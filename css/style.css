@@ -1,0 +1,134 @@
+/* Importando a fonte localmente */
+@font-face {
+    font-family: 'CinzelDecorative';
+    src: url('../assets/fonts/CinzelDecorative-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Configurações Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #a4d4e1;
+    overflow-x: hidden;
+}
+
+/* Estilos do Header e Navegação */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 42px;
+    background-color: white;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #1b9daa;
+    z-index: 1;
+}
+
+/* Regra ÚNICA e CORRIGIDA para a navegação */
+nav {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center; /* Agrupa os itens no centro */
+    align-items: center;
+}
+
+/* NOVO: Espaçamento para o botão central */
+.nav-center {
+    margin: 0 10px; /* Cria um respiro de 40px nas laterais do botão */
+}
+
+
+nav a, nav a:visited {
+    font-family: 'CinzelDecorative', cursive;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;         /* Adiciona o estilo de negrito */
+    text-shadow: none;         /* Remove completamente o contorno/sombra */
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 10px;
+}
+nav a:hover {
+    transform: scale(1.1);
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    gap: 20px; /* Espaço entre os links internos de cada lado */
+    height: 100%;
+}
+
+/* Estilo para o botão "PLAY BETA" (mantendo suas configurações) */
+.play-beta-btn {
+    display: block;
+    width: 250px;
+    height: 70px;
+    background-image: url('../assets/images/buttons/play_beta.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    top: 18px;
+}
+
+.play-beta-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Seção Principal (Hero) */
+.hero-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.parallax-bg, .foreground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+}
+
+.parallax-bg {
+    background-size: 110%;
+    z-index: 1;
+}
+
+.foreground {
+    z-index: 2;
+}

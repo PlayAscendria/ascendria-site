@@ -1,0 +1,19 @@
+{
+  "redirects": [
+    {
+      "source": "/discord",
+      "destination": "https://discord.gg/zjsPBXfFX7",
+      "permanent": true
+    },
+    {
+      "source": "/notion",
+      "destination": "https://glistening-shad-227.notion.site/Ascendria-Official-Whitepaper-23f0479021b180489dd8d79832c8eb55",
+      "permanent": true
+    },
+    {
+      "source": "/youtube",
+      "destination": "https://youtube.com/@PlayAscendria",
+      "permanent": true
+    }
+  ]
+}
