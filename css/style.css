@@ -44,7 +44,6 @@ header::before {
     z-index: 1;
 }
 
-/* Regra ÚNICA e CORRIGIDA para a navegação */
 nav {
     position: relative;
     z-index: 2;
@@ -53,22 +52,20 @@ nav {
     height: 100%;
     margin: 0 auto;
     display: flex;
-    justify-content: center; /* Agrupa os itens no centro */
+    justify-content: center;
     align-items: center;
 }
 
-/* NOVO: Espaçamento para o botão central */
 .nav-center {
-    margin: 0 10px; /* Cria um respiro de 40px nas laterais do botão */
+    margin: 0 10px;
 }
-
 
 nav a, nav a:visited {
     font-family: 'CinzelDecorative', cursive;
     color: white;
     text-decoration: none;
-    font-weight: bold;         /* Adiciona o estilo de negrito */
-    text-shadow: none;         /* Remove completamente o contorno/sombra */
+    font-weight: bold;
+    text-shadow: none;
     font-size: 1.2rem;
     transition: transform 0.3s ease;
     display: flex;
@@ -76,17 +73,19 @@ nav a, nav a:visited {
     height: 100%;
     padding: 0 10px;
 }
+
 nav a:hover {
     transform: scale(1.1);
 }
 
+/* ALTERAÇÃO 1: Adicionado 'position: relative' */
 .nav-left, .nav-right {
     display: flex;
-    gap: 20px; /* Espaço entre os links internos de cada lado */
+    gap: 20px;
     height: 100%;
+    position: relative; /* Necessário para posicionar o ícone corretamente */
 }
 
-/* Estilo para o botão "PLAY BETA" (mantendo suas configurações) */
 .play-beta-btn {
     display: block;
     width: 250px;
@@ -131,4 +130,109 @@ nav a:hover {
 
 .foreground {
     z-index: 2;
+}
+
+/* ================================================== */
+/* === Estilos CORRIGIDOS para o Ícone do Discord === */
+/* ================================================== */
+
+.social-icon-link {
+    position: absolute;
+    right: -45px;
+    top: 50%;
+    /* A transformação base é SÓ a de posicionamento */
+    transform: translateY(-50%);
+    padding: 0;
+    /* A transição agora fica no link e não na imagem */
+    transition: transform 0.3s ease;
+}
+
+.social-icon-link img {
+    height: 28px;
+    width: auto;
+    display: block;
+}
+
+/* O hover é aplicado no link e não na imagem */
+.social-icon-link:hover {
+    /* AQUI ESTÁ O SEGREDO:
+       Mantemos a translação vertical E adicionamos a escala. */
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* ================================================== */
+/* === Estilos para o Divisor e Novas Seções      === */
+/* ================================================== */
+
+/* Estilo CORRIGIDO para o Separador */
+.separator {
+    position: absolute;
+    /* NOVO POSICIONAMENTO: */
+    top: 100%;      /* Posiciona o TOPO do separador no FIM da seção hero (100% da altura) */
+    left: 0;
+    transform: translateY(-50%); /* Puxa o separador PARA CIMA pela metade da sua altura */
+
+    /* O resto das propriedades continua igual */
+    width: 100%;
+    height: 350px; /* Altura do seu separador. Ajuste se necessário. */
+    z-index: 3;
+    background-image: url('../assets/images/ui/separator.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.content-section {
+    /* Estilo básico para a nova seção, para podermos visualizá-la */
+    padding: 150px 50px 50px 50px; /* Espaçamento interno */
+    background-color: #1a2e3a; /* Uma cor de fundo de exemplo */
+    color: white;
+    text-align: center;
+}
+
+/* ================================================== */
+/* === Estilos para o Menu Dropdown               === */
+/* ================================================== */
+
+/* O container que segura o item do menu e o dropdown */
+.dropdown {
+    position: relative; /* Essencial para o posicionamento do menu filho */
+}
+
+/* O menu dropdown em si (escondido por padrão) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    min-width: 240px; /* <-- CAIXA MENOR (de 250px para 220px) */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
+    z-index: 100;
+    list-style: none;
+    padding: 8px 0;
+    border-radius: 0 0 8px 8px;
+}
+
+/* Mostra o menu quando o mouse passa sobre o container .dropdown */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Estilo dos links dentro do dropdown */
+.dropdown-content li a {
+    font-size: 0.90rem; /* <-- FONTE MENOR (de 0.9rem para 0.85rem) */
+    text-align: center;   /* <-- TEXTO CENTRALIZADO */
+    font-weight: bold;
+    padding: 10px 15px;   /* Padding ajustado para o novo alinhamento */
+    color: #1b9daa;
+    display: block;
+    transition: background-color 0.2s ease;
+}
+
+/* Efeito de hover para os links do dropdown */
+.dropdown-content li a:hover {
+    background-color: #1b9daa; /* Fundo com a cor da barra */
+    color: white;              /* Fonte na cor branca */
+    transform: none;           /* Mantém o comportamento de não dar zoom */
 }
