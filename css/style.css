@@ -36,8 +36,11 @@ VARIÁVEIS E ESTILOS GLOBAIS
     box-sizing: border-box;
 }
 html, body {
-    width: 100%;
+    html, body {
     overflow-x: hidden;
+    overflow-y: auto; /* Só mostra rolagem vertical se necessário */
+    height: auto; /* Remove altura fixa */
+}
 }
 html {
     scroll-behavior: smooth;
