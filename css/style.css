@@ -1,8 +1,16 @@
-/* ======================================================= */
-/* === ARQUIVO CSS COMPLETO E CORRIGIDO - ASCENDRIA    === */
-/* ======================================================= */
+/*=================================
+VARIÁVEIS E ESTILOS GLOBAIS
+=================================*/
+:root {
+    --cor-gold: #fedf37;
+    --cor-back-blue: #0c2b31;
+    --cor-section-blue: #1a2e3a;
+    --cor-text: #ffffff;
+    --fonte-titulo: 'CinzelDecorative', cursive;
+    --fonte-corpo: 'Glacial Indifference', sans-serif;
+    --largura-maxima-nav: 1200px;
+}
 
-/* --- FONTES --- */
 @font-face {
     font-family: 'CinzelDecorative';
     src: url('../assets/fonts/CinzelDecorative-Regular.ttf') format('truetype');
@@ -22,44 +30,38 @@
     font-style: normal;
 }
 
-/* --- CONFIGURAÇÕES GLOBAIS --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 html, body {
-    width: 100%; /* Garante que a base ocupe 100% da largura disponível */
-    overflow-x: hidden; /* Evita a rolagem horizontal */
+    width: 100%;
+    overflow-x: hidden;
 }
-
 html {
     scroll-behavior: smooth;
 }
-
 body {
-    font-family: 'Glacial Indifference', sans-serif;
-    background-color: #0c2b31;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    font-family: var(--fonte-corpo);
+    background-color: var(--cor-back-blue);
 }
 
-/* ======================================================== */
-/* === SEÇÃO DE NAVEGAÇÃO CORRIGIDA COM CSS GRID        === */
-/* ======================================================== */
-
+/*=================================
+HEADER E NAVEGAÇÃO
+=================================*/
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 42px;
-    background-color: #fedf37;
-    z-index: 1000;
+    background-color: var(--cor-gold);
+    z-index: 1200;
     display: flex;
     align-items: center;
     padding: 0 50px;
+    overflow: visible; /* (patch) dropdowns não cortam */
 }
 header::before {
     content: '';
@@ -68,64 +70,45 @@ header::before {
     left: 0;
     width: 100%;
     height: 40px;
-    background-color: #0c2b31;
+    background-color: var(--cor-back-blue);
     z-index: -1;
 }
-
 nav {
-    /* Usamos Grid, mas apenas para as DUAS colunas laterais */
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Coluna Esquerda | Coluna Direita */
-    
+    grid-template-columns: 1fr 200px 1fr;
     align-items: center;
     width: 100%;
     max-width: 1200px;
     height: 100%;
     margin: 0 auto;
-    position: relative; /* Essencial para ser a âncora do botão */
-    z-index: 2;
+    position: relative;
+    z-index: 10;
+    overflow: visible; /* (patch) dropdowns não cortam */
 }
-
-/* O botão central não precisa de regras especiais, o Grid cuida dele */
 .nav-center {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 100; /* Garante que ele fique sobre os outros itens */
+    z-index: 1250;
 }
-
-/* Containers laterais */
-.nav-left, .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    height: 100%;
-}
-
-/* Alinha o conteúdo da esquerda para a direita (em direção ao centro) */
 .nav-left {
+    grid-column: 1;
     display: flex;
-    justify-content: flex-end; /* Alinha o conteúdo à direita (para o centro) */
+    justify-content: flex-end;
     align-items: center;
     gap: 20px;
-    /* Espaço de segurança para não encostar no botão */
-    padding-right: 100px;
-}
 
-/* Alinha o conteúdo da direita para a esquerda (em direção ao centro) */
+}
 .nav-right {
+    grid-column: 3;
     display: flex;
-    justify-content: flex-start; /* Alinha o conteúdo à esquerda (para o centro) */
+    justify-content: flex-start;
     align-items: center;
     gap: 20px;
-    /* Espaço de segurança para não encostar no botão */
-    padding-left: 100px;
 }
-
-/* Estilo geral para os links de texto na nav */
 nav a, nav a:visited {
-    font-family: 'CinzelDecorative', cursive;
-    color: #fedf37;
+    font-family: var(--fonte-titulo);
+    color: var(--cor-gold);
     text-decoration: none;
     font-weight: bold;
     font-size: 1.1rem;
@@ -139,14 +122,30 @@ nav a:hover {
     transform: scale(1.1);
 }
 
-/* ======================================================== */
-/* === O RESTO DO CÓDIGO PERMANECE IGUAL                === */
-/* ======================================================== */
+/*=================================
+LAYERING (Z-INDEX) — IMPORTANTE
+=================================*/
+.nav-center .hover-button-container,
+.ascendria-btn, .play-beta-btn {
+    position: relative;
+    z-index: 1100; /* logo/play acima de dropdown e mobile-menu */
+}
+.hamburger-btn, .rotate-btn {
+    position: relative;
+    z-index: 1200; /* botões sempre clicáveis no topo */
+}
+/* dropdown já tinha position/z-index no bloco próprio */
+/* se quiser que o mobile-menu cubra a logo: aumente o z-index dele aqui */
 
-
-/* --- DROPDOWNS DO MENU --- */
+/*=================================
+DROPDOWN E ÍCONES SOCIAIS
+=================================*/
 .dropdown {
     position: relative;
+    height: 100%;
+    display: flex;
+    z-index: 1201;
+    align-items: center;
 }
 .dropdown-content {
     display: none;
@@ -154,10 +153,10 @@ nav a:hover {
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #0c2b31;
+    background-color: var(--cor-back-blue);
     min-width: 220px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
-    z-index: 100;
+    z-index: 1201;
     list-style: none;
     padding: 8px 0;
     border-radius: 0 0 8px 8px;
@@ -170,26 +169,21 @@ nav a:hover {
     text-align: center;
     font-weight: bold;
     padding: 10px 15px;
-    color: #fedf37;
+    color: var(--cor-gold);
     display: block;
     transition: background-color 0.2s ease, color 0.2s ease;
+    width: 100%;
 }
 .dropdown-content li a:hover {
-    background-color: #fedf37;
-    color: #0c2b31;
+    background-color: var(--cor-gold);
+    color: var(--cor-back-blue);
     transform: none;
 }
-
-/* --- ÍCONES SOCIAIS --- */
 .social-icons {
     display: flex;
     align-items: center;
     gap: 15px;
     margin-left: 25px;
-}
-.social-icon-link {
-    padding: 0;
-    line-height: 1;
 }
 .social-icon-link img {
     height: 24px;
@@ -201,140 +195,9 @@ nav a:hover {
     transform: scale(1.15);
 }
 
-/* --- SEÇÃO HERO (TOPO) --- */
-.hero-section {
-    position: relative;
-    width: 100%; /* <-- MUDANÇA PRINCIPAL: de 100vw para 100% */
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    background-color: #0c2b31; /* Corrigi para a cor do seu fundo escuro */
-    z-index: 10;
-}
-.parallax-bg, .foreground {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: bottom center;
-    background-repeat: no-repeat;
-}
-.parallax-bg {
-    background-size: 150%;
-    z-index: 1;
-}
-.foreground {
-    z-index: 2;
-}
-
-/* --- SEPARADOR --- */
-.separator {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    transform: translateY(50%);
-    width: 100%;
-    height: 350px;
-    z-index: 12;
-    background-image: url('../assets/images/ui/separator.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-/* --- SEÇÃO DO CARROSSEL --- */
-.carousel-section {
-    margin-top: -175px;
-    padding-top: 175px;
-    padding-bottom: 0px;
-    position: relative;
-    z-index: 1;
-    background-color: #0c2b31;
-}
-.aboutSwiper {
-    width: 100%;
-    max-width: none;
-    height: 720px;
-    overflow: hidden;
-}
-/* ======================================================= */
-/* === ESTILOS FINAIS - CARROSSEL COM TEXTO SOBREPOSTO === */
-/* ======================================================= */
-
-.swiper-slide {
-    position: relative; /* Essencial para o posicionamento absoluto do filho */
-    background-color: #0c2b31;
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-/* Camada de Fundo (A Imagem) */
-.slide-background {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Garante que a imagem preencha o slide */
-}
-
-/* A caixa de texto sobreposta */
-.slide-text-content {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50%; /* Mantemos 50% para dar espaço suficiente ao texto */
-    height: 100%;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    /* A MÁGICA ESTÁ AQUI: */
-    /* Empurra todo o bloco de texto 15% para a esquerda */
-    transform: translateX(-10%); 
-    
-    padding: 0 5%; /* Apenas um espaçamento interno geral */
-    box-sizing: border-box;
-}
-
-/* Estilos para o título e parágrafo */
-.slide-text-content h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: #fedf37;
-    font-size: 2.8rem;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.slide-text-content p {
-    font-family: 'Glacial Indifference', sans-serif;
-    color: white;
-    font-size: 1.5rem;
-    line-height: 1.6;
-    text-align: center;
-}
-
-/* --- BOTÕES CUSTOMIZADOS DO CARROSSEL --- */
-.swiper-button-prev,
-.swiper-button-next {
-    width: 80px;
-    height: 80px;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-.swiper-button-prev::after,
-.swiper-button-next::after {
-    display: none;
-}
-.swiper-button-prev {
-    background-image: url('../assets/images/ui/left_button.png');
-}
-.swiper-button-next {
-    background-image: url('../assets/images/ui/right_button.png');
-}
-
-/* --- ANIMAÇÃO DE GIRO DO BOTÃO CENTRAL --- */
+/*=================================
+LOGO CENTRAL E BOTÃO DE JOGO
+=================================*/
 .hover-button-container {
     width: 130px;
     height: 130px;
@@ -343,8 +206,7 @@ nav a:hover {
     perspective: 1000px;
     top: 18px;
 }
-.ascendria-btn,
-.play-beta-btn {
+.ascendria-btn, .play-beta-btn {
     position: absolute;
     top: 0;
     left: 0;
@@ -373,18 +235,459 @@ nav a:hover {
     transform: rotateX(0deg);
 }
 
-/* Estilo para o segundo separador, no fundo do carrossel */
-.separator-bottom {
+/*=================================
+SESSÃO HERO E PARALLAX
+=================================*/
+.hero-section {
+    position: relative;
+    width: 100%;
+    min-height: calc(100svh - 42px);
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: #a4d4e1;
+    z-index: 10;
+    overflow: hidden;
+}
+.parallax-bg, .foreground {
     position: absolute;
     bottom: 0;
     left: 0;
-    transform: translateY(50%);
     width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+}
+.parallax-bg {
+    width: 110%;
+    height: 110%;
+    top: -5%;
+    left: -5%;
+    background-size: cover;
+    z-index: 1;
+}
+.foreground {
+    z-index: 10;
+}
+
+/*=================================
+SEPARADOR
+=================================*/
+.separator {
     height: 350px;
-    z-index: 5;
-    background-image: url('../assets/images/ui/separator.png'); /* <<< A imagem que você mencionou */
+    margin-top: -175px;  
+    margin-bottom: -175px;
+    position: relative;
+    z-index: 10;        
+    background-image: url('../assets/images/ui/separator.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     pointer-events: none;
 }
+
+/*=================================
+SESSÕES DE CONTEÚDO
+=================================*/
+.carousel-section, .content-section {
+    position: relative;
+    z-index: 1;
+    background-color: var(--cor-section-blue);
+}
+#about-ascendria {
+  margin-top: 0;
+  padding-top: 0;
+}
+#characters-section, #nfts-section, #champions-section, #forges-section, #chronicles-section {
+    padding-top: 0px;
+    padding-bottom: 0;
+}
+#roadmap-section {
+    padding: 0px 5%;
+}
+.section-title {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-gold);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.section-subtitle {
+    font-size: 1.2rem;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 50px auto;
+    color: #ccc;
+}
+footer {
+    padding: 40px;
+    text-align: center;
+    color: #aaaaaa;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 1;
+    background-color: var(--cor-back-blue);
+}
+
+/*=================================
+CARROSEL SWIPER
+=================================*/
+.aboutSwiper, .charactersSwiper {
+    width: 100%;
+    margin-top: 0px;
+    max-width: none;
+    height: 720px;
+    position: relative;
+    overflow: hidden; 
+}
+.swiper-slide {
+    position: relative;
+    background-color: var(--cor-back-blue);
+}
+.slide-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+.slide-text-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 5%;
+    box-sizing: border-box;
+}
+.slide-text-content h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-gold);
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    text-align: left;
+}
+.slide-text-content p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-text);
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: left;
+}
+.swiper-slide.inverted .slide-text-content {
+    right: auto;
+    left: 0;
+}
+.swiper-button-prev, .swiper-button-next {
+    width: 80px;
+    height: 80px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.swiper-button-prev::after, .swiper-button-next::after {
+    display: none;
+}
+.swiper-button-prev {
+    background-image: url('../assets/images/ui/left_button.png');
+}
+.swiper-button-next {
+    background-image: url('../assets/images/ui/right_button.png');
+}
+
+/*=================================
+MENU, SUBMENU MOBILE
+=================================*/
+.hamburger-btn {
+    display: none;
+}
+.mobile-menu {
+    width: min(50vw, 350px);
+    height: 100vh;
+    z-index: 05;
+    background-color: var(--cor-section-blue);
+    padding: 80px 0 40px 0;
+    box-shadow: 5px 0px 15px rgba(0,0,0,0.4);
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    overflow-y: auto;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition: transform 0.4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    will-change: transform, opacity;
+}
+.mobile-menu > * {
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+.mobile-logo {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    order: -1;
+}
+.mobile-menu.is-active {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 5;
+    visibility: visible;
+}
+.mobile-menu.is-active > * {
+  opacity: 1;
+  transition-delay: 120ms;           /* ajuste fino: 80–200ms conforme seu gosto */
+}
+.mobile-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.mobile-menu ul li a {
+    display: block;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-family: var(--fonte-titulo);
+    color: var(--cor-gold);
+    text-align: left;
+    transition: all 0.2s ease;
+}
+.mobile-menu ul li a:hover {
+    background-color: var(--cor-gold);
+    color: var(--cor-section-blue);
+}
+.submenu {
+    display: none;
+    background-color: rgba(0,0,0,0.2); /* base (desktop e mobile) */
+}
+li.has-submenu.expanded > .submenu {
+    display: block;
+}
+.submenu li a {
+    padding-left: 45px;
+    font-size: 0.8em;
+    font-weight: normal;
+    text-align: right; 
+}
+.has-submenu > a {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+}
+.has-submenu > a::after {
+    content: '▼';
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+li.has-submenu.expanded > a::after {
+    transform: rotate(180deg);
+}
+.play-beta-mobile-btn {
+    text-align: center !important;
+    background-color: var(--cor-gold);
+    color: var(--cor-back-blue) !important;
+    font-weight: bold;
+    margin: 20px 30px 0 30px;
+    border-radius: 8px;
+}
+.mobile-social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--cor-section-blue);
+}
+.mobile-social-icons img {
+    height: 28px;
+}
+
+/*=================================
+RESPONSIVIDADE
+=================================*/
+@media (max-width: 1212px) {
+    header {
+        padding: 0 5px;
+    }
+    nav {
+        display: block;
+    }
+    .nav-left,
+    .nav-right {
+        display: none;
+    }
+/*=================================
+ÍCONES E BOTÕES MOBILE
+=================================*/
+    .hamburger-btn {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 1001;
+    }
+    .hamburger-btn img,
+    .hamburger-btn svg {
+        width: 32px;
+        height: 32px;
+        display: block;
+        margin: auto;
+    }
+    .nav-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+.rotate-btn {
+    display: none;
+}
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.modal-container.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+.modal-content {
+    background-color: var(--cor-back-blue);
+    border: 2px solid var(--cor-gold);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    max-width: 80%;
+}
+.modal-content p {
+    margin-bottom: 20px;
+    color: var(--cor-text);
+    font-family: var(--fonte-corpo);
+}
+.modal-buttons button {
+    background-color: var(--cor-gold);
+    color: var(--cor-back-blue);
+    border: none;
+    padding: 10px 25px;
+    margin: 0 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--fonte-titulo);
+    font-weight: bold;
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+}
+.modal-buttons button:hover {
+    transform: scale(1.05);
+}
+#modal-btn-nao {
+    background-color: #555;
+    color: var(--cor-text);
+}
+
+@media (max-width: 1212px) {
+    .rotate-btn {
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 1001;
+    }
+
+    .rotate-btn img {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/*=================================
+MENU ARCO(D)EÃO MOBILE — dentro da media query
+=================================*/
+@media (max-width: 1212px) {
+    .submenu {
+        background-color: var(--cor-section-blue); /* override só no mobile */
+        padding-left: 20px;
+    }
+    li.has-submenu.expanded > .submenu { display: block; }
+
+    .has-submenu > a {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .has-submenu > a::after {
+        content: '▼';
+        display: inline-block;
+        font-size: 0.8rem;
+        margin-left: 10px;
+        transition: transform 0.3s ease;
+    }
+    li.has-submenu.expanded > a::after { transform: rotate(180deg); }
+
+    .play-beta-mobile-btn {
+        background-color: var(--cor-gold);
+        color: var(--cor-back-blue) !important;
+        font-weight: bold;
+        margin: 10px 20px 0 20px;
+        border-radius: 5px;
+    }
+}
+
+/*=================================
+ATIVAÇÃO JS PARA MENU MOBILE
+=================================*/
+.mobile-menu.is-active {
+    display: block;
+}
+li.has-submenu.expanded > a::after {
+    transform: rotate(180deg);
+}
+.swiper-slide.layout-inverted .slide-text-content {
+    align-items: flex-end;
+    right: auto;
+    left: 0;
+}
+.swiper-slide.layout-inverted .slide-text-content h2,
+.swiper-slide.layout-inverted .slide-text-content p {
+    text-align: right;
+}
+
+/* HOTFIX — logo acima do menu mobile (corrige stacking context do .nav-center) */
+.nav-center { z-index: 1300; }      /* precisa ser MAIOR que o .mobile-menu */
+.mobile-menu { z-index: 900; }   

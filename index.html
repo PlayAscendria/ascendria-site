@@ -1,13 +1,15 @@
+<!--INDEX.HTML-->
+
 <!DOCTYPE html>
-<html lang="en"> <head>
+<html lang="en"> 
+<head>
     <meta charset="UTF-8">
+    <meta name="description" content="Ascendria - An RPG with NFTs and a robust circular economy.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ascendria</title>
     
     <link rel="icon" type="image/png" href="assets/images/ui/favicon.png">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -19,33 +21,28 @@
                     <a href="#">UNIVERSE</a>
                     <ul class="dropdown-content">
                         <li><a href="#about-ascendria">About Ascendria</a></li>
-                        <li><a href="#">Characters</a></li>
-                        <li><a href="#">Roadmap</a></li>
+                        <li><a href="#characters-section">Characters</a></li>
+                        <li><a href="#roadmap-section">Roadmap</a></li>
                     </ul>
                 </div>
                 <div class="dropdown">
                     <a href="#">GAMEPLAY</a>
                     <ul class="dropdown-content">
-                        <li><a href="#">NFTs</a></li>
-                        <li><a href="#">Champions of Ascendria</a></li>
-                        <li><a href="#">Forges of Ascendria</a></li>
-                        <li><a href="#">Chronicles of Ascendria</a></li>
+                        <li><a href="#nfts-section">NFTs</a></li>
+                        <li><a href="#champions-section">Champions of Ascendria</a></li>
+                        <li><a href="#forges-section">Forges of Ascendria</a></li>
+                        <li><a href="#chronicles-section">Chronicles of Ascendria</a></li>
                     </ul>
                 </div>
             </div>
             <div class="nav-center">
-
                 <div class="hover-button-container">
-
                     <a href="#" class="ascendria-btn" aria-label="Ascendria Logo"></a>
-
                     <a href="#" class="play-beta-btn" aria-label="Play Beta"></a>
-                    
                 </div>
-
             </div>
             <div class="nav-right">
-                <a href="URL_DO_SEU_TOKENOMICS" target="_blank">ECONOMY</a>
+                <a href="https://playascendria.com/notion" target="_blank">ECONOMY</a>
                 <a href="https://playascendria.com/notion" target="_blank">WHITEPAPER</a>
                 <div class="social-icons">
                     <a href="https://x.com/PlayAscendria" target="_blank" class="social-icon-link">
@@ -56,62 +53,231 @@
                     </a>
                 </div>
             </div>
+    
+            <button class="hamburger-btn" aria-label="Abrir menu">
+                <img src="assets/images/buttons/hamburger-btn.png" alt="Menu">
+            </button>
+            <button class="rotate-btn" aria-label="Girar tela">
+                <img src="assets/images/ui/rotate_icon.png" alt="Girar Tela">
+            </button>
         </nav>
+
+        <div class="mobile-menu">
+            <div class="mobile-menu-inner">
+                <ul>
+                    <li class="has-submenu">
+                        <a href="#">UNIVERSE</a>
+                        <ul class="submenu">
+                            <li><a href="#about-ascendria">About Ascendria</a></li>
+                            <li><a href="#characters-section">Characters</a></li>
+                            <li><a href="#roadmap-section">Roadmap</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#">GAMEPLAY</a>
+                        <ul class="submenu">
+                            <li><a href="#nfts-section">NFTs</a></li>
+                            <li><a href="#champions-section">Champions of Ascendria</a></li>
+                            <li><a href="#forges-section">Forges of Ascendria</a></li>
+                            <li><a href="#chronicles-section">Chronicles of Ascendria</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="https://playascendria.com/notion" target="_blank">ECONOMY</a></li>
+                    <li><a href="https://playascendria.com/notion" target="_blank">WHITEPAPER</a></li>
+                    <li><a href="#" class="play-beta-mobile-btn">PLAY BETA</a></li>
+                </ul>
+                <div class="mobile-social-icons">
+                    <a href="https://x.com/PlayAscendria" target="_blank" class="social-icon-link">
+                        <img src="assets/images/ui/x_icon.png" alt="Link para o X (Twitter)">
+                    </a>
+                    <a href="https://playascendria.com/discord" target="_blank" class="social-icon-link">
+                        <img src="assets/images/ui/discord_icon.png" alt="Link para o Discord">
+                    </a>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <main class="hero-section">
-        <div id="skyes-mountain" class="parallax-bg" style="background-image: url('assets/images/background/skyes-mountain.png');"></div>
-        <div class="foreground" style="background-image: url('assets/images/background/ascendria-npc-hill.png');"></div>
-        <div class="separator" style="background-image: url('assets/images/ui/separator.png');"></div>
+    <main>
+
+        <section class="hero-section">
+            <div id="skyes-mountain" class="parallax-bg" style="background-image: url('assets/images/background/skyes-mountain.png');"></div>
+            <div class="foreground" style="background-image: url('assets/images/background/ascendria-npc-hill.png');"></div>
+        </section><div class="separator"></div>
+
+        <section class="carousel-section" id="about-ascendria">
+            <div class="swiper aboutSwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img class="slide-background" src="assets/images/carousel/about_ascendria.png" alt="About Ascendria background">
+                        <div class="slide-text-content">
+                            <h2>ABOUT ASCENDRIA</h2>
+                            <p>Ascendria is a Magical Medieval Kingdom with the Heroes' Square at its heart. From here, you can access the great fiefdoms: Champions of Ascendria, Forges of Ascendria, and Chronicles of Ascendria. Each domain offers its own path to glory, and together, they strengthen the Ascenders in their fight against the evil that terrorizes the realm.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="slide-background" src="assets/images/carousel/champions_ascendria.png" alt="Champions of Ascendria background">
+                        <div class="slide-text-content">
+                            <h2>CHAMPIONS OF ASCENDRIA</h2>
+                            <p>Step into the Arena where legends are born and glory is eternal. Engage in tactical, turn-based combat where skill, strategy, and timing are your greatest weapons. Rise through the competitive ranks each season, dominate your opponents, and claim the realm's most exclusive rewards. Here, your legacy is not given—it is earned in battle.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="slide-background" src="assets/images/carousel/forges_ascendria.png" alt="Forges of Ascendria background">
+                        <div class="slide-text-content">
+                            <h2>FORGES OF ASCENDRIA</h2>
+                            <p>Beyond the battlefield, true dominion is forged. In the Forges of Ascendria, claim your own plot of Land and become a master of industry. Cultivate rare resources from your territory and craft the realm's most sought-after goods: legendary weapons, impenetrable armor, and life-altering potions. Here, you don't just supply heroes—you build the very foundation of the Ascendrian economy.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="slide-background" src="assets/images/carousel/chronicles_ascendria.png" alt="Chronicles of Ascendria background">
+                        <div class="slide-text-content">
+                            <h2>CHRONICLES OF ASCENDRIA</h2>
+                            <p>Part of Ascendria's history lies lost in the darkness of its forgotten dungeons. Embark on perilous expeditions to unravel the secrets of a fallen age and gather rare resources, unique magical recipes, and even powerful skill scrolls. The Chronicles are the path for every Ascender to grow stronger, unearth the past, and fund their journey to greatness. Adventure awaits those brave enough to seek it.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section><div class="separator"></div>
+
+        <section class="carousel-section" id="characters-section">
+            <div class="swiper charactersSwiper">
+                <div class="swiper-wrapper">
+                    
+                    <div class="swiper-slide layout-inverted">
+                        <img class="slide-background" src="assets/images/carousel/characters/good_father_bg.png" alt="The Good Father Background">
+                        <div class="slide-text-content">
+                            <h2>THE GOOD FATHER</h2>
+                            <p>Said to have always existed, he is the creator of the Ascenders. He drives them to battle and evolve, offering passage to the Arena, the Training Grounds, and soon, the Battlegrounds.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide layout-inverted">
+                        <img class="slide-background" src="assets/images/carousel/characters/banker_bg.png" alt="The Banker Background">
+                        <div class="slide-text-content">
+                            <h2>THE BANKER</h2>
+                            <p>The Banker oversees all financial matters within the realm, masterfully balancing the markets to ensure the kingdom's long-term economic prosperity.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide layout-inverted">
+                        <img class="slide-background" src="assets/images/carousel/characters/artifice_bg.png" alt="The Artifice Background">
+                        <div class="slide-text-content">
+                            <h2>THE ARTIFICE</h2>
+                            <p>The master craftsman responsible for forging nearly everything that can become a powerful ERC-1155 NFT, including Bloodstones, Ascension Stones, and Card Packs.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide layout-inverted">
+                        <img class="slide-background" src="assets/images/carousel/characters/tavern_keeper_bg.png" alt="The Tavern Keeper Background">
+                        <div class="slide-text-content">
+                            <h2>THE TAVERN KEEPER</h2>
+                            <p>The Tavern Keeper sells starter card packs to new adventurers. Within the walls of his tavern, he also serves as a cunning mediator for various games of chance and skill.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide layout-inverted">
+                        <img class="slide-background" src="assets/images/carousel/characters/bloodly_merchant_bg.png" alt="The Bloodly Merchant Background">
+                        <div class="slide-text-content">
+                            <h2>THE BLOODLY MERCHANT</h2>
+                            <p>A mysterious foreigner who manages the trade of unstable fragments. He acts as a price regulator, overseeing the marketplace where Ascenders negotiate for these volatile resources.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide layout-inverted">
+                        <img class="slide-background" src="assets/images/carousel/characters/alchemist_bg.png" alt="The Alchemist Background">
+                        <div class="slide-text-content">
+                            <h2>THE ALCHEMIST</h2>
+                            <p>The Alchemist brews powerful potions using Tears of the Unlucky. Some of his most potent concoctions can be transformed into valuable NFTs and traded on the main market.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide layout-inverted">
+                        <img class="slide-background" src="assets/images/carousel/characters/hunter_bg.png" alt="The Hunter Background">
+                        <div class="slide-text-content">
+                            <h2>THE HUNTER</h2>
+                            <p>The Hunter manages the Expedition Board, guiding most adventurers as they take their first steps towards evolution and glory in the realm of Ascendria.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide layout-inverted">
+                        <img class="slide-background" src="assets/images/carousel/characters/enchanter_bg.png" alt="The Enchanter Background">
+                        <div class="slide-text-content">
+                            <h2>THE ENCHANTER</h2>
+                            <p>The Enchanter possesses the rare ability to imbue items with magic, turning them into unique ERC-7165 NFTs that can be sold on the marketplace.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide layout-inverted">
+                        <img class="slide-background" src="assets/images/carousel/characters/wanderer_bg.png" alt="The Wanderer Background">
+                        <div class="slide-text-content">
+                            <h2>THE WANDERER</h2>
+                            <p>He is responsible for the Unstaking process of all ERC-1155 items, allowing players to bring their digital assets from the game into the real world.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide layout-inverted">
+                        <img class="slide-background" src="assets/images/carousel/characters/returner_bg.png" alt="The Returner Background">
+                        <div class="slide-text-content">
+                            <h2>THE RETURNER</h2>
+                            <p>The antagonist of the story. The Good Father's lost brother, corrupted in his search for forbidden power. He is responsible for global events that reshape the world itself.</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+        <div class="separator"></div>
+
+        <section class="carousel-section" id="nfts-section">
+             <h2 style="color:white; text-align:center; padding: 200px 0;">NFTs Section Placeholder</h2>
+        </section><div class="separator"></div>
+
+        <section class="carousel-section" id="champions-section">
+             <h2 style="color:white; text-align:center; padding: 200px 0;">Champions of Ascendria Section Placeholder</h2>
+        </section><div class="separator"></div>
+        
+        <section class="carousel-section" id="forges-section">
+             <h2 style="color:white; text-align:center; padding: 200px 0;">Forges of Ascendria Section Placeholder</h2>
+        </section><div class="separator"></div>
+
+        <section class="carousel-section" id="chronicles-section">
+             <h2 style="color:white; text-align:center; padding: 200px 0;">Chronicles of Ascendria Section Placeholder</h2>
+        </section><div class="separator"></div>
+
+        <section class="content-section" id="roadmap-section">
+            <h2 class="section-title">Roadmap</h2>
+            <p class="section-subtitle">Content coming soon...</p>
+        </section><div class="separator"></div>
+
     </main>
 
-    <section class="carousel-section" id="about-ascendria">
-    <div class="swiper aboutSwiper">
-        <div class="swiper-wrapper">
-            
-            <div class="swiper-slide">
-                <img class="slide-background" src="assets/images/carousel/about_ascendria.png" alt="About Ascendria background">
-                <div class="slide-text-content">
-                    <h2>ABOUT ASCENDRIA</h2>
-                    <p>Ascendria is a Magical Medieval Kingdom with the Heroes' Square at its heart. From here, you can access the great fiefdoms: Champions of Ascendria, Forges of Ascendria, and Chronicles of Ascendria. Each domain offers its own path to glory, and together, they strengthen the Ascenders in their fight against the evil that terrorizes the realm.</p>
-                </div>
-            </div>
+    <footer>
+        <p>&copy; 2025 Ascendria. All rights reserved.</p>
+    </footer>
 
-            <div class="swiper-slide">
-                <img class="slide-background" src="assets/images/carousel/champions_ascendria.png" alt="Champions of Ascendria background">
-                <div class="slide-text-content">
-                    <h2>CHAMPIONS OF ASCENDRIA</h2>
-                    <p>Step into the Arena where legends are born and glory is eternal. Engage in tactical, turn-based combat where skill, strategy, and timing are your greatest weapons. Rise through the competitive ranks each season, dominate your opponents, and claim the realm's most exclusive rewards. Here, your legacy is not given—it is earned in battle.</p>
-                </div>
+    <div class="modal-container" id="rotate-modal">
+        <div class="modal-content">
+            <p>Para uma melhor experiência, recomendamos girar a tela e ativar o modo de tela cheia.</p>
+            <p>Deseja fazer isso agora?</p>
+            <div class="modal-buttons">
+                <button id="modal-btn-sim">Sim</button>
+                <button id="modal-btn-nao">Não</button>
             </div>
-
-            <div class="swiper-slide">
-                <img class="slide-background" src="assets/images/carousel/forges_ascendria.png" alt="Forges of Ascendria background">
-                <div class="slide-text-content">
-                    <h2>FORGES OF ASCENDRIA</h2>
-                    <p>Beyond the battlefield, true dominion is forged. In the Forges of Ascendria, claim your own plot of Land and become a master of industry. Cultivate rare resources from your territory and craft the realm's most sought-after goods: legendary weapons, impenetrable armor, and life-altering potions. Here, you don't just supply heroes—you build the very foundation of the Ascendrian economy.</p>
-                </div>
-            </div>
-
-            <div class="swiper-slide">
-                <img class="slide-background" src="assets/images/carousel/chronicles_ascendria.png" alt="Chronicles of Ascendria background">
-                <div class="slide-text-content">
-                    <h2>CHRONICLES OF ASCENDRIA</h2>
-                    <p>Part of Ascendria's history lies lost in the darkness of its forgotten dungeons. Embark on perilous expeditions to unravel the secrets of a fallen age and gather rare resources, unique magical recipes, and even powerful skill scrolls. The Chronicles are the path for every Ascender to grow stronger, unearth the past, and fund their journey to greatness. Adventure awaits those brave enough to seek it.</p>
-                </div>
-            </div>
-
         </div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
     </div>
-            <div class="separator-bottom"></div>
-    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/about-carousel.js"></script>
+    <script src="js/characters-carousel.js"></script>
+
+
 </body>
 </html>
-
