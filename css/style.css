@@ -1,0 +1,105 @@
+/* Layout base: faz o footer ficar no fim da página usando flex column */
+html, body { height: 100%; }
+body {
+	margin: 0;
+	/* Layout em fluxo normal com topbar fixa; o conteúdo recebe padding-top para
+		 compensar a altura da topbar (8vh). */
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background-repeat: no-repeat;
+}
+
+/* topbar styles moved to components/topbar/topbar.css */
+
+/* Hero / primeira imagem de fundo do site */
+.hero {
+	/* Hero full-screen: ocupa toda a viewport; topbar ficará sobre ela (transparente e fixed) */
+	height: 100vh;
+	min-height: 100vh;
+	width: 100%;
+	/* background removido — agora o componente BackgroundLive controla o visual */
+	background: none;
+	position: relative;
+	z-index: 10; /* abaixo do topbar (topbar tem z-index 9999) */
+	display: block;
+	margin: 0; /* sem margin */
+	padding: 0; /* sem padding */
+	margin-top: -8vh; /* compensa a altura da topbar fixa para começar no topo */
+}
+
+
+/* Se quiser que o conteúdo da hero esteja alinhado (ex.: centralizado), adicione um contêiner interno */
+.hero .hero-inner {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Footer: evitar que sobreponha a hero e ficar no final da página */
+.site-footer {
+	position: relative;
+	z-index: 1;
+	clear: both;
+	padding: 2rem 0;
+	background: #111; /* cor básica para contraste (ajuste conforme necessário) */
+	color: #fff;
+	width: 100%;
+	margin-top: auto; /* empurra o footer para baixo quando o conteúdo for curto */
+}
+
+/* Garante espaçamento entre a hero e o footer se necessário */
+.hero { margin-bottom: 0; }
+
+/* Certifica que o footer não esteja flutuando sobre a hero */
+.site-footer {
+	position: relative;
+	z-index: 1;
+	clear: both;
+	margin-top: 0;
+}
+
+/* Garante que o main tenha altura mínima para empurrar o footer quando a hero for menor */
+/* Compensar topbar fixa para que o conteúdo não fique oculto por baixo dela */
+#content-area {
+	padding-top: 8vh;
+	overflow: auto;
+	flex: 1 1 auto;
+}
+
+/* Scroll behavior e customização leve do scrollbar */
+html {
+	scroll-behavior: smooth;
+}
+
+/* WebKit-based browsers */
+body::-webkit-scrollbar { width: 12px; height: 12px; }
+body::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+body::-webkit-scrollbar-thumb {
+	background: rgba(5, 63, 53, 0.8);
+	border-radius: 999px;
+	border: 3px solid rgba(0,0,0,0.06);
+}
+
+/* Firefox */
+* { scrollbar-width: thin; scrollbar-color: rgb(3, 32, 30) rgba(255,255,255,0.02); }
+
+#main {
+	min-height: 20vh;
+}
+
+/* Container para páginas técnicas (whitepaper, tokenomics) */
+.doc-container {
+	background: rgba(255,255,255,0.02);
+	padding: 2.25rem 1.25rem;
+	border-radius: 8px;
+	color: #fff;
+	max-width: 1000px;
+	margin: 1.25rem auto 3rem auto;
+}
+.doc-container h1 { margin-top: 0; font-size: 2rem; }
+.doc-container h2 { margin-top: 1.25rem; }
+.doc-container p, .doc-container li { line-height: 1.6; color: #eee; }
+

@@ -1,0 +1,161 @@
+/* Loading page - Canvas painting effect */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: #f5f1e8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f5f1e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 99999;
+  pointer-events: auto;
+}
+
+/* Canvas - camada de pintura */
+#paintCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 99998;
+}
+
+/* Textura de tela */
+#paintCanvas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,.02) 2px, rgba(0,0,0,.02) 4px),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.02) 2px, rgba(0,0,0,.02) 4px);
+  pointer-events: none;
+  z-index: 99999;
+}
+
+/* Camadas escondidas (para carregar imagens) */
+.painting-layers {
+  display: none;
+}
+
+.paint-layer {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Info do loading */
+.loading-info {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 99999;
+  pointer-events: none;
+}
+
+.painting-text {
+  color: #333;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  opacity: 0.8;
+  animation: textBlink 1.5s ease-in-out infinite;
+}
+
+.progress-value {
+  color: #333;
+  font-size: 24px;
+  font-weight: 900;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+}
+
+@keyframes textBlink {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* Fade out quando concluído */
+@keyframes canvasFadeOut {
+  0% { 
+    opacity: 1;
+  }
+  100% { 
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.loading-container.completed {
+  animation: canvasFadeOut 0.3s ease-out forwards;
+  pointer-events: none;
+}
+
+.loading-container.completed .loading-info {
+  animation: fadeOutInfo 0.2s ease-out forwards;
+}
+
+@keyframes fadeOutInfo {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* SVG Filter para textura */
+svg {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .painting-text {
+    font-size: 14px;
+  }
+
+  .progress-value {
+    font-size: 20px;
+  }
+
+  .loading-info {
+    bottom: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .painting-text {
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .progress-value {
+    font-size: 18px;
+  }
+
+  .loading-info {
+    bottom: 30px;
+  }
+}

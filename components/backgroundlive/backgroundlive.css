@@ -1,0 +1,455 @@
+/* BackgroundLive component styles */
+
+/* ========== CONFIGURAÇÃO DE NUVENS ==========
+   EDITE AQUI O MOVIMENTO DE CADA NUVEM:
+   
+   Para cada nuvem você pode configurar:
+   - animation-duration: tempo total do loop em segundos (ex: 180s)
+   - animation-direction: normal ou reverse
+   
+   Exemplo de customização:
+   
+   .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 200s; animation-direction: normal; }
+   .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 150s; animation-direction: reverse; }
+   
+   NUVENS CONFIGURÁVEIS:
+   - nuvem1: movimento esquerda (cloud-loop-left)
+   - nuvem2: movimento direita (cloud-loop-right)
+   - nuvem3: movimento esquerda (cloud-loop-left)
+   - nuvem4: movimento direita (cloud-loop-right)
+   - nuvem5: movimento esquerda (cloud-loop-left)
+   - nuvem6: movimento direita (cloud-loop-right)
+   - nuvem7: movimento esquerda (cloud-loop-left)
+   - nuvem8: movimento direita (cloud-loop-right)
+   
+   ============================================ */
+
+.backgroundlive-root { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 5; }
+.backgroundlive-root .bg-parallax { position: absolute; inset: 0; }
+.backgroundlive-root .bg-layer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  width: 120%;
+  height: 120%;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: contain;
+}
+.backgroundlive-root .bg-layer.montanha3 { z-index: 18; background-image: url("/assets/images/background/backgroundpaisagem/3_montanha1_18.png"); }
+.backgroundlive-root .bg-layer.grama2 { z-index: 19; background-image: url("/assets/images/background/backgroundpaisagem/2_grama2_19.png"); }
+.backgroundlive-root .bg-layer.grama1 { z-index: 20; background-image: url("/assets/images/background/backgroundpaisagem/1_grama1_20.png"); }
+.backgroundlive-root .bg-layer.montanha2 { z-index: 17; background-image: url("/assets/images/background/backgroundpaisagem/3_montanha2_14.png"); }
+
+/* Nuvens - z-index 15 e 14 (variado) */
+.backgroundlive-root .bg-layer.nuvem1 { z-index: 15; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem1_15.png"); }
+.backgroundlive-root .bg-layer.nuvem2 { z-index: 14; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem2_15.png"); }
+.backgroundlive-root .bg-layer.nuvem3 { z-index: 13; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem3_15.png"); }
+.backgroundlive-root .bg-layer.nuvem4 { z-index: 15; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem4_15.png"); }
+.backgroundlive-root .bg-layer.nuvem5 { z-index: 11; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem5_15.png"); }
+.backgroundlive-root .bg-layer.nuvem6 { z-index: 10; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem6_15.png"); }
+.backgroundlive-root .bg-layer.nuvem7 { z-index: 9; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem7_15.png"); }
+.backgroundlive-root .bg-layer.fundo-sol {
+  /* fundo-sol: fixed, always full-width and responsive. Do not transform this layer. */
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: none !important;
+  will-change: auto;
+  width: 100%;
+  height: 100%;
+  background-image: url("/assets/images/background/backgroundpaisagem/5_fundosol_1.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100% auto; /* fill width, keep aspect */
+  z-index: 1;
+}
+.backgroundlive-root .bg-layer.sun { z-index: 2; /* in front of fundo-sol */ background-position: 30% 20%; background-size: 20% auto; }
+
+/* Sun visual: rays + glow using pseudo-elements */
+.backgroundlive-root .bg-layer.sun::before,
+.backgroundlive-root .bg-layer.sun::after {
+  content: "";
+  position: absolute;
+  left: 59%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* rays */
+/* old CSS rays removed to allow dynamic, randomized rays created by JS */
+.backgroundlive-root .bg-layer.sun::before {
+  display: none;
+}
+
+/* Dynamic sun rays container (created by JS) */
+.backgroundlive-root .sun-rays {
+  position: absolute;
+  left: 59%;
+  top: 56%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  /* give the container room for rays so children positioned with top/left center correctly */
+  width: 750px;
+  height: 750px;
+  z-index: 17; /* test: above numvem6 */
+  animation: sun-rotate 120s linear infinite;
+}
+
+/* Breathing glow circle (pulsating light effect) */
+.backgroundlive-root .breathing-glow {
+  position: absolute;
+  left: 57%;
+  top: 65%;
+  transform: translate(-50%, -50%);
+  width: 750px;
+  height: 750px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 180, 60, 0.8) 0%,
+    rgba(255, 140, 40, 0.6) 20%,
+    rgba(255, 100, 20, 0.4) 40%,
+    rgba(255, 80, 10, 0.15) 60%,
+    rgba(15, 15, 15, 0.308) 100%
+  );
+  pointer-events: none;
+  z-index: 16; /* behind rays but above clouds */
+  filter: blur(40px);
+  animation: breathing-light 6s ease-in-out infinite;
+}
+
+@keyframes breathing-light {
+  0%, 100% {
+    opacity: 1;
+    filter: blur(40px) brightness(1.0);
+  }
+  50% {
+    opacity: 1.0;
+    filter: blur(40px) brightness(1.6);
+  }
+}
+
+.backgroundlive-root .sun-ray {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%); /* rotation applied inline on the wrapper */
+  pointer-events: none;
+  will-change: transform;
+}
+
+.backgroundlive-root .ray-triangle{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  /* triangle size is set via inline width/height on creation */
+  background: linear-gradient(180deg, rgba(241,215,44,0.95) 0%, rgba(241,215,44,0.02) 60%);
+  filter: blur(0.8px) saturate(1.05);
+  opacity: 0.9;
+  /* create scalene triangle using clip-path; three points: base-left, base-right, tip */
+  clip-path: polygon(var(--base-left-x,30%) 100%, var(--base-right-x,95%) 100%, var(--tip-x,50%) 0%);
+  transform-origin: 50% 100%; /* scale from base */
+  /* compression/expansion animation using scaleY; durations provided via vars */
+  animation: triangle-pulse var(--ray-duration, 3s) ease-in-out var(--ray-delay, 0s) infinite alternate;
+}
+
+@keyframes sun-rotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+
+
+@keyframes triangle-pulse {
+  0% { transform: translate(-50%,-50%) scaleY(0.6); opacity: 0.5; }
+  50% { transform: translate(-50%,-50%) scaleY(1.18); opacity: 0.95; }
+  100% { transform: translate(-50%,-50%) scaleY(1.0); opacity: 0.75; }
+}
+
+/* ========== ANIMAÇÕES ESPECÍFICAS DE CADA NUVEM ========== 
+   EDITE AQUI O MOVIMENTO DE CADA NUVEM
+   ========================================================== */
+
+/* NUVEM 1: Movimento esquerda (padrão) */
+@keyframes nuvem1-animation {
+  0% { transform: translate(-50%, -50%) scale(0.1); left: 37%; top: 38%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  10% { transform: translate(-50%, -50%) scale(0.08); left: 40.7%; top: 47.5%; opacity: 0.8; filter: blur(1px) saturate(0.9) brightness(1.05); }
+  20% { transform: translate(-50%, -50%) scale(0.06); left: 44.4%; top: 57%; opacity: 0.6; filter: blur(2px) saturate(0.8) brightness(1.1); }
+  30% { transform: translate(-50%, -50%) scale(0.04); left: 48.1%; top: 66.5%; opacity: 0.4; filter: blur(3px) saturate(0.7) brightness(1.15); }
+  40% { transform: translate(-50%, -50%) scale(0.02); left: 51.8%; top: 76%; opacity: 0.02; filter: blur(4px) saturate(0.6) brightness(1.2); }
+  50% { transform: translate(-50%, -50%) scale(0); left: 55.5%; top: 85.5%; opacity: 0.1; filter: blur(5px) saturate(0.5) brightness(1.25); }
+  51% { transform: translate(-50%, -50%) scale(0); left: 59.2%; top: 95%; opacity: 0; filter: blur(10px) saturate(0.2) brightness(1.3); }
+  52% { transform: translate(-50%, -50%) scale(0.196); left: 19.98%; top: -10.857%; opacity: 0; filter: blur(0px) saturate(1) brightness(1); }
+  53% { transform: translate(-50%, -50%) scale(0.194); left: 19.61%; top: -9.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  54% { transform: translate(-50%, -50%) scale(0.192); left: 19.98%; top: -8.143%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  55% { transform: translate(-50%, -50%) scale(0.19); left: 20.35%; top: -6.786%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  56% { transform: translate(-50%, -50%) scale(0.188); left: 20.72%; top: -5.429%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  57% { transform: translate(-50%, -50%) scale(0.186); left: 21.09%; top: -4.071%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  58% { transform: translate(-50%, -50%) scale(0.184); left: 21.46%; top: -2.714%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  59% { transform: translate(-50%, -50%) scale(0.182); left: 21.83%; top: -1.357%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  60% { transform: translate(-50%, -50%) scale(0.18); left: 22.2%; top: 0%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  70% { transform: translate(-50%, -50%) scale(0.16); left: 25.9%; top: 9.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  80% { transform: translate(-50%, -50%) scale(0.14); left: 29.6%; top: 19%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  90% { transform: translate(-50%, -50%) scale(0.12); left: 33.3%; top: 28.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  100% { transform: translate(-50%, -50%) scale(0.1); left: 37%; top: 38%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+}
+
+/* NUVEM 2: Movimento direita (invertido) */
+@keyframes nuvem2-animation {
+  0% { transform: translate(-50%, -50%) scale(0.5); left: 5%; top: 20%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  10% { transform: translate(-50%, -50%) scale(0.4); left: 14.17%; top: 32.5%; opacity: 0.8; filter: blur(1px) saturate(0.9) brightness(1.05); }
+  20% { transform: translate(-50%, -50%) scale(0.3); left: 23.33%; top: 45%; opacity: 0.6; filter: blur(2px) saturate(0.8) brightness(1.1); }
+  30% { transform: translate(-50%, -50%) scale(0.2); left: 32.5%; top: 57.5%; opacity: 0.4; filter: blur(3px) saturate(0.7) brightness(1.15); }
+  40% { transform: translate(-50%, -50%) scale(0.1); left: 41.67%; top: 70%; opacity: 0.02; filter: blur(4px) saturate(0.6) brightness(1.2); }
+  50% { transform: translate(-50%, -50%) scale(0); left: 50.83%; top: 82.5%; opacity: 0.1; filter: blur(5px) saturate(0.5) brightness(1.25); }
+  51% { transform: translate(-50%, -50%) scale(0); left: 50%; top: 95%; opacity: 0; filter: blur(10px) saturate(0.2) brightness(1.3); }
+  52% { transform: translate(-50%, -50%) scale(0.98); left: -60.143%; top: -59.286%; opacity: 0; filter: blur(0px) saturate(1) brightness(1); }
+  53% { transform: translate(-50%, -50%) scale(0.97); left: -58.833%; top: -57.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  54% { transform: translate(-50%, -50%) scale(0.96); left: -53.524%; top: -52.714%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  55% { transform: translate(-50%, -50%) scale(0.95); left: -46.214%; top: -45.929%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  56% { transform: translate(-50%, -50%) scale(0.94); left: -41.905%; top: -40.143%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  57% { transform: translate(-50%, -50%) scale(0.93); left: -37.595%; top: -36.357%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  58% { transform: translate(-50%, -50%) scale(0.92); left: -34.286%; top: -33.571%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  59% { transform: translate(-50%, -50%) scale(0.91); left: -32.976%; top: -31.786%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  60% { transform: translate(-50%, -50%) scale(0.9); left: -31.667%; top: -30%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  70% { transform: translate(-50%, -50%) scale(0.8); left: -22.5%; top: -17.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  80% { transform: translate(-50%, -50%) scale(0.7); left: -13.333%; top: -5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  90% { transform: translate(-50%, -50%) scale(0.6); left: -4.167%; top: 7.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  100% { transform: translate(-50%, -50%) scale(0.5); left: 5%; top: 20%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+}
+
+/* NUVEM 3: Movimento esquerda */
+@keyframes nuvem3-animation {
+  0% { transform: translate(-50%, -50%) scale(0.2); left: 30%; top: 18%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  10% { transform: translate(-50%, -50%) scale(0.16); left: 35%; top: 30.833%; opacity: 0.8; filter: blur(1px) saturate(0.9) brightness(1.05); }
+  20% { transform: translate(-50%, -50%) scale(0.12); left: 40%; top: 43.667%; opacity: 0.6; filter: blur(2px) saturate(0.8) brightness(1.1); }
+  30% { transform: translate(-50%, -50%) scale(0.08); left: 45%; top: 56.5%; opacity: 0.4; filter: blur(3px) saturate(0.7) brightness(1.15); }
+  40% { transform: translate(-50%, -50%) scale(0.04); left: 50%; top: 69.333%; opacity: 0.02; filter: blur(4px) saturate(0.6) brightness(1.2); }
+  50% { transform: translate(-50%, -50%) scale(0); left: 55%; top: 82.167%; opacity: 0.1; filter: blur(5px) saturate(0.5) brightness(1.25); }
+  51% { transform: translate(-50%, -50%) scale(0); left: 50%; top: 95%; opacity: 0; filter: blur(10px) saturate(0.2) brightness(1.3); }
+  52% { transform: translate(-50%, -50%) scale(0.392); left: 4.286%; top: -48%; opacity: 0; filter: blur(0px) saturate(1) brightness(1); }
+  53% { transform: translate(-50%, -50%) scale(0.388); left: 5%; top: -46.167%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  54% { transform: translate(-50%, -50%) scale(0.384); left: 5.714%; top: -44.333%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  55% { transform: translate(-50%, -50%) scale(0.38); left: 6.429%; top: -42.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  56% { transform: translate(-50%, -50%) scale(0.376); left: 7.143%; top: -40.667%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  57% { transform: translate(-50%, -50%) scale(0.372); left: 7.857%; top: -38.833%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  58% { transform: translate(-50%, -50%) scale(0.368); left: 8.571%; top: -37%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  59% { transform: translate(-50%, -50%) scale(0.364); left: 9.286%; top: -35.167%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  60% { transform: translate(-50%, -50%) scale(0.36); left: 10%; top: -33.333%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  70% { transform: translate(-50%, -50%) scale(0.32); left: 15%; top: -20.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  80% { transform: translate(-50%, -50%) scale(0.28); left: 20%; top: -7.667%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  90% { transform: translate(-50%, -50%) scale(0.24); left: 25%; top: 5.167%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  100% { transform: translate(-50%, -50%) scale(0.2); left: 30%; top: 18%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+}
+
+/* NUVEM 4: Movimento direita */
+@keyframes nuvem4-animation {
+  0% { transform: translate(-50%, -50%) scale(0.1); left: 42%; top: 52%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  10% { transform: translate(-50%, -50%) scale(0.08); left: 52.5%; top: 53%; opacity: 0.8; filter: blur(1px) saturate(0.9) brightness(1.05); }
+  20% { transform: translate(-50%, -50%) scale(0.06); left: 54%; top: 54%; opacity: 0.6; filter: blur(2px) saturate(0.8) brightness(1.1); }
+  30% { transform: translate(-50%, -50%) scale(0.04); left: 55.5%; top: 55%; opacity: 0.4; filter: blur(3px) saturate(0.7) brightness(1.15); }
+  40% { transform: translate(-50%, -50%) scale(0.02); left: 56%; top: 56%; opacity: 0.02; filter: blur(4px) saturate(0.6) brightness(1.2); }
+  50% { transform: translate(-50%, -50%) scale(0); left: 57%; top: 57%; opacity: 0.1; filter: blur(5px) saturate(0.5) brightness(1.25); }
+  51% { transform: translate(-50%, -50%) scale(0); left: 57%; top: 53%; opacity: 0; filter: blur(10px) saturate(0.2) brightness(1.3); }
+  52% { transform: translate(-50%, -50%) scale(0.196); left: -15.4%; top: 46.60%; opacity: 0; filter: blur(0px) saturate(1) brightness(1); }
+  53% { transform: translate(-50%, -50%) scale(0.194); left: -10.5%; top: 46.85%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  54% { transform: translate(-50%, -50%) scale(0.192); left: -9%; top: 46%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  55% { transform: translate(-50%, -50%) scale(0.19); left: -7.5%; top: 47.15%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  56% { transform: translate(-50%, -50%) scale(0.188); left: -6%; top: 47.30%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  57% { transform: translate(-50%, -50%) scale(0.186); left: -4.5%; top: 47.45%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  58% { transform: translate(-50%, -50%) scale(0.184); left: -3%; top: 47.60%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  59% { transform: translate(-50%, -50%) scale(0.182); left: -1.5%; top: 47.85%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  60% { transform: translate(-50%, -50%) scale(0.18); left: 0%; top: 48%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  70% { transform: translate(-50%, -50%) scale(0.16); left: 10.5%; top: 49%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  80% { transform: translate(-50%, -50%) scale(0.14); left: 21%; top: 50%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  90% { transform: translate(-50%, -50%) scale(0.12); left: 31.5%; top: 51%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  100% { transform: translate(-50%, -50%) scale(0.1); left: 42%; top: 52%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+}
+
+/* NUVEM 5: Movimento esquerda */
+@keyframes nuvem5-animation {
+  0% { transform: translate(-50%, -50%) scale(0.1); left: 70%; top: 52%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  10% { transform: translate(-50%, -50%) scale(0.08); left: 68.17%; top: 52.5%; opacity: 0.8; filter: blur(1px) saturate(0.9) brightness(1.05); }
+  20% { transform: translate(-50%, -50%) scale(0.06); left: 66.33%; top: 53%; opacity: 0.6; filter: blur(2px) saturate(0.8) brightness(1.1); }
+  30% { transform: translate(-50%, -50%) scale(0.04); left: 64.5%; top: 53.5%; opacity: 0.4; filter: blur(3px) saturate(0.7) brightness(1.15); }
+  40% { transform: translate(-50%, -50%) scale(0.02); left: 62.67%; top: 54%; opacity: 0.02; filter: blur(4px) saturate(0.6) brightness(1.2); }
+  51% { transform: translate(-50%, -50%) scale(0); left: 57%; top: 54%; opacity: 0; filter: blur(10px) saturate(0.2) brightness(1.3); }
+  52% { transform: translate(-50%, -50%) scale(0.196); left: 108.8%; top: 46.60%; opacity: 0; filter: blur(0px) saturate(1) brightness(1); }
+  53% { transform: translate(-50%, -50%) scale(0.194); left: 107.7%; top: 46.85%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  54% { transform: translate(-50%, -50%) scale(0.192); left: 106.6%; top: 46%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  55% { transform: translate(-50%, -50%) scale(0.19); left: 105.5%; top: 47.15%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  56% { transform: translate(-50%, -50%) scale(0.188); left: 104.4%; top: 47.30%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  57% { transform: translate(-50%, -50%) scale(0.186); left: 103.3%; top: 47.45%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  58% { transform: translate(-50%, -50%) scale(0.184); left: 102.2%; top: 47.60%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  59% { transform: translate(-50%, -50%) scale(0.182); left: 101.1%; top: 47.85%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  60% { transform: translate(-50%, -50%) scale(0.18); left: 100%; top: 48%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  70% { transform: translate(-50%, -50%) scale(0.16); left: 92.5%; top: 48.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  80% { transform: translate(-50%, -50%) scale(0.14); left: 85%; top: 49%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  90% { transform: translate(-50%, -50%) scale(0.12); left: 77.5%; top: 51%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  100% { transform: translate(-50%, -50%) scale(0.1); left: 70%; top: 52%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+}
+
+/* NUVEM 6: Movimento direita */
+@keyframes nuvem6-animation {
+  0% { transform: translate(-50%, -50%) scale(0.3); left: 100%; top: 50%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  10% { transform: translate(-50%, -50%) scale(0.28); left: 90%; top: 52.5%; opacity: 0.8; filter: blur(1px) saturate(0.9) brightness(1.05); }
+  20% { transform: translate(-50%, -50%) scale(0.26); left: 80%; top: 53%; opacity: 0.6; filter: blur(2px) saturate(0.8) brightness(1.1); }
+  30% { transform: translate(-50%, -50%) scale(0.24); left: 70%; top: 53.5%; opacity: 0.4; filter: blur(3px) saturate(0.7) brightness(1.15); }
+  40% { transform: translate(-50%, -50%) scale(0.22); left: 60%; top: 54%; opacity: 0.02; filter: blur(4px) saturate(0.6) brightness(1.2); }
+  51% { transform: translate(-50%, -50%) scale(0); left: 50%; top: 54%; opacity: 0; filter: blur(10px) saturate(0.2) brightness(1.3); }
+  52% { transform: translate(-50%, -50%) scale(0.396); left: 148%; top: 46.60%; opacity: 0; filter: blur(0px) saturate(1) brightness(1); }
+  53% { transform: translate(-50%, -50%) scale(0.394); left: 147%; top: 46.85%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  54% { transform: translate(-50%, -50%) scale(0.392); left: 146%; top: 46%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  55% { transform: translate(-50%, -50%) scale(0.39); left: 145%; top: 47.15%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  56% { transform: translate(-50%, -50%) scale(0.388); left: 144%; top: 47.30%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  57% { transform: translate(-50%, -50%) scale(0.386); left: 143%; top: 47.45%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  58% { transform: translate(-50%, -50%) scale(0.384); left: 142%; top: 47.60%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  59% { transform: translate(-50%, -50%) scale(0.382); left: 141%; top: 47.85%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  60% { transform: translate(-50%, -50%) scale(0.38); left: 140%; top: 48%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  70% { transform: translate(-50%, -50%) scale(0.36); left: 130%; top: 54%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  80% { transform: translate(-50%, -50%) scale(0.34); left: 120%; top: 49%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  90% { transform: translate(-50%, -50%) scale(0.32); left: 110%; top: 55%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  100% { transform: translate(-50%, -50%) scale(0.3); left: 100%; top: 50%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+}
+
+/* NUVEM 7: Movimento esquerda */
+@keyframes nuvem7-animation {
+  0% { transform: translate(-50%, -50%) scale(0.4); left: 100%; top: 20%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  10% { transform: translate(-50%, -50%) scale(0.38); left: 90%; top: 30%; opacity: 0.8; filter: blur(1px) saturate(0.9) brightness(1.05); }
+  20% { transform: translate(-50%, -50%) scale(0.36); left: 80%; top: 40%; opacity: 0.6; filter: blur(2px) saturate(0.8) brightness(1.1); }
+  30% { transform: translate(-50%, -50%) scale(0.34); left: 70%; top: 50%; opacity: 0.4; filter: blur(3px) saturate(0.7) brightness(1.15); }
+  40% { transform: translate(-50%, -50%) scale(0.32); left: 60%; top: 60%; opacity: 0.02; filter: blur(4px) saturate(0.6) brightness(1.2); }
+  51% { transform: translate(-50%, -50%) scale(0); left: 50%; top: 54%; opacity: 0; filter: blur(10px) saturate(0.2) brightness(1.3); }
+  52% { transform: translate(-50%, -50%) scale(0.496); left: 148%; top: -28%; opacity: 0; filter: blur(0px) saturate(1) brightness(1); }
+  53% { transform: translate(-50%, -50%) scale(0.494); left: 147%; top: -27%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  54% { transform: translate(-50%, -50%) scale(0.492); left: 146%; top: -26%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  55% { transform: translate(-50%, -50%) scale(0.49); left: 145%; top: -25%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  56% { transform: translate(-50%, -50%) scale(0.488); left: 144%; top: -24%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  57% { transform: translate(-50%, -50%) scale(0.486); left: 143%; top: -23%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  58% { transform: translate(-50%, -50%) scale(0.484); left: 142%; top: -22%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  59% { transform: translate(-50%, -50%) scale(0.482); left: 141%; top: -21%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  60% { transform: translate(-50%, -50%) scale(0.48); left: 140%; top: -20%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  70% { transform: translate(-50%, -50%) scale(0.46); left: 130%; top: -10%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  80% { transform: translate(-50%, -50%) scale(0.44); left: 120%; top: 0%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  90% { transform: translate(-50%, -50%) scale(0.42); left: 110%; top: 10%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+  100% { transform: translate(-50%, -50%) scale(0.4); left: 100%; top: 20%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
+}
+
+
+/* Cloud animation: attach to nuvem layers */
+.backgroundlive-root .bg-layer.nuvem1 { animation: nuvem1-animation 70s linear infinite !important; will-change: transform; }
+.backgroundlive-root .bg-layer.nuvem2 { animation: nuvem2-animation 140s linear infinite !important; will-change: transform; }
+.backgroundlive-root .bg-layer.nuvem3 { animation: nuvem3-animation 80s linear infinite !important; will-change: transform; }
+.backgroundlive-root .bg-layer.nuvem4 { animation: nuvem4-animation 65s linear infinite !important; will-change: transform; }
+.backgroundlive-root .bg-layer.nuvem5 { animation: nuvem5-animation 65s linear infinite !important; will-change: transform; }
+.backgroundlive-root .bg-layer.nuvem6 { animation: nuvem6-animation 120s linear infinite !important; will-change: transform; }
+.backgroundlive-root .bg-layer.nuvem7 { animation: nuvem7-animation 180s linear infinite !important; will-change: transform; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .backgroundlive-root .sun-rays { animation: none !important; }
+  .backgroundlive-root .sun-ray { animation: none !important; }
+  .backgroundlive-root .sun-rays::before { animation: none !important; filter: blur(45px) brightness(1.15) !important; /* glow stays, just no animation */ }
+}
+
+/* bloom / soft glow */
+.backgroundlive-root .bg-layer.sun::after {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 45%, rgba(241,215,44,0.95) 0%, rgba(241,215,44,0.25) 25%, rgba(241,215,44,0.08) 45%, rgba(241,215,44,0.0) 70%);
+  filter: blur(18px) brightness(1.1);
+  opacity: 0.95;
+}
+
+@keyframes sun-rotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .backgroundlive-root .bg-layer.sun::before { animation: none; }
+}
+
+@media (max-width: 900px) {
+  .backgroundlive-root .bg-layer { width: 140%; height: 140%; background-size: 120% auto; }
+  
+  /* Adjust sun rays container for tablets */
+  .backgroundlive-root .sun-rays {
+    width: 600px;
+    height: 600px;
+  }
+  
+  /* Scale down glow for tablets */
+  .backgroundlive-root .breathing-glow {
+    width: 250px;
+    height: 250px;
+    filter: blur(35px);
+  }
+}
+
+@media (max-width: 768px) {
+  .backgroundlive-root .bg-layer { width: 150%; height: 150%; background-size: 130% auto; }
+  
+  /* Medium tablets: scale down further */
+  .backgroundlive-root .sun-rays {
+    width: 500px;
+    height: 500px;
+  }
+  
+  .backgroundlive-root .breathing-glow {
+    width: 700px;
+    height: 350px;
+    filter: blur(32px);
+  }
+}
+
+@media (max-width: 600px) {
+  .backgroundlive-root .bg-layer { width: 160%; height: 160%; background-size: 140% auto; }
+  
+  /* Small tablets and large phones */
+  .backgroundlive-root .sun-rays {
+    width: 400px;
+    height: 400px;
+  }
+  
+  .backgroundlive-root .breathing-glow {
+    width: 180px;
+    height: 180px;
+    filter: blur(28px);
+  }
+}
+
+@media (max-width: 480px) {
+  .backgroundlive-root .bg-layer { width: 180%; height: 180%; background-size: 150% auto; }
+  /* ensure fundo-sol stays full-width on small screens */
+  .backgroundlive-root .bg-layer.fundo-sol { background-size: 100% auto; background-position: center top; }
+  
+  /* Mobile: scale down significantly */
+  .backgroundlive-root .sun-rays {
+    width: 320px;
+    height: 320px;
+  }
+  
+  .backgroundlive-root .breathing-glow {
+    width: 150px;
+    height: 150px;
+    filter: blur(24px);
+  }
+}
+
+@media (max-width: 320px) {
+  .backgroundlive-root .bg-layer { width: 200%; height: 200%; background-size: 160% auto; }
+  
+  /* Ultra-small phones */
+  .backgroundlive-root .sun-rays {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .backgroundlive-root .breathing-glow {
+    width: 120px;
+    height: 120px;
+    filter: blur(20px);
+  }
+}

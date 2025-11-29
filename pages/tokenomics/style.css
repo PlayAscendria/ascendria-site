@@ -1,0 +1,35 @@
+@import url("../css/style.css");
+
+/* Página Tokenomics: usa imagem de paisagem como background */
+body {
+  background: url("../assets/images/background/backgroundpaisagem.png") center top / cover no-repeat;
+}
+
+/* Estilos específicos para a página Tokenomics */
+.doc-container {
+  position: relative;
+  z-index: 1; /* garante que o texto fique acima do pergaminho */
+  padding: 2.25rem 1.25rem;
+  border-radius: 8px;
+  color: #fff;
+  max-width: 1000px;
+  margin: 1.25rem auto 3rem auto;
+}
+
+/* Pergaminho decorativo atrás do texto */
+.doc-container::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* preenche o container; o background ficará centralizado dentro */
+  z-index: 0; /* atrás do conteúdo */
+  pointer-events: none;
+  background-image: url("../assets/images/ui/pergaminho.png");
+  background-repeat: no-repeat;
+  background-position: center center; /* centraliza horizontal e verticalmente */
+  background-size: 70% auto; /* ocupa 70% da largura do container e mantém proporção */
+  opacity: 1;
+}
+
+.doc-container h1 { margin-top: 0; font-size: 2rem; }
+.doc-container h2 { margin-top: 1.25rem; }
+.doc-container p, .doc-container li { line-height: 1.6; color: #eee; }
