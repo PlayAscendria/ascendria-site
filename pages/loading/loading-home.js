@@ -29,21 +29,21 @@ class HomeLoadingManager {
     const hasVisited = sessionStorage.getItem('hasVisitedHome');
     
     if (hasVisited) {
-      // Não é primeira visita - pula o loading
+      // Not first visit - skip loading
       this.skipLoading();
     } else {
-      // Primeira visita da sessão - mostra loading
+      // First visit of session - show loading
       sessionStorage.setItem('hasVisitedHome', 'true');
       this.init();
     }
   }
 
   skipLoading() {
-    // Remove ou oculta imediatamente a tela de loading
+    // Remove or hide loading screen immediately
     if (this.loadingScreen) {
       this.loadingScreen.style.display = 'none';
     }
-    console.log('⏭️ Loading pulado - não é primeira visita da sessão');
+    console.log('⏭️ Loading skipped - not first visit of session');
   }
 
   init() {
