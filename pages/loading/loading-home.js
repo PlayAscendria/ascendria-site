@@ -42,6 +42,12 @@ class HomeLoadingManager {
     // Remove or hide loading screen immediately
     if (this.loadingScreen) {
       this.loadingScreen.style.display = 'none';
+      // Force remove from DOM
+      setTimeout(() => {
+        if (this.loadingScreen && this.loadingScreen.parentNode) {
+          this.loadingScreen.remove();
+        }
+      }, 100);
     }
     console.log('⏭️ Loading skipped - not first visit of session');
   }
@@ -270,11 +276,47 @@ class HomeLoadingManager {
   }
 }
 
+// Fallback de segurança: garante que loading nunca bloqueie o site
+function ensureLoadingRemoval() {
+  const loadingScreen = document.getElementById('loading-screen');
+  if (loadingScreen && loadingScreen.style.display !== 'none') {
+    setTimeout(() => {
+      if (loadingScreen && loadingScreen.style.display !== 'none') {
+        console.warn('⚠️ Loading timeout - forcing removal');
+        loadingScreen.style.display = 'none';
+        loadingScreen.remove();
+      }
+    }, 10000); // 10 segundos máximo
+  }
+}
+
 // Inicia quando DOM está pronto
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    new HomeLoadingManager();
+    try {
+      new HomeLoadingManager();
+      ensureLoadingRemoval();
+    } catch (err) {
+      console.error('Loading manager error:', err);
+      // Em caso de erro, remove loading imediatamente
+      const ls = document.getElementById('loading-screen');
+      if (ls) {
+        ls.style.display = 'none';
+        ls.remove();
+      }
+    }
   });
 } else {
-  new HomeLoadingManager();
+  try {
+    new HomeLoadingManager();
+    ensureLoadingRemoval();
+  } catch (err) {
+    console.error('Loading manager error:', err);
+    // Em caso de erro, remove loading imediatamente
+    const ls = document.getElementById('loading-screen');
+    if (ls) {
+      ls.style.display = 'none';
+      ls.remove();
+    }
+  }
 }

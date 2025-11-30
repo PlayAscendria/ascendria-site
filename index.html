@@ -78,6 +78,32 @@
 		<!-- Skip Navigation for Accessibility -->
 		<a href="#main" class="skip-to-main">Skip to main content</a>
 
+		<!-- Emergency fallback: garante que loading nunca trave o site -->
+		<script>
+		(function() {
+			// Se após 15 segundos o loading ainda estiver visível, remove
+			setTimeout(function() {
+				var loading = document.getElementById('loading-screen');
+				if (loading && loading.style.display !== 'none') {
+					console.warn('⚠️ Emergency loading removal activated');
+					loading.style.display = 'none';
+					if (loading.parentNode) loading.remove();
+				}
+			}, 15000);
+
+			// Se detectar que não é primeira visita, remove imediatamente
+			if (sessionStorage.getItem('hasVisitedHome')) {
+				var loading = document.getElementById('loading-screen');
+				if (loading) {
+					loading.style.display = 'none';
+					setTimeout(function() {
+						if (loading.parentNode) loading.remove();
+					}, 100);
+				}
+			}
+		})();
+		</script>
+
 		<!-- Loading screen (appears on first visit) -->
 		<div id="loading-screen" class="loading-container">
 			<canvas id="paintCanvas"></canvas>
