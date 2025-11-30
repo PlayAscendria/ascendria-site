@@ -77,10 +77,6 @@ body {
 .hero {
 	content-visibility: auto;
 	contain-intrinsic-size: 100vw 100vh;
-}
-
-/* Hero / primeira imagem de fundo do site */
-.hero {
 	/* Hero full-screen: ocupa toda a viewport; topbar ficará sobre ela (transparente e fixed) */
 	height: 100vh;
 	min-height: 100vh;
@@ -90,11 +86,11 @@ body {
 	position: relative;
 	z-index: var(--z-content, 10);
 	display: block;
-	margin: 0; /* sem margin */
-	padding: 0; /* sem padding */
+	margin: 0;
+	padding: 0;
 	margin-top: clamp(-80px, -8vh, -60px); /* compensa a altura da topbar fixa para começar no topo */
+	margin-bottom: 0;
 }
-
 
 /* Se quiser que o conteúdo da hero esteja alinhado (ex.: centralizado), adicione um contêiner interno */
 .hero .hero-inner {
@@ -105,30 +101,6 @@ body {
 	justify-content: center;
 }
 
-/* Footer: evitar que sobreponha a hero e ficar no final da página */
-.site-footer {
-	position: relative;
-	z-index: 1;
-	clear: both;
-	padding: 2rem 0;
-	background: #111; /* cor básica para contraste (ajuste conforme necessário) */
-	color: #fff;
-	width: 100%;
-	margin-top: auto; /* empurra o footer para baixo quando o conteúdo for curto */
-}
-
-/* Garante espaçamento entre a hero e o footer se necessário */
-.hero { margin-bottom: 0; }
-
-/* Certifica que o footer não esteja flutuando sobre a hero */
-.site-footer {
-	position: relative;
-	z-index: 1;
-	clear: both;
-	margin-top: 0;
-}
-
-/* Garante que o main tenha altura mínima para empurrar o footer quando a hero for menor */
 /* Compensar topbar fixa para que o conteúdo não fique oculto por baixo dela */
 #content-area {
 	padding-top: 8vh;
@@ -155,6 +127,153 @@ body::-webkit-scrollbar-thumb {
 
 #main {
 	min-height: 20vh;
+}
+
+/* ========== HERO CONTENT ========== */
+
+.hero-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	z-index: var(--z-content, 10);
+	padding: clamp(1rem, 4vw, 2rem);
+	max-width: 800px;
+	width: 90%;
+}
+
+.hero-title {
+	font-size: clamp(3rem, 10vw, 6rem);
+	font-weight: 900;
+	color: #fff;
+	text-shadow: 
+		0 2px 4px rgba(0, 0, 0, 0.3),
+		0 4px 20px rgba(241, 215, 44, 0.3);
+	margin: 0 0 0.5rem 0;
+	letter-spacing: 0.1em;
+	line-height: 1;
+}
+
+.hero-subtitle {
+	font-size: clamp(1rem, 3vw, 1.5rem);
+	font-weight: 600;
+	color: #F1D72C;
+	margin: 0 0 0.5rem 0;
+	text-transform: uppercase;
+	letter-spacing: 0.15em;
+}
+
+.hero-description {
+	font-size: clamp(0.9rem, 2vw, 1.2rem);
+	color: rgba(255, 255, 255, 0.9);
+	margin: 0 0 2rem 0;
+	line-height: 1.5;
+}
+
+.cta-primary {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+	background: linear-gradient(135deg, #F1D72C 0%, #e6c520 100%);
+	color: #111;
+	padding: clamp(0.875rem, 2vw, 1.25rem) clamp(2rem, 5vw, 3rem);
+	border-radius: 50px;
+	font-weight: 800;
+	font-size: clamp(1rem, 2vw, 1.25rem);
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	border: 3px solid rgba(255, 255, 255, 0.2);
+	box-shadow: 
+		0 4px 15px rgba(241, 215, 44, 0.4),
+		0 8px 30px rgba(0, 0, 0, 0.3),
+		inset 0 1px 0 rgba(255, 255, 255, 0.3);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
+	overflow: hidden;
+}
+
+.cta-primary::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+	transition: left 0.5s ease;
+}
+
+.cta-primary:hover::before {
+	left: 100%;
+}
+
+.cta-primary:hover,
+.cta-primary:focus {
+	transform: translateY(-3px) scale(1.02);
+	box-shadow: 
+		0 6px 25px rgba(241, 215, 44, 0.5),
+		0 12px 40px rgba(0, 0, 0, 0.4),
+		inset 0 1px 0 rgba(255, 255, 255, 0.4);
+	background: linear-gradient(135deg, #f5dc3d 0%, #F1D72C 100%);
+}
+
+.cta-primary:active {
+	transform: translateY(-1px) scale(1);
+}
+
+.cta-primary:focus-visible {
+	outline: 3px solid #fff;
+	outline-offset: 4px;
+}
+
+.cta-icon {
+	font-size: 0.9em;
+	transition: transform 0.3s ease;
+}
+
+.cta-primary:hover .cta-icon {
+	transform: translateX(3px);
+}
+
+/* Responsividade do Hero */
+@media (max-width: 768px) {
+	.hero-content {
+		top: 45%;
+	}
+	
+	.hero-title {
+		font-size: clamp(2.5rem, 12vw, 4rem);
+	}
+}
+
+@media (max-width: 480px) {
+	.hero-content {
+		width: 95%;
+		padding: 1rem;
+	}
+	
+	.cta-primary {
+		width: 100%;
+		justify-content: center;
+	}
+}
+
+/* Landscape mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+	.hero-content {
+		top: 55%;
+	}
+	
+	.hero-title {
+		font-size: clamp(2rem, 8vw, 3rem);
+		margin-bottom: 0.25rem;
+	}
+	
+	.hero-description {
+		margin-bottom: 1rem;
+	}
 }
 
 /* Container para páginas técnicas (whitepaper, tokenomics) */

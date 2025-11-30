@@ -1,5 +1,10 @@
 {
-  "dependencies": {
-    "@vercel/speed-insights": "^1.2.0"
+  "name": "ascendria-site",
+  "version": "1.0.0",
+  "description": "Ascendria - Gaming Community & NFT Ecosystem Landing Page",
+  "private": true,
+  "scripts": {
+    "start": "npx serve .",
+    "lint": "echo 'No linting configured'"
   }
 }

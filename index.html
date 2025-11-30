@@ -12,25 +12,34 @@
 		<meta name="author" content="Ascendria Team">
 		<meta name="robots" content="index, follow">
 		<meta name="language" content="English">
-		<link rel="canonical" href="https://ascendria.com/">
+		<link rel="canonical" href="https://playascendria.com/">
 		
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website">
-		<meta property="og:url" content="https://ascendria.com/">
+		<meta property="og:url" content="https://playascendria.com/">
 		<meta property="og:title" content="Ascendria - Gaming Community & NFT Ecosystem">
 		<meta property="og:description" content="Join Ascendria, a thriving gaming community and NFT ecosystem. Explore unique digital assets, play immersive games, and be part of a revolutionary Web3 gaming experience.">
-		<meta property="og:image" content="https://ascendria.com/assets/images/ui/logoascendria.png">
+		<meta property="og:image" content="https://playascendria.com/assets/images/ui/logoascendria.png">
 		<meta property="og:site_name" content="Ascendria">
 		
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image">
-		<meta property="twitter:url" content="https://ascendria.com/">
+		<meta property="twitter:url" content="https://playascendria.com/">
+		<meta property="twitter:site" content="@PlayAscendria">
+		<meta property="twitter:creator" content="@PlayAscendria">
 		<meta property="twitter:title" content="Ascendria - Gaming Community & NFT Ecosystem">
 		<meta property="twitter:description" content="Join Ascendria, a thriving gaming community and NFT ecosystem. Explore unique digital assets, play immersive games, and be part of a revolutionary Web3 gaming experience.">
-		<meta property="twitter:image" content="https://ascendria.com/assets/images/ui/logoascendria.png">
+		<meta property="twitter:image" content="https://playascendria.com/assets/images/ui/logoascendria.png">
 		
 		<!-- Favicon -->
 		<link rel="icon" type="image/png" href="/assets/images/ui/favicon.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/ui/favicon.png">
+		<meta name="theme-color" content="#0a0e27">
+		
+		<!-- Preconnect para recursos externos -->
+		<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+		<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+		<link rel="preconnect" href="https://vitals.vercel-insights.com" crossorigin>
 		
 		<!-- Structured Data (JSON-LD) -->
 		<script type="application/ld+json">
@@ -39,12 +48,13 @@
 			"@type": "Organization",
 			"name": "Ascendria",
 			"description": "Gaming Community and NFT Ecosystem",
-			"url": "https://ascendria.com",
-			"logo": "https://ascendria.com/assets/images/ui/logoascendria.png",
+			"url": "https://playascendria.com",
+			"logo": "https://playascendria.com/assets/images/ui/logoascendria.png",
 			"sameAs": [
-				"https://twitter.com/ascendria",
-				"https://discord.gg/ascendria",
-				"https://youtube.com/@ascendria"
+				"https://x.com/PlayAscendria",
+				"https://discord.gg/wdAS9ey5pm",
+				"https://www.youtube.com/@PlayAscendria",
+				"https://www.tiktok.com/@playascendria"
 			],
 			"contactPoint": {
 				"@type": "ContactPoint",
@@ -61,9 +71,11 @@
 			"description": "Immersive Web3 gaming experience with NFT integration",
 			"genre": ["Action", "Adventure", "NFT Game"],
 			"gamePlatform": ["Web Browser", "PC"],
+			"url": "https://app.playascendria.com",
 			"publisher": {
 				"@type": "Organization",
-				"name": "Ascendria Team"
+				"name": "Ascendria Team",
+				"url": "https://playascendria.com"
 			}
 		}
 		</script>
@@ -81,7 +93,7 @@
 		<!-- Emergency fallback: garante que loading nunca trave o site -->
 		<script>
 		(function() {
-			// Se após 15 segundos o loading ainda estiver visível, remove
+			// Se após 5 segundos o loading ainda estiver visível, remove
 			setTimeout(function() {
 				var loading = document.getElementById('loading-screen');
 				if (loading && loading.style.display !== 'none') {
@@ -89,7 +101,7 @@
 					loading.style.display = 'none';
 					if (loading.parentNode) loading.remove();
 				}
-			}, 15000);
+			}, 5000);
 
 			// Se detectar que não é primeira visita, remove imediatamente
 			if (sessionStorage.getItem('hasVisitedHome')) {
@@ -126,8 +138,18 @@
 				</div>
 			</div>
 
-			<!-- Conteúdo vazio (página limpa) -->
-			<main id="main" role="main"></main>
+			<!-- Conteúdo principal com hero content -->
+			<main id="main" role="main">
+				<section class="hero-content">
+					<h1 class="hero-title">ASCENDRIA</h1>
+					<p class="hero-subtitle">Gaming Community & NFT Ecosystem</p>
+					<p class="hero-description">Play, Collect, Earn — Join the Web3 Gaming Revolution</p>
+					<a href="https://app.playascendria.com" class="cta-primary" target="_blank" rel="noopener">
+						<span class="cta-icon">▶</span>
+						<span class="cta-text">PLAY NOW</span>
+					</a>
+				</section>
+			</main>
 
 			<!-- Footer Component (dynamically loaded) -->
 			<div id="footer-placeholder" data-component="footer"></div>

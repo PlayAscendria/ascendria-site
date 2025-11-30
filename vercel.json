@@ -3,7 +3,17 @@
   "redirects": [
     {
       "source": "/discord",
-      "destination": "https://discord.gg/zjsPBXfFX7",
+      "destination": "https://discord.gg/wdAS9ey5pm",
+      "permanent": true
+    },
+    {
+      "source": "/x",
+      "destination": "https://x.com/PlayAscendria",
+      "permanent": true
+    },
+    {
+      "source": "/twitter",
+      "destination": "https://x.com/PlayAscendria",
       "permanent": true
     },
     {
@@ -13,7 +23,12 @@
     },
     {
       "source": "/youtube",
-      "destination": "https://youtube.com/@PlayAscendria",
+      "destination": "https://www.youtube.com/@PlayAscendria",
+      "permanent": true
+    },
+    {
+      "source": "/tiktok",
+      "destination": "https://www.tiktok.com/@playascendria",
       "permanent": true
     }
   ],
@@ -32,6 +47,18 @@
         {
           "key": "X-XSS-Protection",
           "value": "1; mode=block"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://vitals.vercel-insights.com; frame-ancestors 'self'"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
         },
         {
           "key": "Cache-Control",

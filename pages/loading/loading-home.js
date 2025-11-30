@@ -87,20 +87,21 @@ class HomeLoadingManager {
     const basePath = '/assets/images/background/backgroundpaisagem/';
     
     // Lista EDITÁVEL - defina aqui a ordem de pintura e o z-index de cada arquivo
+    // OTIMIZADO: Usando WebP para melhor performance
     const imageFiles = [
-      { file: '0_telabranca_0.png', order: 0, zIndex: 0, category: 'base' },
-      { file: '1_grama1_20.png', order: 1, zIndex: 20, category: 'grama' },
-      { file: '2_grama2_19.png', order: 2, zIndex: 19, category: 'grama' },
-      { file: '3_montanha1_18.png', order: 3, zIndex: 18, category: 'montanha' },
-      { file: '3_montanha2_14.png', order: 3, zIndex: 17, category: 'montanha' },
-      { file: '4_nuvem1_15.png', order: 4, zIndex: 15, category: 'nuvem' },
-      { file: '4_nuvem2_15.png', order: 4, zIndex: 15, category: 'nuvem' },
-      { file: '4_nuvem4_15.png', order: 4, zIndex: 15, category: 'nuvem' },
-      { file: '4_nuvem5_15.png', order: 4, zIndex: 15, category: 'nuvem' },
-      { file: '4_nuvem6_15.png', order: 4, zIndex: 15, category: 'nuvem' },
-      { file: '4_nuvem7_15.png', order: 4, zIndex: 15, category: 'nuvem' },
-      { file: '4_nuvem8_15.png', order: 4, zIndex: 15, category: 'nuvem' },
-      { file: '5_fundosol_1.png', order: 5, zIndex: 1, category: 'fundo' },
+      { file: '0_telabranca_0.webp', order: 0, zIndex: 0, category: 'base' },
+      { file: '1_grama1_20.webp', order: 1, zIndex: 20, category: 'grama' },
+      { file: '2_grama2_19.webp', order: 2, zIndex: 19, category: 'grama' },
+      { file: '3_montanha1_18.webp', order: 3, zIndex: 18, category: 'montanha' },
+      { file: '3_montanha2_14.webp', order: 3, zIndex: 17, category: 'montanha' },
+      { file: '4_nuvem1_15.webp', order: 4, zIndex: 15, category: 'nuvem' },
+      { file: '4_nuvem2_15.webp', order: 4, zIndex: 15, category: 'nuvem' },
+      { file: '4_nuvem4_15.webp', order: 4, zIndex: 15, category: 'nuvem' },
+      { file: '4_nuvem5_15.webp', order: 4, zIndex: 15, category: 'nuvem' },
+      { file: '4_nuvem6_15.webp', order: 4, zIndex: 15, category: 'nuvem' },
+      { file: '4_nuvem7_15.webp', order: 4, zIndex: 15, category: 'nuvem' },
+      { file: '4_nuvem8_15.webp', order: 4, zIndex: 15, category: 'nuvem' },
+      { file: '5_fundosol_1.webp', order: 5, zIndex: 1, category: 'fundo' },
     ];
 
     let loaded = 0;

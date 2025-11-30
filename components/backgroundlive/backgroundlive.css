@@ -38,19 +38,19 @@
   background-position: center center;
   background-size: cover;
 }
-.backgroundlive-root .bg-layer.montanha3 { z-index: 18; background-image: url("/assets/images/background/backgroundpaisagem/3_montanha1_18.png"); }
-.backgroundlive-root .bg-layer.grama2 { z-index: 19; background-image: url("/assets/images/background/backgroundpaisagem/2_grama2_19.png"); }
-.backgroundlive-root .bg-layer.grama1 { z-index: 20; background-image: url("/assets/images/background/backgroundpaisagem/1_grama1_20.png"); }
-.backgroundlive-root .bg-layer.montanha2 { z-index: 17; background-image: url("/assets/images/background/backgroundpaisagem/3_montanha2_14.png"); }
+.backgroundlive-root .bg-layer.montanha3 { z-index: 18; background-image: url("/assets/images/background/backgroundpaisagem/3_montanha1_18.webp"); }
+.backgroundlive-root .bg-layer.grama2 { z-index: 19; background-image: url("/assets/images/background/backgroundpaisagem/2_grama2_19.webp"); }
+.backgroundlive-root .bg-layer.grama1 { z-index: 20; background-image: url("/assets/images/background/backgroundpaisagem/1_grama1_20.webp"); }
+.backgroundlive-root .bg-layer.montanha2 { z-index: 17; background-image: url("/assets/images/background/backgroundpaisagem/3_montanha2_14.webp"); }
 
 /* Nuvens - z-index 15 e 14 (variado) */
-.backgroundlive-root .bg-layer.nuvem1 { z-index: 15; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem1_15.png"); }
-.backgroundlive-root .bg-layer.nuvem2 { z-index: 14; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem2_15.png"); }
-.backgroundlive-root .bg-layer.nuvem3 { z-index: 13; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem3_15.png"); }
-.backgroundlive-root .bg-layer.nuvem4 { z-index: 15; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem4_15.png"); }
-.backgroundlive-root .bg-layer.nuvem5 { z-index: 11; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem5_15.png"); }
-.backgroundlive-root .bg-layer.nuvem6 { z-index: 10; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem6_15.png"); }
-.backgroundlive-root .bg-layer.nuvem7 { z-index: 9; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem7_15.png"); }
+.backgroundlive-root .bg-layer.nuvem1 { z-index: 15; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem1_15.webp"); }
+.backgroundlive-root .bg-layer.nuvem2 { z-index: 14; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem2_15.webp"); }
+.backgroundlive-root .bg-layer.nuvem3 { z-index: 13; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem3_15.webp"); }
+.backgroundlive-root .bg-layer.nuvem4 { z-index: 15; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem4_15.webp"); }
+.backgroundlive-root .bg-layer.nuvem5 { z-index: 11; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem5_15.webp"); }
+.backgroundlive-root .bg-layer.nuvem6 { z-index: 10; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem6_15.webp"); }
+.backgroundlive-root .bg-layer.nuvem7 { z-index: 9; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem7_15.webp"); }
 .backgroundlive-root .bg-layer.fundo-sol {
   /* fundo-sol: fixed, always full-width and responsive. Do not transform this layer. */
   position: absolute;
@@ -60,7 +60,7 @@
   will-change: auto;
   width: 100%;
   height: 100%;
-  background-image: url("/assets/images/background/backgroundpaisagem/5_fundosol_1.png");
+  background-image: url("/assets/images/background/backgroundpaisagem/5_fundosol_1.webp");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: 100% auto; /* fill width, keep aspect */
