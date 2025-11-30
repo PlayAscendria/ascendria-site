@@ -1,10 +1,17 @@
 /* Loading page - Canvas painting effect */
 
 /* 
- * IMPORTANTE: Estas regras são específicas para a tela de loading
- * Evitamos resets globais que causariam FOUC
+ * SISTEMA DE LOADING ANTI-FOUC
+ * 
+ * Fluxo:
+ * 1. Loading começa INVISÍVEL (opacity: 0, visibility: hidden)
+ * 2. JS verifica se é primeira visita da sessão
+ * 3. Se primeira visita: adiciona .active (loading aparece)
+ * 4. Após animação: adiciona .completed (fade-out 0.25s)
+ * 5. Demais visitas: remove loading ANTES do primeiro frame
  */
 
+/* ========== CONTAINER PRINCIPAL ========== */
 .loading-container {
   position: fixed;
   top: 0;
@@ -17,14 +24,32 @@
   justify-content: center;
   overflow: hidden;
   z-index: 99999;
-  pointer-events: auto;
-  /* Sem transition inicial para aparecer instantaneamente */
+  
+  /* INVISÍVEL POR PADRÃO - Nunca pisca! */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
-/* Estado quando loading é completado */
+/* ========== ESTADO ATIVO ========== */
+/* Só o JS adiciona esta classe na primeira visita */
+.loading-container.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* ========== ESTADO COMPLETADO (FADE-OUT) ========== */
+/* Animação única de saída - 0.25s */
 .loading-container.completed {
-  opacity: 0;
+  animation: canvasFadeOut 0.25s ease-out forwards;
   pointer-events: none;
+}
+
+/* Keyframe única para fade-out */
+@keyframes canvasFadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
 }
 
 /* Canvas - camada de pintura */
@@ -96,22 +121,7 @@
   50% { opacity: 1; }
 }
 
-/* Fade out quando concluído */
-@keyframes canvasFadeOut {
-  0% { 
-    opacity: 1;
-  }
-  100% { 
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-.loading-container.completed {
-  animation: canvasFadeOut 0.3s ease-out forwards;
-  pointer-events: none;
-}
-
+/* Fade out dos textos */
 .loading-container.completed .loading-info {
   animation: fadeOutInfo 0.2s ease-out forwards;
 }

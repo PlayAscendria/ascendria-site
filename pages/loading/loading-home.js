@@ -2,8 +2,15 @@
 class HomeLoadingManager {
   constructor() {
     this.loadingScreen = document.getElementById('loading-screen');
+    
+    // Se não encontrar o loading screen, sai
+    if (!this.loadingScreen) {
+      console.log('⏭️ Loading screen não encontrado');
+      return;
+    }
+    
     this.canvas = document.getElementById('paintCanvas');
-    this.ctx = this.canvas.getContext('2d', { willReadFrequently: true });
+    this.ctx = this.canvas ? this.canvas.getContext('2d', { willReadFrequently: true }) : null;
     this.paintingText = document.getElementById('paintingText');
     this.progressValue = document.getElementById('progressValue');
     
@@ -21,38 +28,26 @@ class HomeLoadingManager {
     ];
     this.currentMessage = 0;
     
-    // Verifica se é o primeiro acesso da sessão
-    this.checkFirstVisit();
+    // Primeira visita confirmada - mostra loading
+    this.showLoading();
   }
 
-  checkFirstVisit() {
-    const hasVisited = sessionStorage.getItem('hasVisitedHome');
+  showLoading() {
+    // Adiciona classe .active para revelar o loading (CSS controla visibilidade)
+    this.loadingScreen.classList.add('active');
+    console.log('🎨 Loading ativado - primeira visita da sessão');
     
-    if (hasVisited) {
-      // Not first visit - skip loading
-      this.skipLoading();
-    } else {
-      // First visit of session - show loading
-      sessionStorage.setItem('hasVisitedHome', 'true');
-      this.init();
-    }
-  }
-
-  skipLoading() {
-    // Remove or hide loading screen immediately
-    if (this.loadingScreen) {
-      this.loadingScreen.style.display = 'none';
-      // Force remove from DOM
-      setTimeout(() => {
-        if (this.loadingScreen && this.loadingScreen.parentNode) {
-          this.loadingScreen.remove();
-        }
-      }, 100);
-    }
-    console.log('⏭️ Loading skipped - not first visit of session');
+    // Inicia a animação de pintura
+    this.init();
   }
 
   init() {
+    if (!this.canvas || !this.ctx) {
+      console.warn('Canvas não disponível, finalizando loading');
+      this.onPaintingComplete();
+      return;
+    }
+    
     this.resizeCanvas();
     window.addEventListener('resize', () => this.resizeCanvas());
     this.loadImages();
@@ -261,63 +256,80 @@ class HomeLoadingManager {
     this.currentProgress = 100;
     this.updateProgress();
     this.paintingText.textContent = '✓ Work Completed!';
+    
+    // Marca sessão como já carregada
+    sessionStorage.setItem('alreadyLoaded', '1');
 
     setTimeout(() => {
       this.dissolve();
-    }, 1000);
+    }, 800);
   }
 
   dissolve() {
+    // Adiciona classe .completed que dispara animação CSS de 0.25s
     this.loadingScreen.classList.add('completed');
 
+    // Remove do DOM após a animação (0.25s = 250ms)
     setTimeout(() => {
-      this.loadingScreen.style.display = 'none';
-      this.loadingScreen.remove();
+      if (this.loadingScreen && this.loadingScreen.parentNode) {
+        this.loadingScreen.remove();
+      }
     }, 300);
   }
 }
 
 // Fallback de segurança: garante que loading nunca bloqueie o site
 function ensureLoadingRemoval() {
-  const loadingScreen = document.getElementById('loading-screen');
-  if (loadingScreen && loadingScreen.style.display !== 'none') {
-    setTimeout(() => {
-      if (loadingScreen && loadingScreen.style.display !== 'none') {
-        console.warn('⚠️ Loading timeout - forcing removal');
-        loadingScreen.style.display = 'none';
-        loadingScreen.remove();
-      }
-    }, 10000); // 10 segundos máximo
-  }
+  setTimeout(() => {
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen && loadingScreen.parentNode) {
+      console.warn('⚠️ Loading timeout (10s) - forcing removal');
+      loadingScreen.remove();
+    }
+  }, 10000); // 10 segundos máximo
 }
 
-// Inicia quando DOM está pronto
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
+// Inicia IMEDIATAMENTE para evitar qualquer flash
+// O loading começa invisível (CSS), então é seguro executar cedo
+(function initLoadingManager() {
+  // Verifica se já carregou na sessão ANTES de qualquer outra coisa
+  const alreadyLoaded = sessionStorage.getItem('alreadyLoaded');
+  
+  if (alreadyLoaded) {
+    // Segunda visita: remove loading imediatamente quando DOM estiver pronto
+    // Usa requestAnimationFrame para garantir que aconteça no primeiro frame
+    const removeLoading = () => {
+      const ls = document.getElementById('loading-screen');
+      if (ls) {
+        ls.remove();
+        console.log('⏭️ Loading removido - não é primeira visita da sessão');
+      }
+    };
+    
+    // Se DOM já está pronto, remove agora. Senão, aguarda.
+    if (document.readyState !== 'loading') {
+      removeLoading();
+    } else {
+      document.addEventListener('DOMContentLoaded', removeLoading);
+    }
+    return; // Não inicializa o HomeLoadingManager
+  }
+  
+  // Primeira visita: aguarda DOM e inicializa
+  const init = () => {
     try {
       new HomeLoadingManager();
       ensureLoadingRemoval();
     } catch (err) {
       console.error('Loading manager error:', err);
-      // Em caso de erro, remove loading imediatamente
       const ls = document.getElementById('loading-screen');
-      if (ls) {
-        ls.style.display = 'none';
-        ls.remove();
-      }
+      if (ls) ls.remove();
     }
-  });
-} else {
-  try {
-    new HomeLoadingManager();
-    ensureLoadingRemoval();
-  } catch (err) {
-    console.error('Loading manager error:', err);
-    // Em caso de erro, remove loading imediatamente
-    const ls = document.getElementById('loading-screen');
-    if (ls) {
-      ls.style.display = 'none';
-      ls.remove();
-    }
+  };
+  
+  if (document.readyState !== 'loading') {
+    init();
+  } else {
+    document.addEventListener('DOMContentLoaded', init);
   }
-}
+})();

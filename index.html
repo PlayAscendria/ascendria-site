@@ -124,36 +124,20 @@
 		</script>
 	</head>
 	<body>
+		<!-- Loading script - DEVE ser o PRIMEIRO script para evitar flash -->
+		<script src="/pages/loading/loading-home.js"></script>
+
 		<!-- Skip Navigation for Accessibility -->
 		<a href="#main" class="skip-to-main">Skip to main content</a>
 
-		<!-- Emergency fallback: garante que loading nunca trave o site -->
-		<script>
-		(function() {
-			// Se após 5 segundos o loading ainda estiver visível, remove
-			setTimeout(function() {
-				var loading = document.getElementById('loading-screen');
-				if (loading && loading.style.display !== 'none') {
-					console.warn('⚠️ Emergency loading removal activated');
-					loading.style.display = 'none';
-					if (loading.parentNode) loading.remove();
-				}
-			}, 5000);
+		<!-- 
+			SISTEMA DE LOADING ANTI-FOUC
+			O loading-container começa INVISÍVEL (CSS: opacity:0, visibility:hidden)
+			O JS (loading-home.js) controla quando mostrar via classe .active
+			Na segunda visita da sessão, é removido ANTES do primeiro frame
+		-->
 
-			// Se detectar que não é primeira visita, remove imediatamente
-			if (sessionStorage.getItem('hasVisitedHome')) {
-				var loading = document.getElementById('loading-screen');
-				if (loading) {
-					loading.style.display = 'none';
-					setTimeout(function() {
-						if (loading.parentNode) loading.remove();
-					}, 100);
-				}
-			}
-		})();
-		</script>
-
-		<!-- Loading screen (appears on first visit) -->
+		<!-- Loading screen (appears on first visit only) -->
 		<div id="loading-screen" class="loading-container">
 			<canvas id="paintCanvas"></canvas>
 			<div class="loading-info">
@@ -240,9 +224,6 @@
 			loadComponents();
 		})();
 		</script>
-
-		<!-- Loading screen script -->
-		<script src="/pages/loading/loading-home.js" defer></script>
 
 		<!-- Vercel Speed Insights -->
 		<script type="module">
