@@ -17,8 +17,15 @@ class ComponentLoader {
     }
 
     try {
-      // Usar caminhos absolutos que funcionam tanto local quanto na Vercel
-      const htmlPath = `/components/${componentName}/${componentName.charAt(0).toUpperCase() + componentName.slice(1)}.html`;
+      // Mapear nomes dos componentes para seus arquivos HTML corretos (case-sensitive)
+      const htmlFileNames = {
+        'topbar': 'TopBar',
+        'footer': 'Footer',
+        'backgroundlive': 'BackgroundLive'
+      };
+      
+      const htmlFileName = htmlFileNames[componentName] || componentName;
+      const htmlPath = `/components/${componentName}/${htmlFileName}.html`;
       
       console.log(`🔍 Tentando carregar: ${htmlPath}`);
       const htmlResponse = await fetch(htmlPath);
