@@ -2,48 +2,43 @@
 
 /* 
  * Sistema de prevenção de FOUC (Flash of Unstyled Content)
- * Estratégia: body inicia com opacity:0 inline, CSS é bloqueante,
- * então quando JS executa no body, CSS já está aplicado
+ * 
+ * COMO FUNCIONA:
+ * 1. CSS é carregado via <link> no HTML (bloqueante por padrão)
+ * 2. Conteúdo inicia ESCONDIDO (opacity: 0, visibility: hidden)
+ * 3. JavaScript carrega componentes dinamicamente
+ * 4. Após componentes carregarem, JS adiciona classe 'loaded' ao body
+ * 5. CSS então mostra o conteúdo com transição suave
+ * 
+ * IMPORTANTE: NÃO usar body style="opacity:0" inline - isso causa problemas
+ * O CSS deve controlar a visibilidade, não o HTML inline.
  */
 
-/* Background base - sempre presente */
+/* Background base - SEMPRE presente imediatamente */
 html, body {
 	background: #0a0e27;
 	margin: 0;
 	padding: 0;
 }
 
-/* Conteúdo principal escondido enquanto loading está ativa */
-#content-area {
-	opacity: 0;
-	visibility: hidden;
-}
-
-/* Topbar e footer podem aparecer durante loading */
+/* Conteúdo principal ESCONDIDO por padrão */
+#content-area,
 #topbar-placeholder,
 #footer-placeholder,
+#backgroundlive-placeholder,
 .topbar {
 	opacity: 0;
 	visibility: hidden;
 }
 
-/* Quando página está carregada, mostrar tudo com transição suave */
+/* Quando body.loaded é adicionado, mostrar TUDO com transição */
 body.loaded #content-area,
 body.loaded #topbar-placeholder,
 body.loaded #footer-placeholder,
+body.loaded #backgroundlive-placeholder,
 body.loaded .topbar {
 	opacity: 1;
 	visibility: visible;
-	transition: opacity 0.4s ease-out;
-}
-
-/* BackgroundLive deve aparecer junto com content-area */
-#backgroundlive-placeholder {
-	opacity: 0;
-}
-
-body.loaded #backgroundlive-placeholder {
-	opacity: 1;
 	transition: opacity 0.4s ease-out;
 }
 

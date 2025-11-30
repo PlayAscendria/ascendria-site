@@ -1,10 +1,7 @@
 /* 
  * Tokenomics Page Styles
- * Importações CSS devem ser processadas ANTES do conteúdo renderizar
+ * CSS global agora é carregado via <link> no HTML para evitar FOUC
  */
-@import url("../../css/style.css");
-@import url("../../components/topbar/topbar.css");
-@import url("../../components/backgroundlive/backgroundlive.css");
 
 /* ========== BASE ========== */
 html, body {

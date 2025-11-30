@@ -5,22 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>About Ascendria</title>
 
-    <link rel="icon" type="image/png" href="assets/images/ui/favicon.png">
+    <link rel="icon" type="image/png" href="/assets/images/ui/favicon.png">
     <meta name="theme-color" content="#0a0e27">
 
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!-- Global Styles -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/components/topbar/topbar.css">
 
     <!-- About Page Specific Styles -->
-    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="/css/about.css">
 </head>
-<body style="opacity: 0;">
-    <!-- Mostrar body após CSS carregar -->
-    <script>document.body.style.opacity = '1';</script>
-
+<body>
     <!-- Skip Navigation for Accessibility -->
     <a href="#main-content" class="skip-to-main">Pular para conteúdo principal</a>
 
@@ -79,18 +77,20 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <!-- Component Loader -->
-    <script src="js/component-loader.js"></script>
+    <script src="/js/component-loader.js"></script>
 
     <!-- Initialize Components -->
     <script>
         // Carregar componente TopBar e marcar como loaded
         ComponentLoader.load('topbar', 'topbar-placeholder').then(() => {
             document.body.classList.add('loaded');
+        }).catch(() => {
+            document.body.classList.add('loaded');
         });
     </script>
 
     <!-- Carousel Initialization -->
-    <script src="js/about-carousel.js"></script>
+    <script src="/js/about-carousel.js"></script>
 
 </body>
 </html>

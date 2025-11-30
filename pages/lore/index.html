@@ -30,13 +30,15 @@
     <link rel="icon" type="image/png" href="/assets/images/ui/favicon.png">
     <meta name="theme-color" content="#0a0e27">
     
-    <!-- CSS - carregamento bloqueante para evitar FOUC -->
+    <!-- CSS Global (carregamento bloqueante) -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/components/topbar/topbar.css">
+    <link rel="stylesheet" href="/components/backgroundlive/backgroundlive.css">
+    
+    <!-- CSS Local da página -->
     <link rel="stylesheet" href="style.css">
   </head>
-  <body style="opacity: 0;">
-    <!-- Mostrar body imediatamente após CSS carregar -->
-    <script>document.body.style.opacity = '1';</script>
-
+  <body>
     <!-- Skip Navigation for Accessibility -->
     <a href="#main" class="skip-to-main">Skip to main content</a>
 
