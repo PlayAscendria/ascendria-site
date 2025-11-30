@@ -124,24 +124,29 @@
 		</script>
 	</head>
 	<body>
-		<!-- Loading script - DEVE ser o PRIMEIRO script para evitar flash -->
+		<!-- 
+			SISTEMA DE PRELOADER AAA
+			1. asset-preloader.js: carrega TODOS os assets do site com progresso real
+			2. loading-home.js: gerencia exibição e integração com sessionStorage
+			O loading começa INVISÍVEL (CSS), JS controla quando mostrar
+		-->
+		
+		<!-- Asset Preloader - DEVE carregar PRIMEIRO -->
+		<script src="/js/asset-preloader.js"></script>
+		<!-- Loading Manager - usa o preloader acima -->
 		<script src="/pages/loading/loading-home.js"></script>
 
 		<!-- Skip Navigation for Accessibility -->
 		<a href="#main" class="skip-to-main">Skip to main content</a>
 
-		<!-- 
-			SISTEMA DE LOADING ANTI-FOUC
-			O loading-container começa INVISÍVEL (CSS: opacity:0, visibility:hidden)
-			O JS (loading-home.js) controla quando mostrar via classe .active
-			Na segunda visita da sessão, é removido ANTES do primeiro frame
-		-->
-
 		<!-- Loading screen (appears on first visit only) -->
 		<div id="loading-screen" class="loading-container">
 			<canvas id="paintCanvas"></canvas>
 			<div class="loading-info">
-				<div class="painting-text" id="paintingText">Painting...</div>
+				<div class="painting-text" id="paintingText">Preparing the canvas...</div>
+				<div class="loading-progress-bar">
+					<div class="loading-progress-fill" id="progressFill"></div>
+				</div>
 				<div class="progress-value" id="progressValue">0%</div>
 			</div>
 		</div>
