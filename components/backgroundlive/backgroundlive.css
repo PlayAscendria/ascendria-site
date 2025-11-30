@@ -35,8 +35,8 @@
   width: 120%;
   height: 120%;
   background-repeat: no-repeat;
-  background-position: center bottom;
-  background-size: contain;
+  background-position: center center;
+  background-size: cover;
 }
 .backgroundlive-root .bg-layer.montanha3 { z-index: 18; background-image: url("/assets/images/background/backgroundpaisagem/3_montanha1_18.png"); }
 .backgroundlive-root .bg-layer.grama2 { z-index: 19; background-image: url("/assets/images/background/backgroundpaisagem/2_grama2_19.png"); }
@@ -88,25 +88,28 @@
 /* Dynamic sun rays container (created by JS) */
 .backgroundlive-root .sun-rays {
   position: absolute;
-  left: 59%;
-  top: 56%;
+  /* Posicionamento FIXO ancorado na montanha - usa left/top em % mas com transform centralizado */
+  left: 52%;
+  top: 52%;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  /* give the container room for rays so children positioned with top/left center correctly */
-  width: 750px;
-  height: 750px;
-  z-index: 17; /* test: above numvem6 */
+  /* Tamanho escala com a viewport height */
+  width: 60vh;
+  height: 60vh;
+  z-index: var(--z-sun-rays, 17);
   animation: sun-rotate 120s linear infinite;
 }
 
 /* Breathing glow circle (pulsating light effect) */
 .backgroundlive-root .breathing-glow {
   position: absolute;
-  left: 57%;
-  top: 65%;
+  /* Posicionamento FIXO ancorado na montanha - mesma posição dos raios */
+  left: 52%;
+  top: 52%;
   transform: translate(-50%, -50%);
-  width: 750px;
-  height: 750px;
+  /* Tamanho escala com a viewport height */
+  width: 60vh;
+  height: 60vh;
   border-radius: 50%;
   background: radial-gradient(
     circle at 50% 50%,
@@ -117,7 +120,7 @@
     rgba(15, 15, 15, 0.308) 100%
   );
   pointer-events: none;
-  z-index: 16; /* behind rays but above clouds */
+  z-index: var(--z-breathing-glow, 16);
   filter: blur(40px);
   animation: breathing-light 6s ease-in-out infinite;
 }
@@ -135,7 +138,7 @@
 
 .backgroundlive-root .sun-ray {
   position: absolute;
-  left: 50%;
+  left: 40%;
   top: 50%;
   transform: translate(-50%,-50%); /* rotation applied inline on the wrapper */
   pointer-events: none;
@@ -144,7 +147,7 @@
 
 .backgroundlive-root .ray-triangle{
   position: absolute;
-  left: 50%;
+  left: 40%;
   top: 50%;
   transform: translate(-50%,-50%);
   /* triangle size is set via inline width/height on creation */
@@ -159,8 +162,6 @@
 }
 
 @keyframes sun-rotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
-
-
 
 @keyframes triangle-pulse {
   0% { transform: translate(-50%,-50%) scaleY(0.6); opacity: 0.5; }
@@ -371,85 +372,472 @@
   .backgroundlive-root .bg-layer.sun::before { animation: none; }
 }
 
+/* ========== RESPONSIVIDADE MOBILE E TABLETS ========== */
+
+/* Tablets (769px - 900px) */
 @media (max-width: 900px) {
-  .backgroundlive-root .bg-layer { width: 140%; height: 140%; background-size: 120% auto; }
-  
-  /* Adjust sun rays container for tablets */
-  .backgroundlive-root .sun-rays {
-    width: 600px;
-    height: 600px;
+  .backgroundlive-root .bg-layer {
+    width: 150%; /* Aumentado para crescer naturalmente */
+    height: 150%;
   }
-  
-  /* Scale down glow for tablets */
+
+  /* Montanhas e grama: crescem proporcionalmente com o container */
+  .backgroundlive-root .bg-layer.montanha3,
+  .backgroundlive-root .bg-layer.montanha2,
+  .backgroundlive-root .bg-layer.grama1,
+  .backgroundlive-root .bg-layer.grama2 {
+    width: 100%;
+    height: 100%;
+    background-size: auto 100%;
+    background-position: center bottom;
+  }
+
+  /* Nuvens: crescem proporcionalmente */
+  .backgroundlive-root .bg-layer.nuvem1,
+  .backgroundlive-root .bg-layer.nuvem2,
+  .backgroundlive-root .bg-layer.nuvem3,
+  .backgroundlive-root .bg-layer.nuvem4,
+  .backgroundlive-root .bg-layer.nuvem5,
+  .backgroundlive-root .bg-layer.nuvem6,
+  .backgroundlive-root .bg-layer.nuvem7 {
+    background-size: contain;
+  }
+
+  /* FUNDO-SOL: Este é o background real - deve preencher TUDO */
+  .backgroundlive-root .bg-layer.fundo-sol {
+    width: 100%;
+    height: 100%;
+    background-size: cover; /* Preenche altura E largura */
+    background-position: center center;
+  }
+
+  /* Tablets - sun rays e glow tamanho médio */
+  .backgroundlive-root .sun-rays {
+    width: 45vh;
+    height: 45vh;
+  }
+
   .backgroundlive-root .breathing-glow {
-    width: 250px;
-    height: 250px;
+    width: 45vh;
+    height: 45vh;
+    filter: blur(30px);
+  }
+}
+
+/* iPad Pro e Tablets grandes (901px - 1024px) em portrait */
+@media (min-width: 901px) and (max-width: 1024px) and (orientation: portrait) {
+  .backgroundlive-root .bg-layer {
+    width: 140%;
+    height: 140%;
+  }
+
+  /* Nuvens: tamanho maior para cobrir toda área */
+  .backgroundlive-root .bg-layer.nuvem1,
+  .backgroundlive-root .bg-layer.nuvem2,
+  .backgroundlive-root .bg-layer.nuvem3,
+  .backgroundlive-root .bg-layer.nuvem4,
+  .backgroundlive-root .bg-layer.nuvem5,
+  .backgroundlive-root .bg-layer.nuvem6,
+  .backgroundlive-root .bg-layer.nuvem7,
+  .backgroundlive-root .bg-layer.nuvem8 {
+    width: 140%;
+    height: 140%;
+    background-size: contain;
+    background-position: center center;
+  }
+
+  /* Montanhas e grama: manter visíveis */
+  .backgroundlive-root .bg-layer.montanha3,
+  .backgroundlive-root .bg-layer.montanha2,
+  .backgroundlive-root .bg-layer.grama1,
+  .backgroundlive-root .bg-layer.grama2 {
+    width: 100%;
+    height: 100%;
+    background-size: auto 100%;
+    background-position: center bottom;
+  }
+
+  /* FUNDO-SOL: preencher toda área */
+  .backgroundlive-root .bg-layer.fundo-sol {
+    width: 100%;
+    height: 100%;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+
+  /* Sun rays e glow */
+  .backgroundlive-root .sun-rays {
+    width: 50vh;
+    height: 50vh;
+  }
+
+  .backgroundlive-root .breathing-glow {
+    width: 50vh;
+    height: 50vh;
     filter: blur(35px);
   }
 }
 
+/* Mobile Landscape e Tablets pequenos (481px - 768px) */
 @media (max-width: 768px) {
-  .backgroundlive-root .bg-layer { width: 150%; height: 150%; background-size: 130% auto; }
-  
-  /* Medium tablets: scale down further */
-  .backgroundlive-root .sun-rays {
-    width: 500px;
-    height: 500px;
+  .backgroundlive-root .bg-layer {
+    width: 160%; /* Aumentado para crescer mais */
+    height: 160%;
   }
-  
-  .backgroundlive-root .breathing-glow {
-    width: 700px;
-    height: 350px;
-    filter: blur(32px);
-  }
-}
 
-@media (max-width: 600px) {
-  .backgroundlive-root .bg-layer { width: 160%; height: 160%; background-size: 140% auto; }
-  
-  /* Small tablets and large phones */
-  .backgroundlive-root .sun-rays {
-    width: 400px;
-    height: 400px;
+  /* Montanhas e grama: crescem proporcionalmente */
+  .backgroundlive-root .bg-layer.montanha3,
+  .backgroundlive-root .bg-layer.montanha2,
+  .backgroundlive-root .bg-layer.grama1,
+  .backgroundlive-root .bg-layer.grama2 {
+    width: 100%;
+    height: 100%;
+    background-size: auto 100%;
+    background-position: center bottom;
   }
-  
-  .backgroundlive-root .breathing-glow {
-    width: 180px;
-    height: 180px;
-    filter: blur(28px);
-  }
-}
 
-@media (max-width: 480px) {
-  .backgroundlive-root .bg-layer { width: 180%; height: 180%; background-size: 150% auto; }
-  /* ensure fundo-sol stays full-width on small screens */
-  .backgroundlive-root .bg-layer.fundo-sol { background-size: 100% auto; background-position: center top; }
-  
-  /* Mobile: scale down significantly */
-  .backgroundlive-root .sun-rays {
-    width: 320px;
-    height: 320px;
+  /* Nuvens: crescem proporcionalmente */
+  .backgroundlive-root .bg-layer.nuvem1,
+  .backgroundlive-root .bg-layer.nuvem2,
+  .backgroundlive-root .bg-layer.nuvem3,
+  .backgroundlive-root .bg-layer.nuvem4,
+  .backgroundlive-root .bg-layer.nuvem5,
+  .backgroundlive-root .bg-layer.nuvem6,
+  .backgroundlive-root .bg-layer.nuvem7 {
+    background-size: contain;
   }
-  
-  .backgroundlive-root .breathing-glow {
-    width: 150px;
-    height: 150px;
-    filter: blur(24px);
-  }
-}
 
-@media (max-width: 320px) {
-  .backgroundlive-root .bg-layer { width: 200%; height: 200%; background-size: 160% auto; }
-  
-  /* Ultra-small phones */
-  .backgroundlive-root .sun-rays {
-    width: 250px;
-    height: 250px;
+  /* FUNDO-SOL: Background principal - preenche tudo */
+  .backgroundlive-root .bg-layer.fundo-sol {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
   }
-  
+
+  /* Mobile landscape - tamanho reduzido */
+  .backgroundlive-root .sun-rays {
+    width: 35vh;
+    height: 35vh;
+  }
+
   .backgroundlive-root .breathing-glow {
-    width: 120px;
-    height: 120px;
+    width: 35vh;
+    height: 35vh;
     filter: blur(20px);
+  }
+
+  /* Reduzir velocidade de animação em mobile */
+  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 90s !important; }
+  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 160s !important; }
+  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 100s !important; }
+  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 85s !important; }
+  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 85s !important; }
+  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 140s !important; }
+  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 200s !important; }
+}
+
+/* Mobile Portrait (321px - 480px) */
+@media (max-width: 480px) {
+  .backgroundlive-root .bg-layer {
+    width: 170%;
+    height: 170%;
+  }
+
+  /* Montanhas e grama: manter proporção natural */
+  .backgroundlive-root .bg-layer.montanha3,
+  .backgroundlive-root .bg-layer.montanha2,
+  .backgroundlive-root .bg-layer.grama1,
+  .backgroundlive-root .bg-layer.grama2 {
+    width: 100%;
+    height: 100%;
+    background-size: auto 100%;
+    background-position: center bottom;
+  }
+
+  /* Nuvens: crescem proporcionalmente com o container */
+  .backgroundlive-root .bg-layer.nuvem1,
+  .backgroundlive-root .bg-layer.nuvem2,
+  .backgroundlive-root .bg-layer.nuvem3,
+  .backgroundlive-root .bg-layer.nuvem4,
+  .backgroundlive-root .bg-layer.nuvem5,
+  .backgroundlive-root .bg-layer.nuvem6,
+  .backgroundlive-root .bg-layer.nuvem7 {
+    background-size: contain;
+  }
+
+  /* FUNDO-SOL: Background principal - preenche tudo */
+  .backgroundlive-root .bg-layer.fundo-sol {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  /* Mobile pequeno - sol menor */
+  .backgroundlive-root .sun-rays {
+    width: 28vh;
+    height: 28vh;
+  }
+
+  .backgroundlive-root .breathing-glow {
+    width: 28vh;
+    height: 28vh;
+    filter: blur(15px);
+  }
+
+  /* Animações mais lentas em mobile pequeno */
+  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 100s !important; }
+  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 170s !important; }
+  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 110s !important; }
+  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 95s !important; }
+  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 95s !important; }
+  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 150s !important; }
+  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 210s !important; }
+}
+
+/* Mobile Ultra Pequeno (até 320px) */
+@media (max-width: 320px) {
+  .backgroundlive-root .bg-layer {
+    width: 180%;
+    height: 180%;
+  }
+
+  /* Montanhas e grama: manter proporção natural */
+  .backgroundlive-root .bg-layer.montanha3,
+  .backgroundlive-root .bg-layer.montanha2,
+  .backgroundlive-root .bg-layer.grama1,
+  .backgroundlive-root .bg-layer.grama2 {
+    width: 100%;
+    height: 100%;
+    background-size: auto 100%;
+    background-position: center bottom;
+  }
+
+  /* Nuvens: crescem proporcionalmente com o container */
+  .backgroundlive-root .bg-layer.nuvem1,
+  .backgroundlive-root .bg-layer.nuvem2,
+  .backgroundlive-root .bg-layer.nuvem3,
+  .backgroundlive-root .bg-layer.nuvem4,
+  .backgroundlive-root .bg-layer.nuvem5,
+  .backgroundlive-root .bg-layer.nuvem6,
+  .backgroundlive-root .bg-layer.nuvem7 {
+    background-size: contain;
+  }
+
+  /* FUNDO-SOL: Background principal - preenche tudo */
+  .backgroundlive-root .bg-layer.fundo-sol {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  /* Mobile ultra pequeno - sol mínimo */
+  .backgroundlive-root .sun-rays {
+    width: 22vh;
+    height: 22vh;
+  }
+
+  .backgroundlive-root .breathing-glow {
+    width: 22vh;
+    height: 22vh;
+    filter: blur(12px);
+  }
+}
+
+/* ========== RESPONSIVE DESIGN: 720p até 4K ========== */
+
+/* HD / 720p (1280x720) */
+@media (min-width: 1280px) and (max-width: 1365px) {
+  .backgroundlive-root .bg-layer {
+    width: 115%;
+    height: 115%;
+    background-size: contain;
+  }
+
+  .backgroundlive-root .bg-layer.sun {
+    background-size: 22% auto;
+  }
+
+  /* Sun rays e glow mantêm posição fixa, apenas tamanho muda */
+  .backgroundlive-root .sun-rays {
+    width: 50vh;
+    height: 50vh;
+  }
+
+  .backgroundlive-root .breathing-glow {
+    width: 50vh;
+    height: 50vh;
+  }
+  
+  /* Animações HD */
+  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 20s; }
+  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 22s; }
+  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 21s; }
+  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 23s; }
+  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 24s; }
+  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 19s; }
+  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 25s; }
+  .backgroundlive-root .bg-layer.nuvem8 { animation-duration: 18s; }
+}
+
+/* Full HD / 1080p (1920x1080) */
+@media (min-width: 1366px) and (max-width: 1919px) {
+  .backgroundlive-root .bg-layer {
+    width: 120%;
+    height: 120%;
+    background-size: contain;
+  }
+
+  .backgroundlive-root .bg-layer.sun {
+    background-size: 20% auto;
+  }
+
+  /* Full HD - tamanho maior mas mesma posição */
+  .backgroundlive-root .sun-rays {
+    width: 65vh;
+    height: 65vh;
+  }
+
+  .backgroundlive-root .breathing-glow {
+    width: 65vh;
+    height: 65vh;
+  }
+  
+  /* Animações 1080p */
+  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 18s; }
+  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 20s; }
+  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 19s; }
+  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 21s; }
+  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 22s; }
+  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 17s; }
+  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 23s; }
+  .backgroundlive-root .bg-layer.nuvem8 { animation-duration: 16s; }
+}
+
+/* Ultrawide / QHD (2560x1440) */
+@media (min-width: 1920px) and (max-width: 2559px) {
+  .backgroundlive-root .bg-layer {
+    width: 100%;
+    height: 100%;
+    background-size: 100% auto;
+  }
+  
+  /* Nuvens: manter contain para não cortar */
+  .backgroundlive-root .bg-layer.nuvem1,
+  .backgroundlive-root .bg-layer.nuvem2,
+  .backgroundlive-root .bg-layer.nuvem3,
+  .backgroundlive-root .bg-layer.nuvem4,
+  .backgroundlive-root .bg-layer.nuvem5,
+  .backgroundlive-root .bg-layer.nuvem6,
+  .backgroundlive-root .bg-layer.nuvem7,
+  .backgroundlive-root .bg-layer.nuvem8 {
+    background-size: contain;
+  }
+  
+  .backgroundlive-root .bg-layer.sun {
+    background-size: 18% auto;
+  }
+
+  /* QHD/Ultrawide - tamanho ainda maior */
+  .backgroundlive-root .sun-rays {
+    width: 75vh;
+    height: 75vh;
+  }
+
+  .backgroundlive-root .breathing-glow {
+    width: 75vh;
+    height: 75vh;
+  }
+  
+  /* Animações Ultrawide */
+  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 16s; }
+  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 18s; }
+  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 17s; }
+  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 19s; }
+  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 20s; }
+  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 15s; }
+  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 21s; }
+  .backgroundlive-root .bg-layer.nuvem8 { animation-duration: 14s; }
+}
+
+/* 4K UHD (3840x2160) */
+@media (min-width: 2560px) {
+  .backgroundlive-root .bg-layer {
+    width: 100%;
+    height: 100%;
+    background-size: 100% auto;
+  }
+  
+  /* Nuvens: manter contain para não cortar */
+  .backgroundlive-root .bg-layer.nuvem1,
+  .backgroundlive-root .bg-layer.nuvem2,
+  .backgroundlive-root .bg-layer.nuvem3,
+  .backgroundlive-root .bg-layer.nuvem4,
+  .backgroundlive-root .bg-layer.nuvem5,
+  .backgroundlive-root .bg-layer.nuvem6,
+  .backgroundlive-root .bg-layer.nuvem7,
+  .backgroundlive-root .bg-layer.nuvem8 {
+    background-size: contain;
+  }
+  
+  .backgroundlive-root .bg-layer.sun {
+    background-size: 16% auto;
+  }
+
+  /* 4K - tamanho máximo */
+  .backgroundlive-root .sun-rays {
+    width: 90vh;
+    height: 90vh;
+  }
+
+  .backgroundlive-root .breathing-glow {
+    width: 90vh;
+    height: 90vh;
+  }
+  
+  /* Animações 4K */
+  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 14s; }
+  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 16s; }
+  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 15s; }
+  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 17s; }
+  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 18s; }
+  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 13s; }
+  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 19s; }
+  .backgroundlive-root .bg-layer.nuvem8 { animation-duration: 12s; }
+}
+
+/* ========== LANDSCAPE ORIENTATION ========== */
+
+/* Mobile Landscape - Otimizações específicas */
+@media (max-width: 768px) and (orientation: landscape) {
+  .backgroundlive-root .sun-rays {
+    width: 40vh;
+    height: 40vh;
+  }
+
+  .backgroundlive-root .breathing-glow {
+    width: 40vh;
+    height: 40vh;
+    filter: blur(15px);
+  }
+
+  /* Ajustes para viewport curto em landscape */
+  .backgroundlive-root .bg-layer {
+    background-size: cover;
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+  .backgroundlive-root .sun-rays {
+    width: min(60vh, 40vw);
+    height: min(60vh, 40vw);
+  }
+
+  .backgroundlive-root .breathing-glow {
+    width: min(60vh, 40vw);
+    height: min(60vh, 40vw);
   }
 }

@@ -2,56 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
   <title>Entrar no Universo Ascendria</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/play.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #0a0f1c;
-      background-image: radial-gradient(circle at center, #162232, #0a0f1c);
-      color: white;
-    }
-  </style>
 </head>
-<body class="min-h-screen flex items-center justify-center">
+<body>
+
+  <!-- Skip Navigation for Accessibility -->
+  <a href="#main-content" class="skip-to-main">Pular para conteúdo principal</a>
 
   <!-- Login Card -->
-  <div class="bg-[#101b2d] border-2 border-[#30f2ff] rounded-xl shadow-2xl w-full max-w-md px-8 py-10 text-center">
-    
-    <img src="assets/images/ui/logo-ascendria.png" alt="Logo Ascendria" class="h-16 mx-auto mb-6">
+  <main id="main-content" role="main">
+    <div class="login-card">
 
-    <h1 class="text-2xl font-bold mb-2">Entrar no Universo Ascendria</h1>
-    <p class="text-gray-400 text-sm mb-6">Faça login para acessar seu painel e explorar o mundo.</p>
+      <img src="assets/images/ui/logo-ascendria.png" alt="Logo Ascendria">
 
-    <!-- Botão Login com Google -->
-    <button class="w-full bg-white text-black font-semibold py-2 rounded-md mb-4 hover:bg-gray-200 transition">
-      <i class="fab fa-google mr-2"></i> Entrar com Google
-    </button>
+      <h1>Entrar no Universo Ascendria</h1>
+      <p>Faça login para acessar seu painel e explorar o mundo.</p>
 
-    <div class="flex items-center my-4">
-      <div class="flex-grow h-px bg-gray-600"></div>
-      <span class="mx-3 text-gray-400 text-sm">ou</span>
-      <div class="flex-grow h-px bg-gray-600"></div>
-    </div>
-
-    <!-- Login com email e senha -->
-    <form>
-      <input type="email" placeholder="Email" class="w-full bg-gray-800 text-white px-4 py-2 rounded-md mb-4 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#30f2ff]" required>
-      
-      <input type="password" placeholder="Senha" class="w-full bg-gray-800 text-white px-4 py-2 rounded-md mb-6 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#30f2ff]" required>
-
-      <button type="submit" class="w-full bg-[#f8c537] text-[#0a0a0a] font-bold py-2 rounded-md hover:bg-[#e6b425] transition">
-        Entrar
+      <!-- Botão Login com Google -->
+      <button class="btn btn-google" aria-label="Entrar com Google">
+        Entrar com Google
       </button>
-    </form>
 
-    <p class="text-sm text-gray-400 mt-6">
-      Ainda não tem conta? <a href="#" class="text-[#30f2ff] hover:underline">Crie uma agora</a>
-    </p>
-  </div>
+      <div class="divider">
+        <div class="divider-line"></div>
+        <span class="divider-text">ou</span>
+        <div class="divider-line"></div>
+      </div>
+
+      <!-- Login com email e senha -->
+      <form>
+        <input type="email" placeholder="Email" required aria-label="Email">
+
+        <input type="password" placeholder="Senha" required aria-label="Senha">
+
+        <button type="submit" class="btn btn-submit">
+          Entrar
+        </button>
+      </form>
+
+      <p class="footer-text">
+        Ainda não tem conta? <a href="#">Crie uma agora</a>
+      </p>
+    </div>
+  </main>
 
 </body>
 </html>

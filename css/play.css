@@ -1,0 +1,223 @@
+/* Play Page - Login Styles (migrado do Tailwind CDN) */
+
+/* Skip Navigation */
+.skip-to-main {
+  position: absolute;
+  left: -9999px;
+  z-index: 1000;
+  padding: 1rem 1.5rem;
+  background: #F1D72C;
+  color: #111;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.skip-to-main:focus {
+  left: 1rem;
+  top: 1rem;
+  outline: 3px solid #30f2ff;
+  outline-offset: 2px;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #0a0f1c;
+  background-image: radial-gradient(circle at center, #162232, #0a0f1c);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+/* Login Card */
+.login-card {
+  background: #101b2d;
+  border: 2px solid #30f2ff;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(48, 242, 255, 0.15);
+  width: 100%;
+  max-width: 450px;
+  padding: clamp(2rem, 5vw, 2.5rem) clamp(1.5rem, 4vw, 2rem);
+  text-align: center;
+}
+
+/* Logo */
+.login-card img {
+  height: clamp(48px, 10vw, 64px);
+  width: auto;
+  margin: 0 auto clamp(1rem, 3vw, 1.5rem);
+  display: block;
+}
+
+/* Typography */
+.login-card h1 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  margin-bottom: clamp(0.5rem, 2vw, 0.75rem);
+  line-height: 1.2;
+}
+
+.login-card p {
+  color: #9ca3af;
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+  margin-bottom: clamp(1.25rem, 3vw, 1.5rem);
+}
+
+/* Buttons */
+.btn {
+  width: 100%;
+  font-weight: 600;
+  padding: clamp(0.75rem, 2vw, 0.875rem) 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: clamp(0.95rem, 1.5vw, 1rem);
+}
+
+.btn-google {
+  background: white;
+  color: black;
+  margin-bottom: clamp(0.75rem, 2vw, 1rem);
+}
+
+.btn-google:hover,
+.btn-google:focus {
+  background: #e5e5e5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-submit {
+  background: #f8c537;
+  color: #0a0a0a;
+  font-weight: 700;
+}
+
+.btn-submit:hover,
+.btn-submit:focus {
+  background: #e6b425;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(248, 197, 55, 0.3);
+}
+
+.btn:focus-visible {
+  outline: 3px solid #30f2ff;
+  outline-offset: 2px;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  margin: clamp(1rem, 3vw, 1.25rem) 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: #4b5563;
+}
+
+.divider-text {
+  margin: 0 clamp(0.75rem, 2vw, 1rem);
+  color: #9ca3af;
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+}
+
+/* Form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 2vw, 1rem);
+}
+
+input {
+  width: 100%;
+  background: #1f2937;
+  color: white;
+  padding: clamp(0.75rem, 2vw, 0.875rem) clamp(0.875rem, 2vw, 1rem);
+  border-radius: 6px;
+  border: 1px solid #374151;
+  font-size: clamp(0.95rem, 1.5vw, 1rem);
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+input::placeholder {
+  color: #6b7280;
+}
+
+input:focus {
+  outline: none;
+  border-color: #30f2ff;
+  box-shadow: 0 0 0 3px rgba(48, 242, 255, 0.1);
+}
+
+input:focus-visible {
+  outline: 2px solid #30f2ff;
+  outline-offset: 2px;
+}
+
+/* Footer Text */
+.footer-text {
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+  color: #9ca3af;
+  margin-top: clamp(1rem, 3vw, 1.5rem);
+}
+
+.footer-text a {
+  color: #30f2ff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.footer-text a:hover,
+.footer-text a:focus {
+  text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  body {
+    padding: 1rem;
+  }
+
+  .login-card {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  body {
+    padding: 1rem;
+  }
+
+  .login-card {
+    max-width: 600px;
+    padding: 1.5rem 2rem;
+  }
+
+  .login-card img {
+    height: 48px;
+    margin-bottom: 1rem;
+  }
+
+  .login-card h1 {
+    font-size: 1.5rem;
+  }
+
+  .divider {
+    margin: 0.75rem 0;
+  }
+
+  form {
+    gap: 0.75rem;
+  }
+}

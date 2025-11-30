@@ -12,17 +12,38 @@ class HomeLoadingManager {
     this.paintingComplete = false;
     
     this.messages = [
-      'Preparando a tela...',
-      'Pintando o fundo...',
-      'Adicionando montanhas...',
-      'Desenhando nuvens...',
-      'Detalhes finais...',
-      'Obra-prima concluída!'
+      'Preparing the canvas...',
+      'Painting the background...',
+      'Adding mountains...',
+      'Drawing clouds...',
+      'Final details...',
+      'Masterpiece completed!'
     ];
     this.currentMessage = 0;
     
-    // Sempre mostra o loading
-    this.init();
+    // Verifica se é o primeiro acesso da sessão
+    this.checkFirstVisit();
+  }
+
+  checkFirstVisit() {
+    const hasVisited = sessionStorage.getItem('hasVisitedHome');
+    
+    if (hasVisited) {
+      // Não é primeira visita - pula o loading
+      this.skipLoading();
+    } else {
+      // Primeira visita da sessão - mostra loading
+      sessionStorage.setItem('hasVisitedHome', 'true');
+      this.init();
+    }
+  }
+
+  skipLoading() {
+    // Remove ou oculta imediatamente a tela de loading
+    if (this.loadingScreen) {
+      this.loadingScreen.style.display = 'none';
+    }
+    console.log('⏭️ Loading pulado - não é primeira visita da sessão');
   }
 
   init() {
@@ -181,7 +202,28 @@ class HomeLoadingManager {
           // Camadas já pintadas: opacas
           this.ctx.globalAlpha = 1;
         }
-        this.ctx.drawImage(layer.img, 0, 0, this.canvas.width, this.canvas.height);
+        
+        // Calcula dimensões para manter proporção (cover)
+        const imgAspect = layer.img.width / layer.img.height;
+        const canvasAspect = this.canvas.width / this.canvas.height;
+        
+        let drawWidth, drawHeight, offsetX, offsetY;
+        
+        if (canvasAspect > imgAspect) {
+          // Canvas é mais largo que a imagem
+          drawWidth = this.canvas.width;
+          drawHeight = this.canvas.width / imgAspect;
+          offsetX = 0;
+          offsetY = (this.canvas.height - drawHeight) / 2;
+        } else {
+          // Canvas é mais alto que a imagem
+          drawHeight = this.canvas.height;
+          drawWidth = this.canvas.height * imgAspect;
+          offsetX = (this.canvas.width - drawWidth) / 2;
+          offsetY = 0;
+        }
+        
+        this.ctx.drawImage(layer.img, offsetX, offsetY, drawWidth, drawHeight);
       });
 
       this.ctx.globalAlpha = 1;

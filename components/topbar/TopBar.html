@@ -14,29 +14,28 @@
           <li class="has-dropdown">
             <a href="#" aria-haspopup="true" aria-expanded="false" role="button">UNIVERSE</a>
             <ul class="dropdown-menu" aria-label="UNIVERSE submenu">
-              <li><a href="#nfts">NFTs</a></li>
-              <li><a href="#ecosistema">ECOSSISTEMA</a></li>
+              <li><a href="/index.html#nfts">NFTs</a></li>
+              <li><a href="/index.html#ecosystem">ECOSYSTEM</a></li>
             </ul>
           </li>
 
-          <li><a href="/lore/">LORE</a></li>
+          <li><a href="/pages/lore/index.html">LORE</a></li>
 
           <li class="has-dropdown">
-            <a href="#" aria-haspopup="true" aria-expanded="false" role="button">SOCIAL</a>
-            <ul class="dropdown-menu" aria-label="SOCIAL submenu">
-              <li><a href="#discord">DISCORD</a></li>
-              <li><a href="#x">X</a></li>
-              <li><a href="#youtube">YOUTUBE</a></li>
-              <li><a href="#tiktok">TIKTOK</a></li>
+            <a href="#" aria-haspopup="true" aria-expanded="false" role="button">DOCUMENTS</a>
+            <ul class="dropdown-menu" aria-label="DOCUMENTS submenu">
+              <li><a href="/pages/whitepaper/index.html">WHITEPAPER</a></li>
+              <li><a href="/pages/tokenomics/index.html">TOKENOMICS</a></li>
             </ul>
           </li>
-
-          <li class="has-dropdown">
-            <a href="#" aria-haspopup="true" aria-expanded="false" role="button">MORE</a>
-            <ul class="dropdown-menu" aria-label="MORE submenu">
-              <li><a href="/whitepaper/">WHITEPAPER</a></li>
-              <li><a href="/tokenomics/">TOKENOMICS</a></li>
-            </ul>
+            <li class="has-dropdown">
+                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">SOCIAL</a>
+                <ul class="dropdown-menu" aria-label="SOCIAL submenu">
+                <li><a href="#discord">DISCORD</a></li>
+                <li><a href="#x">X</a></li>
+                <li><a href="#youtube">YOUTUBE</a></li>
+                <li><a href="#tiktok">TIKTOK</a></li>
+                </ul>
           </li>
         </ul>
       </nav>
@@ -46,5 +45,43 @@
     <div class="topbar-right">
       <a href="#" class="join-btn">JOIN NOW</a>
     </div>
+
+    <!-- Menu Sanduíche (Hamburger) - para mobile -->
+    <button class="hamburger" id="hamburger-menu" aria-label="Toggle menu" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+
+    <!-- Mobile Menu -->
+    <nav class="mobile-nav" id="mobile-menu" aria-hidden="true">
+      <ul class="mobile-nav-list">
+        <li class="mobile-has-dropdown">
+          <button class="mobile-dropdown-toggle" aria-expanded="false">UNIVERSE</button>
+          <ul class="mobile-dropdown-menu">
+            <li><a href="/index.html#nfts">NFTs</a></li>
+            <li><a href="/index.html#ecosystem">ECOSYSTEM</a></li>
+          </ul>
+        </li>
+        <li><a href="/pages/lore/index.html">LORE</a></li>
+        <li class="mobile-has-dropdown">
+          <button class="mobile-dropdown-toggle" aria-expanded="false">SOCIAL</button>
+          <ul class="mobile-dropdown-menu">
+            <li><a href="#discord">DISCORD</a></li>
+            <li><a href="#x">X</a></li>
+            <li><a href="#youtube">YOUTUBE</a></li>
+            <li><a href="#tiktok">TIKTOK</a></li>
+          </ul>
+        </li>
+        <li class="mobile-has-dropdown">
+          <button class="mobile-dropdown-toggle" aria-expanded="false">MORE</button>
+          <ul class="mobile-dropdown-menu">
+            <li><a href="/pages/whitepaper/index.html">WHITEPAPER</a></li>
+            <li><a href="/pages/tokenomics/index.html">TOKENOMICS</a></li>
+          </ul>
+        </li>
+        <li class="mobile-join"><a href="#" class="join-btn">JOIN NOW</a></li>
+      </ul>
+    </nav>
   </div>
 </header>

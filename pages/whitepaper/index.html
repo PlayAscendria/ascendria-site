@@ -2,99 +2,49 @@
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Whitepaper — Ascendria</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
 
-    <!-- Header (copiado do site principal) -->
-    <header id="topbar" class="topbar" role="banner">
-      <div class="topbar-inner container">
-        <div class="topbar-left">
-          <a href="/index.html" aria-label="Ascendria">
-            <img src="../assets/images/ui/logoascendria.png" alt="Ascendria Logo" class="logo-img">
-          </a>
-        </div>
-        <div class="topbar-center">
-          <nav class="main-nav" aria-label="Main Navigation">
-            <ul>
-              <li class="has-dropdown">
-                <a href="#" role="button" aria-haspopup="true" aria-expanded="false">UNIVERSE</a>
-                <ul class="dropdown-menu" aria-label="UNIVERSE submenu">
-                  <li><a href="/index.html#nfts">NFTs</a></li>
-                  <li><a href="/index.html#ecosistema">ECOSSISTEMA</a></li>
-                </ul>
-              </li>
-              <li><a href="/lore/">LORE</a></li>
-              <li class="has-dropdown">
-                <a href="#" role="button" aria-haspopup="true" aria-expanded="false">SOCIAL</a>
-                <ul class="dropdown-menu" aria-label="SOCIAL submenu">
-                  <li><a href="/index.html#discord">DISCORD</a></li>
-                  <li><a href="/index.html#x">X</a></li>
-                  <li><a href="/index.html#youtube">YOUTUBE</a></li>
-                  <li><a href="/index.html#tiktok">TIKTOK</a></li>
-                </ul>
-              </li>
-              <li class="has-dropdown">
-                <a href="#" role="button" aria-haspopup="true" aria-expanded="false">MORE</a>
-                <ul class="dropdown-menu" aria-label="MORE submenu">
-                  <li><a href="/whitepaper/">WHITEPAPER</a></li>
-                  <li><a href="/tokenomics/">TOKENOMICS</a></li>
-                </ul>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div class="topbar-right">
-          <a href="#" class="join-btn">JOIN NOW</a>
-        </div>
-      </div>
-    </header>
+    <!-- Skip Navigation for Accessibility -->
+    <a href="#main" class="skip-to-main">Skip to main content</a>
+
+    <!-- Topbar Component (dynamically loaded) -->
+    <div id="topbar-placeholder" data-component="topbar"></div>
+
+    <!-- BackgroundLive Component -->
+    <div id="backgroundlive-placeholder" data-component="backgroundlive"></div>
 
     <main id="main" role="main">
-      <div class="doc-container container">
-        <h1>Whitepaper</h1>
-        <p>Esta é a página dedicada ao Whitepaper. Coloque aqui o conteúdo técnico completo — seções, tabelas, gráficos e links para downloads (PDF) conforme necessário.</p>
-        <section>
-          <h2>Sumário</h2>
-          <ol>
-            <li>Visão Geral</li>
-            <li>Problema</li>
-            <li>Solução</li>
-            <li>Arquitetura</li>
-            <li>Roadmap</li>
-          </ol>
-        </section>
-        <p>Substitua este texto com o conteúdo técnico do whitepaper.</p>
+      <div class="doc-container">
+        <div class="doc-content">
+          <h1>Whitepaper</h1>
+          <p>This page is dedicated to the Whitepaper. Place here the complete technical content — sections, tables, charts and links to downloads (PDF) as needed.</p>
+          <section>
+            <h2>Summary</h2>
+            <ol>
+              <li>Overview</li>
+              <li>Problem</li>
+              <li>Solution</li>
+              <li>Architecture</li>
+              <li>Roadmap</li>
+            </ol>
+          </section>
+          <p>Replace this text with the technical content of the whitepaper.</p>
+        </div>
       </div>
     </main>
 
-    <!-- footer removed for immersive reading -->
+    <!-- Component Loader -->
+    <script src="../../js/component-loader.js"></script>
 
-    <script src="/assets/js/site.js" defer></script>
+    <!-- Initialize Components -->
     <script>
-    // Reutiliza o comportamento simples de dropdown do topo (se necessário)
-    (function(){
-      const dropdownToggles = document.querySelectorAll('.main-nav .has-dropdown > a');
-      function closeAll(){ dropdownToggles.forEach(a => a.setAttribute('aria-expanded','false')); }
-      dropdownToggles.forEach(a => {
-        a.addEventListener('click', function(e){
-          // previne navegação acidental e abre/fecha submenu
-          e.preventDefault();
-          const li = this.parentElement;
-          const isOpen = this.getAttribute('aria-expanded') === 'true';
-          if(!isOpen) {
-            closeAll();
-            this.setAttribute('aria-expanded','true');
-            if(li) li.classList.add('open');
-          } else {
-            this.setAttribute('aria-expanded','false');
-            if(li) li.classList.remove('open');
-          }
-        });
-      });
-    })();
+      // Carregar componentes
+      ComponentLoader.load('topbar', 'topbar-placeholder');
+      ComponentLoader.load('backgroundlive', 'backgroundlive-placeholder');
     </script>
   </body>
 </html>
