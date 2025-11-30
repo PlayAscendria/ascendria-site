@@ -29,6 +29,15 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/images/ui/favicon.png">
     <meta name="theme-color" content="#0a0e27">
+
+    <!-- ANTI-FLASH: CSS crítico inline para background imediato -->
+    <style>
+      html, body {
+        background: #0a0e27 !important;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
     
     <!-- CSS Global (carregamento bloqueante) -->
     <link rel="stylesheet" href="/css/style.css">
@@ -49,60 +58,54 @@
     <div id="backgroundlive-placeholder" data-component="backgroundlive"></div>
 
     <main id="main" role="main">
-      <div class="doc-container">
-        <div class="doc-content">
-          <h1>Tokenomics</h1>
-          <p>Dedicated to Tokenomics — describe here the token distribution, unlock schedule, allocation for team, treasury, rewards and numerical examples.</p>
-          <section>
-            <h2>Distribution</h2>
-            <ul>
-              <li>Team: %</li>
-              <li>Investors: %</li>
-              <li>Treasury: %</li>
-              <li>Community / Rewards: %</li>
-            </ul>
-          </section>
-          <p>Replace this content with details and tables.</p>
+        <div class="doc-container">
+          <div class="doc-content">
+            <h1>Tokenomics</h1>
+            <p>Dedicated to Tokenomics — describe here the token distribution, unlock schedule, allocation for team, treasury, rewards and numerical examples.</p>
+            <section>
+              <h2>Distribution</h2>
+              <ul>
+                <li>Team: %</li>
+                <li>Investors: %</li>
+                <li>Treasury: %</li>
+                <li>Community / Rewards: %</li>
+              </ul>
+            </section>
+            <p>Replace this content with details and tables.</p>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
 
     <!-- Component Loader -->
     <script src="/js/component-loader.js"></script>
+    <!-- SPA Router -->
+    <script src="/js/spa-router.js"></script>
 
-    <!-- Initialize Components with Robust Loading System -->
+    <!-- Initialize Components -->
     <script>
     (function() {
-      // ANTI-FOUC: Timeout de fallback para garantir que a página seja exibida
-      const FALLBACK_TIMEOUT = 3000; // 3 segundos
+      const FALLBACK_TIMEOUT = 3000;
       let loaded = false;
       
       function showPage() {
         if (loaded) return;
         loaded = true;
         document.body.classList.add('loaded');
-        console.log('✅ Página revelada');
       }
       
-      // Fallback: se componentes não carregarem em 3s, mostra a página
-      const fallbackTimer = setTimeout(() => {
-        console.warn('⚠️ Fallback: Componentes demoraram demais, revelando página');
-        showPage();
-      }, FALLBACK_TIMEOUT);
+      const fallbackTimer = setTimeout(showPage, FALLBACK_TIMEOUT);
       
-      // Carregar componentes
       async function loadComponents() {
         try {
           await Promise.all([
             ComponentLoader.load('topbar', 'topbar-placeholder'),
             ComponentLoader.load('backgroundlive', 'backgroundlive-placeholder')
           ]);
-          console.log('✓ Componentes carregados');
         } catch (err) {
-          console.error('✗ Erro ao carregar componentes:', err);
+          console.error('Erro ao carregar componentes:', err);
         } finally {
           clearTimeout(fallbackTimer);
-          requestAnimationFrame(() => showPage());
+          requestAnimationFrame(showPage);
         }
       }
       

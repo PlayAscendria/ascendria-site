@@ -8,6 +8,15 @@
     <link rel="icon" type="image/png" href="/assets/images/ui/favicon.png">
     <meta name="theme-color" content="#0a0e27">
 
+    <!-- ANTI-FLASH: CSS crítico inline para background imediato -->
+    <style>
+        html, body {
+            background: #0a0e27 !important;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
@@ -15,6 +24,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/components/topbar/topbar.css">
     <link rel="stylesheet" href="/components/backgroundlive/backgroundlive.css">
+    <link rel="stylesheet" href="/components/footer/footer.css">
 
     <!-- About Page Specific Styles -->
     <link rel="stylesheet" href="/css/about.css">
@@ -26,65 +36,81 @@
     <!-- Topbar Component (dynamically loaded) -->
     <div id="topbar-placeholder" data-component="topbar"></div>
 
-    <!-- Main Content -->
-    <main id="main-content" class="about-page" role="main">
-        <div class="swiper aboutSwiper">
-            <div class="swiper-wrapper">
-
-                <!-- Slide 1: About Ascendria -->
-                <div class="swiper-slide" style="background-image: url('/assets/images/carousel/about_ascendria.png');">
-                    <div class="slide-content">
-                        <h2>ABOUT ASCENDRIA</h2>
-                        <p>Ascendria is a Magical Medieval Kingdom with the Heroes' Square at its heart. From here, you can access the great fiefdoms: Champions, Forges, and Chronicles of Ascendria. Each domain offers its own path to glory, and together, they strengthen the Ascenders in their fight against the evil that terrorizes the realm.</p>
-                    </div>
-                </div>
-
-                <!-- Slide 2: Champions -->
-                <div class="swiper-slide" style="background-image: url('/assets/images/carousel/champions_ascendria.png');">
-                    <div class="slide-content">
-                        <h2>CHAMPIONS OF ASCENDRIA</h2>
-                        <p>Step into the Arena where legends are born and glory is eternal. Engage in tactical, turn-based combat where skill, strategy, and timing are your greatest weapons. Rise through the competitive ranks each season, dominate your opponents, and claim the realm's most exclusive rewards. Here, your legacy is not given—it is earned in battle.</p>
-                    </div>
-                </div>
-
-                <!-- Slide 3: Forges -->
-                <div class="swiper-slide" style="background-image: url('/assets/images/carousel/forges_ascendria.png');">
-                     <div class="slide-content">
-                        <h2>FORGES OF ASCENDRIA</h2>
-                        <p>Beyond the battlefield, true dominion is forged. In the Forges of Ascendria, claim your own plot of Land and become a master of industry. Cultivate rare resources from your territory and craft the realm's most sought-after goods: legendary weapons, impenetrable armor, and life-altering potions. Here, you don't just supply heroes—you build the very foundation of the Ascendrian economy.</p>
-                    </div>
-                </div>
-
-                <!-- Slide 4: Chronicles -->
-                <div class="swiper-slide" style="background-image: url('/assets/images/carousel/chronicles_ascendria.png');">
-                     <div class="slide-content">
-                        <h2>CHRONICLES OF ASCENDRIA</h2>
-                        <p>Part of Ascendria's history lies lost in the darkness of its forgotten dungeons. Embark on perilous expeditions to unravel the secrets of a fallen age and gather rare resources, unique magical recipes, and even powerful skill scrolls. The Chronicles are the path for every Ascender to grow stronger, unearth the past, and fund their journey to greatness. Adventure awaits those brave enough to seek it.</p>
-                    </div>
-                </div>
-
+    <!-- Content area - mesma estrutura do index.html para SPA funcionar -->
+    <div id="content-area">
+        <!-- Hero: Background live -->
+        <div class="hero" role="img" aria-label="Imagem oficial de Ascendria">
+            <div class="hero-inner" aria-hidden="true">
+                <!-- Background live component placeholder -->
+                <div id="backgroundlive-placeholder"></div>
             </div>
-
-            <!-- Navigation -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-
-            <!-- Pagination -->
-            <div class="swiper-pagination"></div>
         </div>
-    </main>
+
+        <!-- Main Content -->
+        <main id="main-content" class="about-page" role="main">
+            <div class="swiper aboutSwiper">
+                <div class="swiper-wrapper">
+
+                    <!-- Slide 1: About Ascendria -->
+                    <div class="swiper-slide" style="background-image: url('/assets/images/carousel/about_ascendria.png');">
+                        <div class="slide-content">
+                            <h2>ABOUT ASCENDRIA</h2>
+                            <p>Ascendria is a Magical Medieval Kingdom with the Heroes' Square at its heart. From here, you can access the great fiefdoms: Champions, Forges, and Chronicles of Ascendria. Each domain offers its own path to glory, and together, they strengthen the Ascenders in their fight against the evil that terrorizes the realm.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Champions -->
+                    <div class="swiper-slide" style="background-image: url('/assets/images/carousel/champions_ascendria.png');">
+                        <div class="slide-content">
+                            <h2>CHAMPIONS OF ASCENDRIA</h2>
+                            <p>Step into the Arena where legends are born and glory is eternal. Engage in tactical, turn-based combat where skill, strategy, and timing are your greatest weapons. Rise through the competitive ranks each season, dominate your opponents, and claim the realm's most exclusive rewards. Here, your legacy is not given—it is earned in battle.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Forges -->
+                    <div class="swiper-slide" style="background-image: url('/assets/images/carousel/forges_ascendria.png');">
+                         <div class="slide-content">
+                            <h2>FORGES OF ASCENDRIA</h2>
+                            <p>Beyond the battlefield, true dominion is forged. In the Forges of Ascendria, claim your own plot of Land and become a master of industry. Cultivate rare resources from your territory and craft the realm's most sought-after goods: legendary weapons, impenetrable armor, and life-altering potions. Here, you don't just supply heroes—you build the very foundation of the Ascendrian economy.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: Chronicles -->
+                    <div class="swiper-slide" style="background-image: url('/assets/images/carousel/chronicles_ascendria.png');">
+                         <div class="slide-content">
+                            <h2>CHRONICLES OF ASCENDRIA</h2>
+                            <p>Part of Ascendria's history lies lost in the darkness of its forgotten dungeons. Embark on perilous expeditions to unravel the secrets of a fallen age and gather rare resources, unique magical recipes, and even powerful skill scrolls. The Chronicles are the path for every Ascender to grow stronger, unearth the past, and fund their journey to greatness. Adventure awaits those brave enough to seek it.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </main>
+
+        <!-- Footer Component (dynamically loaded) -->
+        <div id="footer-placeholder" data-component="footer"></div>
+    </div>
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <!-- Component Loader -->
     <script src="/js/component-loader.js"></script>
+    
+    <!-- SPA Router - Navegação sem reload (mantém BackgroundLive ativo) -->
+    <script src="/js/spa-router.js"></script>
 
     <!-- Initialize Components with Robust Loading System -->
     <script>
     (function() {
-      // ANTI-FOUC: Timeout de fallback para garantir que a página seja exibida
-      const FALLBACK_TIMEOUT = 3000; // 3 segundos
+      const FALLBACK_TIMEOUT = 3000;
       let loaded = false;
       
       function showPage() {
@@ -94,16 +120,18 @@
         console.log('✅ Página revelada');
       }
       
-      // Fallback: se componentes não carregarem em 3s, mostra a página
       const fallbackTimer = setTimeout(() => {
         console.warn('⚠️ Fallback: Componentes demoraram demais, revelando página');
         showPage();
       }, FALLBACK_TIMEOUT);
       
-      // Carregar componentes
       async function loadComponents() {
         try {
-          await ComponentLoader.load('topbar', 'topbar-placeholder');
+          await Promise.all([
+            ComponentLoader.load('topbar', 'topbar-placeholder'),
+            ComponentLoader.load('backgroundlive', 'backgroundlive-placeholder'),
+            ComponentLoader.load('footer', 'footer-placeholder')
+          ]);
           console.log('✓ Componentes carregados');
         } catch (err) {
           console.error('✗ Erro ao carregar componentes:', err);
@@ -114,11 +142,40 @@
       }
       
       loadComponents();
+      
+      // Inicializa Swiper após componentes carregarem
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+          if (typeof Swiper !== 'undefined') {
+            new Swiper('.aboutSwiper', {
+              loop: true,
+              effect: 'fade',
+              fadeEffect: { crossFade: true },
+              autoplay: { delay: 8000, disableOnInteraction: false },
+              pagination: { el: '.swiper-pagination', clickable: true },
+              navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
+            });
+          }
+        }, 100);
+      });
+      
+      // Reinicializa Swiper após navegação SPA
+      window.addEventListener('spa:navigation', function() {
+        setTimeout(() => {
+          const swiperEl = document.querySelector('.aboutSwiper:not(.swiper-initialized)');
+          if (swiperEl && typeof Swiper !== 'undefined') {
+            new Swiper(swiperEl, {
+              loop: true,
+              effect: 'fade',
+              fadeEffect: { crossFade: true },
+              autoplay: { delay: 8000, disableOnInteraction: false },
+              pagination: { el: '.swiper-pagination', clickable: true },
+              navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
+            });
+          }
+        }, 100);
+      });
     })();
     </script>
-
-    <!-- Carousel Initialization -->
-    <script src="/js/about-carousel.js"></script>
-
 </body>
 </html>

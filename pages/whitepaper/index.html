@@ -29,6 +29,15 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/images/ui/favicon.png">
     <meta name="theme-color" content="#0a0e27">
+
+    <!-- ANTI-FLASH: CSS crítico inline para background imediato -->
+    <style>
+      html, body {
+        background: #0a0e27 !important;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
     
     <!-- CSS Global (carregamento bloqueante) -->
     <link rel="stylesheet" href="/css/style.css">
@@ -52,30 +61,32 @@
       <div class="doc-container">
         <div class="doc-content">
           <h1>Whitepaper</h1>
-          <p>This page is dedicated to the Whitepaper. Place here the complete technical content — sections, tables, charts and links to downloads (PDF) as needed.</p>
-          <section>
-            <h2>Summary</h2>
-            <ol>
-              <li>Overview</li>
-              <li>Problem</li>
-              <li>Solution</li>
-              <li>Architecture</li>
-              <li>Roadmap</li>
-            </ol>
-          </section>
-          <p>Replace this text with the technical content of the whitepaper.</p>
+            <p>This page is dedicated to the Whitepaper. Place here the complete technical content — sections, tables, charts and links to downloads (PDF) as needed.</p>
+            <section>
+              <h2>Summary</h2>
+              <ol>
+                <li>Overview</li>
+                <li>Problem</li>
+                <li>Solution</li>
+                <li>Architecture</li>
+                <li>Roadmap</li>
+              </ol>
+            </section>
+            <p>Replace this text with the technical content of the whitepaper.</p>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
 
     <!-- Component Loader -->
     <script src="/js/component-loader.js"></script>
+    
+    <!-- SPA Router -->
+    <script src="/js/spa-router.js"></script>
 
     <!-- Initialize Components with Robust Loading System -->
     <script>
     (function() {
-      // ANTI-FOUC: Timeout de fallback para garantir que a página seja exibida
-      const FALLBACK_TIMEOUT = 3000; // 3 segundos
+      const FALLBACK_TIMEOUT = 3000;
       let loaded = false;
       
       function showPage() {
@@ -85,13 +96,11 @@
         console.log('✅ Página revelada');
       }
       
-      // Fallback: se componentes não carregarem em 3s, mostra a página
       const fallbackTimer = setTimeout(() => {
         console.warn('⚠️ Fallback: Componentes demoraram demais, revelando página');
         showPage();
       }, FALLBACK_TIMEOUT);
       
-      // Carregar componentes
       async function loadComponents() {
         try {
           await Promise.all([

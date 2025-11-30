@@ -32,6 +32,7 @@ body.loaded .topbar {
 }
 
 /* ========== LAYOUT ========== */
+/* Main ocupa toda a viewport */
 main {
   position: fixed;
   top: clamp(60px, 8vh, 80px);
