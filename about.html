@@ -14,6 +14,7 @@
     <!-- Global Styles -->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/components/topbar/topbar.css">
+    <link rel="stylesheet" href="/components/backgroundlive/backgroundlive.css">
 
     <!-- About Page Specific Styles -->
     <link rel="stylesheet" href="/css/about.css">
@@ -31,7 +32,7 @@
             <div class="swiper-wrapper">
 
                 <!-- Slide 1: About Ascendria -->
-                <div class="swiper-slide" style="background-image: url('assets/images/carousel/about_ascendria.png');">
+                <div class="swiper-slide" style="background-image: url('/assets/images/carousel/about_ascendria.png');">
                     <div class="slide-content">
                         <h2>ABOUT ASCENDRIA</h2>
                         <p>Ascendria is a Magical Medieval Kingdom with the Heroes' Square at its heart. From here, you can access the great fiefdoms: Champions, Forges, and Chronicles of Ascendria. Each domain offers its own path to glory, and together, they strengthen the Ascenders in their fight against the evil that terrorizes the realm.</p>
@@ -39,7 +40,7 @@
                 </div>
 
                 <!-- Slide 2: Champions -->
-                <div class="swiper-slide" style="background-image: url('assets/images/carousel/champions_ascendria.png');">
+                <div class="swiper-slide" style="background-image: url('/assets/images/carousel/champions_ascendria.png');">
                     <div class="slide-content">
                         <h2>CHAMPIONS OF ASCENDRIA</h2>
                         <p>Step into the Arena where legends are born and glory is eternal. Engage in tactical, turn-based combat where skill, strategy, and timing are your greatest weapons. Rise through the competitive ranks each season, dominate your opponents, and claim the realm's most exclusive rewards. Here, your legacy is not given—it is earned in battle.</p>
@@ -47,7 +48,7 @@
                 </div>
 
                 <!-- Slide 3: Forges -->
-                <div class="swiper-slide" style="background-image: url('assets/images/carousel/forges_ascendria.png');">
+                <div class="swiper-slide" style="background-image: url('/assets/images/carousel/forges_ascendria.png');">
                      <div class="slide-content">
                         <h2>FORGES OF ASCENDRIA</h2>
                         <p>Beyond the battlefield, true dominion is forged. In the Forges of Ascendria, claim your own plot of Land and become a master of industry. Cultivate rare resources from your territory and craft the realm's most sought-after goods: legendary weapons, impenetrable armor, and life-altering potions. Here, you don't just supply heroes—you build the very foundation of the Ascendrian economy.</p>
@@ -55,7 +56,7 @@
                 </div>
 
                 <!-- Slide 4: Chronicles -->
-                <div class="swiper-slide" style="background-image: url('assets/images/carousel/chronicles_ascendria.png');">
+                <div class="swiper-slide" style="background-image: url('/assets/images/carousel/chronicles_ascendria.png');">
                      <div class="slide-content">
                         <h2>CHRONICLES OF ASCENDRIA</h2>
                         <p>Part of Ascendria's history lies lost in the darkness of its forgotten dungeons. Embark on perilous expeditions to unravel the secrets of a fallen age and gather rare resources, unique magical recipes, and even powerful skill scrolls. The Chronicles are the path for every Ascender to grow stronger, unearth the past, and fund their journey to greatness. Adventure awaits those brave enough to seek it.</p>
@@ -79,14 +80,41 @@
     <!-- Component Loader -->
     <script src="/js/component-loader.js"></script>
 
-    <!-- Initialize Components -->
+    <!-- Initialize Components with Robust Loading System -->
     <script>
-        // Carregar componente TopBar e marcar como loaded
-        ComponentLoader.load('topbar', 'topbar-placeholder').then(() => {
-            document.body.classList.add('loaded');
-        }).catch(() => {
-            document.body.classList.add('loaded');
-        });
+    (function() {
+      // ANTI-FOUC: Timeout de fallback para garantir que a página seja exibida
+      const FALLBACK_TIMEOUT = 3000; // 3 segundos
+      let loaded = false;
+      
+      function showPage() {
+        if (loaded) return;
+        loaded = true;
+        document.body.classList.add('loaded');
+        console.log('✅ Página revelada');
+      }
+      
+      // Fallback: se componentes não carregarem em 3s, mostra a página
+      const fallbackTimer = setTimeout(() => {
+        console.warn('⚠️ Fallback: Componentes demoraram demais, revelando página');
+        showPage();
+      }, FALLBACK_TIMEOUT);
+      
+      // Carregar componentes
+      async function loadComponents() {
+        try {
+          await ComponentLoader.load('topbar', 'topbar-placeholder');
+          console.log('✓ Componentes carregados');
+        } catch (err) {
+          console.error('✗ Erro ao carregar componentes:', err);
+        } finally {
+          clearTimeout(fallbackTimer);
+          requestAnimationFrame(() => showPage());
+        }
+      }
+      
+      loadComponents();
+    })();
     </script>
 
     <!-- Carousel Initialization -->

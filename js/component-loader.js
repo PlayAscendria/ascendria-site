@@ -1,8 +1,36 @@
 /**
  * Component Loader - Sistema unificado de carregamento de componentes
  * Carrega HTML, CSS e JS de componentes de forma consistente
+ * 
+ * VERCEL COMPATIBILITY:
+ * - Usa SEMPRE paths absolutos (começando com /)
+ * - Case-sensitive: nomes de arquivos devem corresponder EXATAMENTE
+ * - Timeout de fetch para evitar travamentos
  */
 class ComponentLoader {
+  // Timeout para fetch (5 segundos)
+  static FETCH_TIMEOUT = 5000;
+  
+  /**
+   * Fetch com timeout para evitar travamentos
+   */
+  static async fetchWithTimeout(url, options = {}) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), this.FETCH_TIMEOUT);
+    
+    try {
+      const response = await fetch(url, { ...options, signal: controller.signal });
+      clearTimeout(timeout);
+      return response;
+    } catch (err) {
+      clearTimeout(timeout);
+      if (err.name === 'AbortError') {
+        throw new Error(`Timeout ao carregar: ${url}`);
+      }
+      throw err;
+    }
+  }
+
   /**
    * Carrega um componente dinamicamente
    * @param {string} componentName - Nome do componente (ex: 'topbar', 'footer')
@@ -10,35 +38,38 @@ class ComponentLoader {
    * @returns {Promise<void>}
    */
   static async load(componentName, placeholderId) {
+    const startTime = performance.now();
     const placeholder = document.getElementById(placeholderId);
+    
     if (!placeholder) {
-      console.warn(`Placeholder #${placeholderId} não encontrado`);
+      console.warn(`⚠️ [ComponentLoader] Placeholder #${placeholderId} não encontrado`);
       return;
     }
 
     try {
-      // Mapear nomes dos componentes para seus arquivos HTML corretos (case-sensitive)
+      // Mapear nomes dos componentes para seus arquivos HTML corretos (CASE-SENSITIVE!)
+      // Linux/Vercel é case-sensitive, então os nomes devem corresponder EXATAMENTE
       const htmlFileNames = {
-        'topbar': 'TopBar',
-        'footer': 'Footer',
-        'backgroundlive': 'BackgroundLive'
+        'topbar': 'TopBar',        // /components/topbar/TopBar.html
+        'footer': 'Footer',        // /components/footer/Footer.html
+        'backgroundlive': 'BackgroundLive'  // /components/backgroundlive/BackgroundLive.html
       };
       
       const htmlFileName = htmlFileNames[componentName] || componentName;
+      // SEMPRE usar paths absolutos (começando com /)
       const htmlPath = `/components/${componentName}/${htmlFileName}.html`;
       
-      console.log(`🔍 Tentando carregar: ${htmlPath}`);
-      const htmlResponse = await fetch(htmlPath);
+      console.log(`🔍 [ComponentLoader] Carregando: ${htmlPath}`);
+      const htmlResponse = await this.fetchWithTimeout(htmlPath);
 
       if (!htmlResponse.ok) {
-        throw new Error(`Erro ao carregar HTML: ${htmlResponse.status} - ${htmlPath}`);
+        throw new Error(`HTTP ${htmlResponse.status} - Não foi possível carregar ${htmlPath}`);
       }
 
       const html = await htmlResponse.text();
       placeholder.innerHTML = html;
-      console.log(`✓ HTML carregado: ${componentName}`);
-
-      // Carregar CSS se não existir
+      
+      // Carregar CSS se não existir (path absoluto)
       const cssPath = `/components/${componentName}/${componentName}.css`;
       const cssId = `component-css-${componentName}`;
 
@@ -48,30 +79,30 @@ class ComponentLoader {
         link.rel = 'stylesheet';
         link.href = cssPath;
         document.head.appendChild(link);
-        console.log(`✓ CSS carregado: ${componentName}`);
       }
 
-      // Carregar JS se existir
+      // Carregar JS se existir (path absoluto)
       const jsPath = `/components/${componentName}/${componentName}.js`;
       
-      // Verificar se o arquivo JS existe antes de tentar carregar
       try {
-        const jsCheck = await fetch(jsPath, { method: 'HEAD' });
+        const jsCheck = await this.fetchWithTimeout(jsPath, { method: 'HEAD' });
         if (jsCheck.ok) {
           const script = document.createElement('script');
           script.src = jsPath;
           script.defer = true;
           document.body.appendChild(script);
-          console.log(`✓ JS carregado: ${componentName}`);
         }
       } catch (jsErr) {
-        console.log(`ℹ️ Sem JS para ${componentName} (opcional)`);
+        // JS é opcional, não logar como erro
       }
 
-      console.log(`✅ Componente ${componentName} carregado com sucesso`);
+      const loadTime = (performance.now() - startTime).toFixed(0);
+      console.log(`✅ [ComponentLoader] ${componentName} carregado em ${loadTime}ms`);
 
     } catch (err) {
-      console.error(`✗ Erro ao carregar componente ${componentName}:`, err);
+      console.error(`❌ [ComponentLoader] Falha ao carregar ${componentName}:`, err.message);
+      // Re-throw para que o chamador saiba que falhou
+      throw err;
     }
   }
 

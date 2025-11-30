@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="/components/backgroundlive/backgroundlive.css">
     
     <!-- CSS Local da página -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/pages/tokenomics/style.css">
   </head>
   <body>
     <!-- Skip Navigation for Accessibility -->
@@ -70,21 +70,44 @@
     <!-- Component Loader -->
     <script src="/js/component-loader.js"></script>
 
-    <!-- Initialize Components -->
+    <!-- Initialize Components with Robust Loading System -->
     <script>
-      // Carregar componentes e mostrar página
-      (async function() {
+    (function() {
+      // ANTI-FOUC: Timeout de fallback para garantir que a página seja exibida
+      const FALLBACK_TIMEOUT = 3000; // 3 segundos
+      let loaded = false;
+      
+      function showPage() {
+        if (loaded) return;
+        loaded = true;
+        document.body.classList.add('loaded');
+        console.log('✅ Página revelada');
+      }
+      
+      // Fallback: se componentes não carregarem em 3s, mostra a página
+      const fallbackTimer = setTimeout(() => {
+        console.warn('⚠️ Fallback: Componentes demoraram demais, revelando página');
+        showPage();
+      }, FALLBACK_TIMEOUT);
+      
+      // Carregar componentes
+      async function loadComponents() {
         try {
           await Promise.all([
             ComponentLoader.load('topbar', 'topbar-placeholder'),
             ComponentLoader.load('backgroundlive', 'backgroundlive-placeholder')
           ]);
-          document.body.classList.add('loaded');
+          console.log('✓ Componentes carregados');
         } catch (err) {
-          console.error('Erro ao carregar componentes:', err);
-          document.body.classList.add('loaded');
+          console.error('✗ Erro ao carregar componentes:', err);
+        } finally {
+          clearTimeout(fallbackTimer);
+          requestAnimationFrame(() => showPage());
         }
-      })();
+      }
+      
+      loadComponents();
+    })();
     </script>
 
     <!-- Vercel Speed Insights -->

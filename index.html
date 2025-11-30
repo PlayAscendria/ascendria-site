@@ -123,14 +123,9 @@
 		}
 		</script>
 	</head>
-	<body style="opacity: 0;">
+	<body>
 		<!-- Skip Navigation for Accessibility -->
 		<a href="#main" class="skip-to-main">Skip to main content</a>
-
-		<!-- Mostrar body assim que DOM estiver pronto (CSS já carregou pois é bloqueante) -->
-		<script>
-			document.body.style.opacity = '1';
-		</script>
 
 		<!-- Emergency fallback: garante que loading nunca trave o site -->
 		<script>
@@ -200,28 +195,49 @@
 		<!-- Component Loader -->
 		<script src="/js/component-loader.js"></script>
 
-		<!-- Initialize Components -->
+		<!-- Initialize Components with Robust Loading System -->
 		<script>
-		// Carregar componentes usando o ComponentLoader
-		(async function() {
-			try {
-				// Carregar componentes em paralelo
-				await Promise.all([
-					ComponentLoader.load('topbar', 'topbar-placeholder'),
-					ComponentLoader.load('backgroundlive', 'backgroundlive-placeholder'),
-					ComponentLoader.load('footer', 'footer-placeholder')
-				]);
-				console.log('✓ Todos os componentes carregados com sucesso');
-				
-				// Marcar página como carregada para transição suave
-				setTimeout(() => {
-					document.body.classList.add('loaded');
-				}, 100);
-			} catch (err) {
-				console.error('✗ Erro ao carregar componentes:', err);
-				// Mesmo com erro, mostrar conteúdo
+		(function() {
+			// ANTI-FOUC: Timeout de fallback para garantir que a página seja exibida
+			const FALLBACK_TIMEOUT = 3000; // 3 segundos
+			let loaded = false;
+			
+			function showPage() {
+				if (loaded) return;
+				loaded = true;
 				document.body.classList.add('loaded');
+				console.log('✅ Página revelada');
 			}
+			
+			// Fallback: se componentes não carregarem em 3s, mostra a página mesmo assim
+			const fallbackTimer = setTimeout(() => {
+				console.warn('⚠️ Fallback: Componentes demoraram demais, revelando página');
+				showPage();
+			}, FALLBACK_TIMEOUT);
+			
+			// Carregar componentes
+			async function loadComponents() {
+				try {
+					await Promise.all([
+						ComponentLoader.load('topbar', 'topbar-placeholder'),
+						ComponentLoader.load('backgroundlive', 'backgroundlive-placeholder'),
+						ComponentLoader.load('footer', 'footer-placeholder')
+					]);
+					console.log('✓ Todos os componentes carregados com sucesso');
+				} catch (err) {
+					console.error('✗ Erro ao carregar componentes:', err);
+				} finally {
+					// Limpar fallback timer e mostrar página
+					clearTimeout(fallbackTimer);
+					// Pequeno delay para garantir renderização
+					requestAnimationFrame(() => {
+						showPage();
+					});
+				}
+			}
+			
+			// Iniciar carregamento
+			loadComponents();
 		})();
 		</script>
 
