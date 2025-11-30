@@ -17,23 +17,22 @@ class ComponentLoader {
     }
 
     try {
-      // Determinar caminho base (root ou subdiretório)
-      const isRootPage = !window.location.pathname.includes('/pages/');
-      const basePath = isRootPage ? '' : '../../';
-
-      // Carregar HTML
-      const htmlPath = `${basePath}components/${componentName}/${componentName.charAt(0).toUpperCase() + componentName.slice(1)}.html`;
+      // Usar caminhos absolutos que funcionam tanto local quanto na Vercel
+      const htmlPath = `/components/${componentName}/${componentName.charAt(0).toUpperCase() + componentName.slice(1)}.html`;
+      
+      console.log(`🔍 Tentando carregar: ${htmlPath}`);
       const htmlResponse = await fetch(htmlPath);
 
       if (!htmlResponse.ok) {
-        throw new Error(`Erro ao carregar HTML: ${htmlResponse.status}`);
+        throw new Error(`Erro ao carregar HTML: ${htmlResponse.status} - ${htmlPath}`);
       }
 
       const html = await htmlResponse.text();
       placeholder.innerHTML = html;
+      console.log(`✓ HTML carregado: ${componentName}`);
 
       // Carregar CSS se não existir
-      const cssPath = `${basePath}components/${componentName}/${componentName}.css`;
+      const cssPath = `/components/${componentName}/${componentName}.css`;
       const cssId = `component-css-${componentName}`;
 
       if (!document.getElementById(cssId)) {
@@ -42,16 +41,27 @@ class ComponentLoader {
         link.rel = 'stylesheet';
         link.href = cssPath;
         document.head.appendChild(link);
+        console.log(`✓ CSS carregado: ${componentName}`);
       }
 
-      // Carregar JS
-      const jsPath = `${basePath}components/${componentName}/${componentName}.js`;
-      const script = document.createElement('script');
-      script.src = jsPath;
-      script.defer = true;
-      document.body.appendChild(script);
+      // Carregar JS se existir
+      const jsPath = `/components/${componentName}/${componentName}.js`;
+      
+      // Verificar se o arquivo JS existe antes de tentar carregar
+      try {
+        const jsCheck = await fetch(jsPath, { method: 'HEAD' });
+        if (jsCheck.ok) {
+          const script = document.createElement('script');
+          script.src = jsPath;
+          script.defer = true;
+          document.body.appendChild(script);
+          console.log(`✓ JS carregado: ${componentName}`);
+        }
+      } catch (jsErr) {
+        console.log(`ℹ️ Sem JS para ${componentName} (opcional)`);
+      }
 
-      console.log(`✓ Componente ${componentName} carregado com sucesso`);
+      console.log(`✅ Componente ${componentName} carregado com sucesso`);
 
     } catch (err) {
       console.error(`✗ Erro ao carregar componente ${componentName}:`, err);
