@@ -1,26 +1,41 @@
-/* ========== LOADING STATE ========== */
+/* ========== ANTI-FOUC SYSTEM ========== */
 
-/* Prevenir FOUC (Flash of Unstyled Content) */
-body:not(.loaded) #content-area,
-body:not(.loaded) #topbar-placeholder,
-body:not(.loaded) #backgroundlive-placeholder,
-body:not(.loaded) #footer-placeholder {
+/* 
+ * Sistema de prevenção de FOUC (Flash of Unstyled Content)
+ * O CSS crítico inline no HTML garante que a página não pisque
+ * Este arquivo complementa com transições suaves
+ */
+
+/* Estado inicial: escondido */
+#content-area,
+#topbar-placeholder,
+#backgroundlive-placeholder,
+#footer-placeholder,
+.topbar {
 	opacity: 0;
 	visibility: hidden;
+	/* Não usar transition aqui para evitar animação no load inicial */
 }
 
+/* Estado carregado: visível com transição */
 body.loaded #content-area,
 body.loaded #topbar-placeholder,
 body.loaded #backgroundlive-placeholder,
-body.loaded #footer-placeholder {
+body.loaded #footer-placeholder,
+body.loaded .topbar {
 	opacity: 1;
 	visibility: visible;
-	transition: opacity 0.4s ease;
+	transition: opacity 0.35s ease-out, visibility 0s;
 }
 
-/* Background escuro enquanto carrega */
-body:not(.loaded) {
+/* Background base - sempre presente */
+html, body {
 	background: #0a0e27;
+}
+
+/* Quando loading screen está ativa, garantir que conteúdo fique atrás */
+body:has(.loading-container:not(.completed)) #content-area {
+	pointer-events: none;
 }
 
 /* ========== ACESSIBILIDADE ========== */

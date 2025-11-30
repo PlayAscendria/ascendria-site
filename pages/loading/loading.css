@@ -1,20 +1,9 @@
 /* Loading page - Canvas painting effect */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-body {
-  background: #f5f1e8;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+/* 
+ * IMPORTANTE: Estas regras são específicas para a tela de loading
+ * Evitamos resets globais que causariam FOUC
+ */
 
 .loading-container {
   position: fixed;
@@ -29,7 +18,7 @@ body {
   overflow: hidden;
   z-index: 99999;
   pointer-events: auto;
-  transition: opacity 0.3s ease;
+  /* Sem transition inicial para aparecer instantaneamente */
 }
 
 /* Estado quando loading é completado */

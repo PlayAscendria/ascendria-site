@@ -6,6 +6,19 @@
     <title>About Ascendria</title>
 
     <link rel="icon" type="image/png" href="assets/images/ui/favicon.png">
+    <meta name="theme-color" content="#0a0e27">
+
+    <!-- Critical CSS Inline - Previne FOUC -->
+    <style>
+        html { visibility: hidden; }
+        html.ready { visibility: visible; }
+        html, body { background: #0a0e27; margin: 0; padding: 0; min-height: 100vh; }
+        #topbar-placeholder, .topbar, main { opacity: 0; visibility: hidden; }
+        body.loaded #topbar-placeholder, body.loaded .topbar, body.loaded main {
+            opacity: 1; visibility: visible; transition: opacity 0.3s ease-out;
+        }
+    </style>
+    <script>document.documentElement.classList.add('ready');</script>
 
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -80,8 +93,10 @@
 
     <!-- Initialize Components -->
     <script>
-        // Carregar componente TopBar
-        ComponentLoader.load('topbar', 'topbar-placeholder');
+        // Carregar componente TopBar e marcar como loaded
+        ComponentLoader.load('topbar', 'topbar-placeholder').then(() => {
+            document.body.classList.add('loaded');
+        });
     </script>
 
     <!-- Carousel Initialization -->
