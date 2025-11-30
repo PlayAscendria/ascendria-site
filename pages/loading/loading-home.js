@@ -25,7 +25,6 @@
       const ls = document.getElementById('loading-screen');
       if (ls) {
         ls.remove();
-        console.log('⏭️ Loading removido - não é primeira visita da sessão');
       }
     };
     
@@ -43,13 +42,11 @@
     const loadingScreen = document.getElementById('loading-screen');
     
     if (!loadingScreen) {
-      console.warn('⚠️ Loading screen não encontrado');
       return;
     }
     
     // Ativa o loading (CSS: opacity 0 -> 1)
     loadingScreen.classList.add('active');
-    console.log('🎮 AssetPreloader iniciando - primeira visita da sessão');
     
     try {
       // Verifica se o preloader está disponível
@@ -57,11 +54,9 @@
         await startAssetPreloader();
       } else {
         // Fallback: preloader não carregou, usa método simples
-        console.warn('⚠️ AssetPreloader não disponível, usando fallback');
         await fallbackLoading(loadingScreen);
       }
     } catch (err) {
-      console.error('❌ Erro no preloader:', err);
       // Em caso de erro, finaliza o loading
       finishLoading(loadingScreen);
     }
@@ -118,7 +113,6 @@
   setTimeout(() => {
     const ls = document.getElementById('loading-screen');
     if (ls && ls.parentNode) {
-      console.warn('⚠️ Loading timeout (20s) - forcing removal');
       sessionStorage.setItem('alreadyLoaded', '1');
       ls.remove();
     }

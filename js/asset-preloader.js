@@ -118,7 +118,6 @@ class AssetPreloader {
     
     // Conta total de assets
     this.totalAssets = this.backgroundLayers.length + this.additionalAssets.length;
-    console.log(`🎮 AssetPreloader: ${this.totalAssets} assets para carregar`);
     
     // Carrega PRIMEIRO as imagens do background para pintura
     await this.loadPaintingLayers();
@@ -196,8 +195,6 @@ class AssetPreloader {
           
           this.loadedCount++;
           this.updateProgressBar();
-          
-          console.log(`✓ Loaded: ${layer.url} (order: ${layer.order}, z-index: ${layer.zIndex})`);
           resolve();
         };
         
@@ -386,8 +383,6 @@ class AssetPreloader {
     if (this.progressFill) {
       this.progressFill.style.width = `${percent}%`;
     }
-    
-    console.log(`📦 Progress: ${percent}% (${this.loadedCount}/${this.totalAssets})`);
   }
   
   /**
@@ -465,8 +460,6 @@ async function startAssetPreloader() {
   
   await preloader.start();
   await preloader.complete();
-  
-  console.log('✅ Asset preloader completed - site ready!');
 }
 
 // Exporta para uso global

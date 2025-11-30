@@ -38,11 +38,9 @@ class ComponentLoader {
    * @returns {Promise<void>}
    */
   static async load(componentName, placeholderId) {
-    const startTime = performance.now();
     const placeholder = document.getElementById(placeholderId);
     
     if (!placeholder) {
-      console.warn(`⚠️ [ComponentLoader] Placeholder #${placeholderId} não encontrado`);
       return;
     }
 
@@ -58,8 +56,6 @@ class ComponentLoader {
       const htmlFileName = htmlFileNames[componentName] || componentName;
       // SEMPRE usar paths absolutos (começando com /)
       const htmlPath = `/components/${componentName}/${htmlFileName}.html`;
-      
-      console.log(`🔍 [ComponentLoader] Carregando: ${htmlPath}`);
       const htmlResponse = await this.fetchWithTimeout(htmlPath);
 
       if (!htmlResponse.ok) {
@@ -96,12 +92,8 @@ class ComponentLoader {
         // JS é opcional, não logar como erro
       }
 
-      const loadTime = (performance.now() - startTime).toFixed(0);
-      console.log(`✅ [ComponentLoader] ${componentName} carregado em ${loadTime}ms`);
-
-    } catch (err) {
-      console.error(`❌ [ComponentLoader] Falha ao carregar ${componentName}:`, err.message);
-      // Re-throw para que o chamador saiba que falhou
+          } catch (err) {
+      // Erro silencioso em produção - componente falhou ao carregar
       throw err;
     }
   }

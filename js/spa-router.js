@@ -78,10 +78,6 @@
   function init() {
     document.addEventListener('click', handleClick);
     window.addEventListener('popstate', handlePopState);
-    
-    const pageType = isDocPage(currentPath) ? 'documento' : 
-                     isMainPage(currentPath) ? 'principal' : 'outra';
-    console.log(`🚀 SPA Router v5 ativo (página: ${pageType})`);
   }
 
   /**
@@ -172,12 +168,9 @@
       
       // Atualiza URL sem reload
       history.pushState(null, '', hash);
-      
-      console.log(`📍 Scroll suave para: ${hash}`);
       return true;
     }
     
-    console.warn(`⚠️ Seção não encontrada: ${hash}`);
     return false;
   }
 
@@ -232,7 +225,6 @@
     e.preventDefault();
     e.stopPropagation();
     
-    console.log(`🔗 SPA (${navType}):`, href);
     navigate(href, navType);
   }
 
@@ -313,7 +305,6 @@
     }
     
     currentPath = targetPath;
-    console.log(`✅ Navegou (doc-to-doc): ${targetPath}`);
   }
 
   /**

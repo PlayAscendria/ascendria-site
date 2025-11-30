@@ -108,7 +108,7 @@
             ComponentLoader.load('backgroundlive', 'backgroundlive-placeholder')
           ]);
         } catch (err) {
-          console.error('Erro ao carregar componentes:', err);
+          // Erro silencioso
         } finally {
           clearTimeout(fallbackTimer);
           requestAnimationFrame(showPage);

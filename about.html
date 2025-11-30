@@ -117,11 +117,9 @@
         if (loaded) return;
         loaded = true;
         document.body.classList.add('loaded');
-        console.log('✅ Página revelada');
       }
       
       const fallbackTimer = setTimeout(() => {
-        console.warn('⚠️ Fallback: Componentes demoraram demais, revelando página');
         showPage();
       }, FALLBACK_TIMEOUT);
       
@@ -132,9 +130,8 @@
             ComponentLoader.load('backgroundlive', 'backgroundlive-placeholder'),
             ComponentLoader.load('footer', 'footer-placeholder')
           ]);
-          console.log('✓ Componentes carregados');
         } catch (err) {
-          console.error('✗ Erro ao carregar componentes:', err);
+          // Erro silencioso
         } finally {
           clearTimeout(fallbackTimer);
           requestAnimationFrame(() => showPage());

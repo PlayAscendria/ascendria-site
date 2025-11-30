@@ -199,19 +199,17 @@
 		<script>
 		(function() {
 			// ANTI-FOUC: Timeout de fallback para garantir que a página seja exibida
-			const FALLBACK_TIMEOUT = 3000; // 3 segundos
+			const FALLBACK_TIMEOUT = 3000;
 			let loaded = false;
 			
 			function showPage() {
 				if (loaded) return;
 				loaded = true;
 				document.body.classList.add('loaded');
-				console.log('✅ Página revelada');
 			}
 			
 			// Fallback: se componentes não carregarem em 3s, mostra a página mesmo assim
 			const fallbackTimer = setTimeout(() => {
-				console.warn('⚠️ Fallback: Componentes demoraram demais, revelando página');
 				showPage();
 			}, FALLBACK_TIMEOUT);
 			
@@ -223,13 +221,10 @@
 						ComponentLoader.load('backgroundlive', 'backgroundlive-placeholder'),
 						ComponentLoader.load('footer', 'footer-placeholder')
 					]);
-					console.log('✓ Todos os componentes carregados com sucesso');
 				} catch (err) {
-					console.error('✗ Erro ao carregar componentes:', err);
+					// Erro silencioso
 				} finally {
-					// Limpar fallback timer e mostrar página
 					clearTimeout(fallbackTimer);
-					// Pequeno delay para garantir renderização
 					requestAnimationFrame(() => {
 						showPage();
 					});

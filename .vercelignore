@@ -21,3 +21,9 @@ stylebackup.css
 # Logs
 *.log
 npm-debug.log*
+
+# Development/Debug files
+AUDITORIA.md
+TROUBLESHOOTING.md
+VERCEL_COMPATIBILITY_AUDIT.md
+diagnostic.html

@@ -20,8 +20,6 @@
       charactersContainer.style.display = mode === 'simple' ? 'none' : '';
     }
     
-    console.log(`🎨 BackgroundLive iniciado (modo: ${mode})`);
-    
     const layers = root.querySelectorAll('.bg-layer');
     if(!layers.length) return;
 
@@ -185,7 +183,6 @@
       if (charactersContainer) {
         charactersContainer.style.display = mode === 'simple' ? 'none' : '';
       }
-      console.log(`🎨 BackgroundLive modo alterado: ${mode}`);
     }
   };
 
