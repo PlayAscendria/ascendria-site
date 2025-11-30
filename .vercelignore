@@ -1,0 +1,23 @@
+# Node modules
+node_modules/
+
+# Git
+.git/
+.github/
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.backup
+*.bak
+stylebackup.css
+
+# Logs
+*.log
+npm-debug.log*

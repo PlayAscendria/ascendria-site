@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ascendria - Diagnostic Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 10px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+        .test-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        .test-section h2 {
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success {
+            background: rgba(0, 255, 0, 0.2);
+            border-left: 4px solid #00ff00;
+        }
+        .error {
+            background: rgba(255, 0, 0, 0.2);
+            border-left: 4px solid #ff0000;
+        }
+        .warning {
+            background: rgba(255, 255, 0, 0.2);
+            border-left: 4px solid #ffff00;
+        }
+        .info {
+            background: rgba(0, 100, 255, 0.2);
+            border-left: 4px solid #0064ff;
+        }
+        code {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 10px 10px 10px 0;
+        }
+        .button:hover {
+            background: #764ba2;
+        }
+        #diagnosticResults {
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Ascendria Diagnostic Page</h1>
+        <p>This page helps diagnose deployment and loading issues on Vercel.</p>
+
+        <div class="test-section">
+            <h2>📋 Environment Info</h2>
+            <div class="info">
+                <strong>Current URL:</strong> <code id="currentUrl"></code><br>
+                <strong>User Agent:</strong> <code id="userAgent"></code><br>
+                <strong>Screen Size:</strong> <code id="screenSize"></code><br>
+                <strong>Timestamp:</strong> <code id="timestamp"></code>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>🧪 Component Tests</h2>
+            <button class="button" onclick="testComponents()">Run Component Tests</button>
+            <button class="button" onclick="testAssets()">Test Assets</button>
+            <button class="button" onclick="testAPIs()">Test APIs</button>
+            <div id="testResults"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>📊 Full Diagnostic Report</h2>
+            <button class="button" onclick="runFullDiagnostic()">Run Full Diagnostic</button>
+            <div id="diagnosticResults"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>🔗 Quick Links</h2>
+            <a href="/" class="button">Home Page</a>
+            <a href="/pages/lore/" class="button">Lore</a>
+            <a href="/pages/tokenomics/" class="button">Tokenomics</a>
+            <a href="/pages/whitepaper/" class="button">Whitepaper</a>
+        </div>
+    </div>
+
+    <script>
+        // Update environment info
+        document.getElementById('currentUrl').textContent = window.location.href;
+        document.getElementById('userAgent').textContent = navigator.userAgent;
+        document.getElementById('screenSize').textContent = `${window.innerWidth}x${window.innerHeight}`;
+        document.getElementById('timestamp').textContent = new Date().toISOString();
+
+        async function testComponents() {
+            const results = document.getElementById('testResults');
+            results.innerHTML = '<div class="info">Testing components...</div>';
+
+            const components = [
+                { name: 'topbar', file: '/components/topbar/TopBar.html' },
+                { name: 'footer', file: '/components/footer/Footer.html' },
+                { name: 'backgroundlive', file: '/components/backgroundlive/BackgroundLive.html' }
+            ];
+
+            let html = '';
+            for (const comp of components) {
+                try {
+                    const response = await fetch(comp.file);
+                    if (response.ok) {
+                        html += `<div class="success">✅ ${comp.name}: OK (${response.status})</div>`;
+                    } else {
+                        html += `<div class="error">❌ ${comp.name}: Failed (${response.status})</div>`;
+                    }
+                } catch (err) {
+                    html += `<div class="error">❌ ${comp.name}: Error - ${err.message}</div>`;
+                }
+            }
+            results.innerHTML = html;
+        }
+
+        async function testAssets() {
+            const results = document.getElementById('testResults');
+            results.innerHTML = '<div class="info">Testing assets...</div>';
+
+            const assets = [
+                '/css/style.css',
+                '/js/component-loader.js',
+                '/assets/images/ui/favicon.png',
+                '/assets/images/ui/logoascendria.png'
+            ];
+
+            let html = '';
+            for (const asset of assets) {
+                try {
+                    const response = await fetch(asset, { method: 'HEAD' });
+                    if (response.ok) {
+                        html += `<div class="success">✅ ${asset}: OK</div>`;
+                    } else {
+                        html += `<div class="error">❌ ${asset}: Failed (${response.status})</div>`;
+                    }
+                } catch (err) {
+                    html += `<div class="error">❌ ${asset}: Error - ${err.message}</div>`;
+                }
+            }
+            results.innerHTML = html;
+        }
+
+        async function testAPIs() {
+            const results = document.getElementById('testResults');
+            results.innerHTML = '<div class="info">Testing APIs and external resources...</div>';
+
+            let html = '<div class="success">✅ JavaScript is working</div>';
+            html += `<div class="success">✅ Fetch API available: ${typeof fetch !== 'undefined'}</div>`;
+            html += `<div class="success">✅ LocalStorage available: ${typeof localStorage !== 'undefined'}</div>`;
+            html += `<div class="success">✅ SessionStorage available: ${typeof sessionStorage !== 'undefined'}</div>`;
+            
+            results.innerHTML = html;
+        }
+
+        async function runFullDiagnostic() {
+            const results = document.getElementById('diagnosticResults');
+            results.innerHTML = 'Running diagnostic...\n\n';
+
+            let report = '=== ASCENDRIA DIAGNOSTIC REPORT ===\n\n';
+            report += `Timestamp: ${new Date().toISOString()}\n`;
+            report += `URL: ${window.location.href}\n`;
+            report += `User Agent: ${navigator.userAgent}\n`;
+            report += `Screen: ${window.innerWidth}x${window.innerHeight}\n\n`;
+
+            // Test Component Loader
+            report += '--- Testing Component Loader ---\n';
+            try {
+                const loaderResponse = await fetch('/js/component-loader.js');
+                report += `ComponentLoader: ${loaderResponse.ok ? '✅ OK' : '❌ FAILED'} (${loaderResponse.status})\n`;
+            } catch (err) {
+                report += `ComponentLoader: ❌ ERROR - ${err.message}\n`;
+            }
+
+            // Test Components
+            report += '\n--- Testing Components ---\n';
+            const components = [
+                '/components/topbar/TopBar.html',
+                '/components/topbar/topbar.css',
+                '/components/topbar/topbar.js',
+                '/components/footer/Footer.html',
+                '/components/backgroundlive/BackgroundLive.html'
+            ];
+
+            for (const comp of components) {
+                try {
+                    const response = await fetch(comp);
+                    report += `${comp}: ${response.ok ? '✅' : '❌'} (${response.status})\n`;
+                } catch (err) {
+                    report += `${comp}: ❌ ERROR - ${err.message}\n`;
+                }
+            }
+
+            // Test CSS files
+            report += '\n--- Testing CSS Files ---\n';
+            const cssFiles = [
+                '/css/style.css',
+                '/components/topbar/topbar.css',
+                '/components/backgroundlive/backgroundlive.css'
+            ];
+
+            for (const css of cssFiles) {
+                try {
+                    const response = await fetch(css, { method: 'HEAD' });
+                    report += `${css}: ${response.ok ? '✅' : '❌'} (${response.status})\n`;
+                } catch (err) {
+                    report += `${css}: ❌ ERROR - ${err.message}\n`;
+                }
+            }
+
+            // Test images
+            report += '\n--- Testing Images ---\n';
+            const images = [
+                '/assets/images/ui/favicon.png',
+                '/assets/images/ui/logoascendria.png'
+            ];
+
+            for (const img of images) {
+                try {
+                    const response = await fetch(img, { method: 'HEAD' });
+                    report += `${img}: ${response.ok ? '✅' : '❌'} (${response.status})\n`;
+                } catch (err) {
+                    report += `${img}: ❌ ERROR - ${err.message}\n`;
+                }
+            }
+
+            // Browser capabilities
+            report += '\n--- Browser Capabilities ---\n';
+            report += `Fetch API: ${typeof fetch !== 'undefined' ? '✅' : '❌'}\n`;
+            report += `LocalStorage: ${typeof localStorage !== 'undefined' ? '✅' : '❌'}\n`;
+            report += `SessionStorage: ${typeof sessionStorage !== 'undefined' ? '✅' : '❌'}\n`;
+            report += `WebGL: ${!!document.createElement('canvas').getContext('webgl') ? '✅' : '❌'}\n`;
+            report += `ServiceWorker: ${'serviceWorker' in navigator ? '✅' : '❌'}\n`;
+
+            report += '\n=== END OF REPORT ===\n';
+
+            results.innerHTML = report;
+            
+            // Also log to console
+            console.log(report);
+        }
+
+        // Auto-run diagnostic on load
+        window.addEventListener('load', () => {
+            console.log('🔍 Diagnostic page loaded. Click buttons to run tests.');
+        });
+    </script>
+</body>
+</html>

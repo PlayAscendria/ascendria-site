@@ -1,29 +1,95 @@
-# Ascendria — Static Clone Demo
+# Ascendria - Gaming Community & NFT Ecosystem
 
-This is a small static scaffold inspired by the layout and topbar style of Axie Infinity (for educational/demo purposes).
+Official website for Ascendria gaming community and NFT ecosystem.
 
-Files created:
-- `index.html` — homepage scaffold
-- `css/style.css` — styles including fixed topbar
-- `components/header.html` — header component (for manual reuse)
-- `assets/logo.svg` — simple placeholder logo
+## 🚀 Quick Start
 
-How to run locally (PowerShell):
-
+### Local Development
 ```powershell
+# Using Python
 Set-Location 'd:\PROJETOS\ASCENDRIA\ascendria-site'
-py -m http.server 8000
-# or
 python -m http.server 8000
 
-# Open in browser:
-http://localhost:8000
+# Using Node.js
+npx serve
+
+# Open in browser: http://localhost:8000
 ```
 
-Next steps you can ask me to do:
-- Replace placeholder assets with your real images (logo, backgrounds, icons).
-- Add dropdowns, mobile menu content, and animations.
-- Match fonts/colors more closely to a reference design.
+## 📁 Project Structure
 
-License & notes:
-- This scaffold is an original implementation for learning and prototyping. Do not copy proprietary assets or exact content from third-party sites without permission.
+```
+ascendria-site/
+├── index.html              # Main homepage
+├── diagnostic.html         # Diagnostic tool for troubleshooting
+├── assets/                 # Static assets
+│   ├── fonts/
+│   ├── icons/
+│   └── images/
+├── components/             # Reusable components
+│   ├── topbar/
+│   ├── footer/
+│   └── backgroundlive/
+├── css/                    # Global styles
+├── js/                     # Global scripts
+└── pages/                  # Sub-pages
+    ├── lore/
+    ├── tokenomics/
+    └── whitepaper/
+```
+
+## 🔧 CI/CD Pipeline
+
+### GitHub Actions
+Automated quality checks on every push:
+- HTML/CSS/JavaScript linting
+- File reference validation
+- JSON validation
+- Security checks
+
+### Deployment
+Automatically deployed to Vercel on push to `main` branch.
+
+## 🐛 Troubleshooting
+
+### Site Not Loading on Vercel?
+
+1. **Check Diagnostic Page**: Visit `https://your-domain.vercel.app/diagnostic.html`
+2. **Run Full Diagnostic**: Click "Run Full Diagnostic" button
+3. **Check Console**: Open browser DevTools (F12) for errors
+
+### Common Issues
+
+#### Components Not Loading
+- Verify `component-loader.js` is accessible
+- Check component paths in console
+- Ensure files exist with correct case
+
+#### White Screen / Blank Page
+1. Open browser console (F12)
+2. Visit `/diagnostic.html` to run tests
+3. Verify all CSS/JS files are loading
+
+## 📊 SEO Features
+
+- Meta tags (description, keywords, robots)
+- Open Graph & Twitter Card tags
+- JSON-LD structured data
+- Sitemap.xml & Robots.txt
+- Canonical URLs
+
+## 🔒 Security
+
+Headers configured in `vercel.json`:
+- X-Content-Type-Options: nosniff
+- X-Frame-Options: SAMEORIGIN
+- X-XSS-Protection: 1; mode=block
+
+## 📧 Support
+
+- Discord: [Join our community](https://discord.gg/zjsPBXfFX7)
+- YouTube: [@PlayAscendria](https://youtube.com/@PlayAscendria)
+
+## 📄 License
+
+Copyright © 2025 Ascendria Team. All rights reserved.

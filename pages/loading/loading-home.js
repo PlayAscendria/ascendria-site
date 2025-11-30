@@ -253,7 +253,7 @@ class HomeLoadingManager {
     this.paintingComplete = true;
     this.currentProgress = 100;
     this.updateProgress();
-    this.paintingText.textContent = '✓ Obra concluída!';
+    this.paintingText.textContent = '✓ Work Completed!';
 
     setTimeout(() => {
       this.dissolve();
