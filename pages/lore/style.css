@@ -44,35 +44,81 @@ main {
   justify-content: center;
   z-index: 10;
   overflow: hidden;
+  background: transparent;
 }
 
 /* ========== PERGAMINHO ========== */
 .doc-container {
   position: relative;
-  width: 80vw;
-  max-width: 1200px;
-  height: 80vh;
-  background-image: url("/assets/images/ui/pergaminho.png");
-  background-position: center center;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+  /* Ocupa 98% da altura do main */
+  height: 98%;
+  /* Largura se ajusta à proporção da imagem */
+  width: auto;
+  aspect-ratio: 1169 / 758; /* Proporção real da imagem */
+  max-width: 95vw;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
   margin: 0;
-  border-radius: 0;
+  background: transparent;
 }
 
-/* Container interno com scroll */
+/* Título no banner superior do pergaminho */
+.doc-title {
+  position: absolute;
+  top: 11%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20; /* ACIMA do pergaminho */
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #2c1810;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+  font-family: inherit;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* Moldura do pergaminho - camada do meio */
+.doc-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/assets/images/ui/pergaminho.webp");
+  background-position: center center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  z-index: 10;
+  pointer-events: none; /* Permite clicar no conteúdo atrás */
+}
+
+/* Conteúdo fica ABAIXO do pergaminho, visível pela janela vazada */
 .doc-content {
-  position: relative;
-  z-index: 2;
-  width: 70%;
-  height: 70%;
+  position: absolute;
+  z-index: 5; /* ABAIXO da moldura */
+  /* Ajustado para caber na moldura interna do pergaminho */
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 48%;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 2rem;
+  padding: 2rem 2rem 10rem 2rem; /* top | right | bottom | left */
+
+  /* Degradê com cores do pergaminho */
+  background: linear-gradient(
+    135deg,
+    #e0b070 0%,
+    #c48547 50%,
+    #fcc45c 100%
+  );
+  border-radius: 4px;
+  
+  /* Texto */
   color: #2c1810;
   
   /* Estilo do scrollbar */
@@ -93,29 +139,35 @@ main {
   border-radius: 4px;
 }
 
-.doc-container h1 {
-  margin-top: 0;
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+.doc-content p,
+.doc-content li {
   color: #2c1810;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+  line-height: 1.8;
 }
 
-.doc-container p,
-.doc-container li {
-  color: #3d2817;
-  line-height: 1.6;
+.doc-content h2,
+.doc-content h3 {
+  color: #1a0f08;
+  margin-top: 1.5rem;
 }
 
 /* Mobile responsivo */
 @media (max-width: 768px) {
   .doc-container {
-    width: 95vw;
-    height: 85vh;
+    height: 94%;
+    max-width: 98vw;
+  }
+  
+  .doc-title {
+    top: 3%;
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
   }
   
   .doc-content {
-    width: 75%;
-    height: 75%;
-    padding: 1.5rem;
+    top: 14%;
+    left: 14%;
+    width: 72%;
+    height: 66%;
+    padding: 1rem 1.5rem;
   }
 }

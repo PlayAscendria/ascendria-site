@@ -1,16 +1,20 @@
 /**
- * ASCENDRIA - SPA Router v4
+ * ASCENDRIA - SPA Router v5
  * 
- * SPA apenas entre páginas de documentos (Lore, Whitepaper, Tokenomics)
- * O BackgroundLive permanece ativo e contínuo nessas páginas.
- * Outras páginas fazem navegação normal.
+ * Funcionalidades:
+ * 1. SPA entre páginas de documentos (Lore, Whitepaper, Tokenomics)
+ *    - BackgroundLive permanece ativo e contínuo
+ * 2. Transição suave da Home/About para páginas de documentos
+ *    - Fade overlay elegante
+ * 3. Navegação normal para outras páginas
  */
 
 (function() {
   'use strict';
 
   const CONFIG = {
-    transitionDuration: 200
+    transitionDuration: 200,
+    fadeOutDuration: 150  // Bem mais rápido
   };
 
   let isNavigating = false;
@@ -38,26 +42,68 @@
   }
 
   /**
-   * Inicializa o router
+   * Verifica se é página principal (Home, About)
    */
-  function init() {
-    // Só ativa se estiver em página de documentos
-    if (!isDocPage(window.location.pathname)) {
-      console.log('📄 SPA Router: Modo normal (não é página de documento)');
-      return;
-    }
-    
-    document.addEventListener('click', handleClick);
-    window.addEventListener('popstate', handlePopState);
-    
-    console.log('🚀 SPA Router v4 ativo (documentos)');
+  function isMainPage(path) {
+    const normalized = normalizePath(path);
+    return normalized === '/' || 
+           normalized === '' ||
+           normalized === '/index' ||
+           normalized === '/about';
   }
 
   /**
-   * Verifica se deve usar SPA
+   * Fade out da página atual (dissolução rápida)
+   * Mantém a TopBar visível durante a transição
    */
-  function shouldUseSPA(href) {
-    if (!href || href.startsWith('#') || href.startsWith('mailto:') || 
+  async function fadeOutPage() {
+    // Seleciona apenas o conteúdo, nunca a topbar
+    // Home: #content-area | Docs: main
+    const contentArea = document.getElementById('content-area');
+    const main = document.querySelector('main');
+    
+    const target = contentArea || main;
+    
+    if (target) {
+      target.style.transition = `opacity ${CONFIG.fadeOutDuration}ms ease-out`;
+      target.style.opacity = '0';
+    }
+    
+    await sleep(CONFIG.fadeOutDuration);
+  }
+
+  /**
+   * Inicializa o router
+   */
+  function init() {
+    document.addEventListener('click', handleClick);
+    window.addEventListener('popstate', handlePopState);
+    
+    const pageType = isDocPage(currentPath) ? 'documento' : 
+                     isMainPage(currentPath) ? 'principal' : 'outra';
+    console.log(`🚀 SPA Router v5 ativo (página: ${pageType})`);
+  }
+
+  /**
+   * Determina o tipo de navegação
+   */
+  function getNavigationType(fromPath, toPath) {
+    const fromDoc = isDocPage(fromPath);
+    const toDoc = isDocPage(toPath);
+    const fromMain = isMainPage(fromPath);
+    const toMain = isMainPage(toPath);
+
+    if (fromDoc && toDoc) return 'doc-to-doc';      // SPA puro
+    if (fromMain && toDoc) return 'main-to-doc';    // Transição suave
+    if (fromDoc && toMain) return 'doc-to-main';    // Transição suave
+    return 'normal';                                 // Reload normal
+  }
+
+  /**
+   * Verifica se deve interceptar o link
+   */
+  function shouldIntercept(href) {
+    if (!href || href.startsWith('mailto:') || 
         href.startsWith('tel:') || href.startsWith('javascript:')) {
       return false;
     }
@@ -67,23 +113,72 @@
       try {
         const url = new URL(href);
         if (url.host !== window.location.host) return false;
-        href = url.pathname;
       } catch {
         return false;
       }
     }
     
-    // Resolve path
-    let targetPath;
+    return true;
+  }
+
+  /**
+   * Verifica se é link de hash (âncora) para a mesma página
+   */
+  function isHashLink(href) {
+    if (!href) return false;
+    
+    // Link começa com # = âncora na página atual
+    if (href.startsWith('#')) return true;
+    
+    // Link com hash para a página atual (ex: /index.html#nfts quando estamos em /)
     try {
       const url = new URL(href, window.location.origin);
-      targetPath = url.pathname;
+      const targetPath = normalizePath(url.pathname);
+      const hasHash = url.hash && url.hash.length > 1;
+      
+      // Se tem hash e o path é a mesma página ou é a home
+      if (hasHash) {
+        const isCurrentPage = targetPath === currentPath;
+        const isBothHome = (targetPath === '/' || targetPath === '/index' || targetPath === '') && 
+                          (currentPath === '/' || currentPath === '/index' || currentPath === '');
+        return isCurrentPage || isBothHome;
+      }
     } catch {
       return false;
     }
     
-    // SPA apenas entre páginas de documentos
-    return isDocPage(currentPath) && isDocPage(targetPath);
+    return false;
+  }
+
+  /**
+   * Faz scroll suave para uma seção
+   */
+  function smoothScrollTo(hash) {
+    if (!hash || hash === '#') return;
+    
+    const targetId = hash.replace('#', '');
+    const element = document.getElementById(targetId);
+    
+    if (element) {
+      // Offset para o topbar
+      const topbarHeight = document.querySelector('.topbar')?.offsetHeight || 70;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - topbarHeight - 20;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      
+      // Atualiza URL sem reload
+      history.pushState(null, '', hash);
+      
+      console.log(`📍 Scroll suave para: ${hash}`);
+      return true;
+    }
+    
+    console.warn(`⚠️ Seção não encontrada: ${hash}`);
+    return false;
   }
 
   /**
@@ -96,19 +191,55 @@
     const href = link.getAttribute('href');
     
     if (link.target === '_blank' || e.ctrlKey || e.shiftKey || e.metaKey) return;
-    if (!shouldUseSPA(href)) return;
+    if (!shouldIntercept(href)) return;
+    
+    // Verifica se é link de hash (âncora)
+    if (isHashLink(href)) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Extrai o hash
+      let hash;
+      if (href.startsWith('#')) {
+        hash = href;
+      } else {
+        try {
+          const url = new URL(href, window.location.origin);
+          hash = url.hash;
+        } catch {
+          return;
+        }
+      }
+      
+      smoothScrollTo(hash);
+      return;
+    }
+    
+    // Resolve path para outras navegações
+    let targetPath;
+    try {
+      const url = new URL(href, window.location.origin);
+      targetPath = url.pathname;
+    } catch {
+      return;
+    }
+    
+    const navType = getNavigationType(currentPath, targetPath);
+    
+    // Navegação normal para páginas não relacionadas
+    if (navType === 'normal') return;
     
     e.preventDefault();
     e.stopPropagation();
     
-    console.log('🔗 SPA:', href);
-    navigate(href);
+    console.log(`🔗 SPA (${navType}):`, href);
+    navigate(href, navType);
   }
 
   /**
-   * Navega para nova página de documento
+   * Navega para nova página
    */
-  async function navigate(href, pushState = true) {
+  async function navigate(href, navType, pushState = true) {
     if (isNavigating) return;
     
     const url = new URL(href, window.location.origin);
@@ -119,50 +250,13 @@
     isNavigating = true;
     
     try {
-      const main = document.querySelector('main');
-      
-      // Fade out
-      if (main) {
-        main.style.transition = `opacity ${CONFIG.transitionDuration}ms ease-out`;
-        main.style.opacity = '0';
+      if (navType === 'doc-to-doc') {
+        // SPA puro entre documentos
+        await navigateDocToDoc(url, targetPath, pushState);
+      } else if (navType === 'main-to-doc' || navType === 'doc-to-main') {
+        // Fade out suave da página atual
+        await navigateWithFade(url, targetPath, pushState);
       }
-      
-      await sleep(CONFIG.transitionDuration);
-      
-      // Fetch nova página
-      const response = await fetch(url.pathname);
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      
-      const html = await response.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      
-      const newMain = doc.querySelector('main');
-      if (!newMain) throw new Error('Main não encontrado');
-      
-      // Carrega CSS
-      await loadPageCSS(doc);
-      
-      // Substitui conteúdo
-      if (main) {
-        main.innerHTML = newMain.innerHTML;
-      }
-      
-      document.title = doc.title;
-      
-      // Fade in
-      await sleep(50);
-      if (main) {
-        main.style.opacity = '1';
-      }
-      
-      // Histórico
-      if (pushState) {
-        history.pushState({ path: targetPath }, '', url.pathname);
-      }
-      
-      currentPath = targetPath;
-      console.log(`✅ Navegou: ${targetPath}`);
       
     } catch (err) {
       console.error('❌ Erro SPA:', err);
@@ -170,6 +264,67 @@
     } finally {
       isNavigating = false;
     }
+  }
+
+  /**
+   * Navegação SPA entre documentos (BackgroundLive contínuo)
+   */
+  async function navigateDocToDoc(url, targetPath, pushState) {
+    const main = document.querySelector('main');
+    
+    // Fade out
+    if (main) {
+      main.style.transition = `opacity ${CONFIG.transitionDuration}ms ease-out`;
+      main.style.opacity = '0';
+    }
+    
+    await sleep(CONFIG.transitionDuration);
+    
+    // Fetch nova página
+    const response = await fetch(url.pathname);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    
+    const html = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    
+    const newMain = doc.querySelector('main');
+    if (!newMain) throw new Error('Main não encontrado');
+    
+    // Carrega CSS
+    await loadPageCSS(doc);
+    
+    // Substitui conteúdo
+    if (main) {
+      main.innerHTML = newMain.innerHTML;
+    }
+    
+    document.title = doc.title;
+    
+    // Fade in
+    await sleep(50);
+    if (main) {
+      main.style.opacity = '1';
+    }
+    
+    // Histórico
+    if (pushState) {
+      history.pushState({ path: targetPath, type: 'doc-to-doc' }, '', url.pathname);
+    }
+    
+    currentPath = targetPath;
+    console.log(`✅ Navegou (doc-to-doc): ${targetPath}`);
+  }
+
+  /**
+   * Navegação com fade out suave (Home ↔ Docs)
+   */
+  async function navigateWithFade(url, targetPath, pushState) {
+    // Fade out rápido
+    await fadeOutPage();
+    
+    // Navega imediatamente
+    window.location.href = url.pathname;
   }
 
   /**
@@ -200,8 +355,10 @@
    */
   function handlePopState(e) {
     const path = e.state?.path || window.location.pathname;
-    if (isDocPage(path)) {
-      navigate(path, false);
+    const type = e.state?.type || 'normal';
+    
+    if (type === 'doc-to-doc' && isDocPage(path) && isDocPage(currentPath)) {
+      navigate(path, 'doc-to-doc', false);
     } else {
       window.location.reload();
     }

@@ -21,6 +21,11 @@ html, body {
 	padding: 0;
 }
 
+/* Scroll suave para âncoras */
+html {
+	scroll-behavior: smooth;
+}
+
 /* Conteúdo principal ESCONDIDO por padrão */
 #content-area,
 #topbar-placeholder,
@@ -371,13 +376,15 @@ body::-webkit-scrollbar-thumb {
 	padding: clamp(4rem, 10vw, 8rem) clamp(1rem, 5vw, 2rem);
 	background: linear-gradient(180deg, #0a0e27 0%, #0d1233 100%);
 	position: relative;
+	/* Offset para scroll suave considerando o topbar fixo */
+	scroll-margin-top: 80px;
 }
 
 .landing-section:nth-child(odd) {
 	background: linear-gradient(180deg, #0d1233 0%, #0a0e27 100%);
 }
 
-.section-container {
+.section-content {
 	max-width: 1200px;
 	margin: 0 auto;
 	text-align: center;

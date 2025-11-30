@@ -1,7 +1,27 @@
 (function(){
   // BackgroundLive parallax component: scroll + mousemove
+  // Suporta dois modos:
+  //   - "full": paisagem + personagens (Home, About)
+  //   - "simple": apenas paisagem (páginas de documentos)
+  
   function init(root){
     if(!root) return;
+    
+    // Detecta modo baseado no placeholder ou URL
+    const placeholder = document.getElementById('backgroundlive-placeholder');
+    const mode = placeholder?.dataset.mode || detectModeFromURL();
+    
+    // Aplica classe de modo no root
+    root.dataset.mode = mode;
+    
+    // Esconde personagens se modo simple
+    const charactersContainer = root.querySelector('.bg-characters');
+    if (charactersContainer) {
+      charactersContainer.style.display = mode === 'simple' ? 'none' : '';
+    }
+    
+    console.log(`🎨 BackgroundLive iniciado (modo: ${mode})`);
+    
     const layers = root.querySelectorAll('.bg-layer');
     if(!layers.length) return;
 
@@ -138,5 +158,35 @@
     });
     obs.observe(document.body, { childList: true, subtree: true });
   }
+  
+  /**
+   * Detecta modo baseado na URL
+   */
+  function detectModeFromURL() {
+    const path = window.location.pathname;
+    // Páginas de documentos = modo simple
+    if (path.includes('/pages/lore') || 
+        path.includes('/pages/whitepaper') || 
+        path.includes('/pages/tokenomics')) {
+      return 'simple';
+    }
+    // Home, About, etc = modo full
+    return 'full';
+  }
+  
+  // Expõe função para trocar modo dinamicamente (usado pelo SPA Router)
+  window.BackgroundLive = {
+    setMode: function(mode) {
+      const root = document.querySelector('.backgroundlive-root');
+      if (!root) return;
+      
+      root.dataset.mode = mode;
+      const charactersContainer = root.querySelector('.bg-characters');
+      if (charactersContainer) {
+        charactersContainer.style.display = mode === 'simple' ? 'none' : '';
+      }
+      console.log(`🎨 BackgroundLive modo alterado: ${mode}`);
+    }
+  };
 
 })();

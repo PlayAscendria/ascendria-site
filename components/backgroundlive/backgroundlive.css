@@ -841,3 +841,57 @@
     height: min(60vh, 40vw);
   }
 }
+
+/* ============================================
+   PERSONAGENS (modo full)
+   Só aparecem na Home e About
+   ============================================ */
+
+.backgroundlive-root .bg-characters {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 16; /* Entre nuvens e grama */
+}
+
+/* Container escondido no modo simple */
+.backgroundlive-root[data-mode="simple"] .bg-characters {
+  display: none !important;
+}
+
+/* Estilo base para personagens */
+.backgroundlive-root .bg-characters .character {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: contain;
+}
+
+/* ============================================
+   ADICIONE SEUS PERSONAGENS AQUI:
+   
+   Exemplo:
+   
+   .backgroundlive-root .bg-characters .character-warrior {
+     width: 300px;
+     height: 500px;
+     background-image: url("/assets/images/characters/warrior.webp");
+     left: 30%;
+     bottom: 15%;
+     z-index: 1;
+   }
+   
+   .backgroundlive-root .bg-characters .character-mage {
+     width: 280px;
+     height: 480px;
+     background-image: url("/assets/images/characters/mage.webp");
+     left: 70%;
+     bottom: 18%;
+     z-index: 2;
+   }
+   
+   ============================================ */
