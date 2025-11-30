@@ -148,8 +148,15 @@
 					ComponentLoader.load('footer', 'footer-placeholder')
 				]);
 				console.log('✓ Todos os componentes carregados com sucesso');
+				
+				// Marcar página como carregada para transição suave
+				setTimeout(() => {
+					document.body.classList.add('loaded');
+				}, 100);
 			} catch (err) {
 				console.error('✗ Erro ao carregar componentes:', err);
+				// Mesmo com erro, mostrar conteúdo
+				document.body.classList.add('loaded');
 			}
 		})();
 		</script>

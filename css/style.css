@@ -1,3 +1,28 @@
+/* ========== LOADING STATE ========== */
+
+/* Prevenir FOUC (Flash of Unstyled Content) */
+body:not(.loaded) #content-area,
+body:not(.loaded) #topbar-placeholder,
+body:not(.loaded) #backgroundlive-placeholder,
+body:not(.loaded) #footer-placeholder {
+	opacity: 0;
+	visibility: hidden;
+}
+
+body.loaded #content-area,
+body.loaded #topbar-placeholder,
+body.loaded #backgroundlive-placeholder,
+body.loaded #footer-placeholder {
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 0.4s ease;
+}
+
+/* Background escuro enquanto carrega */
+body:not(.loaded) {
+	background: #0a0e27;
+}
+
 /* ========== ACESSIBILIDADE ========== */
 
 /* Skip Navigation */

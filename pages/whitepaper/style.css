@@ -9,7 +9,23 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: transparent;
+  background: #0a0e27;
+}
+
+/* Esconder conteúdo até componentes carregarem */
+body:not(.loaded) main,
+body:not(.loaded) #topbar-placeholder,
+body:not(.loaded) #backgroundlive-placeholder {
+  opacity: 0;
+  visibility: hidden;
+}
+
+body.loaded main,
+body.loaded #topbar-placeholder,
+body.loaded #backgroundlive-placeholder {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
 }
 
 /* Main ocupa toda a viewport */

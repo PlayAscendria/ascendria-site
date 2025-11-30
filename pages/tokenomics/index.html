@@ -66,8 +66,16 @@
     <!-- Initialize Components -->
     <script>
       // Carregar componentes
-      ComponentLoader.load('topbar', 'topbar-placeholder');
-      ComponentLoader.load('backgroundlive', 'backgroundlive-placeholder');
+      (async function() {
+        await Promise.all([
+          ComponentLoader.load('topbar', 'topbar-placeholder'),
+          ComponentLoader.load('backgroundlive', 'backgroundlive-placeholder')
+        ]);
+        // Marcar como carregado para exibir conteúdo
+        setTimeout(() => {
+          document.body.classList.add('loaded');
+        }, 100);
+      })();
     </script>
 
     <!-- Vercel Speed Insights -->
