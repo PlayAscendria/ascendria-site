@@ -8,18 +8,6 @@
     <link rel="icon" type="image/png" href="assets/images/ui/favicon.png">
     <meta name="theme-color" content="#0a0e27">
 
-    <!-- Critical CSS Inline - Previne FOUC -->
-    <style>
-        html { visibility: hidden; }
-        html.ready { visibility: visible; }
-        html, body { background: #0a0e27; margin: 0; padding: 0; min-height: 100vh; }
-        #topbar-placeholder, .topbar, main { opacity: 0; visibility: hidden; }
-        body.loaded #topbar-placeholder, body.loaded .topbar, body.loaded main {
-            opacity: 1; visibility: visible; transition: opacity 0.3s ease-out;
-        }
-    </style>
-    <script>document.documentElement.classList.add('ready');</script>
-
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
@@ -29,7 +17,9 @@
     <!-- About Page Specific Styles -->
     <link rel="stylesheet" href="css/about.css">
 </head>
-<body>
+<body style="opacity: 0;">
+    <!-- Mostrar body após CSS carregar -->
+    <script>document.body.style.opacity = '1';</script>
 
     <!-- Skip Navigation for Accessibility -->
     <a href="#main-content" class="skip-to-main">Pular para conteúdo principal</a>

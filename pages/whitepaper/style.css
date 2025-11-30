@@ -1,8 +1,12 @@
+/* 
+ * Whitepaper Page Styles
+ * Importações CSS devem ser processadas ANTES do conteúdo renderizar
+ */
 @import url("../../css/style.css");
 @import url("../../components/topbar/topbar.css");
 @import url("../../components/backgroundlive/backgroundlive.css");
 
-/* Viewport sem scroll */
+/* ========== BASE ========== */
 html, body {
   margin: 0;
   padding: 0;
@@ -12,22 +16,26 @@ html, body {
   background: #0a0e27;
 }
 
-/* Esconder conteúdo até componentes carregarem */
-body:not(.loaded) main,
-body:not(.loaded) #topbar-placeholder,
-body:not(.loaded) #backgroundlive-placeholder {
+/* ========== ANTI-FOUC ========== */
+/* Main e componentes começam visíveis - a transição é controlada pelo body.loaded */
+main,
+#topbar-placeholder,
+#backgroundlive-placeholder,
+.topbar {
   opacity: 0;
   visibility: hidden;
 }
 
 body.loaded main,
 body.loaded #topbar-placeholder,
-body.loaded #backgroundlive-placeholder {
+body.loaded #backgroundlive-placeholder,
+body.loaded .topbar {
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease-out;
 }
 
+/* ========== LAYOUT ========== */
 /* Main ocupa toda a viewport */
 main {
   position: fixed;
@@ -42,13 +50,16 @@ main {
   overflow: hidden;
 }
 
-/* Estilos específicos para a página Whitepaper */
+/* ========== PERGAMINHO ========== */
 .doc-container {
   position: relative;
   width: 80vw;
   max-width: 1200px;
   height: 80vh;
-  background: url("/assets/images/ui/pergaminho.png") center center / 100% 100% no-repeat;
+  background-image: url("/assets/images/ui/pergaminho.png");
+  background-position: center center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;

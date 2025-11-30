@@ -36,59 +36,53 @@
 		<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/ui/favicon.png">
 		<meta name="theme-color" content="#0a0e27">
 		
-		<!-- Critical CSS Inline - Previne FOUC -->
+		<!-- 
+			ANTI-FOUC Strategy:
+			1. Body starts with opacity:0 via inline style
+			2. CSS files load (render-blocking by default)
+			3. After all CSS loaded, JS at end of body shows content
+		-->
 		<style>
-			/* Anti-FOUC: esconder tudo até estar pronto */
-			html { visibility: hidden; }
-			html.ready { visibility: visible; }
-			
-			/* Background imediato */
+			/* Fallback background enquanto carrega */
 			html, body {
-				background: #0a0e27;
+				background: #0a0e27 !important;
 				margin: 0;
 				padding: 0;
-				min-height: 100vh;
 			}
 			
-			/* Loading screen visível imediatamente */
-			.loading-container {
-				position: fixed;
+			/* Loading screen SEMPRE visível imediatamente */
+			#loading-screen {
+				position: fixed !important;
 				top: 0;
 				left: 0;
 				width: 100%;
 				height: 100%;
 				background: #f5f1e8;
-				z-index: 99999;
+				z-index: 99999 !important;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 			}
 			
-			/* Conteúdo escondido até carregar */
-			#content-area,
-			#topbar-placeholder,
-			.topbar {
+			/* Esconder loading quando completado */
+			#loading-screen.completed {
 				opacity: 0;
-				visibility: hidden;
-			}
-			
-			/* Transição suave quando pronto */
-			body.loaded #content-area,
-			body.loaded #topbar-placeholder,
-			body.loaded .topbar {
-				opacity: 1;
-				visibility: visible;
+				pointer-events: none;
 				transition: opacity 0.3s ease-out;
 			}
 		</style>
-		
-		<!-- Ativar visibilidade assim que CSS crítico estiver parseado -->
-		<script>document.documentElement.classList.add('ready');</script>
 		
 		<!-- Preconnect para recursos externos -->
 		<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 		<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 		<link rel="preconnect" href="https://vitals.vercel-insights.com" crossorigin>
+		
+		<!-- CSS - Carregamento bloqueante garante que estilos estejam prontos -->
+		<link rel="stylesheet" href="pages/loading/loading.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="components/topbar/topbar.css">
+		<link rel="stylesheet" href="components/backgroundlive/backgroundlive.css">
+		<link rel="stylesheet" href="components/footer/footer.css">
 		
 		<!-- Structured Data (JSON-LD) -->
 		<script type="application/ld+json">
@@ -128,24 +122,15 @@
 			}
 		}
 		</script>
-		
-		<!-- CSS com preload para evitar bloqueio de renderização -->
-		<link rel="preload" href="css/style.css" as="style">
-		<link rel="preload" href="pages/loading/loading.css" as="style">
-		<link rel="preload" href="components/topbar/topbar.css" as="style">
-		
-		<!-- Loading CSS primeiro (crítico) -->
-		<link rel="stylesheet" href="pages/loading/loading.css">
-		
-		<!-- CSS principal -->
-		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="components/topbar/topbar.css">
-		<link rel="stylesheet" href="components/backgroundlive/backgroundlive.css">
-		<link rel="stylesheet" href="components/footer/footer.css">
 	</head>
-	<body>
+	<body style="opacity: 0;">
 		<!-- Skip Navigation for Accessibility -->
 		<a href="#main" class="skip-to-main">Skip to main content</a>
+
+		<!-- Mostrar body assim que DOM estiver pronto (CSS já carregou pois é bloqueante) -->
+		<script>
+			document.body.style.opacity = '1';
+		</script>
 
 		<!-- Emergency fallback: garante que loading nunca trave o site -->
 		<script>

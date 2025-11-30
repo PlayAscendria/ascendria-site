@@ -10,41 +10,32 @@
     <meta name="description" content="Learn about Ascendria's tokenomics: token distribution, allocation, unlock schedule, and the economic model powering our gaming ecosystem and NFT marketplace.">
     <meta name="keywords" content="Ascendria tokenomics, crypto token, NFT token, gaming token, token distribution, blockchain economics, Web3 economy">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://ascendria.com/pages/tokenomics/">
+    <link rel="canonical" href="https://playascendria.com/pages/tokenomics/">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ascendria.com/pages/tokenomics/">
+    <meta property="og:url" content="https://playascendria.com/pages/tokenomics/">
     <meta property="og:title" content="Tokenomics - Ascendria">
     <meta property="og:description" content="Learn about Ascendria's tokenomics: token distribution, allocation, and economic model.">
-    <meta property="og:image" content="https://ascendria.com/assets/images/ui/logoascendria.png">
+    <meta property="og:image" content="https://playascendria.com/assets/images/ui/logoascendria.png">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://ascendria.com/pages/tokenomics/">
+    <meta property="twitter:url" content="https://playascendria.com/pages/tokenomics/">
     <meta property="twitter:title" content="Tokenomics - Ascendria">
     <meta property="twitter:description" content="Learn about Ascendria's tokenomics and economic model.">
-    <meta property="twitter:image" content="https://ascendria.com/assets/images/ui/logoascendria.png">
+    <meta property="twitter:image" content="https://playascendria.com/assets/images/ui/logoascendria.png">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/images/ui/favicon.png">
     <meta name="theme-color" content="#0a0e27">
     
-    <!-- Critical CSS Inline - Previne FOUC -->
-    <style>
-      html { visibility: hidden; }
-      html.ready { visibility: visible; }
-      html, body { background: #0a0e27; margin: 0; padding: 0; min-height: 100vh; }
-      #topbar-placeholder, .topbar, main, #backgroundlive-placeholder { opacity: 0; visibility: hidden; }
-      body.loaded #topbar-placeholder, body.loaded .topbar, body.loaded main, body.loaded #backgroundlive-placeholder {
-        opacity: 1; visibility: visible; transition: opacity 0.3s ease-out;
-      }
-    </style>
-    <script>document.documentElement.classList.add('ready');</script>
-    
+    <!-- CSS - carregamento bloqueante para evitar FOUC -->
     <link rel="stylesheet" href="style.css">
   </head>
-  <body>
+  <body style="opacity: 0;">
+    <!-- Mostrar body imediatamente após CSS carregar -->
+    <script>document.body.style.opacity = '1';</script>
 
     <!-- Skip Navigation for Accessibility -->
     <a href="#main" class="skip-to-main">Skip to main content</a>
@@ -79,16 +70,18 @@
 
     <!-- Initialize Components -->
     <script>
-      // Carregar componentes
+      // Carregar componentes e mostrar página
       (async function() {
-        await Promise.all([
-          ComponentLoader.load('topbar', 'topbar-placeholder'),
-          ComponentLoader.load('backgroundlive', 'backgroundlive-placeholder')
-        ]);
-        // Marcar como carregado para exibir conteúdo
-        setTimeout(() => {
+        try {
+          await Promise.all([
+            ComponentLoader.load('topbar', 'topbar-placeholder'),
+            ComponentLoader.load('backgroundlive', 'backgroundlive-placeholder')
+          ]);
           document.body.classList.add('loaded');
-        }, 100);
+        } catch (err) {
+          console.error('Erro ao carregar componentes:', err);
+          document.body.classList.add('loaded');
+        }
       })();
     </script>
 
