@@ -83,6 +83,7 @@
 		<link rel="stylesheet" href="/components/topbar/topbar.css">
 		<link rel="stylesheet" href="/components/backgroundlive/backgroundlive.css">
 		<link rel="stylesheet" href="/components/portal/portal.css">
+		<link rel="stylesheet" href="/components/ecosystem/ecosystem.css">
 		<link rel="stylesheet" href="/components/footer/footer.css">
 		
 		<!-- Structured Data (JSON-LD) -->
@@ -168,21 +169,23 @@
 			<!-- Conteúdo principal -->
 			<main id="main" role="main">
 
-				<!-- NFTs Section -->
-				<section id="nfts" class="landing-section">
+				<!-- Ecosystem Section (Pergaminho) - logo após a Hero -->
+				<section id="ecosystem" class="landing-section">
+					<!-- Título no banner superior do pergaminho -->
+					<h1 class="ecosystem-title">Ecosystem</h1>
+					
 					<div class="section-content">
-						<h2 class="section-title">NFTs</h2>
-						<p class="section-description">Collect unique digital assets and build your legendary collection in the Ascendria universe.</p>
-						<!-- Conteúdo adicional será adicionado aqui -->
+						<!-- Container limitador que fica ATRÁS do pergaminho vazado -->
+						<div class="ecosystem-container">
+							<!-- Conteúdo será injetado via JavaScript -->
+						</div>
 					</div>
 				</section>
 
-				<!-- Ecosystem Section -->
-				<section id="ecosystem" class="landing-section">
+				<!-- NFTs Section - após o pergaminho -->
+				<section id="nfts" class="landing-section">
 					<div class="section-content">
-						<h2 class="section-title">Ecosystem</h2>
-						<p class="section-description">Explore the interconnected world of Ascendria - from Champions Arena to the Forges and Chronicles.</p>
-						<!-- Conteúdo adicional será adicionado aqui -->
+						<!-- Conteúdo será adicionado aqui -->
 					</div>
 				</section>
 			</main>
@@ -246,5 +249,8 @@
 		<!-- Three.js para o Portal Mágico -->
 		<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
 		<script src="/components/portal/portal.js" defer></script>
+		
+		<!-- Ecosystem Interactive Graph -->
+		<script src="/components/ecosystem/ecosystem.js" defer></script>
 	</body>
 </html>

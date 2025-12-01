@@ -231,7 +231,7 @@ body.loaded #footer-placeholder {
     <h1 class="hero-title">ASCENDRIA</h1>
     <p class="hero-subtitle">Gaming Community & NFT Ecosystem</p>
     <p class="hero-description">Play, Collect, Earn - Join the Revolution</p>
-    <a href="https://app.ascendria.com" class="cta-primary">PLAY NOW</a>
+    <a href="https://app.ascendria.com" class="cta-primary">JOIN NOW</a>
   </section>
 </main>
 ```
@@ -719,7 +719,7 @@ setTimeout(function() {
   <section class="hero-content">
     <h1 class="hero-title">ASCENDRIA</h1>
     <p class="hero-subtitle">Gaming Community & NFT Ecosystem</p>
-    <a href="https://app.ascendria.com" class="cta-primary">PLAY NOW</a>
+    <a href="https://app.ascendria.com" class="cta-primary">JOIN NOW</a>
   </section>
 </main>
 ```
@@ -884,7 +884,7 @@ self.addEventListener('install', (event) => {
 ## 📝 CHECKLIST DE IMPLEMENTAÇÃO
 
 ### Fase 1 (Crítico)
-- [x] Corrigir href do CTA "JOIN NOW" → "PLAY NOW" (app.playascendria.com)
+- [x] Corrigir href do CTA "JOIN NOW" → "JOIN NOW" (app.playascendria.com)
 - [x] Adicionar headline e descrição no main
 - [x] Corrigir links de redes sociais
 - [x] Adicionar Content-Security-Policy

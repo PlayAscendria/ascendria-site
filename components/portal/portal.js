@@ -6,12 +6,13 @@
 class MagicPortal {
   constructor(container) {
     this.container = container;
-    this.width = container.offsetWidth;
-    this.height = container.offsetHeight;
+    this.width = container.offsetWidth || 200;
+    this.height = container.offsetHeight || 300;
     this.mouse = { x: 0, y: 0 };
     this.targetMouse = { x: 0, y: 0 };
     this.time = 0;
     this.isHovered = false;
+    this.isDestroyed = false;
     
     this.init();
     this.createPortal();
@@ -217,17 +218,27 @@ class MagicPortal {
   }
 
   onResize() {
-    this.width = this.container.offsetWidth;
-    this.height = this.container.offsetHeight;
+    if (this.isDestroyed) return;
     
-    this.camera.aspect = this.width / this.height;
-    this.camera.updateProjectionMatrix();
+    const newWidth = this.container.offsetWidth;
+    const newHeight = this.container.offsetHeight;
     
-    this.renderer.setSize(this.width, this.height);
-    this.portalMaterial.uniforms.uResolution.value.set(this.width, this.height);
+    // Só atualiza se tiver tamanho válido
+    if (newWidth > 0 && newHeight > 0) {
+      this.width = newWidth;
+      this.height = newHeight;
+      
+      this.camera.aspect = this.width / this.height;
+      this.camera.updateProjectionMatrix();
+      
+      this.renderer.setSize(this.width, this.height);
+      this.portalMaterial.uniforms.uResolution.value.set(this.width, this.height);
+    }
   }
 
   animate() {
+    if (this.isDestroyed) return;
+    
     requestAnimationFrame(() => this.animate());
     
     this.time += 0.016; // ~60fps
@@ -257,29 +268,48 @@ class MagicPortal {
   }
 
   destroy() {
+    this.isDestroyed = true;
     this.renderer.dispose();
     this.portalMaterial.dispose();
-    this.container.removeChild(this.renderer.domElement);
+    if (this.renderer.domElement && this.renderer.domElement.parentNode) {
+      this.container.removeChild(this.renderer.domElement);
+    }
   }
 }
 
-// Inicialização automática
-document.addEventListener('DOMContentLoaded', () => {
+// Inicialização - aguarda componentes carregarem
+function initPortal() {
   const portalContainer = document.getElementById('magic-portal');
-  if (portalContainer) {
-    // Carregar Three.js dinamicamente se não estiver disponível
-    if (typeof THREE === 'undefined') {
-      const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';
-      script.onload = () => {
-        new MagicPortal(portalContainer);
-      };
-      document.head.appendChild(script);
-    } else {
-      new MagicPortal(portalContainer);
-    }
+  
+  if (!portalContainer) {
+    // Tenta novamente em 500ms se o container não existir ainda
+    setTimeout(initPortal, 500);
+    return;
   }
-});
+  
+  // Verifica se já foi inicializado
+  if (portalContainer.dataset.portalInit) return;
+  portalContainer.dataset.portalInit = 'true';
+  
+  // Carregar Three.js dinamicamente se não estiver disponível
+  if (typeof THREE === 'undefined') {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';
+    script.onload = () => {
+      new MagicPortal(portalContainer);
+    };
+    document.head.appendChild(script);
+  } else {
+    new MagicPortal(portalContainer);
+  }
+}
+
+// Tenta inicializar quando DOM estiver pronto
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => setTimeout(initPortal, 100));
+} else {
+  setTimeout(initPortal, 100);
+}
 
 // Export para uso externo
 window.MagicPortal = MagicPortal;

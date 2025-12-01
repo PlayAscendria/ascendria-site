@@ -15,10 +15,19 @@
  */
 
 /* Background base - SEMPRE presente imediatamente */
-html, body {
+html {
 	background: #0a0e27;
 	margin: 0;
 	padding: 0;
+	overflow-x: hidden; /* Remove scroll horizontal */
+}
+
+body {
+	background: #0a0e27;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden; /* Remove scroll horizontal */
+	max-width: 100vw; /* Limita largura */
 }
 
 /* Scroll suave para âncoras */
@@ -141,8 +150,10 @@ body {
 /* Compensar topbar fixa para que o conteúdo não fique oculto por baixo dela */
 #content-area {
 	padding-top: 8vh;
-	overflow: auto;
+	overflow-x: hidden; /* Apenas scroll vertical */
+	overflow-y: auto;
 	flex: 1 1 auto;
+	max-width: 100vw;
 }
 
 /* Scroll behavior e customização leve do scrollbar */
@@ -549,4 +560,149 @@ body::-webkit-scrollbar-thumb {
 	.scroll-indicator {
 		bottom: 1rem;
 	}
+}
+
+/* ========== ECOSYSTEM SECTION (PERGAMINHO) ========== */
+/* Seção Ecosystem com pergaminho como moldura - conteúdo fica atrás */
+
+#ecosystem.landing-section {
+	position: relative;
+	z-index: 20; /* Acima da hero (z-index 10) */
+	padding: 0;
+	margin-top: -18vh; /* Invade mais a Hero */
+	background: none;
+	/* Aspect ratio baseado na proporção da imagem do pergaminho */
+	aspect-ratio: 16 / 10;
+	/* Elemento 100% para não causar scroll */
+	width: 100%;
+	max-width: 100%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Título no banner superior do pergaminho */
+.ecosystem-title {
+	position: absolute;
+	top: 11%;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 20; /* ACIMA do pergaminho */
+	margin: 0;
+	font-size: clamp(2rem, 5vw, 4rem);
+	color: #2c1810;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+	font-family: inherit;
+	text-align: center;
+	pointer-events: none;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	/* Efeito de revelação - começa invisível */
+	clip-path: inset(0 100% 0 0);
+	opacity: 0;
+	transition: clip-path 1.2s ease-out, opacity 0.5s ease-out;
+}
+
+/* Quando visível - revela da esquerda para direita */
+.ecosystem-title.visible {
+	clip-path: inset(0 0% 0 0);
+	opacity: 1;
+}
+
+/* Moldura do pergaminho - camada ACIMA do conteúdo */
+#ecosystem.landing-section::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 120%;
+	height: 100%;
+	background-image: url('/assets/images/background/pergaminhoback.webp');
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	z-index: 10; /* Acima do conteúdo */
+	pointer-events: none; /* Permite clicar no conteúdo atrás */
+}
+
+/* Conteúdo da seção Ecosystem - fica ATRÁS do pergaminho */
+#ecosystem .section-content {
+	position: relative;
+	z-index: 5; /* Abaixo da moldura */
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	margin: 0;
+}
+
+/* Responsivo Ecosystem */
+@media (max-width: 1400px) {
+	.ecosystem-title {
+		top: 10%;
+		font-size: clamp(1.8rem, 4.5vw, 3.5rem);
+	}
+}
+
+@media (max-width: 1200px) {
+	.ecosystem-title {
+		top: 9%;
+		font-size: clamp(1.6rem, 4vw, 3rem);
+	}
+}
+
+@media (max-width: 1024px) {
+	.ecosystem-title {
+		top: 8%;
+		font-size: clamp(1.4rem, 3.5vw, 2.5rem);
+	}
+}
+
+@media (max-width: 768px) {
+	#ecosystem.landing-section {
+		margin-top: -10vh;
+		aspect-ratio: 16 / 12; /* Mais alto em mobile */
+	}
+	
+	.ecosystem-title {
+		top: 7%;
+		font-size: clamp(1.2rem, 4vw, 2rem);
+		letter-spacing: 0.08em;
+	}
+}
+
+@media (max-width: 576px) {
+	.ecosystem-title {
+		top: 6%;
+		font-size: clamp(1rem, 5vw, 1.6rem);
+		letter-spacing: 0.05em;
+	}
+}
+
+@media (max-width: 400px) {
+	.ecosystem-title {
+		top: 5%;
+		font-size: clamp(0.9rem, 6vw, 1.4rem);
+	}
+}
+
+/* ========== NFTs SECTION ========== */
+/* Seção NFTs - vem após o pergaminho/Ecosystem */
+
+#nfts.landing-section {
+	position: relative;
+	z-index: 10;
+	margin-top: 0;
+	padding: clamp(4rem, 10vw, 8rem) clamp(1rem, 5vw, 2rem);
+}
+
+#nfts .section-content {
+	position: relative;
+	z-index: 1;
+	max-width: 1200px;
+	margin: 0 auto;
 }

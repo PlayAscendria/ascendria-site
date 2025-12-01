@@ -1,0 +1,421 @@
+/* ========== ECOSYSTEM INTERACTIVE GRAPH ========== */
+/* Container que fica ATRÁS do pergaminho vazado */
+
+.ecosystem-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Ajustado para caber na área vazada do pergaminho */
+    width: 123%;
+    height: 66%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* ========== GRAPH VIEW (Visão principal com nós) ========== */
+.ecosystem-graph {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    /* Imagem de fundo */
+    background-image: url('/assets/images/background/fundo2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+}
+
+.ecosystem-graph.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ========== TRIANGLE LAYOUT PARA 3 NÓS ========== */
+.eco-nodes-triangle {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* ========== NODES (Módulos do ecossistema) ========== */
+.eco-node {
+    position: absolute;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.eco-node:hover {
+    transform: scale(1.1);
+}
+
+.eco-node:active {
+    transform: scale(0.98);
+}
+
+/* Ícone como imagem */
+.eco-node-icon {
+    width: clamp(120px, 18vw, 220px);
+    height: auto;
+    object-fit: contain;
+}
+
+/* Label escondida */
+.eco-node-label {
+    display: none;
+}
+
+/* Posições em triângulo - mais próximos do centro */
+/* Rankings no topo centro */
+.eco-node[data-node="rankings"] {
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.eco-node[data-node="rankings"]:hover {
+    transform: translateX(-50%) scale(1.1);
+}
+
+/* Ascendria embaixo esquerda */
+.eco-node[data-node="ascendria"] {
+    bottom: 22%;
+    left: 28%;
+}
+
+.eco-node[data-node="ascendria"]:hover {
+    transform: scale(1.1);
+}
+
+/* Community embaixo direita */
+.eco-node[data-node="community"] {
+    bottom: 22%;
+    right: 28%;
+}
+
+.eco-node[data-node="community"]:hover {
+    transform: scale(1.1);
+}
+
+/* ========== SETAS CONECTANDO OS NÓS ========== */
+.eco-arrows {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.eco-arrows svg {
+    width: 100%;
+    height: 100%;
+}
+
+.eco-arrow-line {
+    stroke: #1a99e6;
+    stroke-width: 2;
+    fill: none;
+}
+
+.eco-arrow-head {
+    fill: #1a99e6;
+}
+
+/* ========== MODULE DETAIL VIEW ========== */
+.ecosystem-detail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    /* Imagem de fundo */
+    background-image: url('/assets/images/background/fundo2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.ecosystem-detail.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Botão Home (substitui o X) - volta para os 3 menus principais */
+.detail-home {
+    position: absolute;
+    top: 4.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 200;
+    transition: transform 0.3s ease;
+    pointer-events: auto !important;
+    padding: 0;
+}
+
+.detail-home img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.detail-home:hover {
+    transform: scale(1.15);
+}
+
+/* Botão Back - volta para a página anterior */
+.detail-back {
+    position: absolute;
+    top: 4.5rem;
+    left: 1.5rem;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 200;
+    transition: transform 0.3s ease;
+    pointer-events: auto !important;
+    padding: 0;
+    display: none; /* Escondido por padrão, mostrado quando em submenu */
+}
+
+.detail-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.detail-back:hover {
+    transform: scale(1.15);
+}
+
+.detail-back.visible {
+    display: block;
+}
+
+/* Header do detalhe */
+.detail-header {
+    padding: 5rem 1.5rem 1rem 1.5rem;
+    text-align: center;
+    border-bottom: 2px solid rgba(44, 24, 16, 0.2);
+}
+
+.detail-icon {
+    width: clamp(80px, 12vw, 150px);
+    height: auto;
+    object-fit: contain;
+}
+
+.detail-title {
+    display: none;
+}
+
+/* Conteúdo do detalhe */
+.detail-content {
+    flex: 1;
+    padding: 0.5rem 4rem 8rem 4rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    color: #2c1810;
+    text-align: center;
+    font-size: 1.1rem;
+    /* Estilo do scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 90, 43, 0.6) transparent;
+}
+
+.detail-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.detail-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.detail-content::-webkit-scrollbar-thumb {
+    background-color: rgba(139, 90, 43, 0.6);
+    border-radius: 4px;
+}
+
+.detail-content p {
+    line-height: 1.9;
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+}
+
+.detail-content h3 {
+    color: #1a0f08;
+    margin: 2rem 0 1rem 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.detail-content h4 {
+    color: #2c1810;
+    margin: 1.5rem 0 0.75rem 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.detail-content ul {
+    padding-left: 0;
+    margin-bottom: 1.2rem;
+    list-style-position: inside;
+}
+
+.detail-content li {
+    line-height: 1.8;
+    margin-bottom: 0.6rem;
+    font-size: 1.05rem;
+}
+
+/* ========== SUBMENU GRID ========== */
+.submenu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+    justify-items: center;
+}
+
+.submenu-item {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submenu-item:hover {
+    transform: scale(1.1);
+}
+
+.submenu-icon {
+    width: clamp(60px, 10vw, 120px);
+    height: auto;
+    object-fit: contain;
+}
+
+/* ========== ERASER ANIMATION OVERLAY ========== */
+.eraser-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.eraser-overlay canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+    .ecosystem-container {
+        width: 70%;
+        height: 50%;
+    }
+    
+    .eco-node {
+        width: clamp(60px, 9vw, 100px);
+        height: clamp(60px, 9vw, 100px);
+    }
+    
+    .eco-node[data-node="ascendria"] {
+        width: clamp(80px, 11vw, 130px);
+        height: clamp(80px, 11vw, 130px);
+    }
+}
+
+@media (max-width: 768px) {
+    .ecosystem-container {
+        width: 80%;
+        height: 45%;
+    }
+    
+    .eco-node {
+        width: clamp(50px, 15vw, 80px);
+        height: clamp(50px, 15vw, 80px);
+    }
+    
+    .eco-node[data-node="ascendria"] {
+        width: clamp(65px, 18vw, 100px);
+        height: clamp(65px, 18vw, 100px);
+    }
+    
+    .eco-node-label {
+        font-size: clamp(0.5rem, 2vw, 0.7rem);
+    }
+    
+    .eco-node[data-node="nfts"],
+    .eco-node[data-node="token"] {
+        top: 10%;
+    }
+    
+    .eco-node[data-node="marketplace"],
+    .eco-node[data-node="staking"] {
+        bottom: 10%;
+    }
+    
+    .eco-node[data-node="community"] {
+        left: 2%;
+    }
+    
+    .eco-node[data-node="external_impulse"] {
+        right: 2%;
+    }
+}
+
+@media (max-width: 480px) {
+    .ecosystem-container {
+        width: 85%;
+        height: 40%;
+    }
+    
+    .eco-node {
+        width: clamp(45px, 18vw, 65px);
+        height: clamp(45px, 18vw, 65px);
+        border-width: 2px;
+    }
+    
+    .eco-node[data-node="ascendria"] {
+        width: clamp(55px, 22vw, 85px);
+        height: clamp(55px, 22vw, 85px);
+    }
+    
+    .eco-node-icon {
+        font-size: clamp(1rem, 4vw, 1.5rem);
+    }
+    
+    .detail-header {
+        padding: 1rem;
+    }
+    
+    .detail-content {
+        padding: 1rem;
+    }
+}

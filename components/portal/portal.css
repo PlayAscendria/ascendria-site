@@ -1,100 +1,164 @@
-/* Portal M�gico - Estilos */
-/* O portal � uma camada separada (.portal-layer) com z-index 21, abaixo da carruagem (z-index 22) */
+/* Portal Magico - Estilos */
+/* Portal DENTRO da div .carruagem, posicionado no local do espelho */
 
-/* Camada do portal - N�O clic�vel */
-.backgroundlive-root .bg-layer.portal-layer {
-  pointer-events: none; /* Camada n�o intercepta cliques */
-}
-
-/* Link do portal - APENAS esta área é clicável */
-.backgroundlive-root .bg-layer.portal-layer #magic-portal {
+/* ============ BASE (Desktop padrao 1920x1080) ============ */
+.backgroundlive-root .bg-layer.carruagem #magic-portal {
   position: absolute;
   display: block;
-  /* Posição do espelho - ajuste esses valores */
-  right: 0.5%;
-  top: 35%;
+  right: -4.5%;
+  top: 32%;
   width: 30%;
-  height: 45%;
-  border-radius: 45% / 50%;
-  overflow: visible;
-  pointer-events: auto; /* Apenas o portal é clicável */
+  height: 50%;
+  z-index: 1;
+  pointer-events: auto;
   cursor: pointer;
   text-decoration: none;
-  /* Fundo sólido para não vazar as camadas de trás */
-  background: radial-gradient(
-    ellipse at center,
-    #0a1628 0%,
-    #0d1a2d 40%,
-    #081220 70%,
-    #050a12 100%
-  );
+  border-radius: 45% / 50%;
+  overflow: hidden;
 }
 
-.backgroundlive-root .bg-layer.portal-layer #magic-portal canvas {
+/* O canvas Three.js - preenche o container do portal */
+.backgroundlive-root .bg-layer.carruagem #magic-portal canvas {
   display: block;
   width: 100% !important;
   height: 100% !important;
-  pointer-events: none; /* Canvas n�o bloqueia o link */
+  pointer-events: none;
 }
 
-/* Efeito hover no portal */
-.backgroundlive-root .bg-layer.portal-layer #magic-portal:hover {
-  filter: brightness(1.2);
-  transform: scale(1.02);
-  transition: all 0.3s ease;
+/* Efeito hover */
+.backgroundlive-root .bg-layer.carruagem #magic-portal:hover {
+  filter: brightness(1.3);
 }
 
-/* Texto "ENTER" que aparece no hover */
-.backgroundlive-root .bg-layer.portal-layer #magic-portal::after {
-  content: 'ENTER';
+/* Texto "JOIN" centralizado no portal - invisivel por padrao */
+.backgroundlive-root .bg-layer.carruagem #magic-portal::after {
+  content: 'JOIN';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: 'Cinzel', 'Times New Roman', serif;
-  font-size: clamp(0.4rem, 0.8vw, 0.7rem);
+  font-size: clamp(0.8rem, 1.5vw, 1.4rem);
   font-weight: 700;
-  color: rgba(255, 255, 255, 0);
+  color: rgba(255, 215, 0, 0);
   text-shadow: 
-    0 0 10px rgba(0, 255, 255, 0.8),
-    0 0 20px rgba(0, 255, 255, 0.6),
-    0 0 30px rgba(0, 255, 255, 0.4);
-  letter-spacing: 0.2em;
+    0 0 10px rgba(255, 180, 0, 0),
+    0 0 20px rgba(255, 150, 0, 0),
+    0 0 30px rgba(255, 120, 0, 0);
+  letter-spacing: 0.15em;
   text-align: center;
-  transition: all 0.3s ease;
   pointer-events: none;
   z-index: 10;
+  opacity: 0;
+  transition: all 0.3s ease;
 }
 
-.backgroundlive-root .bg-layer.portal-layer #magic-portal:hover::after {
-  color: rgba(255, 255, 255, 1);
+/* Aparece no hover com cor dourada */
+.backgroundlive-root .bg-layer.carruagem #magic-portal:hover::after {
+  color: rgba(255, 215, 0, 1);
   text-shadow: 
-    0 0 10px rgba(0, 255, 255, 1),
-    0 0 20px rgba(0, 255, 255, 0.8),
-    0 0 40px rgba(0, 255, 255, 0.6),
-    0 0 60px rgba(0, 255, 255, 0.4);
+    0 0 10px rgba(255, 200, 50, 1),
+    0 0 20px rgba(255, 180, 0, 0.8),
+    0 0 40px rgba(255, 150, 0, 0.6),
+    0 0 60px rgba(255, 120, 0, 0.4);
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
-/* Responsivo */
-@media (max-width: 1200px) {
-  .backgroundlive-root .bg-layer.portal-layer #magic-portal {
-    right: 5%;
+/* Esconder portal no modo simple */
+.backgroundlive-root[data-mode="simple"] .bg-layer.carruagem #magic-portal {
+  display: none !important;
+}
+
+/* ============ BREAKPOINTS PC ============ */
+
+/* 4K / 2560x1440 (QHD) e acima */
+@media (min-width: 2560px) {
+  .backgroundlive-root .bg-layer.carruagem #magic-portal {
+    right: -6%;
     top: 31%;
-    width: 10%;
-    height: 30%;
+    width: 28%;
+    height: 48%;
   }
 }
 
-@media (max-width: 768px) {
-  .backgroundlive-root .bg-layer.portal-layer #magic-portal {
-    right: 4%;
-    top: 30%;
-    width: 12%;
-    height: 32%;
+/* 1920x1080 (Full HD) - padrao, valores base */
+@media (min-width: 1920px) and (max-width: 2559px) {
+  .backgroundlive-root .bg-layer.carruagem #magic-portal {
+    right: -4.5%;
+    top: 32%;
+    width: 30%;
+    height: 50%;
   }
-  
-  .backgroundlive-root .bg-layer.portal-layer #magic-portal::after {
-    font-size: 0.35rem;
-    letter-spacing: 0.1em;
+}
+
+/* 1680x1050 / 1600x900 */
+@media (min-width: 1600px) and (max-width: 1919px) {
+  .backgroundlive-root .bg-layer.carruagem #magic-portal {
+    right: -5%;
+    top: 32%;
+    width: 31%;
+    height: 50%;
+  }
+}
+
+/* 1440x900 / 1366x768 (Laptops comuns) */
+@media (min-width: 1366px) and (max-width: 1599px) {
+  .backgroundlive-root .bg-layer.carruagem #magic-portal {
+    right: -5.5%;
+    top: 31%;
+    width: 32%;
+    height: 51%;
+  }
+}
+
+/* 1280x720 (HD) / 1280x800 */
+@media (min-width: 1280px) and (max-width: 1365px) {
+  .backgroundlive-root .bg-layer.carruagem #magic-portal {
+    right: -6%;
+    top: 30%;
+    width: 33%;
+    height: 52%;
+  }
+}
+
+/* 1024x768 e similares */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .backgroundlive-root .bg-layer.carruagem #magic-portal {
+    right: -6.5%;
+    top: 29%;
+    width: 34%;
+    height: 53%;
+  }
+}
+
+/* Tablets landscape / telas menores que 1024px */
+@media (max-width: 1023px) {
+  .backgroundlive-root .bg-layer.carruagem #magic-portal {
+    right: -7%;
+    top: 28%;
+    width: 35%;
+    height: 54%;
+  }
+}
+
+/* ============ ASPECT RATIO ADJUSTMENTS ============ */
+/* Telas ultrawide (21:9) */
+@media (min-aspect-ratio: 21/9) {
+  .backgroundlive-root .bg-layer.carruagem #magic-portal {
+    right: -3%;
+    top: 30%;
+    width: 25%;
+    height: 55%;
+  }
+}
+
+/* Telas mais quadradas (4:3, 5:4) */
+@media (max-aspect-ratio: 4/3) {
+  .backgroundlive-root .bg-layer.carruagem #magic-portal {
+    right: -8%;
+    top: 28%;
+    width: 38%;
+    height: 52%;
   }
 }
