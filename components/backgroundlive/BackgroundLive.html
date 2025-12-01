@@ -20,15 +20,19 @@
     <div class="bg-layer nuvem8" data-speed="0.12" data-move="5.5" data-cloud-animation="cloud-loop-right"></div>
     
     <div class="bg-layer grama2" data-speed="0.05" data-move="3"></div>
+    
+    <!-- Orion: z-index 20 (acima da grama2, abaixo da grama1) -->
+    <div class="bg-layer orion" data-speed="0.08" data-move="4" data-mode-full></div>
+    
     <div class="bg-layer grama1" data-speed="0.15" data-move="6"></div>
     
-    <!-- ============ PERSONAGENS (apenas modo full) ============ -->
-    <div class="bg-characters" data-mode-full>
-      <!-- Personagens serão adicionados aqui posteriormente -->
-      <!-- Exemplo:
-      <div class="bg-layer character character-warrior" data-speed="0.08" data-move="4"></div>
-      <div class="bg-layer character character-mage" data-speed="0.10" data-move="5"></div>
-      -->
+    <!-- Portal Mágico: z-index 21 (abaixo da carruagem) -->
+    <div class="bg-layer portal-layer" data-speed="0.12" data-move="5" data-mode-full>
+      <a href="https://app.playascendria.com" id="magic-portal" target="_blank" rel="noopener noreferrer" aria-label="Enter Ascendria Game"></a>
     </div>
+    
+    <!-- Carruagem: z-index 22 (acima do portal) -->
+    <div class="bg-layer carruagem" data-speed="0.12" data-move="5" data-mode-full></div>
+    <div class="bg-layer jano" data-speed="0.14" data-move="5.5" data-mode-full></div>
   </div>
 </div>

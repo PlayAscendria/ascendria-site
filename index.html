@@ -82,6 +82,7 @@
 		<link rel="stylesheet" href="/css/style.css">
 		<link rel="stylesheet" href="/components/topbar/topbar.css">
 		<link rel="stylesheet" href="/components/backgroundlive/backgroundlive.css">
+		<link rel="stylesheet" href="/components/portal/portal.css">
 		<link rel="stylesheet" href="/components/footer/footer.css">
 		
 		<!-- Structured Data (JSON-LD) -->
@@ -241,5 +242,9 @@
 			import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@1/dist/index.mjs';
 			injectSpeedInsights();
 		</script>
+		
+		<!-- Three.js para o Portal Mágico -->
+		<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
+		<script src="/components/portal/portal.js" defer></script>
 	</body>
 </html>

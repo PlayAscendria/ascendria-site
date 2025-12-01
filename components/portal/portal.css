@@ -1,0 +1,100 @@
+/* Portal M�gico - Estilos */
+/* O portal � uma camada separada (.portal-layer) com z-index 21, abaixo da carruagem (z-index 22) */
+
+/* Camada do portal - N�O clic�vel */
+.backgroundlive-root .bg-layer.portal-layer {
+  pointer-events: none; /* Camada n�o intercepta cliques */
+}
+
+/* Link do portal - APENAS esta área é clicável */
+.backgroundlive-root .bg-layer.portal-layer #magic-portal {
+  position: absolute;
+  display: block;
+  /* Posição do espelho - ajuste esses valores */
+  right: 0.5%;
+  top: 35%;
+  width: 30%;
+  height: 45%;
+  border-radius: 45% / 50%;
+  overflow: visible;
+  pointer-events: auto; /* Apenas o portal é clicável */
+  cursor: pointer;
+  text-decoration: none;
+  /* Fundo sólido para não vazar as camadas de trás */
+  background: radial-gradient(
+    ellipse at center,
+    #0a1628 0%,
+    #0d1a2d 40%,
+    #081220 70%,
+    #050a12 100%
+  );
+}
+
+.backgroundlive-root .bg-layer.portal-layer #magic-portal canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none; /* Canvas n�o bloqueia o link */
+}
+
+/* Efeito hover no portal */
+.backgroundlive-root .bg-layer.portal-layer #magic-portal:hover {
+  filter: brightness(1.2);
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+/* Texto "ENTER" que aparece no hover */
+.backgroundlive-root .bg-layer.portal-layer #magic-portal::after {
+  content: 'ENTER';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  font-size: clamp(0.4rem, 0.8vw, 0.7rem);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0);
+  text-shadow: 
+    0 0 10px rgba(0, 255, 255, 0.8),
+    0 0 20px rgba(0, 255, 255, 0.6),
+    0 0 30px rgba(0, 255, 255, 0.4);
+  letter-spacing: 0.2em;
+  text-align: center;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.backgroundlive-root .bg-layer.portal-layer #magic-portal:hover::after {
+  color: rgba(255, 255, 255, 1);
+  text-shadow: 
+    0 0 10px rgba(0, 255, 255, 1),
+    0 0 20px rgba(0, 255, 255, 0.8),
+    0 0 40px rgba(0, 255, 255, 0.6),
+    0 0 60px rgba(0, 255, 255, 0.4);
+}
+
+/* Responsivo */
+@media (max-width: 1200px) {
+  .backgroundlive-root .bg-layer.portal-layer #magic-portal {
+    right: 5%;
+    top: 31%;
+    width: 10%;
+    height: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .backgroundlive-root .bg-layer.portal-layer #magic-portal {
+    right: 4%;
+    top: 30%;
+    width: 12%;
+    height: 32%;
+  }
+  
+  .backgroundlive-root .bg-layer.portal-layer #magic-portal::after {
+    font-size: 0.35rem;
+    letter-spacing: 0.1em;
+  }
+}

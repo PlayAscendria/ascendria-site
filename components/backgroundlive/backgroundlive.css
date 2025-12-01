@@ -40,7 +40,35 @@
 }
 .backgroundlive-root .bg-layer.montanha3 { z-index: 18; background-image: url("/assets/images/background/backgroundpaisagem/3_montanha1_18.webp"); }
 .backgroundlive-root .bg-layer.grama2 { z-index: 19; background-image: url("/assets/images/background/backgroundpaisagem/2_grama2_19.webp"); }
-.backgroundlive-root .bg-layer.grama1 { z-index: 20; background-image: url("/assets/images/background/backgroundpaisagem/1_grama1_20.webp"); }
+.backgroundlive-root .bg-layer.grama1 { z-index: 21; background-image: url("/assets/images/background/backgroundpaisagem/1_grama1_20.webp"); }
+
+/* ============ PERSONAGENS (apenas modo full) ============ */
+/* Portal: abaixo da carruagem (z-index 21) */
+.backgroundlive-root .bg-layer.portal-layer {
+  z-index: 21;
+  background: none; /* Sem imagem de fundo */
+  pointer-events: auto;
+  cursor: pointer;
+  display: block;
+}
+/* Carruagem e Jano: acima do portal (z-index 22) */
+.backgroundlive-root .bg-layer.carruagem { 
+  z-index: 22; 
+  background-image: url("/assets/images/background/backgroundpaisagem/carruagem.png"); 
+}
+.backgroundlive-root .bg-layer.jano { 
+  z-index: 22; 
+  background-image: url("/assets/images/background/backgroundpaisagem/jano.png"); 
+}
+/* Orion: acima da grama2 e abaixo da grama1 (z-index 20) */
+.backgroundlive-root .bg-layer.orion { 
+  z-index: 20; 
+  background-image: url("/assets/images/background/backgroundpaisagem/orion.png"); 
+}
+/* Esconder personagens no modo simple */
+.backgroundlive-root[data-mode="simple"] .bg-layer[data-mode-full] {
+  display: none !important;
+}
 .backgroundlive-root .bg-layer.montanha2 { z-index: 17; background-image: url("/assets/images/background/backgroundpaisagem/3_montanha2_14.webp"); }
 
 /* Nuvens - z-index 15 e 14 (variado) */
