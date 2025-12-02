@@ -6,5 +6,8 @@
   "scripts": {
     "start": "npx serve .",
     "lint": "echo 'No linting configured'"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
   }
 }

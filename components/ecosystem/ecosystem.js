@@ -8,14 +8,13 @@ class EcosystemGraph {
         this.container = container;
         this.graphView = null;
         this.detailView = null;
-        this.eraserCanvas = null;
         this.currentModule = null;
         this.isAnimating = false;
         
         // 3 Menus principais
         this.modules = {
             rankings: {
-                icon: '/assets/images/ecosystem/rankings.png',
+                icon: '/assets/images/ecosystem/rankings.webp',
                 label: 'RANKINGS',
                 title: 'Rankings',
                 hasSubmenu: false,
@@ -81,14 +80,14 @@ class EcosystemGraph {
                 `
             },
             ascendria: {
-                icon: '/assets/images/ecosystem/ascendria.png',
+                icon: '/assets/images/ecosystem/ascendria.webp',
                 label: 'ASCENDRIA',
                 title: 'Ascendria Games',
                 hasSubmenu: true,
                 submenu: [
                     {
                         id: 'idlemines',
-                        icon: '/assets/images/ecosystem/idle_mines.png',
+                        icon: '/assets/images/ecosystem/idle_mines.webp',
                         label: 'IDLE MINES',
                         title: 'Idle Mines',
                         content: `
@@ -124,142 +123,316 @@ class EcosystemGraph {
                     },
                     {
                         id: 'cardinals',
-                        icon: '/assets/images/ecosystem/cardnals_row.png',
+                        icon: '/assets/images/ecosystem/cardnals_row.webp',
                         label: 'CARDINALS ROW',
                         title: 'Cardinals Row',
                         content: `
-                            <p>Cardinals Row is an exciting card-based strategy game within the Ascendria universe.</p>
-                            <h3>Gameplay</h3>
-                            <ul>
-                                <li>Collect and trade unique character cards</li>
-                                <li>Build powerful decks with synergies</li>
-                                <li>Compete in ranked tournaments</li>
-                                <li>Earn rewards and rare cards</li>
-                            </ul>
-                            <p>Strategic card battles with NFT integration. Your cards are truly yours!</p>
+                            <p><strong>Cardinals Row</strong> is a competitive card game inspired by Triple Triad from the acclaimed Final Fantasy VIII. I, the developer and owner of the project, loved this game in my adolescence and wanted to bring this sweet memory to our ecosystem.</p>
+                            
+                            <p>Throughout the journey to Ascendria, we will have many, many championships with exclusive prizes to stir up the community!</p>
+                            
+                            <h3>How to Get Cards</h3>
+                            <p>While mining in <strong>Idle Mines</strong>, you have a chance to acquire card pieces. For every <strong>4 card pieces</strong> found, you can take them to <strong>Jano, The Cartographer</strong>, and request a card repair. He will charge you <strong>1 Lumenstone</strong> for the service, and you will receive a card pack.</p>
+                            
+                            <p>Upon opening the pack, you will receive one of the <strong>50 cards</strong> from the initial collection. If you are very lucky, the cards can even come in maximum rarity levels — but that is very rare!</p>
+                            
+                            <h3>Card Evolution</h3>
+                            <p>Cards can be upgraded with <strong>Jano, The Cartographer</strong>. You can use identical cards to evolve the card's rarity, with a <strong>50% chance of success</strong>. After all, not everything is perfect.</p>
+                            
+                            <h3>Trading & Future</h3>
+                            <p>Card packs can be sold for <strong>SPARK</strong>, our premium currency, in an OFF-CHAIN marketplace through P2P negotiation.</p>
+                            
+                            <p>In the future, when <strong>Ascendria – Champions of Ascendria</strong> is launched and we implement the WEB3 mechanics, the cards can be transformed into <strong>NFTs</strong> and sold on the ON-CHAIN marketplace for real money!</p>
+                            
+                            <p><em>Enjoy the journey to Ascendria!</em></p>
                         `
                     },
                     {
                         id: 'champions',
-                        icon: '/assets/images/ecosystem/champions.png',
+                        icon: '/assets/images/ecosystem/champions.webp',
                         label: 'CHAMPIONS',
                         title: 'Champions of Ascendria',
                         content: `
-                            <p>Champions of Ascendria is the flagship PvP battle arena.</p>
-                            <h3>Features</h3>
-                            <ul>
-                                <li>Real-time strategic combat</li>
-                                <li>Unique champion abilities</li>
-                                <li>Ranked competitive seasons</li>
-                                <li>Esports tournaments with prizes</li>
-                            </ul>
-                            <p>Choose your champion and fight for glory in the arena!</p>
+                            <p>The launch of <strong>Champions of Ascendria</strong> will be a historic milestone in our ecosystem. It will bring with it all the <strong>WEB3 mechanics</strong>. From then on, it will be possible to transform your <strong>OFF-CHAIN items into ON-CHAIN items</strong>. Everything you have crafted can be transformed into an NFT and sold on the ON-CHAIN marketplace.</p>
+
+                            <h3>🔥 THE OATH EVENT</h3>
+                            <p>We will have the <strong>UNIQUE Oath Event</strong> where your miner will choose to follow the path of Light and defend Ascendria, and your miner will become a <strong>unique Genesis NFT</strong>! With a passive ability called <strong>"Witness of the Fall"</strong>!</p>
+
+                            <h3>✨ PRIMORDIAL COLLECTION</h3>
+                            <p>We will also have the mint of our <strong>PRIMORDIAL collection</strong>! Those who are already in the project will have advantages in acquiring it and perhaps getting ahead with a <strong>Mythic Ascender</strong>!</p>
+
+                            <h3>🎫 STAKE SYSTEM</h3>
+                            <p>We will implement <strong>Stake and Unstake</strong>. To play Ascendria, you will need to put your Ascender into Stake, and the Ascenders from the <strong>Genesis and Primordial collections</strong> will receive a number of Tickets for the monthly Raffle every 7 days of Staking. This number of tickets will correspond to the rarity of your Ascender NFT.</p>
+
+                            <h3>📈 NFT EVOLUTION</h3>
+                            <p>Ascender NFTs, even though they start at the lowest rarity level, can reach the <strong>Mythic rarity level</strong> where there is no maximum level limit, but it's a long journey until then! Ascendria is not a stroll, but a long journey of sweat, effort, conquests, and victories.</p>
+                            <p>Your <strong>Ascender NFTs will be evolvable</strong>. This means you can also add value to them simply with your playtime, selling them later with a higher rarity or a higher level. The possibilities are endless.</p>
+
+                            <h3>⚔️ PVP BATTLE SYSTEM</h3>
+                            <p>Champions of Ascendria will bring with it a <strong>PVP format</strong>, both group and solo, where the battle system will be a <strong>top-down with Grid and turns</strong>. We will have RPG elements, and dice will be rolled to determine players' initiative.</p>
+                            <p>The grid is fully walkable. The secret is that each cell has unique characteristics that can facilitate or hinder your movement, help you defend or dodge an attack, or recover some of your health. Many mechanics will be implemented to make the battles epic.</p>
+                            <p>The maps will be <strong>procedurally generated</strong>, and players will spawn in random areas on the map. Furthermore, <strong>Nihil</strong> also appears after a specific number of rounds to consume the grid row by row until only one winning team, or a single player, remains on the board.</p>
+
+                            <h3>🏆 RANKINGS & ECONOMY</h3>
+                            <p>The game's economy will revolve around the <strong>ranking prizes</strong>, and no one will want to be left out. The one who plays the most and has good strategies is the one who will reach the highest level and get their hands on the pot of gold!</p>
+
+                            <h3>🗡️ WEAPONS & ABILITIES</h3>
+                            <p>When evolving your Ascenders (NFTs), you can define your strategy by choosing your character's attributes, but the abilities will be those your weapons possess. Each weapon has a set of <strong>random abilities</strong>, and you must rely on luck or persistence to get your desired ability kit for your favorite weapon.</p>
+                            <p>We will have <strong>short, medium, and long-range weapons</strong> for all available archetypes. You are free to choose your path.</p>
+
+                            <h3>👹 THE RETURN OF NIHIL</h3>
+                            <p>Champions of Ascendria is also home to the global event <strong>The Return of Nihil</strong>, where Nihil the Devoured enters the gates of Ascendria when the seal is weakened, and then begins to drain and paralyze the entire economy of Ascendria. The Ascenders have no choice but to face him, but there is one catch: <strong>Nihil is very powerful and he absorbs your EXPERIENCE</strong> every time you attack him. However, there are great rewards for those who dare to attack him!</p>
+                            <p>Those who attack Nihil will receive an <strong>EXP gain bonus for 24 hours</strong>, and every attack on Nihil has a chance to acquire <strong>Shining Fragments</strong>! (During the Return of Nihil, every Shining Fragment dropped is absorbed by Nihil.)</p>
+                            <p>And for the one who delivers the <strong>final blow to Nihil</strong>, glory remains! This champion has a <strong>10% chance to acquire a Mythic card of Nihil the Devoured</strong>. The champion is also reserved <strong>20% of all EXP and Shining Fragments</strong> drained by Nihil. The rest is divided among everyone who attacked Nihil, and the reward is according to the percentage of damage dealt to him.</p>
+                            <p><em>Note: Nihil returns 80% of everything he absorbed during the event after being killed; this 80% is what will be rewarded.</em></p>
+
+                            <h3>🤖 HUMANOID AUTOMATA</h3>
+                            <p>The NPCs from Idle Mines will be replaced by <strong>Humanoid Automata</strong>. The functions continue, but now the NPCs will inhabit Ascendria and receive new abilities.</p>
+
+                            <h3>⚗️ CRAFTING & MARKETPLACE</h3>
+                            <p>It will be possible to craft <strong>Energy Potions</strong> that can be sold on the ON-CHAIN market. Basically, everything created can be transformed into an NFT.</p>
+
+                            <h3>💰 SUSTAINABLE ECONOMY</h3>
+                            <p>All of Ascendria's currencies will be deposited from the Mint. There will be <strong>no currency inflation</strong> because the currencies will not be created out of thin air; as previously stated, they will be deposited into the reward pools. Therefore, everything within Ascendria will have intrinsic value, even if it's small in the most common currency, but your time and effort will always have value.</p>
+                            <p>The economy will also be monitored by the <strong>Banker</strong>, who will manage the reward Pools, potentially even suspending better-paying missions until the Ecosystem returns to normalcy.</p>
+                            <p>Our economy is <strong>100% cyclical</strong>. Currencies are always going to and returning from the pools. Our compensation system between the NPCs will balance the price of fees so that everyone can have their profits within the project without breaking it, and this is not just a dream—it is just good old math, with the help of economic simulators and a lot of time invested to make Ascendria a project different from the rest.</p>
                         `
                     },
                     {
                         id: 'forges',
-                        icon: '/assets/images/ecosystem/forges.png',
+                        icon: '/assets/images/ecosystem/forges.webp',
                         label: 'FORGES',
                         title: 'Forges of Ascendria',
                         content: `
-                            <p>Forges of Ascendria is the crafting and creation hub.</p>
-                            <h3>Features</h3>
+                            <p>After the Discovery of Ascendria, the excavation did not end, and one of the miners found an <strong>advanced portal</strong> in a tunnel within the Mines. This portal led to another dimension, to safe and prosperous lands where it was possible to produce and create new things.</p>
+                            <p>Each person who entered the portal went to a different environment, as if that environment were conducive: some were sent to lands rich in different ores used to produce things, others to places with fruits, others to lands with lakes, cotton fields, and so on.</p>
+
+                            <h3>🏠 LAND OWNERSHIP</h3>
+                            <p>This created a new economy in Ascendria. Now, in <strong>Forges of Ascendria</strong>, it is possible to own <strong>Lands</strong>, and each of these Lands produces something and gives you the opportunity to create and train in a profession.</p>
+                            <p>Each account can have as many Lands as desired, but they need to be <strong>Staked</strong> to be used in the game. Upon entering the portal within Ascendria, an option will appear where you can choose which Land you wish to access.</p>
+
+                            <h3>🛠️ PROFESSIONS</h3>
+                            <p>The professions vary between creators of consumable resources and semi-durable resources. You can be:</p>
                             <ul>
-                                <li>Craft powerful weapons and armor</li>
-                                <li>Combine resources for rare items</li>
-                                <li>Upgrade NFT equipment stats</li>
-                                <li>Create unique cosmetic items</li>
+                                <li>A creator of <strong>magic potions</strong></li>
+                                <li>A cook of <strong>nutritious foods</strong></li>
+                                <li>A <strong>Leather and Cotton Craftsman</strong></li>
+                                <li>A <strong>Blacksmith</strong></li>
                             </ul>
-                            <p>Master the forges to create legendary equipment!</p>
+
+                            <h3>🤖 MNEMON'S NEW ROLE</h3>
+                            <p>With the emergence of Forges of Ascendria, <strong>Mnemon gains a new function</strong>. Now the player can hire a professional and pay them to be Mnemon's assistant during the creation of their items. The level of increase depends on the skill of each professional.</p>
+                            <p>Now, in addition to being a warrior, our Ascenders can be professionals, because one cannot live only by fighting and battling one's whole life. Life must have other flavors, and Forges comes to add a lot of flavor.</p>
+                            <p>Mnemon now stops selling weapon boxes and starts only <strong>producing weapons with the players</strong>.</p>
+
+                            <h3>🏆 NEW RANKING</h3>
+                            <p>With the arrival of Forges, we will have a <strong>new Ranking</strong> that will reward the biggest negotiators in the marketplace.</p>
+
+                            <h3>⚔️ STRONGER WEAPONS</h3>
+                            <p>With Forges, the weapons that will be used in the content of <strong>Ascendria – Champions of Ascendria</strong> will be much stronger; they will be weapons created by someone.</p>
+
+                            <h3>🌟 RESOURCE PRODUCERS</h3>
+                            <p>Forges comes to add another special layer to our ecosystem. It transforms players who previously only acquired and used the ecosystem's currencies into <strong>resource producers</strong>, now focused on players who enjoy farm and resource administration, and who can genuinely profit from their <strong>Land NFT</strong>.</p>
+                            <p>Most importantly, the same NFT will have a <strong>different experience bar</strong> for the Forges module; here it will progress as it performs actions related to the chosen profession.</p>
+
+                            <h3>🧪 CONSUMABLE ITEMS</h3>
+                            <p>Energy potions to perform actions, life potions to recover health during a battle, foods that grant bonuses for a certain time. They are <strong>single-use</strong>, and the item is consumed.</p>
+
+                            <h3>🗡️ SEMI-DURABLE ITEMS</h3>
+                            <p><strong>Weapons and Armors, Runes and Gems</strong> (Runes and Gems will only be added in the final module, Depth). These items will have durability and can be restored, but they will eventually be destroyed at some point.</p>
+                            <p>The level of durability and the chance of restoration are defined by the <strong>skill of the Player</strong> who created the item. Every created item receives the <strong>name of its creator</strong>.</p>
+
+                            <h3>⭐ BE THE BEST CRAFTSMAN</h3>
+                            <p>Increase your skill level and be sought after by grinders to craft weapons for them. <strong>Be the best!</strong></p>
+
+                            <p><em>Note: Making decisions in Forges, just as in Champions, consumes base energy (the one that recharges), and creations depend on Energy Fluid to activate the creation platform. To add the Energy Fluid to the creation platform, simply add the necessary quantity of Energy Generators to create the item in question.</em></p>
                         `
                     },
                     {
                         id: 'depths',
-                        icon: '/assets/images/ecosystem/depths.png',
+                        icon: '/assets/images/ecosystem/depths.webp',
                         label: 'DEPTHS',
                         title: 'Depths of Ascendria',
                         content: `
-                            <p>Depths of Ascendria is the dungeon exploration experience.</p>
-                            <h3>Features</h3>
+                            <p>After a long time of excavation, the miners were going deeper and deeper, and one day, one of our miners felt a force resonate behind the stones at the touch of the pickaxe. Upon summoning others who came to help, a <strong>crack of reddish light</strong> emerged that illuminated the entire excavation tunnel—they had found another portal. This one now looked terrifying.</p>
+                            <p><strong>King Aethernus</strong> and his entourage went to investigate, and upon entering the portal, they saw what it was: an <strong>underground kingdom</strong>, as if they were entering the Depths of Ascendria. This kingdom was the opposite of Ascendria; it was dark and somber while Ascendria radiated power like a great sun.</p>
+
+                            <h3>⚔️ THE ULTIMATE CHALLENGE</h3>
+                            <p>Opportunities open up for those who have trained, raised their Ascenders to the maximum level they could, strengthened their weapons and armor, and now have reached the <strong>Depths of Ascendria</strong>.</p>
+
+                            <h3>💎 INDESTRUCTIBLE ITEMS</h3>
+                            <p>With the arrival of Depth of Ascendria, many things will change. We will have <strong>unique and extraordinary items</strong>. For the first time in Ascendria, it will be possible to turn a perfected semi-durable item into an <strong>indestructible one</strong>!</p>
+                            <p>For the first time, it will be possible to have that item you've searched for so long, with the ideal ability kit for your playstyle, <strong>forever</strong>!</p>
+
+                            <h3>🔮 NEW CRAFTING: RUNES & GEMS</h3>
+                            <p>New Crafting mechanics will be added to Forges:</p>
                             <ul>
-                                <li>Procedurally generated dungeons</li>
-                                <li>Co-op multiplayer raids</li>
-                                <li>Boss battles with rare drops</li>
-                                <li>Progressive difficulty scaling</li>
+                                <li><strong>Ancient Runes</strong> are found in the dungeons; they are used to enchant armors</li>
+                                <li><strong>Gems</strong> can also be found; they enchant weapons</li>
+                                <li><strong>Unique recipes</strong> for powerful abilities can now be enchanted onto your indestructible weapons and armors</li>
                             </ul>
-                            <p>Venture into the depths and claim legendary treasures!</p>
+
+                            <h3>🐾 PETs MECHANIC</h3>
+                            <p>Everything changes. Depth of Ascendria brings the <strong>PETs mechanic</strong>, where this NFT will help you find more valuable items within the mines.</p>
+                            <p>They say the chances of finding something in this dark world without the help of a pet are close to <strong>0</strong>! But there are those who may try anyway.</p>
+
+                            <h3>🌟 THE COMPLETE ECOSYSTEM</h3>
+                            <p>With Depth of Ascendria, our ecosystem will be <strong>complete</strong>. After the launch of this expansion, we can think about what comes next: more seasonal events? New expansions?</p>
+                            <p><em>Forge your own path in Ascendria and live to tell your stories.</em></p>
                         `
                     }
                 ]
             },
             community: {
-                icon: '/assets/images/ecosystem/community.png',
+                icon: '/assets/images/ecosystem/community.webp',
                 label: 'COMMUNITY',
                 title: 'Community Hub',
                 hasSubmenu: true,
                 submenu: [
                     {
                         id: 'external_impulse',
-                        icon: '/assets/images/ecosystem/external_impulse.png',
+                        icon: '/assets/images/ecosystem/external_impulse.webp',
                         label: 'EXTERNAL IMPULSE',
-                        title: 'External Impulse (DAO)',
+                        title: 'External Impulse',
                         content: `
-                            <p>Ascendria operates as a Decentralized Autonomous Organization.</p>
-                            <h3>Voting Power</h3>
-                            <ul>
-                                <li>1 $ASCEND = 1 Vote</li>
-                                <li>Staked tokens receive 1.5x voting power</li>
-                                <li>Legendary NFT holders get proposal creation rights</li>
-                            </ul>
-                            <p>Shape the future of Ascendria with your vote!</p>
+                            <p>After analyzing many projects, we saw that the majority seek external investment to boost their projects. This model has its pros and cons. At first, it is very good: the team can work smoothly with their salaries paid, prizes are offered to the community for participating in the project, instant events are created, among other benefits.</p>
+                            <p>However, the price of this in the long term is heavy. Every investor wants to make a profit, and as time goes by, investors want their share of the project, thus beginning a <strong>cycle of intense extraction</strong> which consequently culminates in the end of the project in the overwhelming majority of cases.</p>
+
+                            <h3>🌱 SUSTAINABLE MODEL</h3>
+                            <p>In Ascendria, we opted for a more sustainable model where we will not have an extractive model, but we rely on the community to keep funds entering the project, even if new players do not join.</p>
+                            <p>To this end, we created the <strong>External Impulse system</strong> where <strong>70% of the profits</strong> from ADS / YOUTUBE / TIKTOK will return to our reward pools and project maintenance.</p>
+
+                            <h3>🎯 LONG-TERM VISION</h3>
+                            <p>The team is interested in developing a project that lasts for <strong>years</strong>, and not just a few months as we have seen in the market. This model will ensure that Ascendria survives even in times of crisis, all with the support of the community just by watching ADS freely.</p>
+                            <p>Everyone who watches will receive their payment based on what they produced within our platform. And they will also be able to compete for better prizes. We are not talking about making anyone rich with this system; it was created only to keep <strong>Ascendria's doors open</strong> and the reward Pools always well-stocked.</p>
+
+                            <h3>📈 COMMUNITY-DRIVEN GROWTH</h3>
+                            <p>The larger the community, and the greater the participation, the larger the prizes will be. We believe that <strong>sharing the profits</strong> with our community will make everyone feel like a participant in this ecosystem.</p>
+
+                            <h3>❓ WHY 70%?</h3>
+                            <p>We will have a team that will create content entirely for our platforms, which demands time and resources. This <strong>30%</strong> will be directed towards that.</p>
+
+                            <h3>📊 TRANSPARENCY</h3>
+                            <p>We will have a <strong>monthly report and balance sheet live</strong> regarding the revenues acquired via ADS.</p>
+                            <p>The community will be fully aware of everything: values received, deductible taxes, and the value allocated to the reward pools and payment for individual contribution.</p>
+                            <p>All revenue will be <strong>auditable</strong> and can be accessed later by members who hold the rank of <strong>Elder Council</strong> (lvl 100 on Discord).</p>
+
+                            <p><em>In Ascendria, we are all one, and thus even competitiveness becomes healthy!</em></p>
+                            <p><strong>Fight for first place! Let's move forward!</strong></p>
                         `
                     },
                     {
                         id: 'marketplace',
-                        icon: '/assets/images/ecosystem/market_place.png',
+                        icon: '/assets/images/ecosystem/market_place.webp',
                         label: 'MARKETPLACE',
                         title: 'Marketplace',
                         content: `
-                            <p>A decentralized marketplace for trading NFTs, items, and resources.</p>
-                            <h3>Features</h3>
+                            <p>The Ascendria Ecosystem will feature <strong>2 Marketplace models</strong>.</p>
+
+                            <h3>🔷 OFF-CHAIN MARKETPLACE</h3>
+                            <p>Where crafted items can be sold for <strong>SPARKs</strong> from player to player.</p>
+
+                            <h3>🔶 ON-CHAIN MARKETPLACE</h3>
+                            <p>Where enchanted items can be sold on the official <strong>RONIN network</strong> marketplace.</p>
+
+                            <h3>🎫 DIMENSIONAL PASS</h3>
+                            <p>To access the Marketplaces, you need to own the <strong>Dimensional Pass</strong>, which will allow the transit of ecosystem items from Ascendria to the real world.</p>
+
+                            <h3>💰 FEES</h3>
                             <ul>
-                                <li>Low transaction fees (2.5%)</li>
-                                <li>Instant settlements on blockchain</li>
-                                <li>Auction and fixed-price listings</li>
-                                <li>Verified collections</li>
+                                <li><strong>OFF-CHAIN Marketplace:</strong> No fees on sales or ad placement</li>
+                                <li><strong>ON-CHAIN Marketplace:</strong> Usual Ronin network fees + 5% (used to pay team's operational salaries after launch of Champions of Ascendria)</li>
                             </ul>
-                            <p>Trade with confidence using our escrow system!</p>
+
+                            <p><em>Note: The on-chain marketplace will only be released with the launch of Ascendria – Champions of Ascendria, while the off-chain marketplace will be released with the Idle Mines module.</em></p>
+
+                            <p><strong>Good business!</strong></p>
                         `
                     },
                     {
                         id: 'nfts',
-                        icon: '/assets/images/ecosystem/nfts.png',
+                        icon: '/assets/images/ecosystem/nfts.webp',
                         label: 'NFTs',
                         title: 'NFT Collection',
                         content: `
-                            <p>True ownership of in-game assets, characters, and collectibles.</p>
-                            <h3>NFT Types</h3>
+                            <p>In our Ecosystem, we will have <strong>ERC-721 NFTs</strong> (ASCENDERS, LANDS, and PETS) and <strong>ERC-1155 NFTs</strong> (RESOURCES).</p>
+                            <p>The WEB 3 systems will be added with the arrival of <strong>Ascendria – Champions of Ascendria</strong>. However, this does not mean you won't be monetizing your earnings from the start, because everything you create during the <strong>"Toward Ascendria" Event</strong> can be transformed into sellable NFTs with the arrival of Ascendria.</p>
+
+                            <h3>⛏️ MINER TO ASCENDER CONVERSION</h3>
+                            <p>The Miners can only be acquired during the "Toward Ascendria" event, and all their progress will be utilized. Depending on your Miner's evolution, you can receive an Ascender NFT of up to <strong>LEGENDARY</strong> level:</p>
+                            <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+                                <tr style="background: rgba(0,0,0,0.1);"><th style="padding: 0.5rem; text-align: center; width: 50%;">Miner Rarity</th><th style="padding: 0.5rem; text-align: center; width: 50%;">Ascender Rarity</th></tr>
+                                <tr><td style="padding: 0.5rem; text-align: center;">Mythic Miner</td><td style="padding: 0.5rem; text-align: center;"><strong>Legendary Genesis Ascender</strong></td></tr>
+                                <tr><td style="padding: 0.5rem; text-align: center;">Legendary Miner</td><td style="padding: 0.5rem; text-align: center;"><strong>Epic Genesis Ascender</strong></td></tr>
+                                <tr><td style="padding: 0.5rem; text-align: center;">Epic Miner</td><td style="padding: 0.5rem; text-align: center;"><strong>Rare Genesis Ascender</strong></td></tr>
+                                <tr><td style="padding: 0.5rem; text-align: center;">Rare Miner</td><td style="padding: 0.5rem; text-align: center;"><strong>Common Genesis Ascender</strong></td></tr>
+                                <tr><td style="padding: 0.5rem; text-align: center;">Common Miner</td><td style="padding: 0.5rem; text-align: center;"><strong>Common Genesis Ascender</strong></td></tr>
+                            </table>
+
+                            <h3>👑 GENESIS ASCENDERS</h3>
+                            <p>The Genesis Ascenders can only be acquired by obtaining the miner during the "Toward Ascendria" event. When Champions of Ascendria arrives, the <strong>OATH function</strong> will be released at the King Aethernus NPC, and your off-chain asset will be transformed into a <strong>Genesis Ascender Crystal {rarity}</strong>.</p>
+                            <p>Your Sworn Ascender NFT will have a passive buff called <strong>"Witness of the Fall"</strong>. Since your character is theoretically a member of the city of Aurelia that was destroyed by Nihil, you observed the dragon in action and know some of its weak points, guaranteeing you <strong>5% more damage to Nihil</strong>.</p>
+
+                            <h3>🔷 ERC-1155 NFTs (Resources)</h3>
                             <ul>
-                                <li><strong>Characters:</strong> Unique heroes with special abilities</li>
-                                <li><strong>Equipment:</strong> Weapons, armor, and accessories</li>
-                                <li><strong>Land:</strong> Virtual territories in Aurélia</li>
-                                <li><strong>Collectibles:</strong> Limited edition art and items</li>
+                                <li>Cardinal Rows Cards</li>
+                                <li>Repeated Relics</li>
+                                <li>Capacitors</li>
+                                <li>Lumenstone</li>
+                                <li>Energy Generators</li>
+                                <li>Ascension Stones</li>
+                                <li>Weapons, Armor, Food, Potions, Recipes, Runes, and Gems</li>
                             </ul>
+
+                            <h3>🔶 Native ERC-721 NFT Collections</h3>
+                            <ul>
+                                <li><strong>BASIC ASCENDERS Collection</strong> – Post-launch of Champions of Ascendria</li>
+                                <li><strong>PRIMORDIAL ASCENDERS Collection</strong> – Launch of Champions of Ascendria</li>
+                                <li><strong>GENESIS LANDS Collection</strong> – Launch of Forges of Ascendria</li>
+                                <li><strong>GENESIS PETS Collection</strong> – Launch of Depth of Ascendria</li>
+                            </ul>
+
+                            <p>The ERC-721 NFTs will be eligible to participate in the <strong>monthly raffle</strong> when they are in Stake. (More details in the STAKE session).</p>
+
+                            <p><em>This is what we have to share for now. The menus will be added as the ecosystem evolves. Be part of this journey!</em></p>
                         `
                     },
                     {
                         id: 'staking',
-                        icon: '/assets/images/ecosystem/staking.png',
+                        icon: '/assets/images/ecosystem/staking.webp',
                         label: 'STAKING',
                         title: 'Staking & Rewards',
                         content: `
-                            <p>Stake your tokens and NFTs to earn passive rewards.</p>
-                            <h3>Staking Options</h3>
+                            <p>Staking will be an important tool in our ecosystem. For you to use the NFTs within our ecosystem, <strong>they must be in STAKE</strong>.</p>
+
+                            <h3>🎫 MONTHLY RAFFLE SYSTEM</h3>
+                            <p>All <strong>ERC-721 NFTs</strong> will be eligible to participate in the monthly raffle. For every <strong>7 uninterrupted days</strong> of Staking, you receive a quantity of numbers for the monthly raffle.</p>
+                            <p>This quantity will be based on your NFT's <strong>Rarity + Level</strong>:</p>
+
+                            <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+                                <tr style="background: rgba(0,0,0,0.1);"><th style="padding: 0.5rem; text-align: center; width: 50%;">NFT Rarity</th><th style="padding: 0.5rem; text-align: center; width: 50%;">Tickets Formula</th></tr>
+                                <tr><td style="padding: 0.5rem; text-align: center;">Mythic NFT</td><td style="padding: 0.5rem; text-align: center;"><strong>Level × 3</strong></td></tr>
+                                <tr><td style="padding: 0.5rem; text-align: center;">Legendary NFT</td><td style="padding: 0.5rem; text-align: center;"><strong>Level × 2</strong></td></tr>
+                                <tr><td style="padding: 0.5rem; text-align: center;">Epic NFT</td><td style="padding: 0.5rem; text-align: center;"><strong>Level × 1.5</strong></td></tr>
+                                <tr><td style="padding: 0.5rem; text-align: center;">Rare NFT</td><td style="padding: 0.5rem; text-align: center;"><strong>Level × 1</strong></td></tr>
+                                <tr><td style="padding: 0.5rem; text-align: center;">Common NFT</td><td style="padding: 0.5rem; text-align: center;"><strong>Level × 0.5</strong></td></tr>
+                            </table>
+
+                            <h3>🏆 MONTHLY PRIZES</h3>
+                            <p>Our monthly raffle will have varied prizes, and there will be <strong>100 winners every month</strong>.</p>
+                            <p>After the launch of Champions of Ascendria, prizes may vary between:</p>
                             <ul>
-                                <li><strong>Token Staking:</strong> Lock $ASCEND for APY rewards</li>
-                                <li><strong>NFT Staking:</strong> Stake characters for daily bonuses</li>
-                                <li><strong>LP Staking:</strong> Provide liquidity for enhanced yields</li>
+                                <li><strong>USDC</strong></li>
+                                <li><strong>NFTs</strong></li>
+                                <li><strong>WLs from partner projects</strong></li>
+                                <li>And more!</li>
                             </ul>
+
+                            <h3>💰 PRIZE POOL</h3>
+                            <p>The value that will be made available for the monthly raffle prize pool is <strong>1% of everything generated in marketplace fees</strong>.</p>
+                            <p>Therefore, the more movement on the on-chain marketplace, the larger the prize pool, and the more users in our community, the larger the prize pool.</p>
+
+                            <p><strong>Keep your special assets in Stake and compete for unique prizes!</strong></p>
                         `
                     }
                 ]
@@ -333,7 +506,7 @@ class EcosystemGraph {
         this.homeButton.className = 'detail-home';
         this.homeButton.setAttribute('aria-label', 'Início');
         this.homeButton.setAttribute('type', 'button');
-        this.homeButton.innerHTML = `<img src="/assets/images/ecosystem/home.png" alt="Home" />`;
+        this.homeButton.innerHTML = `<img src="/assets/images/ecosystem/home.webp" alt="Home" />`;
         this.detailView.insertBefore(this.homeButton, this.detailView.firstChild);
         
         // Criar botão Back (volta para página anterior)
@@ -341,19 +514,12 @@ class EcosystemGraph {
         this.backButton.className = 'detail-back';
         this.backButton.setAttribute('aria-label', 'Voltar');
         this.backButton.setAttribute('type', 'button');
-        this.backButton.innerHTML = `<img src="/assets/images/ecosystem/back.png" alt="Voltar" />`;
+        this.backButton.innerHTML = `<img src="/assets/images/ecosystem/back.webp" alt="Voltar" />`;
         this.detailView.insertBefore(this.backButton, this.detailView.firstChild);
-        
-        // Eraser overlay para animação
-        const eraserOverlay = document.createElement('div');
-        eraserOverlay.className = 'eraser-overlay';
-        this.eraserCanvas = document.createElement('canvas');
-        eraserOverlay.appendChild(this.eraserCanvas);
         
         // Adicionar ao container
         this.container.appendChild(this.graphView);
         this.container.appendChild(this.detailView);
-        this.container.appendChild(eraserOverlay);
     }
     
     bindEvents() {
@@ -404,7 +570,7 @@ class EcosystemGraph {
         // Esconder botão back no menu principal
         this.backButton.classList.remove('visible');
         
-        // Preencher conteúdo do detalhe
+        // Preencher conteúdo do detalhe ANTES da animação
         const detailIcon = this.detailView.querySelector('.detail-icon');
         detailIcon.src = module.icon;
         detailIcon.alt = module.label;
@@ -418,15 +584,12 @@ class EcosystemGraph {
             this.detailView.querySelector('.detail-content').innerHTML = module.content;
         }
         
-        // Animar borracha apagando
-        await this.eraserAnimation('erase');
-        
-        // Trocar views
-        this.graphView.classList.add('hidden');
-        this.detailView.classList.add('active');
-        
-        // Animar borracha revelando
-        await this.eraserAnimation('reveal');
+        // Animação única: apaga graphView e revela detailView simultaneamente
+        await this.transitionAnimation(this.graphView, this.detailView, () => {
+            // No meio da animação, trocar as classes
+            this.graphView.classList.add('hidden');
+            this.detailView.classList.add('active');
+        });
         
         this.isAnimating = false;
     }
@@ -468,20 +631,25 @@ class EcosystemGraph {
         });
         
         if (foundItem) {
-            // Animar borracha apagando
-            await this.eraserAnimation('erase');
+            // Criar elemento temporário com novo conteúdo
+            const tempContent = document.createElement('div');
+            tempContent.className = 'detail-content-inner';
+            tempContent.innerHTML = `
+                <img class="detail-icon" src="${foundItem.icon}" alt="${foundItem.label}" />
+                <h2 class="detail-title">${foundItem.title}</h2>
+                <div class="detail-content">${foundItem.content}</div>
+            `;
             
-            // Mostrar botão back quando em submenu item
-            this.backButton.classList.add('visible');
-            
-            const detailIcon = this.detailView.querySelector('.detail-icon');
-            detailIcon.src = foundItem.icon;
-            detailIcon.alt = foundItem.label;
-            this.detailView.querySelector('.detail-title').textContent = foundItem.title;
-            this.detailView.querySelector('.detail-content').innerHTML = foundItem.content;
-            
-            // Animar borracha revelando
-            await this.eraserAnimation('reveal');
+            // Animação única no mesmo elemento (troca conteúdo no meio)
+            await this.transitionAnimation(this.detailView, this.detailView, () => {
+                // No meio da animação, trocar o conteúdo e mostrar back
+                this.backButton.classList.add('visible');
+                const detailIcon = this.detailView.querySelector('.detail-icon');
+                detailIcon.src = foundItem.icon;
+                detailIcon.alt = foundItem.label;
+                this.detailView.querySelector('.detail-title').textContent = foundItem.title;
+                this.detailView.querySelector('.detail-content').innerHTML = foundItem.content;
+            });
         }
         
         this.isAnimating = false;
@@ -493,22 +661,17 @@ class EcosystemGraph {
         
         const module = this.modules[this.currentModule];
         
-        // Animar borracha apagando
-        await this.eraserAnimation('erase');
-        
-        // Esconder botão back
-        this.backButton.classList.remove('visible');
-        
-        // Preencher com o submenu
-        const detailIcon = this.detailView.querySelector('.detail-icon');
-        detailIcon.src = module.icon;
-        detailIcon.alt = module.label;
-        this.detailView.querySelector('.detail-title').textContent = module.title;
-        this.detailView.querySelector('.detail-content').innerHTML = this.createSubmenuHTML(module.submenu);
-        this.bindSubmenuEvents();
-        
-        // Animar borracha revelando
-        await this.eraserAnimation('reveal');
+        // Animação única no mesmo elemento (troca conteúdo no meio)
+        await this.transitionAnimation(this.detailView, this.detailView, () => {
+            // No meio da animação, trocar o conteúdo e esconder back
+            this.backButton.classList.remove('visible');
+            const detailIcon = this.detailView.querySelector('.detail-icon');
+            detailIcon.src = module.icon;
+            detailIcon.alt = module.label;
+            this.detailView.querySelector('.detail-title').textContent = module.title;
+            this.detailView.querySelector('.detail-content').innerHTML = this.createSubmenuHTML(module.submenu);
+            this.bindSubmenuEvents();
+        });
         
         this.isAnimating = false;
     }
@@ -517,207 +680,121 @@ class EcosystemGraph {
         if (this.isAnimating) return;
         this.isAnimating = true;
         
-        // Animar borracha apagando
-        await this.eraserAnimation('erase');
+        // Esconder botão back
+        this.backButton.classList.remove('visible');
         
-        // Trocar views
-        this.detailView.classList.remove('active');
-        this.graphView.classList.remove('hidden');
-        
-        // Animar borracha revelando
-        await this.eraserAnimation('reveal');
+        // Animação única: apaga detailView e revela graphView simultaneamente
+        await this.transitionAnimation(this.detailView, this.graphView, () => {
+            // No meio da animação, trocar as classes
+            this.detailView.classList.remove('active');
+            this.graphView.classList.remove('hidden');
+        });
         
         this.currentModule = null;
         this.isAnimating = false;
     }
     
-    async eraserAnimation(mode) {
+    async transitionAnimation(fromElement, toElement, onMiddle) {
         return new Promise((resolve) => {
-            const canvas = this.eraserCanvas;
-            const ctx = canvas.getContext('2d');
+            const duration = 1400; // ms - suave mas responsivo
+            const startTime = performance.now();
             
-            // Ajustar tamanho do canvas
-            const rect = this.container.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
+            // Verificar se é o mesmo elemento (transição interna)
+            const isSameElement = fromElement === toElement;
             
-            // Criar degradê de azuis (cores do portal)
-            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            gradient.addColorStop(0, '#00e6ff');    // Cyan brilhante
-            gradient.addColorStop(0.3, '#1a99e6');  // Azul médio
-            gradient.addColorStop(0.6, '#0066b3');  // Azul
-            gradient.addColorStop(1, '#004d80');    // Azul escuro
-            
-            // Diagonal: da esquerda superior para direita inferior
-            const diagonal = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height);
-            const angle = Math.atan2(canvas.height, canvas.width);
-            
-            if (mode === 'erase') {
-                // Animação de APAGAR: linha diagonal varredura esquerda-superior → direita-inferior
-                let progress = 0;
-                const speed = 0.025;
-                
-                const animate = () => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    
-                    // Calcular posição da "borracha" na diagonal
-                    const sweepProgress = this.easeInOutCubic(progress);
-                    const sweepX = sweepProgress * (canvas.width + canvas.height);
-                    
-                    ctx.fillStyle = gradient;
-                    ctx.beginPath();
-                    
-                    // Criar polígono que representa a área "apagada"
-                    // Começa no canto superior esquerdo e varre diagonalmente
-                    ctx.moveTo(0, 0);
-                    
-                    if (sweepX <= canvas.width) {
-                        // Fase 1: a linha ainda não chegou na borda direita
-                        ctx.lineTo(sweepX, 0);
-                        ctx.lineTo(0, sweepX);
-                    } else if (sweepX <= canvas.height) {
-                        // Fase 2: a linha chegou na borda direita mas não na inferior
-                        ctx.lineTo(canvas.width, 0);
-                        ctx.lineTo(canvas.width, sweepX - canvas.width);
-                        ctx.lineTo(0, sweepX);
-                    } else if (sweepX <= canvas.width + canvas.height) {
-                        // Fase 3: varrendo o canto inferior direito
-                        ctx.lineTo(canvas.width, 0);
-                        ctx.lineTo(canvas.width, Math.min(canvas.height, sweepX - canvas.width));
-                        ctx.lineTo(Math.max(0, sweepX - canvas.height), canvas.height);
-                        ctx.lineTo(0, canvas.height);
-                    } else {
-                        // Completo
-                        ctx.lineTo(canvas.width, 0);
-                        ctx.lineTo(canvas.width, canvas.height);
-                        ctx.lineTo(0, canvas.height);
-                    }
-                    
-                    ctx.closePath();
-                    ctx.fill();
-                    
-                    // Adicionar efeito de "rastro de borracha" - linhas onduladas na borda
-                    this.drawEraserEdge(ctx, sweepX, canvas.width, canvas.height, '#00e6ff');
-                    
-                    progress += speed;
-                    
-                    if (progress < 1) {
-                        requestAnimationFrame(animate);
-                    } else {
-                        // Preencher completamente
-                        ctx.fillStyle = gradient;
-                        ctx.fillRect(0, 0, canvas.width, canvas.height);
-                        resolve();
-                    }
-                };
-                
-                animate();
-            } else {
-                // Animação de REVELAR: mesma direção, mas "escrevendo" (removendo a cobertura)
-                const gradientReveal = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-                gradientReveal.addColorStop(0, '#00e6ff');
-                gradientReveal.addColorStop(0.3, '#1a99e6');
-                gradientReveal.addColorStop(0.6, '#0066b3');
-                gradientReveal.addColorStop(1, '#004d80');
-                
-                ctx.fillStyle = gradientReveal;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                let progress = 0;
-                const speed = 0.025;
-                
-                const animate = () => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    
-                    const sweepProgress = this.easeInOutCubic(progress);
-                    const sweepX = sweepProgress * (canvas.width + canvas.height);
-                    
-                    ctx.fillStyle = gradientReveal;
-                    ctx.beginPath();
-                    
-                    // Área que AINDA está coberta (inverso do erase)
-                    // Começa do ponto atual da varredura até o canto inferior direito
-                    
-                    if (sweepX <= canvas.width) {
-                        ctx.moveTo(sweepX, 0);
-                        ctx.lineTo(canvas.width, 0);
-                        ctx.lineTo(canvas.width, canvas.height);
-                        ctx.lineTo(0, canvas.height);
-                        ctx.lineTo(0, sweepX);
-                    } else if (sweepX <= canvas.height) {
-                        ctx.moveTo(canvas.width, sweepX - canvas.width);
-                        ctx.lineTo(canvas.width, canvas.height);
-                        ctx.lineTo(0, canvas.height);
-                        ctx.lineTo(0, sweepX);
-                    } else if (sweepX <= canvas.width + canvas.height) {
-                        const bottomX = sweepX - canvas.height;
-                        const rightY = sweepX - canvas.width;
-                        
-                        if (rightY < canvas.height && bottomX < canvas.width) {
-                            ctx.moveTo(canvas.width, rightY);
-                            ctx.lineTo(canvas.width, canvas.height);
-                            ctx.lineTo(bottomX, canvas.height);
-                        }
-                    }
-                    
-                    ctx.closePath();
-                    ctx.fill();
-                    
-                    // Efeito de borda na escrita
-                    this.drawEraserEdge(ctx, sweepX, canvas.width, canvas.height, '#00e6ff');
-                    
-                    progress += speed;
-                    
-                    if (progress < 1) {
-                        requestAnimationFrame(animate);
-                    } else {
-                        ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        resolve();
-                    }
-                };
-                
-                animate();
+            // Preparar o elemento de destino (invisível no início) - só se for diferente
+            if (toElement && !isSameElement) {
+                toElement.style.maskImage = 'linear-gradient(135deg, transparent 0%, transparent 100%)';
+                toElement.style.webkitMaskImage = 'linear-gradient(135deg, transparent 0%, transparent 100%)';
             }
+            
+            let middleCalled = false;
+            
+            const animate = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                let progress = Math.min(elapsed / duration, 1);
+                
+                // Movimento linear - velocidade constante
+                // (sem easing, progress já é linear)
+                
+                // A "onda" vai de 0 a 200% (para cobrir toda a diagonal)
+                const wavePos = progress * 200;
+                
+                if (isSameElement) {
+                    // Transição no mesmo elemento: onda passa, troca conteúdo, onda volta revelando
+                    if (wavePos < 100) {
+                        // Primeira metade: onda apaga (de cima-esquerda para baixo-direita)
+                        const erasePos = wavePos;
+                        fromElement.style.maskImage = `linear-gradient(135deg, transparent 0%, transparent ${erasePos - 10}%, rgba(0,0,0,1) ${erasePos}%, rgba(0,0,0,1) 100%)`;
+                        fromElement.style.webkitMaskImage = `linear-gradient(135deg, transparent 0%, transparent ${erasePos - 10}%, rgba(0,0,0,1) ${erasePos}%, rgba(0,0,0,1) 100%)`;
+                    } else {
+                        // Trocar conteúdo quando a onda chegar no meio
+                        if (!middleCalled && onMiddle) {
+                            middleCalled = true;
+                            onMiddle();
+                        }
+                        // Segunda metade: onda revela (conteúdo novo aparece de cima-esquerda para baixo-direita)
+                        const revealPos = wavePos - 100;
+                        fromElement.style.maskImage = `linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${revealPos - 10}%, transparent ${revealPos}%, transparent 100%)`;
+                        fromElement.style.webkitMaskImage = `linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${revealPos - 10}%, transparent ${revealPos}%, transparent 100%)`;
+                    }
+                } else {
+                    // Transição entre elementos diferentes
+                    // O elemento antigo vai desaparecendo conforme a onda passa
+                    if (fromElement) {
+                        const erasePos = Math.min(wavePos, 150);
+                        fromElement.style.maskImage = `linear-gradient(135deg, transparent 0%, transparent ${erasePos - 20}%, rgba(0,0,0,1) ${erasePos}%, rgba(0,0,0,1) 100%)`;
+                        fromElement.style.webkitMaskImage = `linear-gradient(135deg, transparent 0%, transparent ${erasePos - 20}%, rgba(0,0,0,1) ${erasePos}%, rgba(0,0,0,1) 100%)`;
+                    }
+                    
+                    // O elemento novo vai aparecendo logo atrás da onda (com pequeno delay)
+                    if (toElement) {
+                        const revealPos = Math.max(0, wavePos - 50); // Começa um pouco depois
+                        toElement.style.maskImage = `linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${revealPos - 20}%, transparent ${revealPos}%, transparent 100%)`;
+                        toElement.style.webkitMaskImage = `linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${revealPos - 20}%, transparent ${revealPos}%, transparent 100%)`;
+                    }
+                    
+                    // Executar callback no meio da animação (para trocar classes)
+                    if (!middleCalled && progress >= 0.3 && onMiddle) {
+                        middleCalled = true;
+                        onMiddle();
+                    }
+                }
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    // Limpar máscaras no final
+                    if (fromElement) {
+                        fromElement.style.maskImage = '';
+                        fromElement.style.webkitMaskImage = '';
+                    }
+                    if (toElement && !isSameElement) {
+                        toElement.style.maskImage = '';
+                        toElement.style.webkitMaskImage = '';
+                    }
+                    resolve();
+                }
+            };
+            
+            requestAnimationFrame(animate);
         });
     }
     
-    // Desenha efeito ondulado na borda da borracha
-    drawEraserEdge(ctx, sweepX, width, height, color) {
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 8;
-        ctx.lineCap = 'round';
-        
-        // Calcular pontos da linha diagonal atual
-        const points = [];
-        const waveAmplitude = 5;
-        const waveFrequency = 0.05;
-        
-        for (let i = 0; i <= Math.max(width, height); i += 10) {
-            let x, y;
-            
-            if (sweepX <= width) {
-                x = sweepX - i;
-                y = i;
-            } else {
-                x = width - i;
-                y = sweepX - width + i;
-            }
-            
-            if (x >= 0 && x <= width && y >= 0 && y <= height) {
-                // Adicionar ondulação
-                const wave = Math.sin(i * waveFrequency + sweepX * 0.1) * waveAmplitude;
-                points.push({ x: x + wave * 0.7, y: y + wave * 0.7 });
-            }
+    // Easing: começa RÁPIDO, desacelera no meio, termina suave
+    easeOutInQuad(t) {
+        if (t < 0.5) {
+            // Primeira metade: easeOut (começa rápido, desacelera)
+            return 2 * t * (2 - 2 * t);
+        } else {
+            // Segunda metade: easeIn (acelera suavemente até o fim)
+            const t2 = t - 0.5;
+            return 0.5 + 2 * t2 * t2;
         }
-        
-        if (points.length > 1) {
-            ctx.beginPath();
-            ctx.moveTo(points[0].x, points[0].y);
-            for (let i = 1; i < points.length; i++) {
-                ctx.lineTo(points[i].x, points[i].y);
-            }
-            ctx.stroke();
-        }
+    }
+    
+    easeInOutQuad(t) {
+        return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
     }
     
     easeInOutCubic(t) {
