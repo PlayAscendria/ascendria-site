@@ -92,15 +92,34 @@ class EcosystemGraph {
                         label: 'IDLE MINES',
                         title: 'Idle Mines',
                         content: `
-                            <p>Idle Mines is a passive resource gathering game in the Ascendria ecosystem.</p>
-                            <h3>How It Works</h3>
+                            <h3>⛏️ THE BEGINNING OF EVERYTHING</h3>
+                            <p>Idle Mines is the beginning of our entire ecosystem. Here you will build a strong base of resource production to speed up your performance in Ascendria.</p>
+                            
+                            <h3>What you can do in Idle Mines:</h3>
                             <ul>
-                                <li>Deploy miners to extract valuable resources</li>
-                                <li>Upgrade equipment for better yields</li>
-                                <li>Collect resources even while offline</li>
-                                <li>Trade resources on the marketplace</li>
+                                <li>Collect resources actively and inactively</li>
+                                <li>Evolve your mine to increase its production power</li>
+                                <li>Evolve your pickaxe to increase its extraction power</li>
+                                <li>Evolve active and passive skills</li>
+                                <li>Craft items that will help your progress in Ascendria</li>
                             </ul>
-                            <p>Resources mined can be used across all Ascendria games or sold for tokens.</p>
+                            
+                            <h3>🏆 Why Play Idle Mines?</h3>
+                            <p>Playing IDLE MINES is the only way to achieve some of the most valuable conquests in the ecosystem and be recognized by the community.</p>
+                            
+                            <p>Playing IDLE MINES during the excavation to find Ascendria will allow the user to acquire a miner who, upon the launch of Ascendria, will become a <strong>sworn Genesis Ascender (Witness of the Fall)</strong> who will stand out in the global event <strong>The Return of Nihil</strong> by applying <strong>5% more damage to Nihil</strong>, the most coveted event in the ecosystem.</p>
+                            
+                            <p>Playing IDLE MINES will make you have <strong>up to 3x more energy</strong> than a casual player who does not invest in Idle Mines.</p>
+                            
+                            <p>Playing IDLE MINES enables you to find card pieces to create your competitive deck for <strong>Cardinal Rows</strong> (a competitive card game) and you will have the chance to win prizes in the championships that will be developed, with rewards of <strong>UNIQUE NFTs</strong> and even <strong>USDC</strong>.</p>
+                            
+                            <p>Playing IDLE MINES is participating in the beginning of a very great story that is just getting started!</p>
+                            
+                            <h3>⚡ Play Idle Mines and mine advantages for your journey!</h3>
+                            
+                            <p><em>Enjoy!</em></p>
+                            
+                            <p><strong>Note:</strong> Miners can only be acquired during the event "Toward Ascendria."</p>
                         `
                     },
                     {

@@ -41,6 +41,7 @@ class AssetPreloader {
     this.currentPaintIndex = 0;
     this.isPainting = false;
     this.paintingComplete = false;
+    this.paintedLayersCount = 0; // Contador de camadas pintadas
     
     // Mensagens narrativas (sincronizadas com pintura)
     this.messages = [
@@ -288,6 +289,8 @@ class AssetPreloader {
       } else {
         layerData.painted = true;
         this.paintedLayers.push(layerData);
+        this.paintedLayersCount++;
+        this.updateProgressBar(); // Atualiza progresso quando camada é pintada
         callback();
       }
     };
@@ -372,9 +375,20 @@ class AssetPreloader {
   
   /**
    * Atualiza a barra de progresso
+   * Progresso híbrido: 50% para carregamento + 50% para pintura
    */
   updateProgressBar() {
-    const percent = Math.min(Math.floor((this.loadedCount / this.totalAssets) * 100), 100);
+    // Progresso de carregamento (0-50%)
+    const loadPercent = this.totalAssets > 0 
+      ? (this.loadedCount / this.totalAssets) * 50 
+      : 0;
+    
+    // Progresso de pintura (50-100%)
+    const paintPercent = this.paintLayers.length > 0 
+      ? (this.paintedLayersCount / this.paintLayers.length) * 50 
+      : 0;
+    
+    const percent = Math.min(Math.floor(loadPercent + paintPercent), 100);
     
     if (this.progressText) {
       this.progressText.textContent = `${percent}%`;
