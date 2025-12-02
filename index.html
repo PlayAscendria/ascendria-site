@@ -186,6 +186,9 @@
 
 				<!-- NFTs Section - após o pergaminho -->
 				<section id="nfts" class="landing-section">
+					<!-- Título com efeito de revelação -->
+					<h1 class="nfts-title">NFTs</h1>
+					
 					<div class="section-content">
 						<!-- Conteúdo será adicionado aqui -->
 					</div>
@@ -254,5 +257,40 @@
 		
 		<!-- Ecosystem Interactive Graph -->
 		<script src="/components/ecosystem/ecosystem.js" defer></script>
+		
+		<!-- NFTs Title Reveal -->
+		<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const nftsTitle = document.querySelector('.nfts-title');
+			const nftsSection = document.querySelector('#nfts');
+			const contentArea = document.querySelector('#content-area');
+			
+			if (nftsTitle && nftsSection) {
+				let hasRevealed = false;
+				const scrollContainer = contentArea || window;
+				
+				function checkNftsScroll() {
+					const sectionRect = nftsSection.getBoundingClientRect();
+					const triggerPoint = window.innerHeight * 0.7;
+					
+					if (sectionRect.top < triggerPoint) {
+						if (!hasRevealed) {
+							nftsTitle.classList.add('visible');
+							hasRevealed = true;
+						}
+					} else {
+						if (hasRevealed) {
+							nftsTitle.classList.remove('visible');
+							hasRevealed = false;
+						}
+					}
+				}
+				
+				checkNftsScroll();
+				scrollContainer.addEventListener('scroll', checkNftsScroll, { passive: true });
+				window.addEventListener('resize', checkNftsScroll, { passive: true });
+			}
+		});
+		</script>
 	</body>
 </html>

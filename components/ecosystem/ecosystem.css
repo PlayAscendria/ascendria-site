@@ -1,14 +1,16 @@
 /* ========== ECOSYSTEM INTERACTIVE GRAPH ========== */
-/* Container que fica ATRÁS do pergaminho vazado */
+/* ESTILOS BASE - OTIMIZADO PARA 1920x1080 */
+/* Ajustes para outras resoluções em css/responsive.css */
 
+/* Container que fica ATRÁS do pergaminho vazado */
 .ecosystem-container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* Ajustado para caber na área vazada do pergaminho */
-    width: 123%;
-    height: 66%;
+    /* Dimensões otimizadas para 1920x1080 */
+    width: 124%;
+    height: 68%;
     z-index: 1;
     overflow: hidden;
     /* Fundo sempre visível durante transições */
@@ -88,46 +90,22 @@
 .eco-node[data-node="ascendria"] {
     bottom: 22%;
     left: 28%;
+    transform: translateX(-50%);
 }
 
 .eco-node[data-node="ascendria"]:hover {
-    transform: scale(1.1);
+    transform: translateX(-50%) scale(1.1);
 }
 
 /* Community embaixo direita */
 .eco-node[data-node="community"] {
     bottom: 22%;
     right: 28%;
+    transform: translateX(50%);
 }
 
 .eco-node[data-node="community"]:hover {
-    transform: scale(1.1);
-}
-
-/* ========== SETAS CONECTANDO OS NÓS ========== */
-.eco-arrows {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.eco-arrows svg {
-    width: 100%;
-    height: 100%;
-}
-
-.eco-arrow-line {
-    stroke: #1a99e6;
-    stroke-width: 2;
-    fill: none;
-}
-
-.eco-arrow-head {
-    fill: #1a99e6;
+    transform: translateX(50%) scale(1.1);
 }
 
 /* ========== MODULE DETAIL VIEW ========== */

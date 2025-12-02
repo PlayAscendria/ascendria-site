@@ -499,13 +499,14 @@ body::-webkit-scrollbar-thumb {
 }
 
 /* ========== ECOSYSTEM SECTION (PERGAMINHO) ========== */
-/* Seção Ecosystem com pergaminho como moldura - conteúdo fica atrás */
+/* ESTILOS BASE - OTIMIZADO PARA 1920x1080 */
+/* Ajustes para outras resoluções em css/responsive.css */
 
 #ecosystem.landing-section {
 	position: relative;
 	z-index: 20; /* Acima da hero (z-index 10) */
 	padding: 0;
-	margin-top: -18vh; /* Invade mais a Hero */
+	margin-top: -18vh; /* Invade a Hero - ajustado para 1080p */
 	background: none;
 	/* Aspect ratio baseado na proporção da imagem do pergaminho */
 	aspect-ratio: 16 / 10;
@@ -518,7 +519,7 @@ body::-webkit-scrollbar-thumb {
 	justify-content: center;
 }
 
-/* Título no banner superior do pergaminho */
+/* Título no banner superior do pergaminho - posição para 1080p */
 .ecosystem-title {
 	position: absolute;
 	top: 11%;
@@ -577,13 +578,53 @@ body::-webkit-scrollbar-thumb {
 }
 
 /* ========== NFTs SECTION ========== */
+/* ESTILOS BASE - OTIMIZADO PARA 1920x1080 */
 /* Seção NFTs - vem após o pergaminho/Ecosystem */
 
 #nfts.landing-section {
 	position: relative;
+	z-index: 5; /* Abaixo do Ecosystem (z-index 20) para ficar por baixo do pergaminho */
+	margin-top: -18vh; /* Sobe para ficar por baixo do pergaminho */
+	padding-top: calc(18vh + clamp(4rem, 10vw, 8rem)); /* Compensa o margin negativo */
+	padding-bottom: clamp(4rem, 10vw, 8rem);
+	padding-left: clamp(1rem, 5vw, 2rem);
+	padding-right: clamp(1rem, 5vw, 2rem);
+	/* Fundo com a imagem telabranca */
+	background-image: url('/assets/images/background/backgroundpaisagem/0_telabranca_0.webp');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 100vh; /* Exatamente uma tela */
+	min-height: auto;
+	max-height: 100vh;
+}
+
+/* Título da seção NFTs - mesmo estilo do Ecosystem */
+.nfts-title {
+	position: absolute;
+	top: 8%; /* Posição logo abaixo do pergaminho */
+	left: 50%;
+	transform: translateX(-50%);
 	z-index: 10;
-	margin-top: 0;
-	padding: clamp(4rem, 10vw, 8rem) clamp(1rem, 5vw, 2rem);
+	margin: 0;
+	font-size: clamp(2rem, 5vw, 4rem);
+	color: #2c1810;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+	font-family: inherit;
+	text-align: center;
+	pointer-events: none;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	/* Efeito de revelação - começa invisível */
+	clip-path: inset(0 100% 0 0);
+	opacity: 0;
+	transition: clip-path 1s ease-out 0.3s, opacity 1s ease-out;
+}
+
+/* Quando visível - revela da esquerda para direita */
+.nfts-title.visible {
+	clip-path: inset(0 0% 0 0);
+	opacity: 1;
 }
 
 #nfts .section-content {
