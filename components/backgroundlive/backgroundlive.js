@@ -106,6 +106,8 @@
       }
     }
     function getMobileFactor(){
+      // Desativa parallax em mobile (360-430px)
+      if (window.innerWidth <= 430) return 0;
       return window.innerWidth < 768 ? 0.6 : 1;
     }
 

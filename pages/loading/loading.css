@@ -157,32 +157,4 @@ svg {
   display: none;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .painting-text {
-    font-size: 14px;
-  }
-
-  .progress-value {
-    font-size: 20px;
-  }
-
-  .loading-info {
-    bottom: 40px;
-  }
-}
-
-@media (max-width: 480px) {
-  .painting-text {
-    font-size: 12px;
-    letter-spacing: 1px;
-  }
-
-  .progress-value {
-    font-size: 18px;
-  }
-
-  .loading-info {
-    bottom: 30px;
-  }
-}
+/* Responsividade movida para css/responsive.css */

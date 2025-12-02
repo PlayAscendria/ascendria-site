@@ -285,44 +285,7 @@ body::-webkit-scrollbar-thumb {
 	transform: translateX(3px);
 }
 
-/* Responsividade do Hero */
-@media (max-width: 768px) {
-	.hero-content {
-		top: 45%;
-	}
-	
-	.hero-title {
-		font-size: clamp(2.5rem, 12vw, 4rem);
-	}
-}
-
-@media (max-width: 480px) {
-	.hero-content {
-		width: 95%;
-		padding: 1rem;
-	}
-	
-	.cta-primary {
-		width: 100%;
-		justify-content: center;
-	}
-}
-
-/* Landscape mobile */
-@media (max-height: 500px) and (orientation: landscape) {
-	.hero-content {
-		top: 55%;
-	}
-	
-	.hero-title {
-		font-size: clamp(2rem, 8vw, 3rem);
-		margin-bottom: 0.25rem;
-	}
-	
-	.hero-description {
-		margin-bottom: 1rem;
-	}
-}
+/* Responsividade movida para css/responsive.css */
 
 /* Container para páginas técnicas (whitepaper, tokenomics) */
 .doc-container {
@@ -535,33 +498,6 @@ body::-webkit-scrollbar-thumb {
 	box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
 }
 
-/* Responsive adjustments para landing sections */
-@media (max-width: 768px) {
-	.landing-section {
-		padding: clamp(3rem, 8vw, 5rem) 1rem;
-	}
-	
-	.features-grid {
-		grid-template-columns: 1fr;
-		gap: 1.5rem;
-	}
-	
-	.social-links {
-		flex-direction: column;
-		align-items: center;
-	}
-	
-	.social-btn {
-		width: 100%;
-		max-width: 250px;
-		justify-content: center;
-	}
-	
-	.scroll-indicator {
-		bottom: 1rem;
-	}
-}
-
 /* ========== ECOSYSTEM SECTION (PERGAMINHO) ========== */
 /* Seção Ecosystem com pergaminho como moldura - conteúdo fica atrás */
 
@@ -640,56 +576,6 @@ body::-webkit-scrollbar-thumb {
 	margin: 0;
 }
 
-/* Responsivo Ecosystem */
-@media (max-width: 1400px) {
-	.ecosystem-title {
-		top: 10%;
-		font-size: clamp(1.8rem, 4.5vw, 3.5rem);
-	}
-}
-
-@media (max-width: 1200px) {
-	.ecosystem-title {
-		top: 9%;
-		font-size: clamp(1.6rem, 4vw, 3rem);
-	}
-}
-
-@media (max-width: 1024px) {
-	.ecosystem-title {
-		top: 8%;
-		font-size: clamp(1.4rem, 3.5vw, 2.5rem);
-	}
-}
-
-@media (max-width: 768px) {
-	#ecosystem.landing-section {
-		margin-top: -10vh;
-		aspect-ratio: 16 / 12; /* Mais alto em mobile */
-	}
-	
-	.ecosystem-title {
-		top: 7%;
-		font-size: clamp(1.2rem, 4vw, 2rem);
-		letter-spacing: 0.08em;
-	}
-}
-
-@media (max-width: 576px) {
-	.ecosystem-title {
-		top: 6%;
-		font-size: clamp(1rem, 5vw, 1.6rem);
-		letter-spacing: 0.05em;
-	}
-}
-
-@media (max-width: 400px) {
-	.ecosystem-title {
-		top: 5%;
-		font-size: clamp(0.9rem, 6vw, 1.4rem);
-	}
-}
-
 /* ========== NFTs SECTION ========== */
 /* Seção NFTs - vem após o pergaminho/Ecosystem */
 
@@ -706,3 +592,4 @@ body::-webkit-scrollbar-thumb {
 	max-width: 1200px;
 	margin: 0 auto;
 }
+

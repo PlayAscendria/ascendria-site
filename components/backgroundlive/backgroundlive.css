@@ -7,11 +7,6 @@
    - animation-duration: tempo total do loop em segundos (ex: 180s)
    - animation-direction: normal ou reverse
    
-   Exemplo de customização:
-   
-   .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 200s; animation-direction: normal; }
-   .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 150s; animation-direction: reverse; }
-   
    NUVENS CONFIGURÁVEIS:
    - nuvem1: movimento esquerda (cloud-loop-left)
    - nuvem2: movimento direita (cloud-loop-right)
@@ -20,72 +15,46 @@
    - nuvem5: movimento esquerda (cloud-loop-left)
    - nuvem6: movimento direita (cloud-loop-right)
    - nuvem7: movimento esquerda (cloud-loop-left)
-   - nuvem8: movimento direita (cloud-loop-right)
    
    ============================================ */
 
+/* ========== ESTILOS BASE - OTIMIZADO PARA 1920x1080 ========== */
+
 .backgroundlive-root { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 5; }
 .backgroundlive-root .bg-parallax { position: absolute; inset: 0; }
+
+/* Camada genérica - base para todas as layers */
 .backgroundlive-root .bg-layer {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   will-change: transform;
-  width: 120%;
-  height: 120%;
+  width: 100%;
+  height: 100%;
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover;
+  background-size: 100% auto;
 }
+
+/* Nuvens precisam de contain para não distorcer */
+.backgroundlive-root .bg-layer.nuvem1,
+.backgroundlive-root .bg-layer.nuvem2,
+.backgroundlive-root .bg-layer.nuvem3,
+.backgroundlive-root .bg-layer.nuvem4,
+.backgroundlive-root .bg-layer.nuvem5,
+.backgroundlive-root .bg-layer.nuvem6,
+.backgroundlive-root .bg-layer.nuvem7 {
+  background-size: contain;
+}
+
+/* Camadas de paisagem */
 .backgroundlive-root .bg-layer.montanha3 { z-index: 18; background-image: url("/assets/images/background/backgroundpaisagem/3_montanha1_18.webp"); }
 .backgroundlive-root .bg-layer.grama2 { z-index: 19; background-image: url("/assets/images/background/backgroundpaisagem/2_grama2_19.webp"); }
 .backgroundlive-root .bg-layer.grama1 { z-index: 21; background-image: url("/assets/images/background/backgroundpaisagem/1_grama1_20.webp"); }
-
-/* ============ PERSONAGENS (apenas modo full) ============ */
-/* Carruagem: z-index 22 - imagem via ::after para portal ficar atrás */
-.backgroundlive-root .bg-layer.carruagem { 
-  z-index: 22;
-  width: 100%;
-  height: 100%;
-  /* background-image removido - agora usa ::after */
-}
-.backgroundlive-root .bg-layer.carruagem::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("/assets/images/background/backgroundpaisagem/carruagem.webp");
-  background-repeat: no-repeat;
-  background-position: right center;
-  background-size: contain;
-  pointer-events: none;
-  z-index: 2; /* Acima do portal (z-index: 1) */
-}
-.backgroundlive-root .bg-layer.jano { 
-  z-index: 22; 
-  background-image: url("/assets/images/background/backgroundpaisagem/jano.webp"); 
-}
-/* Orion: acima da grama2 e abaixo da grama1 (z-index 20) */
-.backgroundlive-root .bg-layer.orion { 
-  z-index: 20; 
-  background-image: url("/assets/images/background/backgroundpaisagem/orion.webp"); 
-}
-/* Trio: personagens à esquerda */
-.backgroundlive-root .bg-layer.trio { 
-  z-index: 21; 
-  background-image: url("/assets/images/background/backgroundpaisagem/trio.webp"); 
-  background-position: left center;
-}
-/* Esconder personagens no modo simple */
-.backgroundlive-root[data-mode="simple"] .bg-layer[data-mode-full] {
-  display: none !important;
-}
 .backgroundlive-root .bg-layer.montanha2 { z-index: 17; background-image: url("/assets/images/background/backgroundpaisagem/3_montanha2_14.webp"); }
 
-/* Nuvens - z-index 15 e 14 (variado) */
+/* Nuvens */
 .backgroundlive-root .bg-layer.nuvem1 { z-index: 15; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem1_15.webp"); }
 .backgroundlive-root .bg-layer.nuvem2 { z-index: 14; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem2_15.webp"); }
 .backgroundlive-root .bg-layer.nuvem3 { z-index: 13; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem3_15.webp"); }
@@ -93,24 +62,29 @@
 .backgroundlive-root .bg-layer.nuvem5 { z-index: 11; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem5_15.webp"); }
 .backgroundlive-root .bg-layer.nuvem6 { z-index: 10; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem6_15.webp"); }
 .backgroundlive-root .bg-layer.nuvem7 { z-index: 9; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem7_15.webp"); }
+
+/* Fundo-sol - Camada de fundo principal (céu + horizonte) */
 .backgroundlive-root .bg-layer.fundo-sol {
-  /* fundo-sol: fixed, always full-width and responsive. Do not transform this layer. */
   position: absolute;
   left: 0;
   top: 0;
-  transform: none !important;
-  will-change: auto;
+  transform: none; /* Remove o translate herdado do .bg-layer */
   width: 100%;
   height: 100%;
   background-image: url("/assets/images/background/backgroundpaisagem/5_fundosol_1.webp");
   background-repeat: no-repeat;
-  background-position: center top;
-  background-size: 100% auto; /* fill width, keep aspect */
+  background-size: cover;
+  background-position: center center;
   z-index: 1;
 }
-.backgroundlive-root .bg-layer.sun { z-index: 2; /* in front of fundo-sol */ background-position: 30% 20%; background-size: 20% auto; }
 
-/* Sun visual: rays + glow using pseudo-elements */
+/* Sol - Posição e tamanho para 1080p */
+.backgroundlive-root .bg-layer.sun { 
+  z-index: 2; 
+  background-position: 30% 20%; 
+  background-size: 18% auto; 
+}
+
 .backgroundlive-root .bg-layer.sun::before,
 .backgroundlive-root .bg-layer.sun::after {
   content: "";
@@ -121,37 +95,29 @@
   pointer-events: none;
 }
 
-/* rays */
-/* old CSS rays removed to allow dynamic, randomized rays created by JS */
-.backgroundlive-root .bg-layer.sun::before {
-  display: none;
-}
+.backgroundlive-root .bg-layer.sun::before { display: none; }
 
-/* Dynamic sun rays container (created by JS) */
+/* Sun rays container - Tamanho para 1080p */
 .backgroundlive-root .sun-rays {
   position: absolute;
-  /* Posicionamento FIXO ancorado na montanha - usa left/top em % mas com transform centralizado */
   left: 52%;
   top: 52%;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  /* Tamanho escala com a viewport height */
-  width: 60vh;
-  height: 60vh;
+  width: 75vh;
+  height: 75vh;
   z-index: var(--z-sun-rays, 17);
   animation: sun-rotate 120s linear infinite;
 }
 
-/* Breathing glow circle (pulsating light effect) */
+/* Breathing glow - Tamanho para 1080p */
 .backgroundlive-root .breathing-glow {
   position: absolute;
-  /* Posicionamento FIXO ancorado na montanha - mesma posição dos raios */
   left: 52%;
   top: 52%;
   transform: translate(-50%, -50%);
-  /* Tamanho escala com a viewport height */
-  width: 60vh;
-  height: 60vh;
+  width: 75vh;
+  height: 75vh;
   border-radius: 50%;
   background: radial-gradient(
     circle at 50% 50%,
@@ -167,236 +133,6 @@
   animation: breathing-light 6s ease-in-out infinite;
 }
 
-@keyframes breathing-light {
-  0%, 100% {
-    opacity: 1;
-    filter: blur(40px) brightness(1.0);
-  }
-  50% {
-    opacity: 1.0;
-    filter: blur(40px) brightness(1.6);
-  }
-}
-
-.backgroundlive-root .sun-ray {
-  position: absolute;
-  left: 40%;
-  top: 50%;
-  transform: translate(-50%,-50%); /* rotation applied inline on the wrapper */
-  pointer-events: none;
-  will-change: transform;
-}
-
-.backgroundlive-root .ray-triangle{
-  position: absolute;
-  left: 40%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  /* triangle size is set via inline width/height on creation */
-  background: linear-gradient(180deg, rgba(241,215,44,0.95) 0%, rgba(241,215,44,0.02) 60%);
-  filter: blur(0.8px) saturate(1.05);
-  opacity: 0.9;
-  /* create scalene triangle using clip-path; three points: base-left, base-right, tip */
-  clip-path: polygon(var(--base-left-x,30%) 100%, var(--base-right-x,95%) 100%, var(--tip-x,50%) 0%);
-  transform-origin: 50% 100%; /* scale from base */
-  /* compression/expansion animation using scaleY; durations provided via vars */
-  animation: triangle-pulse var(--ray-duration, 3s) ease-in-out var(--ray-delay, 0s) infinite alternate;
-}
-
-@keyframes sun-rotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
-
-@keyframes triangle-pulse {
-  0% { transform: translate(-50%,-50%) scaleY(0.6); opacity: 0.5; }
-  50% { transform: translate(-50%,-50%) scaleY(1.18); opacity: 0.95; }
-  100% { transform: translate(-50%,-50%) scaleY(1.0); opacity: 0.75; }
-}
-
-/* ========== ANIMAÇÕES ESPECÍFICAS DE CADA NUVEM ========== 
-   EDITE AQUI O MOVIMENTO DE CADA NUVEM
-   ========================================================== */
-
-/* NUVEM 1: Movimento esquerda (padrão) */
-@keyframes nuvem1-animation {
-  0% { transform: translate(-50%, -50%) scale(0.1); left: 37%; top: 38%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  10% { transform: translate(-50%, -50%) scale(0.08); left: 40.7%; top: 47.5%; opacity: 0.8; filter: blur(1px) saturate(0.9) brightness(1.05); }
-  20% { transform: translate(-50%, -50%) scale(0.06); left: 44.4%; top: 57%; opacity: 0.6; filter: blur(2px) saturate(0.8) brightness(1.1); }
-  30% { transform: translate(-50%, -50%) scale(0.04); left: 48.1%; top: 66.5%; opacity: 0.4; filter: blur(3px) saturate(0.7) brightness(1.15); }
-  40% { transform: translate(-50%, -50%) scale(0.02); left: 51.8%; top: 76%; opacity: 0.02; filter: blur(4px) saturate(0.6) brightness(1.2); }
-  50% { transform: translate(-50%, -50%) scale(0); left: 55.5%; top: 85.5%; opacity: 0.1; filter: blur(5px) saturate(0.5) brightness(1.25); }
-  51% { transform: translate(-50%, -50%) scale(0); left: 59.2%; top: 95%; opacity: 0; filter: blur(10px) saturate(0.2) brightness(1.3); }
-  52% { transform: translate(-50%, -50%) scale(0.196); left: 19.98%; top: -10.857%; opacity: 0; filter: blur(0px) saturate(1) brightness(1); }
-  53% { transform: translate(-50%, -50%) scale(0.194); left: 19.61%; top: -9.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  54% { transform: translate(-50%, -50%) scale(0.192); left: 19.98%; top: -8.143%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  55% { transform: translate(-50%, -50%) scale(0.19); left: 20.35%; top: -6.786%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  56% { transform: translate(-50%, -50%) scale(0.188); left: 20.72%; top: -5.429%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  57% { transform: translate(-50%, -50%) scale(0.186); left: 21.09%; top: -4.071%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  58% { transform: translate(-50%, -50%) scale(0.184); left: 21.46%; top: -2.714%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  59% { transform: translate(-50%, -50%) scale(0.182); left: 21.83%; top: -1.357%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  60% { transform: translate(-50%, -50%) scale(0.18); left: 22.2%; top: 0%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  70% { transform: translate(-50%, -50%) scale(0.16); left: 25.9%; top: 9.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  80% { transform: translate(-50%, -50%) scale(0.14); left: 29.6%; top: 19%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  90% { transform: translate(-50%, -50%) scale(0.12); left: 33.3%; top: 28.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  100% { transform: translate(-50%, -50%) scale(0.1); left: 37%; top: 38%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-}
-
-/* NUVEM 2: Movimento direita (invertido) */
-@keyframes nuvem2-animation {
-  0% { transform: translate(-50%, -50%) scale(0.5); left: 5%; top: 20%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  10% { transform: translate(-50%, -50%) scale(0.4); left: 14.17%; top: 32.5%; opacity: 0.8; filter: blur(1px) saturate(0.9) brightness(1.05); }
-  20% { transform: translate(-50%, -50%) scale(0.3); left: 23.33%; top: 45%; opacity: 0.6; filter: blur(2px) saturate(0.8) brightness(1.1); }
-  30% { transform: translate(-50%, -50%) scale(0.2); left: 32.5%; top: 57.5%; opacity: 0.4; filter: blur(3px) saturate(0.7) brightness(1.15); }
-  40% { transform: translate(-50%, -50%) scale(0.1); left: 41.67%; top: 70%; opacity: 0.02; filter: blur(4px) saturate(0.6) brightness(1.2); }
-  50% { transform: translate(-50%, -50%) scale(0); left: 50.83%; top: 82.5%; opacity: 0.1; filter: blur(5px) saturate(0.5) brightness(1.25); }
-  51% { transform: translate(-50%, -50%) scale(0); left: 50%; top: 95%; opacity: 0; filter: blur(10px) saturate(0.2) brightness(1.3); }
-  52% { transform: translate(-50%, -50%) scale(0.98); left: -60.143%; top: -59.286%; opacity: 0; filter: blur(0px) saturate(1) brightness(1); }
-  53% { transform: translate(-50%, -50%) scale(0.97); left: -58.833%; top: -57.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  54% { transform: translate(-50%, -50%) scale(0.96); left: -53.524%; top: -52.714%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  55% { transform: translate(-50%, -50%) scale(0.95); left: -46.214%; top: -45.929%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  56% { transform: translate(-50%, -50%) scale(0.94); left: -41.905%; top: -40.143%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  57% { transform: translate(-50%, -50%) scale(0.93); left: -37.595%; top: -36.357%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  58% { transform: translate(-50%, -50%) scale(0.92); left: -34.286%; top: -33.571%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  59% { transform: translate(-50%, -50%) scale(0.91); left: -32.976%; top: -31.786%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  60% { transform: translate(-50%, -50%) scale(0.9); left: -31.667%; top: -30%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  70% { transform: translate(-50%, -50%) scale(0.8); left: -22.5%; top: -17.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  80% { transform: translate(-50%, -50%) scale(0.7); left: -13.333%; top: -5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  90% { transform: translate(-50%, -50%) scale(0.6); left: -4.167%; top: 7.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  100% { transform: translate(-50%, -50%) scale(0.5); left: 5%; top: 20%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-}
-
-/* NUVEM 3: Movimento esquerda */
-@keyframes nuvem3-animation {
-  0% { transform: translate(-50%, -50%) scale(0.2); left: 30%; top: 18%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  10% { transform: translate(-50%, -50%) scale(0.16); left: 35%; top: 30.833%; opacity: 0.8; filter: blur(1px) saturate(0.9) brightness(1.05); }
-  20% { transform: translate(-50%, -50%) scale(0.12); left: 40%; top: 43.667%; opacity: 0.6; filter: blur(2px) saturate(0.8) brightness(1.1); }
-  30% { transform: translate(-50%, -50%) scale(0.08); left: 45%; top: 56.5%; opacity: 0.4; filter: blur(3px) saturate(0.7) brightness(1.15); }
-  40% { transform: translate(-50%, -50%) scale(0.04); left: 50%; top: 69.333%; opacity: 0.02; filter: blur(4px) saturate(0.6) brightness(1.2); }
-  50% { transform: translate(-50%, -50%) scale(0); left: 55%; top: 82.167%; opacity: 0.1; filter: blur(5px) saturate(0.5) brightness(1.25); }
-  51% { transform: translate(-50%, -50%) scale(0); left: 50%; top: 95%; opacity: 0; filter: blur(10px) saturate(0.2) brightness(1.3); }
-  52% { transform: translate(-50%, -50%) scale(0.392); left: 4.286%; top: -48%; opacity: 0; filter: blur(0px) saturate(1) brightness(1); }
-  53% { transform: translate(-50%, -50%) scale(0.388); left: 5%; top: -46.167%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  54% { transform: translate(-50%, -50%) scale(0.384); left: 5.714%; top: -44.333%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  55% { transform: translate(-50%, -50%) scale(0.38); left: 6.429%; top: -42.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  56% { transform: translate(-50%, -50%) scale(0.376); left: 7.143%; top: -40.667%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  57% { transform: translate(-50%, -50%) scale(0.372); left: 7.857%; top: -38.833%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  58% { transform: translate(-50%, -50%) scale(0.368); left: 8.571%; top: -37%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  59% { transform: translate(-50%, -50%) scale(0.364); left: 9.286%; top: -35.167%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  60% { transform: translate(-50%, -50%) scale(0.36); left: 10%; top: -33.333%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  70% { transform: translate(-50%, -50%) scale(0.32); left: 15%; top: -20.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  80% { transform: translate(-50%, -50%) scale(0.28); left: 20%; top: -7.667%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  90% { transform: translate(-50%, -50%) scale(0.24); left: 25%; top: 5.167%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  100% { transform: translate(-50%, -50%) scale(0.2); left: 30%; top: 18%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-}
-
-/* NUVEM 4: Movimento direita */
-@keyframes nuvem4-animation {
-  0% { transform: translate(-50%, -50%) scale(0.1); left: 42%; top: 52%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  10% { transform: translate(-50%, -50%) scale(0.08); left: 52.5%; top: 53%; opacity: 0.8; filter: blur(1px) saturate(0.9) brightness(1.05); }
-  20% { transform: translate(-50%, -50%) scale(0.06); left: 54%; top: 54%; opacity: 0.6; filter: blur(2px) saturate(0.8) brightness(1.1); }
-  30% { transform: translate(-50%, -50%) scale(0.04); left: 55.5%; top: 55%; opacity: 0.4; filter: blur(3px) saturate(0.7) brightness(1.15); }
-  40% { transform: translate(-50%, -50%) scale(0.02); left: 56%; top: 56%; opacity: 0.02; filter: blur(4px) saturate(0.6) brightness(1.2); }
-  50% { transform: translate(-50%, -50%) scale(0); left: 57%; top: 57%; opacity: 0.1; filter: blur(5px) saturate(0.5) brightness(1.25); }
-  51% { transform: translate(-50%, -50%) scale(0); left: 57%; top: 53%; opacity: 0; filter: blur(10px) saturate(0.2) brightness(1.3); }
-  52% { transform: translate(-50%, -50%) scale(0.196); left: -15.4%; top: 46.60%; opacity: 0; filter: blur(0px) saturate(1) brightness(1); }
-  53% { transform: translate(-50%, -50%) scale(0.194); left: -10.5%; top: 46.85%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  54% { transform: translate(-50%, -50%) scale(0.192); left: -9%; top: 46%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  55% { transform: translate(-50%, -50%) scale(0.19); left: -7.5%; top: 47.15%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  56% { transform: translate(-50%, -50%) scale(0.188); left: -6%; top: 47.30%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  57% { transform: translate(-50%, -50%) scale(0.186); left: -4.5%; top: 47.45%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  58% { transform: translate(-50%, -50%) scale(0.184); left: -3%; top: 47.60%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  59% { transform: translate(-50%, -50%) scale(0.182); left: -1.5%; top: 47.85%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  60% { transform: translate(-50%, -50%) scale(0.18); left: 0%; top: 48%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  70% { transform: translate(-50%, -50%) scale(0.16); left: 10.5%; top: 49%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  80% { transform: translate(-50%, -50%) scale(0.14); left: 21%; top: 50%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  90% { transform: translate(-50%, -50%) scale(0.12); left: 31.5%; top: 51%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  100% { transform: translate(-50%, -50%) scale(0.1); left: 42%; top: 52%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-}
-
-/* NUVEM 5: Movimento esquerda */
-@keyframes nuvem5-animation {
-  0% { transform: translate(-50%, -50%) scale(0.1); left: 70%; top: 52%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  10% { transform: translate(-50%, -50%) scale(0.08); left: 68.17%; top: 52.5%; opacity: 0.8; filter: blur(1px) saturate(0.9) brightness(1.05); }
-  20% { transform: translate(-50%, -50%) scale(0.06); left: 66.33%; top: 53%; opacity: 0.6; filter: blur(2px) saturate(0.8) brightness(1.1); }
-  30% { transform: translate(-50%, -50%) scale(0.04); left: 64.5%; top: 53.5%; opacity: 0.4; filter: blur(3px) saturate(0.7) brightness(1.15); }
-  40% { transform: translate(-50%, -50%) scale(0.02); left: 62.67%; top: 54%; opacity: 0.02; filter: blur(4px) saturate(0.6) brightness(1.2); }
-  51% { transform: translate(-50%, -50%) scale(0); left: 57%; top: 54%; opacity: 0; filter: blur(10px) saturate(0.2) brightness(1.3); }
-  52% { transform: translate(-50%, -50%) scale(0.196); left: 108.8%; top: 46.60%; opacity: 0; filter: blur(0px) saturate(1) brightness(1); }
-  53% { transform: translate(-50%, -50%) scale(0.194); left: 107.7%; top: 46.85%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  54% { transform: translate(-50%, -50%) scale(0.192); left: 106.6%; top: 46%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  55% { transform: translate(-50%, -50%) scale(0.19); left: 105.5%; top: 47.15%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  56% { transform: translate(-50%, -50%) scale(0.188); left: 104.4%; top: 47.30%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  57% { transform: translate(-50%, -50%) scale(0.186); left: 103.3%; top: 47.45%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  58% { transform: translate(-50%, -50%) scale(0.184); left: 102.2%; top: 47.60%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  59% { transform: translate(-50%, -50%) scale(0.182); left: 101.1%; top: 47.85%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  60% { transform: translate(-50%, -50%) scale(0.18); left: 100%; top: 48%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  70% { transform: translate(-50%, -50%) scale(0.16); left: 92.5%; top: 48.5%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  80% { transform: translate(-50%, -50%) scale(0.14); left: 85%; top: 49%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  90% { transform: translate(-50%, -50%) scale(0.12); left: 77.5%; top: 51%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  100% { transform: translate(-50%, -50%) scale(0.1); left: 70%; top: 52%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-}
-
-/* NUVEM 6: Movimento direita */
-@keyframes nuvem6-animation {
-  0% { transform: translate(-50%, -50%) scale(0.3); left: 100%; top: 50%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  10% { transform: translate(-50%, -50%) scale(0.28); left: 90%; top: 52.5%; opacity: 0.8; filter: blur(1px) saturate(0.9) brightness(1.05); }
-  20% { transform: translate(-50%, -50%) scale(0.26); left: 80%; top: 53%; opacity: 0.6; filter: blur(2px) saturate(0.8) brightness(1.1); }
-  30% { transform: translate(-50%, -50%) scale(0.24); left: 70%; top: 53.5%; opacity: 0.4; filter: blur(3px) saturate(0.7) brightness(1.15); }
-  40% { transform: translate(-50%, -50%) scale(0.22); left: 60%; top: 54%; opacity: 0.02; filter: blur(4px) saturate(0.6) brightness(1.2); }
-  51% { transform: translate(-50%, -50%) scale(0); left: 50%; top: 54%; opacity: 0; filter: blur(10px) saturate(0.2) brightness(1.3); }
-  52% { transform: translate(-50%, -50%) scale(0.396); left: 148%; top: 46.60%; opacity: 0; filter: blur(0px) saturate(1) brightness(1); }
-  53% { transform: translate(-50%, -50%) scale(0.394); left: 147%; top: 46.85%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  54% { transform: translate(-50%, -50%) scale(0.392); left: 146%; top: 46%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  55% { transform: translate(-50%, -50%) scale(0.39); left: 145%; top: 47.15%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  56% { transform: translate(-50%, -50%) scale(0.388); left: 144%; top: 47.30%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  57% { transform: translate(-50%, -50%) scale(0.386); left: 143%; top: 47.45%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  58% { transform: translate(-50%, -50%) scale(0.384); left: 142%; top: 47.60%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  59% { transform: translate(-50%, -50%) scale(0.382); left: 141%; top: 47.85%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  60% { transform: translate(-50%, -50%) scale(0.38); left: 140%; top: 48%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  70% { transform: translate(-50%, -50%) scale(0.36); left: 130%; top: 54%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  80% { transform: translate(-50%, -50%) scale(0.34); left: 120%; top: 49%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  90% { transform: translate(-50%, -50%) scale(0.32); left: 110%; top: 55%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  100% { transform: translate(-50%, -50%) scale(0.3); left: 100%; top: 50%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-}
-
-/* NUVEM 7: Movimento esquerda */
-@keyframes nuvem7-animation {
-  0% { transform: translate(-50%, -50%) scale(0.4); left: 100%; top: 20%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  10% { transform: translate(-50%, -50%) scale(0.38); left: 90%; top: 30%; opacity: 0.8; filter: blur(1px) saturate(0.9) brightness(1.05); }
-  20% { transform: translate(-50%, -50%) scale(0.36); left: 80%; top: 40%; opacity: 0.6; filter: blur(2px) saturate(0.8) brightness(1.1); }
-  30% { transform: translate(-50%, -50%) scale(0.34); left: 70%; top: 50%; opacity: 0.4; filter: blur(3px) saturate(0.7) brightness(1.15); }
-  40% { transform: translate(-50%, -50%) scale(0.32); left: 60%; top: 60%; opacity: 0.02; filter: blur(4px) saturate(0.6) brightness(1.2); }
-  51% { transform: translate(-50%, -50%) scale(0); left: 50%; top: 54%; opacity: 0; filter: blur(10px) saturate(0.2) brightness(1.3); }
-  52% { transform: translate(-50%, -50%) scale(0.496); left: 148%; top: -28%; opacity: 0; filter: blur(0px) saturate(1) brightness(1); }
-  53% { transform: translate(-50%, -50%) scale(0.494); left: 147%; top: -27%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  54% { transform: translate(-50%, -50%) scale(0.492); left: 146%; top: -26%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  55% { transform: translate(-50%, -50%) scale(0.49); left: 145%; top: -25%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  56% { transform: translate(-50%, -50%) scale(0.488); left: 144%; top: -24%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  57% { transform: translate(-50%, -50%) scale(0.486); left: 143%; top: -23%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  58% { transform: translate(-50%, -50%) scale(0.484); left: 142%; top: -22%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  59% { transform: translate(-50%, -50%) scale(0.482); left: 141%; top: -21%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  60% { transform: translate(-50%, -50%) scale(0.48); left: 140%; top: -20%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  70% { transform: translate(-50%, -50%) scale(0.46); left: 130%; top: -10%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  80% { transform: translate(-50%, -50%) scale(0.44); left: 120%; top: 0%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  90% { transform: translate(-50%, -50%) scale(0.42); left: 110%; top: 10%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-  100% { transform: translate(-50%, -50%) scale(0.4); left: 100%; top: 20%; opacity: 1; filter: blur(0px) saturate(1) brightness(1); }
-}
-
-
-/* Cloud animation: attach to nuvem layers */
-.backgroundlive-root .bg-layer.nuvem1 { animation: nuvem1-animation 70s linear infinite !important; will-change: transform; }
-.backgroundlive-root .bg-layer.nuvem2 { animation: nuvem2-animation 140s linear infinite !important; will-change: transform; }
-.backgroundlive-root .bg-layer.nuvem3 { animation: nuvem3-animation 80s linear infinite !important; will-change: transform; }
-.backgroundlive-root .bg-layer.nuvem4 { animation: nuvem4-animation 65s linear infinite !important; will-change: transform; }
-.backgroundlive-root .bg-layer.nuvem5 { animation: nuvem5-animation 65s linear infinite !important; will-change: transform; }
-.backgroundlive-root .bg-layer.nuvem6 { animation: nuvem6-animation 120s linear infinite !important; will-change: transform; }
-.backgroundlive-root .bg-layer.nuvem7 { animation: nuvem7-animation 180s linear infinite !important; will-change: transform; }
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .backgroundlive-root .sun-rays { animation: none !important; }
-  .backgroundlive-root .sun-ray { animation: none !important; }
-  .backgroundlive-root .sun-rays::before { animation: none !important; filter: blur(45px) brightness(1.15) !important; /* glow stays, just no animation */ }
-}
-
 /* bloom / soft glow */
 .backgroundlive-root .bg-layer.sun::after {
   width: 260px;
@@ -407,533 +143,262 @@
   opacity: 0.95;
 }
 
-@keyframes sun-rotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+/* ============ PERSONAGENS BASE ============ */
 
-/* Respect user preference for reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .backgroundlive-root .bg-layer.sun::before { animation: none; }
-}
-
-/* ========== RESPONSIVIDADE MOBILE E TABLETS ========== */
-
-/* Tablets (769px - 900px) */
-@media (max-width: 900px) {
-  .backgroundlive-root .bg-layer {
-    width: 150%; /* Aumentado para crescer naturalmente */
-    height: 150%;
-  }
-
-  /* Montanhas e grama: crescem proporcionalmente com o container */
-  .backgroundlive-root .bg-layer.montanha3,
-  .backgroundlive-root .bg-layer.montanha2,
-  .backgroundlive-root .bg-layer.grama1,
-  .backgroundlive-root .bg-layer.grama2 {
-    width: 100%;
-    height: 100%;
-    background-size: auto 100%;
-    background-position: center bottom;
-  }
-
-  /* Nuvens: crescem proporcionalmente */
-  .backgroundlive-root .bg-layer.nuvem1,
-  .backgroundlive-root .bg-layer.nuvem2,
-  .backgroundlive-root .bg-layer.nuvem3,
-  .backgroundlive-root .bg-layer.nuvem4,
-  .backgroundlive-root .bg-layer.nuvem5,
-  .backgroundlive-root .bg-layer.nuvem6,
-  .backgroundlive-root .bg-layer.nuvem7 {
-    background-size: contain;
-  }
-
-  /* FUNDO-SOL: Este é o background real - deve preencher TUDO */
-  .backgroundlive-root .bg-layer.fundo-sol {
-    width: 100%;
-    height: 100%;
-    background-size: cover; /* Preenche altura E largura */
-    background-position: center center;
-  }
-
-  /* Tablets - sun rays e glow tamanho médio */
-  .backgroundlive-root .sun-rays {
-    width: 45vh;
-    height: 45vh;
-  }
-
-  .backgroundlive-root .breathing-glow {
-    width: 45vh;
-    height: 45vh;
-    filter: blur(30px);
-  }
-}
-
-/* iPad Pro e Tablets grandes (901px - 1024px) em portrait */
-@media (min-width: 901px) and (max-width: 1024px) and (orientation: portrait) {
-  .backgroundlive-root .bg-layer {
-    width: 140%;
-    height: 140%;
-  }
-
-  /* Nuvens: tamanho maior para cobrir toda área */
-  .backgroundlive-root .bg-layer.nuvem1,
-  .backgroundlive-root .bg-layer.nuvem2,
-  .backgroundlive-root .bg-layer.nuvem3,
-  .backgroundlive-root .bg-layer.nuvem4,
-  .backgroundlive-root .bg-layer.nuvem5,
-  .backgroundlive-root .bg-layer.nuvem6,
-  .backgroundlive-root .bg-layer.nuvem7,
-  .backgroundlive-root .bg-layer.nuvem8 {
-    width: 140%;
-    height: 140%;
-    background-size: contain;
-    background-position: center center;
-  }
-
-  /* Montanhas e grama: manter visíveis */
-  .backgroundlive-root .bg-layer.montanha3,
-  .backgroundlive-root .bg-layer.montanha2,
-  .backgroundlive-root .bg-layer.grama1,
-  .backgroundlive-root .bg-layer.grama2 {
-    width: 100%;
-    height: 100%;
-    background-size: auto 100%;
-    background-position: center bottom;
-  }
-
-  /* FUNDO-SOL: preencher toda área */
-  .backgroundlive-root .bg-layer.fundo-sol {
-    width: 100%;
-    height: 100%;
-    background-size: cover !important;
-    background-position: center center !important;
-  }
-
-  /* Sun rays e glow */
-  .backgroundlive-root .sun-rays {
-    width: 50vh;
-    height: 50vh;
-  }
-
-  .backgroundlive-root .breathing-glow {
-    width: 50vh;
-    height: 50vh;
-    filter: blur(35px);
-  }
-}
-
-/* Mobile Landscape e Tablets pequenos (481px - 768px) */
-@media (max-width: 768px) {
-  .backgroundlive-root .bg-layer {
-    width: 160%; /* Aumentado para crescer mais */
-    height: 160%;
-  }
-
-  /* Montanhas e grama: crescem proporcionalmente */
-  .backgroundlive-root .bg-layer.montanha3,
-  .backgroundlive-root .bg-layer.montanha2,
-  .backgroundlive-root .bg-layer.grama1,
-  .backgroundlive-root .bg-layer.grama2 {
-    width: 100%;
-    height: 100%;
-    background-size: auto 100%;
-    background-position: center bottom;
-  }
-
-  /* Nuvens: crescem proporcionalmente */
-  .backgroundlive-root .bg-layer.nuvem1,
-  .backgroundlive-root .bg-layer.nuvem2,
-  .backgroundlive-root .bg-layer.nuvem3,
-  .backgroundlive-root .bg-layer.nuvem4,
-  .backgroundlive-root .bg-layer.nuvem5,
-  .backgroundlive-root .bg-layer.nuvem6,
-  .backgroundlive-root .bg-layer.nuvem7 {
-    background-size: contain;
-  }
-
-  /* FUNDO-SOL: Background principal - preenche tudo */
-  .backgroundlive-root .bg-layer.fundo-sol {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center center;
-  }
-
-  /* Mobile landscape - tamanho reduzido */
-  .backgroundlive-root .sun-rays {
-    width: 35vh;
-    height: 35vh;
-  }
-
-  .backgroundlive-root .breathing-glow {
-    width: 35vh;
-    height: 35vh;
-    filter: blur(20px);
-  }
-
-  /* Reduzir velocidade de animação em mobile */
-  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 90s !important; }
-  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 160s !important; }
-  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 100s !important; }
-  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 85s !important; }
-  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 85s !important; }
-  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 140s !important; }
-  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 200s !important; }
-}
-
-/* Mobile Portrait (321px - 480px) */
-@media (max-width: 480px) {
-  .backgroundlive-root .bg-layer {
-    width: 170%;
-    height: 170%;
-  }
-
-  /* Montanhas e grama: manter proporção natural */
-  .backgroundlive-root .bg-layer.montanha3,
-  .backgroundlive-root .bg-layer.montanha2,
-  .backgroundlive-root .bg-layer.grama1,
-  .backgroundlive-root .bg-layer.grama2 {
-    width: 100%;
-    height: 100%;
-    background-size: auto 100%;
-    background-position: center bottom;
-  }
-
-  /* Nuvens: crescem proporcionalmente com o container */
-  .backgroundlive-root .bg-layer.nuvem1,
-  .backgroundlive-root .bg-layer.nuvem2,
-  .backgroundlive-root .bg-layer.nuvem3,
-  .backgroundlive-root .bg-layer.nuvem4,
-  .backgroundlive-root .bg-layer.nuvem5,
-  .backgroundlive-root .bg-layer.nuvem6,
-  .backgroundlive-root .bg-layer.nuvem7 {
-    background-size: contain;
-  }
-
-  /* FUNDO-SOL: Background principal - preenche tudo */
-  .backgroundlive-root .bg-layer.fundo-sol {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center center;
-  }
-
-  /* Mobile pequeno - sol menor */
-  .backgroundlive-root .sun-rays {
-    width: 28vh;
-    height: 28vh;
-  }
-
-  .backgroundlive-root .breathing-glow {
-    width: 28vh;
-    height: 28vh;
-    filter: blur(15px);
-  }
-
-  /* Animações mais lentas em mobile pequeno */
-  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 100s !important; }
-  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 170s !important; }
-  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 110s !important; }
-  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 95s !important; }
-  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 95s !important; }
-  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 150s !important; }
-  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 210s !important; }
-}
-
-/* Mobile Ultra Pequeno (até 320px) */
-@media (max-width: 320px) {
-  .backgroundlive-root .bg-layer {
-    width: 180%;
-    height: 180%;
-  }
-
-  /* Montanhas e grama: manter proporção natural */
-  .backgroundlive-root .bg-layer.montanha3,
-  .backgroundlive-root .bg-layer.montanha2,
-  .backgroundlive-root .bg-layer.grama1,
-  .backgroundlive-root .bg-layer.grama2 {
-    width: 100%;
-    height: 100%;
-    background-size: auto 100%;
-    background-position: center bottom;
-  }
-
-  /* Nuvens: crescem proporcionalmente com o container */
-  .backgroundlive-root .bg-layer.nuvem1,
-  .backgroundlive-root .bg-layer.nuvem2,
-  .backgroundlive-root .bg-layer.nuvem3,
-  .backgroundlive-root .bg-layer.nuvem4,
-  .backgroundlive-root .bg-layer.nuvem5,
-  .backgroundlive-root .bg-layer.nuvem6,
-  .backgroundlive-root .bg-layer.nuvem7 {
-    background-size: contain;
-  }
-
-  /* FUNDO-SOL: Background principal - preenche tudo */
-  .backgroundlive-root .bg-layer.fundo-sol {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center center;
-  }
-
-  /* Mobile ultra pequeno - sol mínimo */
-  .backgroundlive-root .sun-rays {
-    width: 22vh;
-    height: 22vh;
-  }
-
-  .backgroundlive-root .breathing-glow {
-    width: 22vh;
-    height: 22vh;
-    filter: blur(12px);
-  }
-}
-
-/* ========== RESPONSIVE DESIGN: 720p até 4K ========== */
-
-/* HD / 720p (1280x720) */
-@media (min-width: 1280px) and (max-width: 1365px) {
-  .backgroundlive-root .bg-layer {
-    width: 115%;
-    height: 115%;
-    background-size: contain;
-  }
-
-  .backgroundlive-root .bg-layer.sun {
-    background-size: 22% auto;
-  }
-
-  /* Sun rays e glow mantêm posição fixa, apenas tamanho muda */
-  .backgroundlive-root .sun-rays {
-    width: 50vh;
-    height: 50vh;
-  }
-
-  .backgroundlive-root .breathing-glow {
-    width: 50vh;
-    height: 50vh;
-  }
-  
-  /* Animações HD */
-  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 20s; }
-  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 22s; }
-  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 21s; }
-  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 23s; }
-  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 24s; }
-  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 19s; }
-  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 25s; }
-  .backgroundlive-root .bg-layer.nuvem8 { animation-duration: 18s; }
-}
-
-/* Full HD / 1080p (1920x1080) */
-@media (min-width: 1366px) and (max-width: 1919px) {
-  .backgroundlive-root .bg-layer {
-    width: 120%;
-    height: 120%;
-    background-size: contain;
-  }
-
-  .backgroundlive-root .bg-layer.sun {
-    background-size: 20% auto;
-  }
-
-  /* Full HD - tamanho maior mas mesma posição */
-  .backgroundlive-root .sun-rays {
-    width: 65vh;
-    height: 65vh;
-  }
-
-  .backgroundlive-root .breathing-glow {
-    width: 65vh;
-    height: 65vh;
-  }
-  
-  /* Animações 1080p */
-  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 18s; }
-  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 20s; }
-  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 19s; }
-  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 21s; }
-  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 22s; }
-  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 17s; }
-  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 23s; }
-  .backgroundlive-root .bg-layer.nuvem8 { animation-duration: 16s; }
-}
-
-/* Ultrawide / QHD (2560x1440) */
-@media (min-width: 1920px) and (max-width: 2559px) {
-  .backgroundlive-root .bg-layer {
-    width: 100%;
-    height: 100%;
-    background-size: 100% auto;
-  }
-  
-  /* Nuvens: manter contain para não cortar */
-  .backgroundlive-root .bg-layer.nuvem1,
-  .backgroundlive-root .bg-layer.nuvem2,
-  .backgroundlive-root .bg-layer.nuvem3,
-  .backgroundlive-root .bg-layer.nuvem4,
-  .backgroundlive-root .bg-layer.nuvem5,
-  .backgroundlive-root .bg-layer.nuvem6,
-  .backgroundlive-root .bg-layer.nuvem7,
-  .backgroundlive-root .bg-layer.nuvem8 {
-    background-size: contain;
-  }
-  
-  .backgroundlive-root .bg-layer.sun {
-    background-size: 18% auto;
-  }
-
-  /* QHD/Ultrawide - tamanho ainda maior */
-  .backgroundlive-root .sun-rays {
-    width: 75vh;
-    height: 75vh;
-  }
-
-  .backgroundlive-root .breathing-glow {
-    width: 75vh;
-    height: 75vh;
-  }
-  
-  /* Animações Ultrawide */
-  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 16s; }
-  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 18s; }
-  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 17s; }
-  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 19s; }
-  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 20s; }
-  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 15s; }
-  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 21s; }
-  .backgroundlive-root .bg-layer.nuvem8 { animation-duration: 14s; }
-}
-
-/* 4K UHD (3840x2160) */
-@media (min-width: 2560px) {
-  .backgroundlive-root .bg-layer {
-    width: 100%;
-    height: 100%;
-    background-size: 100% auto;
-  }
-  
-  /* Nuvens: manter contain para não cortar */
-  .backgroundlive-root .bg-layer.nuvem1,
-  .backgroundlive-root .bg-layer.nuvem2,
-  .backgroundlive-root .bg-layer.nuvem3,
-  .backgroundlive-root .bg-layer.nuvem4,
-  .backgroundlive-root .bg-layer.nuvem5,
-  .backgroundlive-root .bg-layer.nuvem6,
-  .backgroundlive-root .bg-layer.nuvem7,
-  .backgroundlive-root .bg-layer.nuvem8 {
-    background-size: contain;
-  }
-  
-  .backgroundlive-root .bg-layer.sun {
-    background-size: 16% auto;
-  }
-
-  /* 4K - tamanho máximo */
-  .backgroundlive-root .sun-rays {
-    width: 90vh;
-    height: 90vh;
-  }
-
-  .backgroundlive-root .breathing-glow {
-    width: 90vh;
-    height: 90vh;
-  }
-  
-  /* Animações 4K */
-  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 14s; }
-  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 16s; }
-  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 15s; }
-  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 17s; }
-  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 18s; }
-  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 13s; }
-  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 19s; }
-  .backgroundlive-root .bg-layer.nuvem8 { animation-duration: 12s; }
-}
-
-/* ========== LANDSCAPE ORIENTATION ========== */
-
-/* Mobile Landscape - Otimizações específicas */
-@media (max-width: 768px) and (orientation: landscape) {
-  .backgroundlive-root .sun-rays {
-    width: 40vh;
-    height: 40vh;
-  }
-
-  .backgroundlive-root .breathing-glow {
-    width: 40vh;
-    height: 40vh;
-    filter: blur(15px);
-  }
-
-  /* Ajustes para viewport curto em landscape */
-  .backgroundlive-root .bg-layer {
-    background-size: cover;
-  }
-}
-
-/* Tablet Landscape */
-@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
-  .backgroundlive-root .sun-rays {
-    width: min(60vh, 40vw);
-    height: min(60vh, 40vw);
-  }
-
-  .backgroundlive-root .breathing-glow {
-    width: min(60vh, 40vw);
-    height: min(60vh, 40vw);
-  }
-}
-
-/* ============================================
-   PERSONAGENS (modo full)
-   Só aparecem na Home e About
-   ============================================ */
-
-.backgroundlive-root .bg-characters {
+/* Carruagem */
+.backgroundlive-root .bg-layer.carruagem { 
+  z-index: 22;
   position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 16; /* Entre nuvens e grama */
+  height: 100%;
+  width: auto;
+  bottom: auto;
+  left: 80%;
+  top: 70%;
+  background: none;
+  background-image: none;
+  background-size: auto;
+  background-position: unset;
+}
+.backgroundlive-root .bg-layer.carruagem img {
+  height: 100%;
+  width: auto;
+  display: block;
 }
 
-/* Container escondido no modo simple */
-.backgroundlive-root[data-mode="simple"] .bg-characters {
+/* Jano */
+.backgroundlive-root .bg-layer.jano { 
+  z-index: 21;
+  position: absolute;
+  height: 20%;
+  width: auto;
+  bottom: auto;
+  left: 45%;
+  top: 80%;
+  transform: translateX(-50%);
+  background: none;
+  background-image: none;
+  background-size: auto;
+  background-position: unset;
+}
+.backgroundlive-root .bg-layer.jano img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+/* Orion */
+.backgroundlive-root .bg-layer.orion { 
+  z-index: 20;
+  position: absolute;
+  height: 15%;
+  width: auto;
+  bottom: auto;
+  left: 54%;
+  top: 76%;
+  transform: translateX(-50%);
+  background: none;
+  background-image: none;
+  background-size: auto;
+  background-position: unset;
+}
+.backgroundlive-root .bg-layer.orion img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+/* Trio */
+.backgroundlive-root .bg-layer.trio { 
+  z-index: 21;
+  position: absolute;
+  height: 70%;
+  width: auto;
+  bottom: auto;
+  left: 18%;
+  top: 70%;
+  transform: translateX(-50%);
+  background: none;
+  background-image: none;
+  background-size: auto;
+  background-position: unset;
+}
+.backgroundlive-root .bg-layer.trio img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+/* Esconder personagens no modo simple */
+.backgroundlive-root[data-mode="simple"] .bg-layer[data-mode-full] {
   display: none !important;
 }
 
-/* Estilo base para personagens */
-.backgroundlive-root .bg-characters .character {
+/* Sun ray elements */
+.backgroundlive-root .sun-ray {
   position: absolute;
-  left: 50%;
+  left: 40%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%,-50%);
+  pointer-events: none;
   will-change: transform;
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  background-size: contain;
 }
 
-/* ============================================
-   ADICIONE SEUS PERSONAGENS AQUI:
-   
-   Exemplo:
-   
-   .backgroundlive-root .bg-characters .character-warrior {
-     width: 300px;
-     height: 500px;
-     background-image: url("/assets/images/characters/warrior.webp");
-     left: 30%;
-     bottom: 15%;
-     z-index: 1;
-   }
-   
-   .backgroundlive-root .bg-characters .character-mage {
-     width: 280px;
-     height: 480px;
-     background-image: url("/assets/images/characters/mage.webp");
-     left: 70%;
-     bottom: 18%;
-     z-index: 2;
-   }
-   
-   ============================================ */
+.backgroundlive-root .ray-triangle {
+  position: absolute;
+  left: 40%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  background: linear-gradient(180deg, rgba(241,215,44,0.95) 0%, rgba(241,215,44,0.02) 60%);
+  filter: blur(0.8px) saturate(1.05);
+  opacity: 0.9;
+  clip-path: polygon(var(--base-left-x,30%) 100%, var(--base-right-x,95%) 100%, var(--tip-x,50%) 0%);
+  transform-origin: 50% 100%;
+  animation: triangle-pulse var(--ray-duration, 3s) ease-in-out var(--ray-delay, 0s) infinite alternate;
+}
+
+/* ========== KEYFRAMES ========== */
+
+@keyframes breathing-light {
+  0%, 100% { opacity: 1; filter: blur(40px) brightness(1.0); }
+  50% { opacity: 1.0; filter: blur(40px) brightness(1.6); }
+}
+
+@keyframes sun-rotate { 
+  from { transform: translate(-50%, -50%) rotate(0deg); } 
+  to { transform: translate(-50%, -50%) rotate(360deg); } 
+}
+
+@keyframes triangle-pulse {
+  0% { transform: translate(-50%,-50%) scaleY(0.6); opacity: 0.5; }
+  50% { transform: translate(-50%,-50%) scaleY(1.18); opacity: 0.95; }
+  100% { transform: translate(-50%,-50%) scaleY(1.0); opacity: 0.75; }
+}
+
+/* ========== ANIMAÇÕES DAS NUVENS ========== */
+
+@keyframes nuvem1-animation {
+  0% { transform: translate(-50%, -50%) scale(0.1); left: 37%; top: 38%; opacity: 1; }
+  10% { transform: translate(-50%, -50%) scale(0.08); left: 40.7%; top: 47.5%; opacity: 0.8; }
+  20% { transform: translate(-50%, -50%) scale(0.06); left: 44.4%; top: 57%; opacity: 0.6; }
+  30% { transform: translate(-50%, -50%) scale(0.04); left: 48.1%; top: 66.5%; opacity: 0.4; }
+  40% { transform: translate(-50%, -50%) scale(0.02); left: 51.8%; top: 76%; opacity: 0.02; }
+  50% { transform: translate(-50%, -50%) scale(0); left: 55.5%; top: 85.5%; opacity: 0.1; }
+  51% { transform: translate(-50%, -50%) scale(0); left: 59.2%; top: 95%; opacity: 0; }
+  52% { transform: translate(-50%, -50%) scale(0.196); left: 19.98%; top: -10.857%; opacity: 0; }
+  53% { transform: translate(-50%, -50%) scale(0.194); left: 19.61%; top: -9.5%; opacity: 1; }
+  60% { transform: translate(-50%, -50%) scale(0.18); left: 22.2%; top: 0%; opacity: 1; }
+  70% { transform: translate(-50%, -50%) scale(0.16); left: 25.9%; top: 9.5%; opacity: 1; }
+  80% { transform: translate(-50%, -50%) scale(0.14); left: 29.6%; top: 19%; opacity: 1; }
+  90% { transform: translate(-50%, -50%) scale(0.12); left: 33.3%; top: 28.5%; opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.1); left: 37%; top: 38%; opacity: 1; }
+}
+
+@keyframes nuvem2-animation {
+  0% { transform: translate(-50%, -50%) scale(0.5); left: 5%; top: 20%; opacity: 1; }
+  10% { transform: translate(-50%, -50%) scale(0.4); left: 14.17%; top: 32.5%; opacity: 0.8; }
+  20% { transform: translate(-50%, -50%) scale(0.3); left: 23.33%; top: 45%; opacity: 0.6; }
+  30% { transform: translate(-50%, -50%) scale(0.2); left: 32.5%; top: 57.5%; opacity: 0.4; }
+  40% { transform: translate(-50%, -50%) scale(0.1); left: 41.67%; top: 70%; opacity: 0.02; }
+  50% { transform: translate(-50%, -50%) scale(0); left: 50.83%; top: 82.5%; opacity: 0.1; }
+  51% { transform: translate(-50%, -50%) scale(0); left: 50%; top: 95%; opacity: 0; }
+  52% { transform: translate(-50%, -50%) scale(0.98); left: -60.143%; top: -59.286%; opacity: 0; }
+  53% { transform: translate(-50%, -50%) scale(0.97); left: -58.833%; top: -57.5%; opacity: 1; }
+  60% { transform: translate(-50%, -50%) scale(0.9); left: -31.667%; top: -30%; opacity: 1; }
+  70% { transform: translate(-50%, -50%) scale(0.8); left: -22.5%; top: -17.5%; opacity: 1; }
+  80% { transform: translate(-50%, -50%) scale(0.7); left: -13.333%; top: -5%; opacity: 1; }
+  90% { transform: translate(-50%, -50%) scale(0.6); left: -4.167%; top: 7.5%; opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.5); left: 5%; top: 20%; opacity: 1; }
+}
+
+@keyframes nuvem3-animation {
+  0% { transform: translate(-50%, -50%) scale(0.2); left: 30%; top: 18%; opacity: 1; }
+  10% { transform: translate(-50%, -50%) scale(0.16); left: 35%; top: 30.833%; opacity: 0.8; }
+  20% { transform: translate(-50%, -50%) scale(0.12); left: 40%; top: 43.667%; opacity: 0.6; }
+  30% { transform: translate(-50%, -50%) scale(0.08); left: 45%; top: 56.5%; opacity: 0.4; }
+  40% { transform: translate(-50%, -50%) scale(0.04); left: 50%; top: 69.333%; opacity: 0.02; }
+  50% { transform: translate(-50%, -50%) scale(0); left: 55%; top: 82.167%; opacity: 0.1; }
+  51% { transform: translate(-50%, -50%) scale(0); left: 50%; top: 95%; opacity: 0; }
+  52% { transform: translate(-50%, -50%) scale(0.392); left: 4.286%; top: -48%; opacity: 0; }
+  53% { transform: translate(-50%, -50%) scale(0.388); left: 5%; top: -46.167%; opacity: 1; }
+  60% { transform: translate(-50%, -50%) scale(0.36); left: 10%; top: -33.333%; opacity: 1; }
+  70% { transform: translate(-50%, -50%) scale(0.32); left: 15%; top: -20.5%; opacity: 1; }
+  80% { transform: translate(-50%, -50%) scale(0.28); left: 20%; top: -7.667%; opacity: 1; }
+  90% { transform: translate(-50%, -50%) scale(0.24); left: 25%; top: 5.167%; opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.2); left: 30%; top: 18%; opacity: 1; }
+}
+
+@keyframes nuvem4-animation {
+  0% { transform: translate(-50%, -50%) scale(0.1); left: 42%; top: 52%; opacity: 1; }
+  10% { transform: translate(-50%, -50%) scale(0.08); left: 52.5%; top: 53%; opacity: 0.8; }
+  20% { transform: translate(-50%, -50%) scale(0.06); left: 54%; top: 54%; opacity: 0.6; }
+  30% { transform: translate(-50%, -50%) scale(0.04); left: 55.5%; top: 55%; opacity: 0.4; }
+  40% { transform: translate(-50%, -50%) scale(0.02); left: 56%; top: 56%; opacity: 0.02; }
+  50% { transform: translate(-50%, -50%) scale(0); left: 57%; top: 57%; opacity: 0.1; }
+  51% { transform: translate(-50%, -50%) scale(0); left: 57%; top: 53%; opacity: 0; }
+  52% { transform: translate(-50%, -50%) scale(0.196); left: -15.4%; top: 46.60%; opacity: 0; }
+  53% { transform: translate(-50%, -50%) scale(0.194); left: -10.5%; top: 46.85%; opacity: 1; }
+  60% { transform: translate(-50%, -50%) scale(0.18); left: 0%; top: 48%; opacity: 1; }
+  70% { transform: translate(-50%, -50%) scale(0.16); left: 10.5%; top: 49%; opacity: 1; }
+  80% { transform: translate(-50%, -50%) scale(0.14); left: 21%; top: 50%; opacity: 1; }
+  90% { transform: translate(-50%, -50%) scale(0.12); left: 31.5%; top: 51%; opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.1); left: 42%; top: 52%; opacity: 1; }
+}
+
+@keyframes nuvem5-animation {
+  0% { transform: translate(-50%, -50%) scale(0.1); left: 70%; top: 52%; opacity: 1; }
+  10% { transform: translate(-50%, -50%) scale(0.08); left: 68.17%; top: 52.5%; opacity: 0.8; }
+  20% { transform: translate(-50%, -50%) scale(0.06); left: 66.33%; top: 53%; opacity: 0.6; }
+  30% { transform: translate(-50%, -50%) scale(0.04); left: 64.5%; top: 53.5%; opacity: 0.4; }
+  40% { transform: translate(-50%, -50%) scale(0.02); left: 62.67%; top: 54%; opacity: 0.02; }
+  51% { transform: translate(-50%, -50%) scale(0); left: 57%; top: 54%; opacity: 0; }
+  52% { transform: translate(-50%, -50%) scale(0.196); left: 108.8%; top: 46.60%; opacity: 0; }
+  53% { transform: translate(-50%, -50%) scale(0.194); left: 107.7%; top: 46.85%; opacity: 1; }
+  60% { transform: translate(-50%, -50%) scale(0.18); left: 100%; top: 48%; opacity: 1; }
+  70% { transform: translate(-50%, -50%) scale(0.16); left: 92.5%; top: 48.5%; opacity: 1; }
+  80% { transform: translate(-50%, -50%) scale(0.14); left: 85%; top: 49%; opacity: 1; }
+  90% { transform: translate(-50%, -50%) scale(0.12); left: 77.5%; top: 51%; opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.1); left: 70%; top: 52%; opacity: 1; }
+}
+
+@keyframes nuvem6-animation {
+  0% { transform: translate(-50%, -50%) scale(0.3); left: 100%; top: 50%; opacity: 1; }
+  10% { transform: translate(-50%, -50%) scale(0.28); left: 90%; top: 52.5%; opacity: 0.8; }
+  20% { transform: translate(-50%, -50%) scale(0.26); left: 80%; top: 53%; opacity: 0.6; }
+  30% { transform: translate(-50%, -50%) scale(0.24); left: 70%; top: 53.5%; opacity: 0.4; }
+  40% { transform: translate(-50%, -50%) scale(0.22); left: 60%; top: 54%; opacity: 0.02; }
+  51% { transform: translate(-50%, -50%) scale(0); left: 50%; top: 54%; opacity: 0; }
+  52% { transform: translate(-50%, -50%) scale(0.396); left: 148%; top: 46.60%; opacity: 0; }
+  53% { transform: translate(-50%, -50%) scale(0.394); left: 147%; top: 46.85%; opacity: 1; }
+  60% { transform: translate(-50%, -50%) scale(0.38); left: 140%; top: 48%; opacity: 1; }
+  70% { transform: translate(-50%, -50%) scale(0.36); left: 130%; top: 54%; opacity: 1; }
+  80% { transform: translate(-50%, -50%) scale(0.34); left: 120%; top: 49%; opacity: 1; }
+  90% { transform: translate(-50%, -50%) scale(0.32); left: 110%; top: 55%; opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.3); left: 100%; top: 50%; opacity: 1; }
+}
+
+@keyframes nuvem7-animation {
+  0% { transform: translate(-50%, -50%) scale(0.4); left: 100%; top: 20%; opacity: 1; }
+  10% { transform: translate(-50%, -50%) scale(0.38); left: 90%; top: 30%; opacity: 0.8; }
+  20% { transform: translate(-50%, -50%) scale(0.36); left: 80%; top: 40%; opacity: 0.6; }
+  30% { transform: translate(-50%, -50%) scale(0.34); left: 70%; top: 50%; opacity: 0.4; }
+  40% { transform: translate(-50%, -50%) scale(0.32); left: 60%; top: 60%; opacity: 0.02; }
+  51% { transform: translate(-50%, -50%) scale(0); left: 50%; top: 54%; opacity: 0; }
+  52% { transform: translate(-50%, -50%) scale(0.496); left: 148%; top: -28%; opacity: 0; }
+  53% { transform: translate(-50%, -50%) scale(0.494); left: 147%; top: -27%; opacity: 1; }
+  60% { transform: translate(-50%, -50%) scale(0.48); left: 140%; top: -20%; opacity: 1; }
+  70% { transform: translate(-50%, -50%) scale(0.46); left: 130%; top: -10%; opacity: 1; }
+  80% { transform: translate(-50%, -50%) scale(0.44); left: 120%; top: 0%; opacity: 1; }
+  90% { transform: translate(-50%, -50%) scale(0.42); left: 110%; top: 10%; opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.4); left: 100%; top: 20%; opacity: 1; }
+}
+
+/* Aplicar animações às nuvens */
+.backgroundlive-root .bg-layer.nuvem1 { animation: nuvem1-animation 70s linear infinite; will-change: transform; }
+.backgroundlive-root .bg-layer.nuvem2 { animation: nuvem2-animation 140s linear infinite; will-change: transform; }
+.backgroundlive-root .bg-layer.nuvem3 { animation: nuvem3-animation 80s linear infinite; will-change: transform; }
+.backgroundlive-root .bg-layer.nuvem4 { animation: nuvem4-animation 65s linear infinite; will-change: transform; }
+.backgroundlive-root .bg-layer.nuvem5 { animation: nuvem5-animation 65s linear infinite; will-change: transform; }
+.backgroundlive-root .bg-layer.nuvem6 { animation: nuvem6-animation 120s linear infinite; will-change: transform; }
+.backgroundlive-root .bg-layer.nuvem7 { animation: nuvem7-animation 180s linear infinite; will-change: transform; }
+
+/* Responsividade movida para css/responsive.css */

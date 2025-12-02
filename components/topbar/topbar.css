@@ -290,44 +290,5 @@
   transform: rotate(-45deg) translate(0.5rem, -0.7rem);
 }
 
-/* Tablet and below - show hamburger menu */
-@media (max-width: 1024px) {
-  .hamburger {
-    display: flex;
-  }
+/* Responsividade movida para css/responsive.css */
 
-  .topbar-center {
-    display: none;
-  }
-
-  .topbar-right {
-    display: none;
-  }
-}
-
-/* Tablet and smaller */
-@media (max-width: 1024px) {
-  .main-nav > ul {
-    gap: 0.5rem;
-  }
-
-  .main-nav li.has-dropdown > a {
-    font-size: 0.95rem;
-  }
-}
-
-/* Mobile Landscape Orientation */
-@media (max-width: 768px) and (orientation: landscape) {
-  .topbar {
-    height: 60px; /* Altura fixa em landscape para economizar espaço vertical */
-  }
-
-  .logo-img {
-    height: 40px;
-  }
-
-  .mobile-nav {
-    top: 60px;
-    max-height: calc(100vh - 60px);
-  }
-}

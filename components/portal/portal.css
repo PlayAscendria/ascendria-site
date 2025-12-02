@@ -1,14 +1,15 @@
 /* Portal Magico - Estilos */
-/* Portal DENTRO da div .carruagem, posicionado no local do espelho */
+/* Portal DENTRO da div .carruagem, posicionado relativo à imagem da carruagem */
 
-/* ============ BASE (Desktop padrao 1920x1080) ============ */
+/* ============ BASE ============ */
 .backgroundlive-root .bg-layer.carruagem #magic-portal {
   position: absolute;
   display: block;
-  right: -4.5%;
-  top: 32%;
-  width: 30%;
-  height: 50%;
+  /* Posição relativa à carruagem (ajustar conforme posição do espelho) */
+  top: 24%;
+  left: 55%;
+  width: 20%;
+  height: 35%;
   z-index: 1;
   pointer-events: auto;
   cursor: pointer;
@@ -40,95 +41,4 @@
   display: none !important;
 }
 
-/* ============ BREAKPOINTS PC ============ */
-
-/* 4K / 2560x1440 (QHD) e acima */
-@media (min-width: 2560px) {
-  .backgroundlive-root .bg-layer.carruagem #magic-portal {
-    right: -6%;
-    top: 31%;
-    width: 28%;
-    height: 48%;
-  }
-}
-
-/* 1920x1080 (Full HD) - padrao, valores base */
-@media (min-width: 1920px) and (max-width: 2559px) {
-  .backgroundlive-root .bg-layer.carruagem #magic-portal {
-    right: -4.5%;
-    top: 32%;
-    width: 30%;
-    height: 50%;
-  }
-}
-
-/* 1680x1050 / 1600x900 */
-@media (min-width: 1600px) and (max-width: 1919px) {
-  .backgroundlive-root .bg-layer.carruagem #magic-portal {
-    right: -5%;
-    top: 32%;
-    width: 31%;
-    height: 50%;
-  }
-}
-
-/* 1440x900 / 1366x768 (Laptops comuns) */
-@media (min-width: 1366px) and (max-width: 1599px) {
-  .backgroundlive-root .bg-layer.carruagem #magic-portal {
-    right: -5.5%;
-    top: 31%;
-    width: 32%;
-    height: 51%;
-  }
-}
-
-/* 1280x720 (HD) / 1280x800 */
-@media (min-width: 1280px) and (max-width: 1365px) {
-  .backgroundlive-root .bg-layer.carruagem #magic-portal {
-    right: -6%;
-    top: 30%;
-    width: 33%;
-    height: 52%;
-  }
-}
-
-/* 1024x768 e similares */
-@media (min-width: 1024px) and (max-width: 1279px) {
-  .backgroundlive-root .bg-layer.carruagem #magic-portal {
-    right: -6.5%;
-    top: 29%;
-    width: 34%;
-    height: 53%;
-  }
-}
-
-/* Tablets landscape / telas menores que 1024px */
-@media (max-width: 1023px) {
-  .backgroundlive-root .bg-layer.carruagem #magic-portal {
-    right: -7%;
-    top: 28%;
-    width: 35%;
-    height: 54%;
-  }
-}
-
-/* ============ ASPECT RATIO ADJUSTMENTS ============ */
-/* Telas ultrawide (21:9) */
-@media (min-aspect-ratio: 21/9) {
-  .backgroundlive-root .bg-layer.carruagem #magic-portal {
-    right: -3%;
-    top: 30%;
-    width: 25%;
-    height: 55%;
-  }
-}
-
-/* Telas mais quadradas (4:3, 5:4) */
-@media (max-aspect-ratio: 4/3) {
-  .backgroundlive-root .bg-layer.carruagem #magic-portal {
-    right: -8%;
-    top: 28%;
-    width: 38%;
-    height: 52%;
-  }
-}
+/* Responsividade movida para css/responsive.css */

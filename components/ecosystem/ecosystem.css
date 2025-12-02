@@ -75,7 +75,7 @@
 /* Posições em triângulo - mais próximos do centro */
 /* Rankings no topo centro */
 .eco-node[data-node="rankings"] {
-    top: 18%;
+    top: 15%;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -162,8 +162,12 @@
     cursor: pointer;
     z-index: 200;
     transition: transform 0.3s ease;
-    pointer-events: auto !important;
     padding: 0;
+}
+
+/* Garantir que botões sejam clicáveis quando detail está ativo */
+.ecosystem-detail.active .detail-home {
+    pointer-events: auto;
 }
 
 .detail-home img {
@@ -188,9 +192,13 @@
     cursor: pointer;
     z-index: 200;
     transition: transform 0.3s ease;
-    pointer-events: auto !important;
     padding: 0;
     display: none; /* Escondido por padrão, mostrado quando em submenu */
+}
+
+/* Garantir que botões sejam clicáveis quando detail está ativo */
+.ecosystem-detail.active .detail-back {
+    pointer-events: auto;
 }
 
 .detail-back img {
@@ -320,89 +328,5 @@
     text-transform: uppercase;
 }
 
-/* ========== RESPONSIVE ========== */
-@media (max-width: 1024px) {
-    .ecosystem-container {
-        width: 70%;
-        height: 50%;
-    }
-    
-    .eco-node {
-        width: clamp(60px, 9vw, 100px);
-        height: clamp(60px, 9vw, 100px);
-    }
-    
-    .eco-node[data-node="ascendria"] {
-        width: clamp(80px, 11vw, 130px);
-        height: clamp(80px, 11vw, 130px);
-    }
-}
+/* Responsividade movida para css/responsive.css */
 
-@media (max-width: 768px) {
-    .ecosystem-container {
-        width: 80%;
-        height: 45%;
-    }
-    
-    .eco-node {
-        width: clamp(50px, 15vw, 80px);
-        height: clamp(50px, 15vw, 80px);
-    }
-    
-    .eco-node[data-node="ascendria"] {
-        width: clamp(65px, 18vw, 100px);
-        height: clamp(65px, 18vw, 100px);
-    }
-    
-    .eco-node-label {
-        font-size: clamp(0.5rem, 2vw, 0.7rem);
-    }
-    
-    .eco-node[data-node="nfts"],
-    .eco-node[data-node="token"] {
-        top: 10%;
-    }
-    
-    .eco-node[data-node="marketplace"],
-    .eco-node[data-node="staking"] {
-        bottom: 10%;
-    }
-    
-    .eco-node[data-node="community"] {
-        left: 2%;
-    }
-    
-    .eco-node[data-node="external_impulse"] {
-        right: 2%;
-    }
-}
-
-@media (max-width: 480px) {
-    .ecosystem-container {
-        width: 85%;
-        height: 40%;
-    }
-    
-    .eco-node {
-        width: clamp(45px, 18vw, 65px);
-        height: clamp(45px, 18vw, 65px);
-        border-width: 2px;
-    }
-    
-    .eco-node[data-node="ascendria"] {
-        width: clamp(55px, 22vw, 85px);
-        height: clamp(55px, 22vw, 85px);
-    }
-    
-    .eco-node-icon {
-        font-size: clamp(1rem, 4vw, 1.5rem);
-    }
-    
-    .detail-header {
-        padding: 1rem;
-    }
-    
-    .detail-content {
-        padding: 1rem;
-    }
-}

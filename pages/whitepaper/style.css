@@ -151,23 +151,4 @@ main {
   margin-top: 1.5rem;
 }
 
-/* Mobile responsivo */
-@media (max-width: 768px) {
-  .doc-container {
-    height: 94%;
-    max-width: 98vw;
-  }
-  
-  .doc-title {
-    top: 3%;
-    font-size: clamp(1.2rem, 4vw, 1.8rem);
-  }
-  
-  .doc-content {
-    top: 14%;
-    left: 14%;
-    width: 72%;
-    height: 66%;
-    padding: 1rem 1.5rem;
-  }
-}
+/* Responsividade movida para css/responsive.css */

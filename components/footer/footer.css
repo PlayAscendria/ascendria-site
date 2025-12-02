@@ -55,41 +55,4 @@
   border-radius: 2px;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-  .footer-nav {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-}
-
-@media (min-width: 769px) {
-  .footer-container {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .site-footer {
-    text-align: left;
-  }
-
-  .footer-nav {
-    justify-content: flex-end;
-  }
-}
-
-/* Landscape em mobile */
-@media (max-width: 768px) and (orientation: landscape) {
-  .site-footer {
-    padding: 1rem;
-  }
-
-  .footer-container {
-    gap: 0.5rem;
-  }
-
-  .footer-nav {
-    flex-direction: row;
-    gap: 0.5rem 1rem;
-  }
-}
+/* Responsividade movida para css/responsive.css */

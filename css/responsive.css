@@ -1,0 +1,854 @@
+/* ==================================================================================
+   ASCENDRIA - RESPONSIVIDADE CENTRALIZADA
+   
+   Este arquivo contém as media queries para AJUSTAR elementos em resoluções 
+   diferentes de 1920x1080 (Full HD), que é a resolução BASE definida nos 
+   arquivos de componentes (backgroundlive.css, topbar.css, etc).
+   
+   ESTRUTURA:
+   - Cada resolução contém seções para: TOPBAR, BACKGROUNDLIVE, ECOSYSTEM, 
+     FOOTER, PORTAL, LOADING, PÁGINAS (lore, tokenomics, whitepaper)
+   
+   COMO USAR:
+   - 1920x1080 = valores BASE (nos arquivos de componentes)
+   - Este arquivo = apenas AJUSTES para outras resoluções
+   
+   RESOLUÇÕES:
+   - 1024x768 (XGA) - Telas 4:3
+   - 1280x720 (HD 720p)
+   - 1366x768 (HD+ Laptops)
+   - 1440x900 (WXGA+)
+   - 1600x900 (HD+)
+   - 1920x1080 (Full HD) - BASE (não precisa de media query)
+   - 2560x1440 (QHD / 2K)
+   - 3840x2160 (4K UHD)
+   
+   ================================================================================== */
+
+
+/* ==================================================================================
+   1024x768 (XGA) - Telas 4:3
+   ================================================================================== */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  
+  /* ========== TOPBAR ========== */
+  .topbar {
+    height: clamp(55px, 7vh, 70px);
+  }
+  
+  .main-nav > ul {
+    gap: 0.5rem;
+  }
+  
+  .main-nav li.has-dropdown > a {
+    font-size: 0.9rem;
+  }
+  
+  .join-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  /* ========== BACKGROUNDLIVE ========== */
+  /* --- Paisagem --- */
+  .backgroundlive-root .bg-layer {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+  }
+  
+  .backgroundlive-root .bg-layer.fundo-sol {
+    background-size: cover;
+    background-position: center 30%;
+  }
+  
+  /* --- Sol e Glow --- */
+  .backgroundlive-root .bg-layer.sun {
+    background-size: cover;
+    background-position: center 30%;
+  }
+  .backgroundlive-root .sun-rays { width: 45vh; height: 45vh; }
+  .backgroundlive-root .breathing-glow { width: 45vh; height: 45vh; }
+  
+  /* --- Personagens --- */
+  .backgroundlive-root .bg-layer.carruagem { height: 75%; left: 82%; top: 72%; }
+  .backgroundlive-root .bg-layer.jano { height: 17%; left: 46%; top: 82%; }
+  .backgroundlive-root .bg-layer.orion { height: 13%; left: 55%; top: 78%; }
+  .backgroundlive-root .bg-layer.trio { height: 60%; left: 16%; top: 72%; }
+  
+  /* --- Nuvens (velocidade) --- */
+  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 70s; }
+  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 140s; }
+  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 80s; }
+  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 65s; }
+  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 65s; }
+  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 120s; }
+  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 180s; }
+  
+  /* ========== ECOSYSTEM ========== */
+  .ecosystem-container {
+    width: 70%;
+    height: 50%;
+  }
+  
+  .eco-node {
+    width: clamp(60px, 9vw, 100px);
+    height: clamp(60px, 9vw, 100px);
+  }
+  
+  .eco-node[data-node="ascendria"] {
+    width: clamp(80px, 11vw, 130px);
+    height: clamp(80px, 11vw, 130px);
+  }
+  
+  .ecosystem-title {
+    top: 8%;
+    font-size: clamp(1.4rem, 3.5vw, 2.5rem);
+  }
+  
+  /* ========== FOOTER ========== */
+  .site-footer {
+    padding: clamp(1.25rem, 3vw, 2rem) clamp(0.75rem, 2vw, 1.25rem);
+  }
+  
+  /* ========== HERO ========== */
+  .hero-content {
+    max-width: 700px;
+  }
+  
+  .hero-title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+  }
+  
+  /* ========== PÁGINAS (lore, tokenomics, whitepaper) ========== */
+  .doc-container {
+    height: 96%;
+  }
+  
+  .doc-title {
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+  }
+  
+  .doc-content {
+    width: 58%;
+    height: 44%;
+    padding: 1.5rem 1.5rem 8rem 1.5rem;
+  }
+  
+  /* ========== LOADING ========== */
+  .loading-info {
+    bottom: 50px;
+  }
+  
+  .painting-text {
+    font-size: 15px;
+  }
+}
+
+
+/* ==================================================================================
+   1280x720 (HD 720p)
+   ================================================================================== */
+@media (min-width: 1280px) and (max-width: 1365px) {
+  
+  /* ========== TOPBAR ========== */
+  .topbar {
+    height: clamp(58px, 7.5vh, 72px);
+  }
+  
+  .main-nav > ul {
+    gap: 0.6rem;
+  }
+  
+  .main-nav a {
+    font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+  }
+  
+  /* ========== BACKGROUNDLIVE ========== */
+  /* --- Paisagem --- */
+  .backgroundlive-root .bg-layer {
+    width: 115%;
+    height: 115%;
+    background-size: contain;
+  }
+  
+  .backgroundlive-root .bg-layer.fundo-sol {
+    background-size: 100% auto;
+    background-position: center top;
+  }
+  
+  /* --- Sol e Glow --- */
+  .backgroundlive-root .bg-layer.sun { background-size: 22% auto; }
+  .backgroundlive-root .sun-rays { width: 50vh; height: 50vh; }
+  .backgroundlive-root .breathing-glow { width: 50vh; height: 50vh; }
+  
+  /* --- Personagens --- */
+  .backgroundlive-root .bg-layer.carruagem { height: 90%; left: 81%; top: 71%; }
+  .backgroundlive-root .bg-layer.jano { height: 18%; left: 45%; top: 81%; }
+  .backgroundlive-root .bg-layer.orion { height: 14%; left: 54%; top: 77%; }
+  .backgroundlive-root .bg-layer.trio { height: 65%; left: 17%; top: 71%; }
+  
+  /* --- Nuvens (velocidade) --- */
+  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 70s; }
+  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 140s; }
+  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 80s; }
+  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 65s; }
+  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 65s; }
+  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 120s; }
+  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 180s; }
+  
+  /* ========== ECOSYSTEM ========== */
+  .ecosystem-container {
+    width: 68%;
+    height: 52%;
+  }
+  
+  .ecosystem-title {
+    top: 9%;
+    font-size: clamp(1.5rem, 3.8vw, 2.8rem);
+  }
+  
+  /* ========== HERO ========== */
+  .hero-title {
+    font-size: clamp(2.8rem, 9vw, 5rem);
+  }
+  
+  /* ========== PÁGINAS ========== */
+  .doc-container {
+    height: 97%;
+  }
+  
+  .doc-title {
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+  }
+  
+  .doc-content {
+    width: 59%;
+    height: 45%;
+  }
+}
+
+
+/* ==================================================================================
+   1366x768 (HD+ Laptops) - Resolução mais comum em notebooks
+   ================================================================================== */
+@media (min-width: 1366px) and (max-width: 1439px) {
+  
+  /* ========== TOPBAR ========== */
+  .topbar {
+    height: clamp(58px, 7.5vh, 75px);
+  }
+  
+  .main-nav > ul {
+    gap: 0.7rem;
+  }
+  
+  .main-nav a {
+    font-size: clamp(0.88rem, 1.4vw, 0.98rem);
+  }
+  
+  /* ========== BACKGROUNDLIVE ========== */
+  /* --- Paisagem --- */
+  .backgroundlive-root .bg-layer {
+    width: 118%;
+    height: 118%;
+    background-size: contain;
+  }
+  
+  .backgroundlive-root .bg-layer.fundo-sol {
+    background-size: 100% auto;
+    background-position: center top;
+  }
+  
+  /* --- Sol e Glow --- */
+  .backgroundlive-root .bg-layer.sun { background-size: 21% auto; }
+  .backgroundlive-root .sun-rays { width: 55vh; height: 55vh; }
+  .backgroundlive-root .breathing-glow { width: 55vh; height: 55vh; }
+  
+  /* --- Personagens --- */
+  .backgroundlive-root .bg-layer.carruagem { height: 95%; left: 80%; top: 70%; }
+  .backgroundlive-root .bg-layer.jano { height: 19%; left: 45%; top: 80%; }
+  .backgroundlive-root .bg-layer.orion { height: 14%; left: 54%; top: 76%; }
+  .backgroundlive-root .bg-layer.trio { height: 68%; left: 18%; top: 70%; }
+  
+  /* --- Nuvens (velocidade) --- */
+  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 70s; }
+  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 140s; }
+  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 80s; }
+  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 65s; }
+  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 65s; }
+  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 120s; }
+  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 180s; }
+  
+  /* ========== ECOSYSTEM ========== */
+  .ecosystem-container {
+    width: 65%;
+    height: 55%;
+  }
+  
+  .ecosystem-title {
+    top: 9%;
+    font-size: clamp(1.6rem, 4vw, 3rem);
+  }
+  
+  /* ========== HERO ========== */
+  .hero-title {
+    font-size: clamp(2.8rem, 9vw, 5rem);
+  }
+  
+  /* ========== PÁGINAS ========== */
+  .doc-container {
+    height: 97%;
+  }
+  
+  .doc-title {
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  }
+  
+  .doc-content {
+    width: 59%;
+    height: 45%;
+  }
+}
+
+
+/* ==================================================================================
+   1440x900 (WXGA+)
+   ================================================================================== */
+@media (min-width: 1440px) and (max-width: 1599px) {
+  
+  /* ========== TOPBAR ========== */
+  .topbar {
+    height: clamp(60px, 8vh, 78px);
+  }
+  
+  .main-nav > ul {
+    gap: 0.8rem;
+  }
+  
+  /* ========== BACKGROUNDLIVE ========== */
+  /* --- Paisagem --- */
+  .backgroundlive-root .bg-layer {
+    width: 120%;
+    height: 120%;
+    background-size: contain;
+  }
+  
+  .backgroundlive-root .bg-layer.fundo-sol {
+    background-size: 100% auto;
+    background-position: center top;
+  }
+  
+  /* --- Sol e Glow --- */
+  .backgroundlive-root .bg-layer.sun { background-size: 20% auto; }
+  .backgroundlive-root .sun-rays { width: 60vh; height: 60vh; }
+  .backgroundlive-root .breathing-glow { width: 60vh; height: 60vh; }
+  
+  /* --- Personagens --- */
+  .backgroundlive-root .bg-layer.carruagem { height: 98%; left: 80%; top: 70%; }
+  .backgroundlive-root .bg-layer.jano { height: 19%; left: 45%; top: 80%; }
+  .backgroundlive-root .bg-layer.orion { height: 15%; left: 54%; top: 76%; }
+  .backgroundlive-root .bg-layer.trio { height: 69%; left: 18%; top: 70%; }
+  
+  /* --- Nuvens (velocidade) --- */
+  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 70s; }
+  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 140s; }
+  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 80s; }
+  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 65s; }
+  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 65s; }
+  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 120s; }
+  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 180s; }
+  
+  /* ========== ECOSYSTEM ========== */
+  .ecosystem-container {
+    width: 62%;
+    height: 58%;
+  }
+  
+  .ecosystem-title {
+    top: 10%;
+    font-size: clamp(1.8rem, 4.5vw, 3.5rem);
+  }
+  
+  /* ========== PÁGINAS ========== */
+  .doc-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+  
+  .doc-content {
+    width: 60%;
+    height: 46%;
+  }
+}
+
+
+/* ==================================================================================
+   1600x900 (HD+)
+   ================================================================================== */
+@media (min-width: 1600px) and (max-width: 1919px) {
+  
+  /* ========== TOPBAR ========== */
+  .topbar {
+    height: clamp(60px, 8vh, 80px);
+  }
+  
+  .main-nav > ul {
+    gap: 0.9rem;
+  }
+  
+  /* ========== BACKGROUNDLIVE ========== */
+  /* --- Paisagem --- */
+  .backgroundlive-root .bg-layer {
+    width: 120%;
+    height: 120%;
+    background-size: contain;
+  }
+  
+  .backgroundlive-root .bg-layer.fundo-sol {
+    background-size: 100% auto;
+    background-position: center top;
+  }
+  
+  /* --- Sol e Glow --- */
+  .backgroundlive-root .bg-layer.sun { background-size: 20% auto; }
+  .backgroundlive-root .sun-rays { width: 65vh; height: 65vh; }
+  .backgroundlive-root .breathing-glow { width: 65vh; height: 65vh; }
+  
+  /* --- Personagens --- */
+  .backgroundlive-root .bg-layer.carruagem { height: 100%; left: 80%; top: 70%; }
+  .backgroundlive-root .bg-layer.jano { height: 20%; left: 45%; top: 80%; }
+  .backgroundlive-root .bg-layer.orion { height: 15%; left: 52%; top: 76%; }
+  .backgroundlive-root .bg-layer.trio { height: 70%; left: 18%; top: 70%; }
+  
+  /* --- Nuvens (velocidade) --- */
+  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 70s; }
+  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 140s; }
+  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 80s; }
+  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 65s; }
+  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 65s; }
+  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 120s; }
+  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 180s; }
+  
+  /* ========== ECOSYSTEM ========== */
+  .ecosystem-container {
+    width: 60%;
+    height: 60%;
+  }
+  
+  .ecosystem-title {
+    top: 10%;
+    font-size: clamp(1.8rem, 4.5vw, 3.5rem);
+  }
+  
+  /* ========== PÁGINAS ========== */
+  .doc-title {
+    font-size: clamp(2rem, 5vw, 3.8rem);
+  }
+  
+  .doc-content {
+    width: 60%;
+    height: 46%;
+  }
+}
+
+
+/* ==================================================================================
+   2560x1440 (QHD / 2K)
+   ================================================================================== */
+@media (min-width: 2560px) and (max-width: 3839px) {
+  
+  /* ========== TOPBAR ========== */
+  .topbar {
+    height: clamp(70px, 8vh, 90px);
+  }
+  
+  .main-nav > ul {
+    gap: 1.2rem;
+  }
+  
+  .main-nav a {
+    font-size: 1.1rem;
+  }
+  
+  .join-btn {
+    padding: 0.5rem 1rem;
+    font-size: 1.05rem;
+  }
+  
+  /* ========== BACKGROUNDLIVE ========== */
+  /* --- Paisagem --- */
+  .backgroundlive-root .bg-layer {
+    width: 100%;
+    height: 100%;
+    background-size: 100% auto;
+  }
+  
+  .backgroundlive-root .bg-layer.nuvem1,
+  .backgroundlive-root .bg-layer.nuvem2,
+  .backgroundlive-root .bg-layer.nuvem3,
+  .backgroundlive-root .bg-layer.nuvem4,
+  .backgroundlive-root .bg-layer.nuvem5,
+  .backgroundlive-root .bg-layer.nuvem6,
+  .backgroundlive-root .bg-layer.nuvem7 {
+    background-size: contain;
+  }
+  
+  .backgroundlive-root .bg-layer.fundo-sol {
+    background-size: 100% auto;
+    background-position: center top;
+  }
+  
+  /* --- Sol e Glow --- */
+  .backgroundlive-root .bg-layer.sun { background-size: 16% auto; }
+  .backgroundlive-root .sun-rays { width: 85vh; height: 85vh; }
+  .backgroundlive-root .breathing-glow { width: 85vh; height: 85vh; }
+  
+  /* --- Personagens --- */
+  .backgroundlive-root .bg-layer.carruagem { height: 100%; left: 80%; top: 70%; }
+  .backgroundlive-root .bg-layer.jano { height: 20%; left: 45%; top: 80%; }
+  .backgroundlive-root .bg-layer.orion { height: 15%; left: 54%; top: 76%; }
+  .backgroundlive-root .bg-layer.trio { height: 70%; left: 14%; top: 70%; }
+  
+  /* --- Nuvens (velocidade) --- */
+  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 70s; }
+  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 140s; }
+  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 80s; }
+  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 65s; }
+  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 65s; }
+  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 120s; }
+  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 180s; }
+  
+  /* ========== ECOSYSTEM ========== */
+  .ecosystem-container {
+    width: 120%;
+    height: 65%;
+  }
+  
+  .ecosystem-title {
+    top: 11%;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+  }
+  
+  /* ========== HERO ========== */
+  .hero-title {
+    font-size: clamp(4rem, 10vw, 7rem);
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+  }
+  
+  /* ========== PÁGINAS ========== */
+  .doc-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+  }
+  
+  .doc-content {
+    font-size: 1.2rem;
+  }
+  
+  .doc-content p {
+    font-size: 1.2rem;
+  }
+  
+  /* ========== FOOTER ========== */
+  .site-footer {
+    padding: 2.5rem 1.5rem;
+  }
+  
+  .footer-copyright {
+    font-size: 1rem;
+  }
+  
+  .footer-nav a {
+    font-size: 1rem;
+  }
+}
+
+
+/* ==================================================================================
+   3840x2160 (4K UHD)
+   ================================================================================== */
+@media (min-width: 3840px) {
+  
+  /* ========== TOPBAR ========== */
+  .topbar {
+    height: clamp(80px, 8vh, 100px);
+  }
+  
+  .main-nav > ul {
+    gap: 1.5rem;
+  }
+  
+  .main-nav a {
+    font-size: 1.3rem;
+  }
+  
+  .join-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 1.2rem;
+  }
+  
+  .logo-img {
+    height: 98%;
+  }
+  
+  /* ========== BACKGROUNDLIVE ========== */
+  /* --- Paisagem --- */
+  .backgroundlive-root .bg-layer {
+    width: 100%;
+    height: 100%;
+    background-size: 100% auto;
+  }
+  
+  .backgroundlive-root .bg-layer.nuvem1,
+  .backgroundlive-root .bg-layer.nuvem2,
+  .backgroundlive-root .bg-layer.nuvem3,
+  .backgroundlive-root .bg-layer.nuvem4,
+  .backgroundlive-root .bg-layer.nuvem5,
+  .backgroundlive-root .bg-layer.nuvem6,
+  .backgroundlive-root .bg-layer.nuvem7 {
+    background-size: contain;
+  }
+  
+  .backgroundlive-root .bg-layer.fundo-sol {
+    background-size: 100% auto;
+    background-position: center top;
+  }
+  
+  /* --- Sol e Glow --- */
+  .backgroundlive-root .bg-layer.sun { background-size: 14% auto; }
+  .backgroundlive-root .sun-rays { width: 100vh; height: 100vh; }
+  .backgroundlive-root .breathing-glow { width: 100vh; height: 100vh; }
+  
+  /* --- Personagens --- */
+  .backgroundlive-root .bg-layer.carruagem { height: 100%; left: 80%; top: 70%; }
+  .backgroundlive-root .bg-layer.jano { height: 20%; left: 45%; top: 80%; }
+  .backgroundlive-root .bg-layer.orion { height: 15%; left: 54%; top: 76%; }
+  .backgroundlive-root .bg-layer.trio { height: 70%; left: 10%; top: 70%; }
+  
+  /* --- Nuvens (velocidade) --- */
+  .backgroundlive-root .bg-layer.nuvem1 { animation-duration: 70s; }
+  .backgroundlive-root .bg-layer.nuvem2 { animation-duration: 140s; }
+  .backgroundlive-root .bg-layer.nuvem3 { animation-duration: 80s; }
+  .backgroundlive-root .bg-layer.nuvem4 { animation-duration: 65s; }
+  .backgroundlive-root .bg-layer.nuvem5 { animation-duration: 65s; }
+  .backgroundlive-root .bg-layer.nuvem6 { animation-duration: 120s; }
+  .backgroundlive-root .bg-layer.nuvem7 { animation-duration: 180s; }
+  
+  /* ========== ECOSYSTEM ========== */
+  .ecosystem-container {
+    width: 115%;
+    height: 65%;
+  }
+  
+  .ecosystem-title {
+    top: 11%;
+    font-size: clamp(3rem, 5vw, 5rem);
+  }
+  
+  .eco-node-icon {
+    width: clamp(180px, 20vw, 300px);
+  }
+  
+  /* ========== HERO ========== */
+  .hero-title {
+    font-size: clamp(5rem, 10vw, 8rem);
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+  }
+  
+  .hero-description {
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+  }
+  
+  .cta-primary {
+    padding: 1.5rem 3.5rem;
+    font-size: 1.4rem;
+  }
+  
+  /* ========== PÁGINAS ========== */
+  .doc-title {
+    font-size: clamp(3rem, 5vw, 5rem);
+  }
+  
+  .doc-content {
+    font-size: 1.4rem;
+    padding: 2.5rem 2.5rem 12rem 2.5rem;
+  }
+  
+  .doc-content p {
+    font-size: 1.4rem;
+    line-height: 2;
+  }
+  
+  .doc-content h2,
+  .doc-content h3 {
+    font-size: 1.8rem;
+  }
+  
+  /* ========== FOOTER ========== */
+  .site-footer {
+    padding: 3rem 2rem;
+  }
+  
+  .footer-copyright {
+    font-size: 1.2rem;
+  }
+  
+  .footer-nav a {
+    font-size: 1.2rem;
+  }
+  
+  /* ========== LOADING ========== */
+  .painting-text {
+    font-size: 20px;
+  }
+  
+  .progress-value {
+    font-size: 30px;
+  }
+  
+  .loading-info {
+    bottom: 80px;
+    max-width: 600px;
+  }
+}
+
+
+/* ==================================================================================
+   PREFERÊNCIA DE MOVIMENTO REDUZIDO (Acessibilidade)
+   ================================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .backgroundlive-root .sun-rays { animation: none !important; }
+  .backgroundlive-root .sun-ray { animation: none !important; }
+  .backgroundlive-root .bg-layer.sun::before { animation: none; }
+  .backgroundlive-root .breathing-glow { animation: none !important; }
+  
+  .backgroundlive-root .bg-layer.nuvem1,
+  .backgroundlive-root .bg-layer.nuvem2,
+  .backgroundlive-root .bg-layer.nuvem3,
+  .backgroundlive-root .bg-layer.nuvem4,
+  .backgroundlive-root .bg-layer.nuvem5,
+  .backgroundlive-root .bg-layer.nuvem6,
+  .backgroundlive-root .bg-layer.nuvem7 {
+    animation: none !important;
+  }
+  
+  .scroll-indicator {
+    animation: none !important;
+  }
+  
+  .cta-primary::before {
+    display: none;
+  }
+}
+
+
+/* ==================================================================================
+   MOBILE - max-width: 768px
+   ================================================================================== */
+@media (max-width: 768px) {
+  
+  /* ========== ABOUT PAGE ========== */
+  .about-page {
+    padding-top: 60px; /* Topbar fixa em mobile */
+  }
+
+  .aboutSwiper {
+    height: calc(100vh - 60px);
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 16px;
+  }
+}
+
+
+/* ==================================================================================
+   MOBILE - max-width: 600px
+   ================================================================================== */
+@media (max-width: 600px) {
+  
+  /* ========== PLAY PAGE ========== */
+  body.play-page {
+    padding: 1rem;
+  }
+
+  .login-card {
+    padding: 2rem 1.5rem;
+  }
+
+  /* ========== ABOUT PAGE ========== */
+  .slide-content {
+    padding: 1.5rem 1rem;
+  }
+
+  /* Esconder botões de navegação em telas muito pequenas */
+  .aboutSwiper .swiper-button-next,
+  .aboutSwiper .swiper-button-prev {
+    display: none;
+  }
+}
+
+
+/* ==================================================================================
+   MOBILE LANDSCAPE - max-width: 768px + orientation: landscape
+   ================================================================================== */
+@media (max-width: 768px) and (orientation: landscape) {
+  
+  /* ========== PLAY PAGE ========== */
+  body.play-page {
+    padding: 1rem;
+  }
+
+  .login-card {
+    max-width: 600px;
+    padding: 1.5rem 2rem;
+  }
+
+  .login-card img {
+    height: 48px;
+    margin-bottom: 1rem;
+  }
+
+  .login-card h1 {
+    font-size: 1.5rem;
+  }
+
+  .divider {
+    margin: 0.75rem 0;
+  }
+
+  form {
+    gap: 0.75rem;
+  }
+
+  /* ========== ABOUT PAGE ========== */
+  .about-page {
+    padding-top: 60px;
+  }
+
+  .aboutSwiper {
+    height: calc(100vh - 60px);
+  }
+
+  .slide-content h2 {
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .slide-content p {
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    line-height: 1.5;
+  }
+}
