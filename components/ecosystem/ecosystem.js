@@ -341,7 +341,7 @@ class EcosystemGraph {
                             <h3>💰 FEES</h3>
                             <ul>
                                 <li><strong>OFF-CHAIN Marketplace:</strong> No fees on sales or ad placement</li>
-                                <li><strong>ON-CHAIN Marketplace:</strong> Usual Ronin network fees + 5% (used to pay team's operational salaries after launch of Champions of Ascendria)</li>
+                                <li><strong>ON-CHAIN Marketplace:</strong> Usual Ronin network fees + 5% (4% used to pay team's operational salaries after launch of Champions of Ascendria and 1% for monthly raffle.)</li>
                             </ul>
 
                             <p><em>Note: The on-chain marketplace will only be released with the launch of Ascendria – Champions of Ascendria, while the off-chain marketplace will be released with the Idle Mines module.</em></p>

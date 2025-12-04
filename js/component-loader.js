@@ -69,7 +69,11 @@ class ComponentLoader {
       const cssPath = `/components/${componentName}/${componentName}.css`;
       const cssId = `component-css-${componentName}`;
 
-      if (!document.getElementById(cssId)) {
+      // Verifica se o CSS já foi carregado (pelo ID ou pelo href)
+      const cssAlreadyLoaded = document.getElementById(cssId) || 
+        document.querySelector(`link[href="${cssPath}"], link[href*="${componentName}/${componentName}.css"]`);
+
+      if (!cssAlreadyLoaded) {
         const link = document.createElement('link');
         link.id = cssId;
         link.rel = 'stylesheet';

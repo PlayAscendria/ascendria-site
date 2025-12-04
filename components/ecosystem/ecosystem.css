@@ -128,13 +128,19 @@
     pointer-events: auto;
 }
 
-/* Botão Home (substitui o X) - volta para os 3 menus principais */
+/* ========== BOTÕES HOME E BACK ========== */
+/* Posicionamento calculado para alinhar com o pergaminhoback.webp */
+/* O pergaminho tem: width: 120%, height: 100% da seção */
+/* O ecosystem-container tem: width: 124%, height: 68% da seção */
+/* Conversão: vertical = valor * (100/68) ≈ 1.47x | horizontal = valor * (120/124) ≈ 0.97x */
+
+/* Botão Home - volta para os 3 menus principais */
 .detail-home {
     position: absolute;
-    top: 4.5rem;
-    right: 1.5rem;
-    width: 40px;
-    height: 40px;
+    top: 8%;      /* ~7% do pergaminho */
+    right: 2%;   /* ~9% do pergaminho */
+    width: 3%;
+    aspect-ratio: 1;
     background: none;
     border: none;
     cursor: pointer;
@@ -161,10 +167,10 @@
 /* Botão Back - volta para a página anterior */
 .detail-back {
     position: absolute;
-    top: 4.5rem;
-    left: 1.5rem;
-    width: 40px;
-    height: 40px;
+    top: 8%;      /* ~7% do pergaminho */
+    left: 2%;    /* ~9% do pergaminho */
+    width: 3%;
+    aspect-ratio: 1;
     background: none;
     border: none;
     cursor: pointer;
@@ -270,22 +276,26 @@
 }
 
 /* ========== SUBMENU GRID ========== */
+/* Tamanhos RELATIVOS ao container - escala automaticamente */
 .submenu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1.5rem;
-    padding: 1rem;
-    justify-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly; /* Distribui espaço igual entre e ao redor dos itens */
+    align-items: flex-start;
+    padding: 2% 3%;
+    width: 100%;
 }
 
 .submenu-item {
+    flex: 0 0 auto; /* Tamanho automático baseado no conteúdo */
+    width: 12%; /* Largura fixa em porcentagem */
     cursor: pointer;
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 3%;
 }
 
 .submenu-item:hover {
@@ -293,13 +303,13 @@
 }
 
 .submenu-icon {
-    width: clamp(60px, 10vw, 120px);
+    width: 80%; /* Relativo ao item (que é relativo ao container) */
     height: auto;
     object-fit: contain;
 }
 
 .submenu-label {
-    font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+    font-size: 0.8em; /* Relativo ao contexto */
     font-weight: 600;
     color: #2c1810;
     text-align: center;

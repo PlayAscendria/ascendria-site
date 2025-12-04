@@ -1,6 +1,6 @@
 /* 
  * Whitepaper Page Styles
- * CSS global agora é carregado via <link> no HTML para evitar FOUC
+ * Sistema de menus interativos similar ao Ecosystem
  */
 
 /* ========== BASE ========== */
@@ -32,7 +32,6 @@ body.loaded .topbar {
 }
 
 /* ========== LAYOUT ========== */
-/* Main ocupa toda a viewport */
 main {
   position: fixed;
   top: clamp(60px, 8vh, 80px);
@@ -47,14 +46,12 @@ main {
   background: transparent;
 }
 
-/* ========== PERGAMINHO ========== */
+/* ========== PERGAMINHO CONTAINER ========== */
 .doc-container {
   position: relative;
-  /* Ocupa 98% da altura do main */
   height: 98%;
-  /* Largura se ajusta à proporção da imagem */
   width: auto;
-  aspect-ratio: 1169 / 758; /* Proporção real da imagem */
+  aspect-ratio: 1169 / 758;
   max-width: 95vw;
   display: flex;
   align-items: center;
@@ -70,7 +67,7 @@ main {
   top: 11%;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 20; /* ACIMA do pergaminho */
+  z-index: 20;
   margin: 0;
   font-size: clamp(2rem, 5vw, 4rem);
   color: #2c1810;
@@ -92,63 +89,271 @@ main {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   z-index: 10;
-  pointer-events: none; /* Permite clicar no conteúdo atrás */
+  pointer-events: none;
 }
 
-/* Conteúdo fica ABAIXO do pergaminho, visível pela janela vazada */
-.doc-content {
+/* ========== WHITEPAPER CONTAINER (área de conteúdo) ========== */
+.whitepaper-container {
   position: absolute;
-  z-index: 5; /* ABAIXO da moldura */
-  /* Ajustado para caber na moldura interna do pergaminho */
+  z-index: 5;
   top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60%;
-  height: 46%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 2rem 2rem 10rem 2rem; /* top | right | bottom | left */
-
-  /* Degradê com cores do pergaminho */
-  background: linear-gradient(
-    135deg,
-    #e0b070 0%,
-    #c48547 50%,
-    #fcc45c 100%
-  );
+  width: 65%;
+  height: 65%;
+  overflow: hidden;
+  
+  /* Fundo igual ao Ecosystem */
+  background-image: url('/assets/images/background/fundo2.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 4px;
-  
-  /* Texto */
+}
+
+/* ========== MENU VIEW (6 módulos) ========== */
+.whitepaper-menu {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.whitepaper-menu.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Grid de menus - 6 itens */
+.whitepaper-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  padding: 5% 3%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.whitepaper-item {
+  flex: 0 0 auto;
+  width: 14%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8%;
+}
+
+.whitepaper-item:hover {
+  transform: scale(1.1);
+}
+
+.whitepaper-icon {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ========== DETAIL VIEW ========== */
+.whitepaper-detail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.whitepaper-detail.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ========== BOTÃO HOME ========== */
+.whitepaper-detail .detail-home {
+  position: absolute;
+  top: 5%;
+  right: 2%;
+  width: 4%;
+  aspect-ratio: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 200;
+  transition: transform 0.3s ease;
+  padding: 0;
+}
+
+.whitepaper-detail.active .detail-home {
+  pointer-events: auto;
+}
+
+.whitepaper-detail .detail-home img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.whitepaper-detail .detail-home:hover {
+  transform: scale(1.15);
+}
+
+/* ========== HEADER DO DETALHE ========== */
+.whitepaper-detail .detail-header {
+  padding: 1rem 1.5rem 0.5rem 1.5rem;
+  text-align: center;
+  border-bottom: 2px solid rgba(44, 24, 16, 0.2);
+}
+
+.whitepaper-detail .detail-icon {
+  width: clamp(50px, 8vw, 100px);
+  height: auto;
+  object-fit: contain;
+}
+
+.whitepaper-detail .detail-title {
+  display: none;
+}
+
+/* ========== CONTEÚDO DO DETALHE ========== */
+.whitepaper-detail .detail-content {
+  flex: 1;
+  padding: 0.5rem 3rem 6rem 3rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   color: #2c1810;
+  text-align: center;
+  font-size: 1rem;
   
-  /* Estilo do scrollbar */
   scrollbar-width: thin;
   scrollbar-color: rgba(139, 90, 43, 0.6) transparent;
 }
 
-.doc-content::-webkit-scrollbar {
+.whitepaper-detail .detail-content::-webkit-scrollbar {
   width: 8px;
 }
 
-.doc-content::-webkit-scrollbar-track {
+.whitepaper-detail .detail-content::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.doc-content::-webkit-scrollbar-thumb {
+.whitepaper-detail .detail-content::-webkit-scrollbar-thumb {
   background-color: rgba(139, 90, 43, 0.6);
   border-radius: 4px;
 }
 
-.doc-content p,
-.doc-content li {
-  color: #2c1810;
+.whitepaper-detail .detail-content p {
   line-height: 1.8;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #2c1810;
 }
 
-.doc-content h2,
-.doc-content h3 {
+.whitepaper-detail .detail-content h3 {
   color: #1a0f08;
-  margin-top: 1.5rem;
+  margin: 1.5rem 0 0.8rem 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.whitepaper-detail .detail-content h4 {
+  color: #2c1810;
+  margin: 1rem 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.whitepaper-detail .detail-content ul {
+  padding-left: 0;
+  margin-bottom: 1rem;
+  list-style-position: inside;
+  text-align: center;
+}
+
+.whitepaper-detail .detail-content li {
+  line-height: 1.7;
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+  color: #2c1810;
+  text-align: center;
+}
+
+.whitepaper-detail .detail-content ol {
+  padding-left: 0;
+  margin-bottom: 1rem;
+  list-style-position: inside;
+  text-align: center;
+}
+
+/* ========== TABELAS ========== */
+.whitepaper-detail .detail-content table {
+  width: 100%;
+  max-width: 90%;
+  margin: 1.5rem auto;
+  border-collapse: collapse;
+  background: rgba(255, 248, 235, 0.95);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(44, 24, 16, 0.15);
+  border: 2px solid rgba(139, 90, 43, 0.4);
+}
+
+.whitepaper-detail .detail-content table thead {
+  background: linear-gradient(180deg, #8B5A2B 0%, #6B4423 100%);
+}
+
+.whitepaper-detail .detail-content table th {
+  padding: 0.8rem 1rem;
+  color: #FFF8EB;
+  font-weight: bold;
+  font-size: 0.95rem;
+  text-align: center;
+  border-bottom: 2px solid rgba(139, 90, 43, 0.6);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.whitepaper-detail .detail-content table td {
+  padding: 0.6rem 1rem;
+  color: #2c1810;
+  font-size: 0.9rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(139, 90, 43, 0.2);
+}
+
+.whitepaper-detail .detail-content table tbody tr:nth-child(even) {
+  background: rgba(139, 90, 43, 0.08);
+}
+
+.whitepaper-detail .detail-content table tbody tr:hover {
+  background: rgba(139, 90, 43, 0.15);
+}
+
+/* ========== LINKS CLICÁVEIS ========== */
+.whitepaper-detail .detail-content a {
+  color: #8B4513;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.whitepaper-detail .detail-content a:hover {
+  color: #5D2E0C;
+  text-shadow: 0 0 8px rgba(139, 69, 19, 0.4);
+}
+
+.whitepaper-detail .detail-content a:visited {
+  color: #6B3510;
 }
 
 /* Responsividade movida para css/responsive.css */

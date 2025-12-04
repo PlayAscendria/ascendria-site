@@ -64,32 +64,24 @@
         <!-- Título no banner superior do pergaminho -->
         <h1 class="doc-title">Whitepaper</h1>
         
-        <!-- Conteúdo fica ATRÁS do pergaminho, visível pela janela vazada -->
-        <div class="doc-content">
-            <p>This page is dedicated to the Whitepaper. Place here the complete technical content — sections, tables, charts and links to downloads (PDF) as needed.</p>
-            <section>
-              <h2>Summary</h2>
-              <ol>
-                <li>Overview</li>
-                <li>Problem</li>
-                <li>Solution</li>
-                <li>Architecture</li>
-                <li>Roadmap</li>
-              </ol>
-            </section>
-            <p>Replace this text with the technical content of the whitepaper.</p>
-          </div>
+        <!-- Container interativo do Whitepaper (fica ATRÁS do pergaminho) -->
+        <div class="whitepaper-container">
+          <!-- Conteúdo gerado dinamicamente pelo whitepaper.js -->
+        </div>
         
         <!-- Moldura do pergaminho fica POR CIMA -->
         <div class="doc-frame"></div>
-        </div>
-      </main>
+      </div>
+    </main>
 
     <!-- Component Loader -->
     <script src="/js/component-loader.js"></script>
     
     <!-- SPA Router -->
     <script src="/js/spa-router.js"></script>
+    
+    <!-- Whitepaper Interactive Menu -->
+    <script src="/pages/whitepaper/whitepaper.js"></script>
 
     <!-- Initialize Components with Robust Loading System -->
     <script>

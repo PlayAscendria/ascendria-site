@@ -884,7 +884,7 @@ self.addEventListener('install', (event) => {
 ## 📝 CHECKLIST DE IMPLEMENTAÇÃO
 
 ### Fase 1 (Crítico)
-- [x] Corrigir href do CTA "JOIN NOW" → "JOIN NOW" (app.playascendria.com)
+- [x] Corrigir href do CTA "JOIN NOW" → "JOIN NOW" (discord.gg/ykabZ7Exmz)
 - [x] Adicionar headline e descrição no main
 - [x] Corrigir links de redes sociais
 - [x] Adicionar Content-Security-Policy
