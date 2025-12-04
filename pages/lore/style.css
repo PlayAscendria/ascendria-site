@@ -151,4 +151,83 @@ main {
   margin-top: 1.5rem;
 }
 
+/* Narrator styling */
+.doc-content .narrator {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #5a3d2b;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(44, 24, 16, 0.3);
+  padding-bottom: 1rem;
+}
+
+/* Blockquote styling for epic quotes */
+.doc-content blockquote {
+  margin: 1.5rem 1rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, rgba(139, 90, 43, 0.2), rgba(196, 133, 71, 0.15));
+  border-left: 4px solid #8b5a2b;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: #1a0f08;
+  position: relative;
+}
+
+.doc-content blockquote::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 3rem;
+  color: rgba(139, 90, 43, 0.3);
+  font-family: Georgia, serif;
+}
+
+/* Royal orders list styling */
+.doc-content .royal-orders {
+  list-style: none;
+  padding-left: 0;
+  margin: 1.5rem 0;
+}
+
+.doc-content .royal-orders li {
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
+  background: linear-gradient(90deg, rgba(139, 90, 43, 0.15), transparent);
+  border-left: 3px solid #8b5a2b;
+  border-radius: 0 4px 4px 0;
+}
+
+.doc-content .royal-orders li strong {
+  color: #5a3d2b;
+}
+
+/* Nihil's dialogue - dark and menacing */
+.doc-content .dialogue.nihil {
+  background: linear-gradient(135deg, rgba(75, 0, 130, 0.15), rgba(25, 25, 25, 0.2));
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  border-left: 4px solid #4b0082;
+  border-radius: 0 6px 6px 0;
+  font-weight: 600;
+  color: #2c1810;
+}
+
+.doc-content .dialogue.nihil.roar {
+  background: linear-gradient(135deg, rgba(139, 0, 0, 0.2), rgba(75, 0, 130, 0.15));
+  border-left: 4px solid #8b0000;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Final line emphasis */
+.doc-content .final-line {
+  text-align: center;
+  font-size: 1.15rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(44, 24, 16, 0.3);
+}
+
 /* Responsividade movida para css/responsive.css */
