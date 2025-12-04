@@ -1241,16 +1241,32 @@ class WhitepaperMenu {
 }
 
 // Inicializar quando o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', () => {
+function initWhitepaper() {
     const container = document.querySelector('.whitepaper-container');
-    if (container) {
-        const menu = new WhitepaperMenu(container);
-        
-        // Listener para garantir visibilidade quando a página volta ao foco
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden) {
-                menu.ensureVisibility();
-            }
-        });
+    if (!container) {
+        // Se o container não existir ainda, tentar novamente em 100ms
+        setTimeout(initWhitepaper, 100);
+        return;
     }
-});
+    
+    // Verificar se já foi inicializado
+    if (container.dataset.initialized === 'true') return;
+    container.dataset.initialized = 'true';
+    
+    const menu = new WhitepaperMenu(container);
+    
+    // Listener para garantir visibilidade quando a página volta ao foco
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            menu.ensureVisibility();
+        }
+    });
+}
+
+// Tentar inicializar imediatamente se DOM já estiver pronto
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWhitepaper);
+} else {
+    // DOM já está pronto
+    initWhitepaper();
+}

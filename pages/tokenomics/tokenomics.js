@@ -705,7 +705,18 @@ class TokenomicsTimeline {
 }
 
 // Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
+function initTokenomics() {
+  const container = document.querySelector('.tokenomics-container');
+  if (!container) {
+    // Se o container não existir ainda, tentar novamente em 100ms
+    setTimeout(initTokenomics, 100);
+    return;
+  }
+  
+  // Verificar se já foi inicializado
+  if (container.dataset.initialized === 'true') return;
+  container.dataset.initialized = 'true';
+  
   const timeline = new TokenomicsTimeline();
   
   // Listener para garantir visibilidade quando a página volta ao foco
@@ -716,4 +727,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-});
+}
+
+// Tentar inicializar imediatamente se DOM já estiver pronto
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTokenomics);
+} else {
+  // DOM já está pronto
+  initTokenomics();
+}
