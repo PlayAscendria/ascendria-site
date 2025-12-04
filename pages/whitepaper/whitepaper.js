@@ -1078,8 +1078,18 @@ class WhitepaperMenu {
     }
     
     async openModule(moduleKey) {
+        // Reset isAnimating se estiver travado por mais de 3 segundos
+        if (this.isAnimating && this._animationStart) {
+            const elapsed = Date.now() - this._animationStart;
+            if (elapsed > 3000) {
+                console.warn('Whitepaper: animation was stuck, resetting...');
+                this.isAnimating = false;
+            }
+        }
+        
         if (this.isAnimating) return;
         this.isAnimating = true;
+        this._animationStart = Date.now();
         this.currentModule = moduleKey;
         
         const module = this.modules[moduleKey];
@@ -1105,11 +1115,22 @@ class WhitepaperMenu {
         }
         
         this.isAnimating = false;
+        this._animationStart = null;
     }
     
     async closeModule() {
+        // Reset isAnimating se estiver travado por mais de 3 segundos
+        if (this.isAnimating && this._animationStart) {
+            const elapsed = Date.now() - this._animationStart;
+            if (elapsed > 3000) {
+                console.warn('Whitepaper: animation was stuck, resetting...');
+                this.isAnimating = false;
+            }
+        }
+        
         if (this.isAnimating) return;
         this.isAnimating = true;
+        this._animationStart = Date.now();
         
         try {
             // Animação: apaga detailView e revela menuView
@@ -1126,6 +1147,7 @@ class WhitepaperMenu {
         
         this.currentModule = null;
         this.isAnimating = false;
+        this._animationStart = null;
     }
     
     clearMasks() {

@@ -706,26 +706,41 @@ class TokenomicsTimeline {
 
 // Initialize when DOM is ready
 function initTokenomics() {
-  const container = document.querySelector('.tokenomics-container');
-  if (!container) {
-    // Se o container não existir ainda, tentar novamente em 100ms
-    setTimeout(initTokenomics, 100);
-    return;
-  }
-  
-  // Verificar se já foi inicializado
-  if (container.dataset.initialized === 'true') return;
-  container.dataset.initialized = 'true';
-  
-  const timeline = new TokenomicsTimeline();
-  
-  // Listener para garantir visibilidade quando a página volta ao foco
-  if (timeline.container) {
+  try {
+    const container = document.querySelector('.tokenomics-container');
+    if (!container) {
+      console.warn('Tokenomics: container not found, retrying...');
+      // Limite de tentativas para evitar loop infinito
+      if (!window._tokenomicsRetries) window._tokenomicsRetries = 0;
+      window._tokenomicsRetries++;
+      if (window._tokenomicsRetries < 50) { // Máximo 5 segundos
+        setTimeout(initTokenomics, 100);
+      }
+      return;
+    }
+    
+    // Verificar se já foi inicializado
+    if (container.dataset.initialized === 'true') return;
+    container.dataset.initialized = 'true';
+    
+    console.log('Tokenomics: initializing...');
+    const timeline = new TokenomicsTimeline();
+    
+    if (!timeline.container) {
+      console.error('Tokenomics: failed to initialize timeline');
+      return;
+    }
+    
+    console.log('Tokenomics: initialized successfully');
+    
+    // Listener para garantir visibilidade quando a página volta ao foco
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) {
         timeline.ensureVisibility();
       }
     });
+  } catch (error) {
+    console.error('Tokenomics: initialization error', error);
   }
 }
 
@@ -736,3 +751,11 @@ if (document.readyState === 'loading') {
   // DOM já está pronto
   initTokenomics();
 }
+
+// Fallback: tentar novamente após window.onload
+window.addEventListener('load', () => {
+  const container = document.querySelector('.tokenomics-container');
+  if (container && container.dataset.initialized !== 'true') {
+    initTokenomics();
+  }
+});
