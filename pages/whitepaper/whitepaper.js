@@ -3,6 +3,9 @@
  * 6 menus principais com detalhamento de cada módulo
  */
 
+(function() {
+'use strict';
+
 class WhitepaperMenu {
     constructor(container) {
         this.container = container;
@@ -1292,3 +1295,5 @@ if (document.readyState === 'loading') {
     // DOM já está pronto
     initWhitepaper();
 }
+
+})(); // End IIFE

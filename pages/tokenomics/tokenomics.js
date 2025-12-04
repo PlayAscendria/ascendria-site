@@ -3,6 +3,9 @@
  * Sistema de linha do tempo horizontal com nodes clicáveis e progresso baseado em data
  */
 
+(function() {
+'use strict';
+
 class TokenomicsTimeline {
   constructor() {
     this.container = document.querySelector('.tokenomics-container');
@@ -759,3 +762,5 @@ window.addEventListener('load', () => {
     initTokenomics();
   }
 });
+
+})(); // End IIFE
