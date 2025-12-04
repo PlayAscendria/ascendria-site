@@ -262,8 +262,6 @@
    * Navegação SPA entre documentos (BackgroundLive contínuo)
    */
   async function navigateDocToDoc(url, targetPath, pushState) {
-    console.log('[SPA] navigateDocToDoc started:', targetPath);
-    
     const main = document.querySelector('main');
     
     // Fade out
@@ -291,7 +289,6 @@
     // Substitui conteúdo
     if (main) {
       main.innerHTML = newMain.innerHTML;
-      console.log('[SPA] Main content replaced');
     }
     
     document.title = doc.title;
@@ -304,8 +301,6 @@
     if (main) {
       main.style.opacity = '1';
     }
-    
-    console.log('[SPA] navigateDocToDoc completed:', targetPath);
     
     // Histórico
     if (pushState) {
@@ -355,25 +350,19 @@
   async function loadPageScripts(doc, targetPath) {
     const scripts = doc.querySelectorAll('script[src*="/pages/"]');
     
-    console.log('[SPA] Loading scripts for:', targetPath, 'Found:', scripts.length);
-    
     for (const script of scripts) {
       const src = script.getAttribute('src');
       if (!src) continue;
-      
-      console.log('[SPA] Processing script:', src);
       
       // Remover script antigo se existir (para permitir recarregamento)
       // Busca por scripts que contenham o mesmo path (ignora query string de cache)
       const baseSrc = src.split('?')[0];
       const existingScripts = document.querySelectorAll(`script[src*="${baseSrc}"]`);
-      console.log('[SPA] Removing existing scripts:', existingScripts.length);
       existingScripts.forEach(s => s.remove());
       
       // Resetar flag de inicialização do container correspondente
       if (src.includes('tokenomics')) {
         const container = document.querySelector('.tokenomics-container');
-        console.log('[SPA] Tokenomics container found:', !!container);
         if (container) {
           container.dataset.initialized = 'false';
           container.innerHTML = '';
@@ -382,7 +371,6 @@
       }
       if (src.includes('whitepaper')) {
         const container = document.querySelector('.whitepaper-container');
-        console.log('[SPA] Whitepaper container found:', !!container);
         if (container) {
           container.dataset.initialized = 'false';
           container.innerHTML = '';
@@ -394,14 +382,8 @@
         await new Promise((resolve, reject) => {
           const newScript = document.createElement('script');
           newScript.src = baseSrc + '?t=' + Date.now(); // Cache bust
-          newScript.onload = () => {
-            console.log('[SPA] Script loaded successfully:', baseSrc);
-            resolve();
-          };
-          newScript.onerror = (err) => {
-            console.error('[SPA] Script load error:', baseSrc, err);
-            reject(err);
-          };
+          newScript.onload = resolve;
+          newScript.onerror = reject;
           document.body.appendChild(newScript);
         });
       } catch (err) {
