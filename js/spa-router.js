@@ -293,6 +293,9 @@
     
     document.title = doc.title;
     
+    // Carrega e executa scripts da página
+    await loadPageScripts(doc, targetPath);
+    
     // Fade in
     await sleep(50);
     if (main) {
@@ -337,6 +340,50 @@
       await new Promise(resolve => {
         newLink.onload = resolve;
         newLink.onerror = resolve;
+      });
+    }
+  }
+
+  /**
+   * Carrega e executa scripts específicos da página
+   */
+  async function loadPageScripts(doc, targetPath) {
+    const scripts = doc.querySelectorAll('script[src*="/pages/"]');
+    
+    for (const script of scripts) {
+      const src = script.getAttribute('src');
+      if (!src) continue;
+      
+      // Remover script antigo se existir (para permitir recarregamento)
+      // Busca por scripts que contenham o mesmo path (ignora query string de cache)
+      const baseSrc = src.split('?')[0];
+      const existingScripts = document.querySelectorAll(`script[src*="${baseSrc}"]`);
+      existingScripts.forEach(s => s.remove());
+      
+      // Resetar flag de inicialização do container correspondente
+      if (src.includes('tokenomics')) {
+        const container = document.querySelector('.tokenomics-container');
+        if (container) {
+          container.dataset.initialized = 'false';
+          container.innerHTML = '';
+        }
+        window._tokenomicsRetries = 0;
+      }
+      if (src.includes('whitepaper')) {
+        const container = document.querySelector('.whitepaper-container');
+        if (container) {
+          container.dataset.initialized = 'false';
+          container.innerHTML = '';
+        }
+      }
+      
+      // Carregar novo script
+      await new Promise((resolve, reject) => {
+        const newScript = document.createElement('script');
+        newScript.src = baseSrc + '?t=' + Date.now(); // Cache bust
+        newScript.onload = resolve;
+        newScript.onerror = reject;
+        document.body.appendChild(newScript);
       });
     }
   }
