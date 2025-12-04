@@ -13,6 +13,8 @@ class WhitepaperMenu {
         this.detailView = null;
         this.currentModule = null;
         this.isAnimating = false;
+        this._currentAnimationId = null;
+        this._safetyTimeout = null;
         
         // 6 Menus principais do Whitepaper
         this.modules = {
@@ -1081,16 +1083,9 @@ class WhitepaperMenu {
     }
     
     async openModule(moduleKey) {
-        // Reset isAnimating se estiver travado por mais de 3 segundos
-        if (this.isAnimating && this._animationStart) {
-            const elapsed = Date.now() - this._animationStart;
-            if (elapsed > 3000) {
-                console.warn('Whitepaper: animation was stuck, resetting...');
-                this.isAnimating = false;
-            }
-        }
+        // Cancelar qualquer animação em andamento
+        this.cancelCurrentAnimation();
         
-        if (this.isAnimating) return;
         this.isAnimating = true;
         this._animationStart = Date.now();
         this.currentModule = moduleKey;
@@ -1122,16 +1117,9 @@ class WhitepaperMenu {
     }
     
     async closeModule() {
-        // Reset isAnimating se estiver travado por mais de 3 segundos
-        if (this.isAnimating && this._animationStart) {
-            const elapsed = Date.now() - this._animationStart;
-            if (elapsed > 3000) {
-                console.warn('Whitepaper: animation was stuck, resetting...');
-                this.isAnimating = false;
-            }
-        }
+        // Cancelar qualquer animação em andamento
+        this.cancelCurrentAnimation();
         
-        if (this.isAnimating) return;
         this.isAnimating = true;
         this._animationStart = Date.now();
         
@@ -1151,6 +1139,21 @@ class WhitepaperMenu {
         this.currentModule = null;
         this.isAnimating = false;
         this._animationStart = null;
+    }
+    
+    cancelCurrentAnimation() {
+        // Cancelar animação em andamento
+        if (this._currentAnimationId) {
+            cancelAnimationFrame(this._currentAnimationId);
+            this._currentAnimationId = null;
+        }
+        if (this._safetyTimeout) {
+            clearTimeout(this._safetyTimeout);
+            this._safetyTimeout = null;
+        }
+        // Limpar máscaras imediatamente
+        this.clearMasks();
+        this.isAnimating = false;
     }
     
     clearMasks() {
@@ -1178,12 +1181,12 @@ class WhitepaperMenu {
             }
             
             let middleCalled = false;
-            let animationId = null;
             
             // Timeout de segurança - se a animação travar, limpar tudo
-            const safetyTimeout = setTimeout(() => {
-                if (animationId) {
-                    cancelAnimationFrame(animationId);
+            this._safetyTimeout = setTimeout(() => {
+                if (this._currentAnimationId) {
+                    cancelAnimationFrame(this._currentAnimationId);
+                    this._currentAnimationId = null;
                 }
                 // Garantir que onMiddle foi chamado
                 if (!middleCalled && onMiddle) {
@@ -1243,10 +1246,14 @@ class WhitepaperMenu {
                 }
                 
                 if (progress < 1) {
-                    animationId = requestAnimationFrame(animate);
+                    this._currentAnimationId = requestAnimationFrame(animate);
                 } else {
                     // Limpar timeout de segurança
-                    clearTimeout(safetyTimeout);
+                    if (this._safetyTimeout) {
+                        clearTimeout(this._safetyTimeout);
+                        this._safetyTimeout = null;
+                    }
+                    this._currentAnimationId = null;
                     // Limpar máscaras
                     if (fromElement) {
                         fromElement.style.maskImage = '';
@@ -1260,7 +1267,7 @@ class WhitepaperMenu {
                 }
             };
             
-            animationId = requestAnimationFrame(animate);
+            this._currentAnimationId = requestAnimationFrame(animate);
         });
     }
 }
