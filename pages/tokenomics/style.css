@@ -1,6 +1,6 @@
 /* 
  * Tokenomics Page Styles
- * CSS global agora é carregado via <link> no HTML para evitar FOUC
+ * Linha do tempo horizontal com nodes interativos
  */
 
 /* ========== BASE ========== */
@@ -32,7 +32,6 @@ body.loaded .topbar {
 }
 
 /* ========== LAYOUT ========== */
-/* Main ocupa toda a viewport */
 main {
   position: fixed;
   top: clamp(60px, 8vh, 80px);
@@ -47,14 +46,12 @@ main {
   background: transparent;
 }
 
-/* ========== PERGAMINHO ========== */
+/* ========== PERGAMINHO CONTAINER ========== */
 .doc-container {
   position: relative;
-  /* Ocupa 98% da altura do main */
   height: 98%;
-  /* Largura se ajusta à proporção da imagem */
   width: auto;
-  aspect-ratio: 1169 / 758; /* Proporção real da imagem */
+  aspect-ratio: 1169 / 758;
   max-width: 95vw;
   display: flex;
   align-items: center;
@@ -70,7 +67,7 @@ main {
   top: 11%;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 20; /* ACIMA do pergaminho */
+  z-index: 20;
   margin: 0;
   font-size: clamp(2rem, 5vw, 4rem);
   color: #2c1810;
@@ -92,63 +89,447 @@ main {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   z-index: 10;
-  pointer-events: none; /* Permite clicar no conteúdo atrás */
+  pointer-events: none;
 }
 
-/* Conteúdo fica ABAIXO do pergaminho, visível pela janela vazada */
-.doc-content {
+/* ========== TOKENOMICS CONTAINER ========== */
+.tokenomics-container {
   position: absolute;
-  z-index: 5; /* ABAIXO da moldura */
-  /* Ajustado para caber na moldura interna do pergaminho */
+  z-index: 5;
   top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60%;
-  height: 46%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 2rem 2rem 10rem 2rem; /* top | right | bottom | left */
-
-  /* Degradê com cores do pergaminho */
-  background: linear-gradient(
-    135deg,
-    #e0b070 0%,
-    #c48547 50%,
-    #fcc45c 100%
-  );
+  width: 65%;
+  height: 65%;
+  overflow: hidden;
+  
+  background-image: url('/assets/images/background/fundo2.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 4px;
+}
+
+/* ========== TIMELINE VIEW ========== */
+.tokenomics-timeline {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  /* Garantir que a máscara não bloqueie permanentemente */
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+.tokenomics-timeline.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Container da linha do tempo - scroll horizontal com drag */
+.timeline-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  user-select: none;
   
-  /* Texto */
-  color: #2c1810;
-  
-  /* Estilo do scrollbar */
+  /* Scrollbar estilizado */
   scrollbar-width: thin;
   scrollbar-color: rgba(139, 90, 43, 0.6) transparent;
 }
 
-.doc-content::-webkit-scrollbar {
-  width: 8px;
+.timeline-wrapper.dragging {
+  cursor: grabbing;
 }
 
-.doc-content::-webkit-scrollbar-track {
-  background: transparent;
+.timeline-wrapper.dragging * {
+  pointer-events: none;
 }
 
-.doc-content::-webkit-scrollbar-thumb {
+.timeline-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.timeline-wrapper::-webkit-scrollbar-track {
+  background: rgba(139, 90, 43, 0.1);
+  border-radius: 4px;
+}
+
+.timeline-wrapper::-webkit-scrollbar-thumb {
   background-color: rgba(139, 90, 43, 0.6);
   border-radius: 4px;
 }
 
-.doc-content p,
-.doc-content li {
-  color: #2c1810;
-  line-height: 1.8;
+/* Container interno que agrupa linha e nodes */
+.timeline-inner {
+  position: relative;
+  min-width: 200%;
+  width: 200%;
+  height: 100%;
 }
 
-.doc-content h2,
-.doc-content h3 {
+/* Linha central horizontal - base (cinza) */
+.timeline-line {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  height: 6px;
+  background: rgba(139, 90, 43, 0.25);
+  transform: translateY(-50%);
+  border-radius: 3px;
+  z-index: 1;
+}
+
+/* Linha de progresso (preenchida) - verde */
+.timeline-progress {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  height: 6px;
+  background: linear-gradient(90deg, 
+    #228B22 0%,
+    #32CD32 50%,
+    #228B22 100%
+  );
+  transform: translateY(-50%);
+  border-radius: 3px;
+  z-index: 2;
+  transition: width 1s ease-out;
+  box-shadow: 0 0 15px rgba(50, 205, 50, 0.6);
+  width: 0%;
+}
+
+/* Container dos nodes */
+.timeline-nodes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+/* ========== NODES ========== */
+.timeline-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  z-index: 3;
+}
+
+/* Primeiro node (Genesis) - centro alinhado com início da linha */
+.timeline-node:first-child {
+  margin-left: 0;
+  transform: translateX(-50%);
+}
+
+/* Último node (Future) - lateral esquerda alinhada com fim da linha */
+.timeline-node:last-child {
+  margin-right: 0;
+  transform: translateX(75%);
+}
+
+.timeline-node:hover {
+  transform: scale(1.05);
+}
+
+.timeline-node:first-child:hover {
+  transform: translateX(-50%) scale(1.05);
+}
+
+.timeline-node:last-child:hover {
+  transform: translateX(75%) scale(1.05);
+}
+
+/* Posições verticais dos nodes */
+.timeline-node.position-center {
+  align-self: center;
+}
+
+.timeline-node.position-top {
+  align-self: center;
+  transform: translateY(calc(-50% - 5%));
+}
+
+.timeline-node.position-top:hover {
+  transform: translateY(calc(-50% - 5%)) scale(1.05);
+}
+
+.timeline-node.position-bottom {
+  align-self: center;
+  transform: translateY(calc(50% + 5%));
+}
+
+.timeline-node.position-bottom:hover {
+  transform: translateY(calc(50% + 5%)) scale(1.05);
+}
+
+/* Ícone do node - maior e sem sombra */
+.node-icon {
+  width: clamp(70px, 10vw, 130px);
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.timeline-node:hover .node-icon {
+  transform: scale(1.05);
+}
+
+/* Labels removidos */
+.node-label {
+  display: none;
+}
+
+/* Conectores verticais dos nodes à linha */
+.node-connector {
+  position: absolute;
+  width: 2px;
+  background: rgba(139, 90, 43, 0.6);
+  z-index: 1;
+}
+
+.timeline-node.position-top .node-connector {
+  top: 100%;
+  height: calc(50% - 20px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.timeline-node.position-bottom .node-connector {
+  bottom: 100%;
+  height: calc(50% - 20px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ========== DETAIL VIEW ========== */
+.tokenomics-detail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Garantir que a máscara não bloqueie permanentemente */
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+.tokenomics-detail.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ========== BOTÃO HOME ========== */
+.tokenomics-detail .detail-home {
+  position: absolute;
+  top: 5%;
+  right: 2%;
+  width: 4%;
+  aspect-ratio: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 200;
+  transition: transform 0.3s ease;
+  padding: 0;
+}
+
+.tokenomics-detail.active .detail-home {
+  pointer-events: auto;
+}
+
+.tokenomics-detail .detail-home img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.tokenomics-detail .detail-home:hover {
+  transform: scale(1.15);
+}
+
+/* ========== HEADER DO DETALHE ========== */
+.tokenomics-detail .detail-header {
+  padding: 1rem 1.5rem 0.5rem 1.5rem;
+  text-align: center;
+  border-bottom: 2px solid rgba(44, 24, 16, 0.2);
+}
+
+.tokenomics-detail .detail-icon {
+  width: clamp(50px, 8vw, 100px);
+  height: auto;
+  object-fit: contain;
+}
+
+.tokenomics-detail .detail-title {
+  display: none;
+}
+
+/* ========== CONTEÚDO DO DETALHE ========== */
+.tokenomics-detail .detail-content {
+  flex: 1;
+  padding: 0.5rem 3rem 6rem 3rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  color: #2c1810;
+  text-align: center;
+  font-size: 1rem;
+  
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 90, 43, 0.6) transparent;
+}
+
+.tokenomics-detail .detail-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tokenomics-detail .detail-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tokenomics-detail .detail-content::-webkit-scrollbar-thumb {
+  background-color: rgba(139, 90, 43, 0.6);
+  border-radius: 4px;
+}
+
+.tokenomics-detail .detail-content p {
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #2c1810;
+}
+
+.tokenomics-detail .detail-content h3 {
   color: #1a0f08;
-  margin-top: 1.5rem;
+  margin: 1.5rem 0 0.8rem 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.tokenomics-detail .detail-content h4 {
+  color: #2c1810;
+  margin: 1rem 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.tokenomics-detail .detail-content ul {
+  padding-left: 0;
+  margin-bottom: 1rem;
+  list-style-position: inside;
+  text-align: center;
+}
+
+.tokenomics-detail .detail-content li {
+  line-height: 1.7;
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+  color: #2c1810;
+  text-align: center;
+}
+
+.tokenomics-detail .detail-content ol {
+  padding-left: 0;
+  margin-bottom: 1rem;
+  list-style-position: inside;
+  text-align: center;
+}
+
+/* ========== TABELAS ========== */
+.tokenomics-detail .detail-content table {
+  width: 100%;
+  max-width: 90%;
+  margin: 1.5rem auto;
+  border-collapse: collapse;
+  background: rgba(255, 248, 235, 0.95);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(44, 24, 16, 0.15);
+  border: 2px solid rgba(139, 90, 43, 0.4);
+}
+
+.tokenomics-detail .detail-content table thead {
+  background: linear-gradient(180deg, #8B5A2B 0%, #6B4423 100%);
+}
+
+.tokenomics-detail .detail-content table th {
+  padding: 0.8rem 1rem;
+  color: #FFF8EB;
+  font-weight: bold;
+  font-size: 0.95rem;
+  text-align: center;
+  border-bottom: 2px solid rgba(139, 90, 43, 0.6);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.tokenomics-detail .detail-content table td {
+  padding: 0.6rem 1rem;
+  color: #2c1810;
+  font-size: 0.9rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(139, 90, 43, 0.2);
+}
+
+.tokenomics-detail .detail-content table tbody tr:nth-child(even) {
+  background: rgba(139, 90, 43, 0.08);
+}
+
+.tokenomics-detail .detail-content table tbody tr:hover {
+  background: rgba(139, 90, 43, 0.15);
+}
+
+/* ========== LINKS CLICÁVEIS ========== */
+.tokenomics-detail .detail-content a {
+  color: #8B4513;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.tokenomics-detail .detail-content a:hover {
+  color: #5D2E0C;
+  text-shadow: 0 0 8px rgba(139, 69, 19, 0.4);
+}
+
+.tokenomics-detail .detail-content a:visited {
+  color: #6B3510;
+}
+
+/* ========== NODES ESPECIAIS - Genesis e Future ========== */
+.timeline-node[data-module="genesis"] .node-icon,
+.timeline-node[data-module="future"] .node-icon {
+  width: clamp(70px, 12vw, 140px);
+}
+
+/* Nodes alcançados pela linha de progresso - brilho verde */
+.timeline-node.reached .node-icon {
+  filter: drop-shadow(0 0 15px rgba(50, 205, 50, 0.8)) drop-shadow(0 0 30px rgba(50, 205, 50, 0.5));
+}
+
+/* Nodes não alcançados - sempre visíveis, apenas sem efeito */
+.timeline-node:not(.reached) .node-icon {
+  filter: none;
 }
 
 /* Responsividade movida para css/responsive.css */

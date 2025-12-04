@@ -27,7 +27,7 @@
     <meta property="twitter:image" content="https://playascendria.com/assets/images/ui/logoascendria.webp">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/assets/images/ui/favicon.png">
+    <link rel="icon" type="image/webp" href="/assets/images/ui/favicon.webp">
     <meta name="theme-color" content="#0a0e27">
 
     <!-- ANTI-FLASH: CSS crítico inline para background imediato -->
@@ -60,34 +60,28 @@
     <div id="backgroundlive-placeholder" data-component="backgroundlive"></div>
 
     <main id="main" role="main">
-        <div class="doc-container">
-          <!-- Título no banner superior do pergaminho -->
-          <h1 class="doc-title">Tokenomics</h1>
-          
-          <!-- Conteúdo fica ATRÁS do pergaminho, visível pela janela vazada -->
-          <div class="doc-content">
-            <p>Dedicated to Tokenomics — describe here the token distribution, unlock schedule, allocation for team, treasury, rewards and numerical examples.</p>
-            <section>
-              <h2>Distribution</h2>
-              <ul>
-                <li>Team: %</li>
-                <li>Investors: %</li>
-                <li>Treasury: %</li>
-                <li>Community / Rewards: %</li>
-              </ul>
-            </section>
-            <p>Replace this content with details and tables.</p>
-          </div>
-          
-          <!-- Moldura do pergaminho fica POR CIMA -->
-          <div class="doc-frame"></div>
+      <div class="doc-container">
+        <!-- Título no banner superior do pergaminho -->
+        <h1 class="doc-title">Tokenomics</h1>
+        
+        <!-- Container interativo do Tokenomics (fica ATRÁS do pergaminho) -->
+        <div class="tokenomics-container">
+          <!-- Conteúdo gerado dinamicamente pelo tokenomics.js -->
         </div>
-      </main>
+        
+        <!-- Moldura do pergaminho fica POR CIMA -->
+        <div class="doc-frame"></div>
+      </div>
+    </main>
 
     <!-- Component Loader -->
     <script src="/js/component-loader.js"></script>
+    
     <!-- SPA Router -->
     <script src="/js/spa-router.js"></script>
+    
+    <!-- Tokenomics Interactive Timeline -->
+    <script src="/pages/tokenomics/tokenomics.js"></script>
 
     <!-- Initialize Components -->
     <script>

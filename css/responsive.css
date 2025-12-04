@@ -123,17 +123,57 @@
   .doc-container {
     height: 96%;
   }
-  
+
   .doc-title {
     font-size: clamp(1.6rem, 4vw, 2.8rem);
   }
-  
+
+  /* --- LORE --- */
   .doc-content {
     width: 58%;
     height: 44%;
     padding: 1.5rem 1.5rem 8rem 1.5rem;
   }
-  
+
+  /* --- WHITEPAPER --- */
+  .whitepaper-container {
+    width: 60%;
+    height: 58%;
+  }
+
+  .whitepaper-item {
+    width: 12%;
+  }
+
+  .whitepaper-icon {
+    width: 90%;
+  }
+
+  .whitepaper-detail .detail-content {
+    padding: 0.5rem 2rem 5rem 2rem;
+    font-size: 0.9rem;
+  }
+
+  /* --- TOKENOMICS --- */
+  .tokenomics-container {
+    width: 60%;
+    height: 58%;
+  }
+
+  .node-icon {
+    width: clamp(50px, 8vw, 90px);
+  }
+
+  .timeline-node[data-module="genesis"] .node-icon,
+  .timeline-node[data-module="future"] .node-icon {
+    width: clamp(55px, 9vw, 100px);
+  }
+
+  .tokenomics-detail .detail-content {
+    padding: 0.5rem 2rem 5rem 2rem;
+    font-size: 0.9rem;
+  }
+
   /* ========== LOADING ========== */
   .loading-info {
     bottom: 50px;
@@ -249,14 +289,45 @@
   .doc-container {
     height: 97%;
   }
-  
+
   .doc-title {
     font-size: clamp(1.8rem, 4.5vw, 3rem);
   }
-  
+
+  /* --- LORE --- */
   .doc-content {
     width: 59%;
     height: 45%;
+  }
+
+  /* --- WHITEPAPER --- */
+  .whitepaper-container {
+    width: 62%;
+    height: 60%;
+  }
+
+  .whitepaper-item {
+    width: 13%;
+  }
+
+  .whitepaper-detail .detail-content {
+    padding: 0.5rem 2.5rem 5rem 2.5rem;
+    font-size: 0.95rem;
+  }
+
+  /* --- TOKENOMICS --- */
+  .tokenomics-container {
+    width: 62%;
+    height: 60%;
+  }
+
+  .node-icon {
+    width: clamp(55px, 9vw, 100px);
+  }
+
+  .tokenomics-detail .detail-content {
+    padding: 0.5rem 2.5rem 5rem 2.5rem;
+    font-size: 0.95rem;
   }
 }
 
@@ -333,14 +404,43 @@
   .doc-container {
     height: 97%;
   }
-  
+
   .doc-title {
     font-size: clamp(1.8rem, 4.5vw, 3.2rem);
   }
-  
+
+  /* --- LORE --- */
   .doc-content {
     width: 59%;
     height: 45%;
+  }
+
+  /* --- WHITEPAPER --- */
+  .whitepaper-container {
+    width: 63%;
+    height: 62%;
+  }
+
+  .whitepaper-item {
+    width: 13%;
+  }
+
+  .whitepaper-detail .detail-content {
+    padding: 0.5rem 2.5rem 5.5rem 2.5rem;
+  }
+
+  /* --- TOKENOMICS --- */
+  .tokenomics-container {
+    width: 63%;
+    height: 62%;
+  }
+
+  .node-icon {
+    width: clamp(60px, 9vw, 110px);
+  }
+
+  .tokenomics-detail .detail-content {
+    padding: 0.5rem 2.5rem 5.5rem 2.5rem;
   }
 }
 
@@ -406,10 +506,35 @@
   .doc-title {
     font-size: clamp(2rem, 5vw, 3.5rem);
   }
-  
+
+  /* --- LORE --- */
   .doc-content {
     width: 60%;
     height: 46%;
+  }
+
+  /* --- WHITEPAPER --- */
+  .whitepaper-container {
+    width: 64%;
+    height: 65%;
+  }
+
+  .whitepaper-detail .detail-content {
+    padding: 0.5rem 3rem 5.5rem 3rem;
+  }
+
+  /* --- TOKENOMICS --- */
+  .tokenomics-container {
+    width: 64%;
+    height: 63%;
+  }
+
+  .node-icon {
+    width: clamp(65px, 10vw, 120px);
+  }
+
+  .tokenomics-detail .detail-content {
+    padding: 0.5rem 3rem 5.5rem 3rem;
   }
 }
 
@@ -475,10 +600,31 @@
   .doc-title {
     font-size: clamp(2rem, 5vw, 3.8rem);
   }
-  
+
+  /* --- LORE --- */
   .doc-content {
     width: 60%;
     height: 46%;
+  }
+
+  /* --- WHITEPAPER --- */
+  .whitepaper-container {
+    width: 65%;
+    height: 65%;
+  }
+
+  .whitepaper-detail .detail-content {
+    padding: 0.5rem 3rem 6rem 3rem;
+  }
+
+  /* --- TOKENOMICS --- */
+  .tokenomics-container {
+    width: 65%;
+    height: 65%;
+  }
+
+  .tokenomics-detail .detail-content {
+    padding: 0.5rem 3rem 6rem 3rem;
   }
 }
 
@@ -571,24 +717,68 @@
   .doc-title {
     font-size: clamp(2.5rem, 5vw, 4.5rem);
   }
-  
+
+  /* --- LORE --- */
   .doc-content {
     font-size: 1.2rem;
   }
-  
+
   .doc-content p {
     font-size: 1.2rem;
   }
-  
+
+  /* --- WHITEPAPER --- */
+  .whitepaper-container {
+    width: 65%;
+    height: 65%;
+  }
+
+  .whitepaper-icon {
+    width: 100%;
+  }
+
+  .whitepaper-detail .detail-content {
+    font-size: 1.15rem;
+    padding: 0.5rem 3rem 6rem 3rem;
+  }
+
+  .whitepaper-detail .detail-content p {
+    font-size: 1.15rem;
+  }
+
+  /* --- TOKENOMICS --- */
+  .tokenomics-container {
+    width: 65%;
+    height: 65%;
+  }
+
+  .node-icon {
+    width: clamp(80px, 12vw, 150px);
+  }
+
+  .timeline-node[data-module="genesis"] .node-icon,
+  .timeline-node[data-module="future"] .node-icon {
+    width: clamp(90px, 14vw, 170px);
+  }
+
+  .tokenomics-detail .detail-content {
+    font-size: 1.15rem;
+    padding: 0.5rem 3rem 6rem 3rem;
+  }
+
+  .tokenomics-detail .detail-content p {
+    font-size: 1.15rem;
+  }
+
   /* ========== FOOTER ========== */
   .site-footer {
     padding: 2.5rem 1.5rem;
   }
-  
+
   .footer-copyright {
     font-size: 1rem;
   }
-  
+
   .footer-nav a {
     font-size: 1rem;
   }
@@ -683,24 +873,68 @@
   .doc-title {
     font-size: clamp(2.5rem, 5vw, 4.5rem);
   }
-  
+
+  /* --- LORE --- */
   .doc-content {
     font-size: 1.2rem;
   }
-  
+
   .doc-content p {
     font-size: 1.2rem;
   }
-  
+
+  /* --- WHITEPAPER --- */
+  .whitepaper-container {
+    width: 65%;
+    height: 65%;
+  }
+
+  .whitepaper-icon {
+    width: 100%;
+  }
+
+  .whitepaper-detail .detail-content {
+    font-size: 1.2rem;
+    padding: 0.5rem 3rem 6rem 3rem;
+  }
+
+  .whitepaper-detail .detail-content p {
+    font-size: 1.2rem;
+  }
+
+  /* --- TOKENOMICS --- */
+  .tokenomics-container {
+    width: 65%;
+    height: 65%;
+  }
+
+  .node-icon {
+    width: clamp(85px, 12vw, 160px);
+  }
+
+  .timeline-node[data-module="genesis"] .node-icon,
+  .timeline-node[data-module="future"] .node-icon {
+    width: clamp(95px, 14vw, 180px);
+  }
+
+  .tokenomics-detail .detail-content {
+    font-size: 1.2rem;
+    padding: 0.5rem 3rem 6rem 3rem;
+  }
+
+  .tokenomics-detail .detail-content p {
+    font-size: 1.2rem;
+  }
+
   /* ========== FOOTER ========== */
   .site-footer {
     padding: 2.5rem 1.5rem;
   }
-  
+
   .footer-copyright {
     font-size: 1rem;
   }
-  
+
   .footer-nav a {
     font-size: 1rem;
   }
@@ -813,28 +1047,109 @@
   .doc-title {
     font-size: clamp(3rem, 5vw, 5rem);
   }
-  
+
+  /* --- LORE --- */
   .doc-content {
     font-size: 1.4rem;
     padding: 2.5rem 2.5rem 12rem 2.5rem;
   }
-  
+
   .doc-content p {
     font-size: 1.4rem;
     line-height: 2;
   }
-  
+
   .doc-content h2,
   .doc-content h3 {
     font-size: 1.8rem;
   }
-  
+
+  /* --- WHITEPAPER --- */
+  .whitepaper-container {
+    width: 65%;
+    height: 65%;
+  }
+
+  .whitepaper-item {
+    width: 14%;
+  }
+
+  .whitepaper-icon {
+    width: 100%;
+  }
+
+  .whitepaper-detail .detail-content {
+    font-size: 1.4rem;
+    padding: 1rem 3.5rem 8rem 3.5rem;
+  }
+
+  .whitepaper-detail .detail-content p {
+    font-size: 1.4rem;
+    line-height: 2;
+  }
+
+  .whitepaper-detail .detail-content h3 {
+    font-size: 1.6rem;
+  }
+
+  .whitepaper-detail .detail-content h4 {
+    font-size: 1.3rem;
+  }
+
+  .whitepaper-detail .detail-content table th,
+  .whitepaper-detail .detail-content table td {
+    font-size: 1.2rem;
+    padding: 1rem 1.2rem;
+  }
+
+  /* --- TOKENOMICS --- */
+  .tokenomics-container {
+    width: 65%;
+    height: 65%;
+  }
+
+  .node-icon {
+    width: clamp(100px, 14vw, 200px);
+  }
+
+  .timeline-node[data-module="genesis"] .node-icon,
+  .timeline-node[data-module="future"] .node-icon {
+    width: clamp(110px, 16vw, 220px);
+  }
+
+  .timeline-line,
+  .timeline-progress {
+    height: 10px;
+  }
+
+  .tokenomics-detail .detail-content {
+    font-size: 1.4rem;
+    padding: 1rem 3.5rem 8rem 3.5rem;
+  }
+
+  .tokenomics-detail .detail-content p {
+    font-size: 1.4rem;
+    line-height: 2;
+  }
+
+  .tokenomics-detail .detail-content h3 {
+    font-size: 1.6rem;
+  }
+
+  .tokenomics-detail .detail-content h4 {
+    font-size: 1.3rem;
+  }
+
+  .tokenomics-detail .detail-content table th,
+  .tokenomics-detail .detail-content table td {
+    font-size: 1.2rem;
+    padding: 1rem 1.2rem;
+  }
+
   /* ========== FOOTER ========== */
   .site-footer {
     padding: 3rem 2rem;
-  }
-  
-  .footer-copyright {
+  }  .footer-copyright {
     font-size: 1.2rem;
   }
   

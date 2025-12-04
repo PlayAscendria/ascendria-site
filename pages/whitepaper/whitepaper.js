@@ -988,6 +988,25 @@ class WhitepaperMenu {
     init() {
         this.createStructure();
         this.bindEvents();
+        
+        // Verificação de segurança - garantir que menu está visível
+        this.ensureVisibility();
+    }
+    
+    ensureVisibility() {
+        if (this.menuView && !this.currentModule) {
+            this.menuView.classList.remove('hidden');
+            this.menuView.style.opacity = '';
+            this.menuView.style.visibility = '';
+            this.menuView.style.maskImage = '';
+            this.menuView.style.webkitMaskImage = '';
+        }
+        
+        if (this.detailView && !this.currentModule) {
+            this.detailView.classList.remove('active');
+            this.detailView.style.maskImage = '';
+            this.detailView.style.webkitMaskImage = '';
+        }
     }
     
     createStructure() {
@@ -1072,11 +1091,18 @@ class WhitepaperMenu {
         this.detailView.querySelector('.detail-title').textContent = module.title;
         this.detailView.querySelector('.detail-content').innerHTML = module.content;
         
-        // Animação: apaga menuView e revela detailView
-        await this.transitionAnimation(this.menuView, this.detailView, () => {
+        try {
+            // Animação: apaga menuView e revela detailView
+            await this.transitionAnimation(this.menuView, this.detailView, () => {
+                this.menuView.classList.add('hidden');
+                this.detailView.classList.add('active');
+            });
+        } catch (e) {
+            // Em caso de erro, garantir estados corretos
             this.menuView.classList.add('hidden');
             this.detailView.classList.add('active');
-        });
+            this.clearMasks();
+        }
         
         this.isAnimating = false;
     }
@@ -1085,14 +1111,33 @@ class WhitepaperMenu {
         if (this.isAnimating) return;
         this.isAnimating = true;
         
-        // Animação: apaga detailView e revela menuView
-        await this.transitionAnimation(this.detailView, this.menuView, () => {
+        try {
+            // Animação: apaga detailView e revela menuView
+            await this.transitionAnimation(this.detailView, this.menuView, () => {
+                this.detailView.classList.remove('active');
+                this.menuView.classList.remove('hidden');
+            });
+        } catch (e) {
+            // Em caso de erro, garantir estados corretos
             this.detailView.classList.remove('active');
             this.menuView.classList.remove('hidden');
-        });
+            this.clearMasks();
+        }
         
         this.currentModule = null;
         this.isAnimating = false;
+    }
+    
+    clearMasks() {
+        // Limpar máscaras de ambos os elementos
+        if (this.menuView) {
+            this.menuView.style.maskImage = '';
+            this.menuView.style.webkitMaskImage = '';
+        }
+        if (this.detailView) {
+            this.detailView.style.maskImage = '';
+            this.detailView.style.webkitMaskImage = '';
+        }
     }
     
     async transitionAnimation(fromElement, toElement, onMiddle) {
@@ -1108,6 +1153,28 @@ class WhitepaperMenu {
             }
             
             let middleCalled = false;
+            let animationId = null;
+            
+            // Timeout de segurança - se a animação travar, limpar tudo
+            const safetyTimeout = setTimeout(() => {
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                }
+                // Garantir que onMiddle foi chamado
+                if (!middleCalled && onMiddle) {
+                    onMiddle();
+                }
+                // Limpar máscaras
+                if (fromElement) {
+                    fromElement.style.maskImage = '';
+                    fromElement.style.webkitMaskImage = '';
+                }
+                if (toElement) {
+                    toElement.style.maskImage = '';
+                    toElement.style.webkitMaskImage = '';
+                }
+                resolve();
+            }, duration + 500); // 500ms de margem de segurança
             
             const animate = (currentTime) => {
                 const elapsed = currentTime - startTime;
@@ -1151,8 +1218,10 @@ class WhitepaperMenu {
                 }
                 
                 if (progress < 1) {
-                    requestAnimationFrame(animate);
+                    animationId = requestAnimationFrame(animate);
                 } else {
+                    // Limpar timeout de segurança
+                    clearTimeout(safetyTimeout);
                     // Limpar máscaras
                     if (fromElement) {
                         fromElement.style.maskImage = '';
@@ -1166,7 +1235,7 @@ class WhitepaperMenu {
                 }
             };
             
-            requestAnimationFrame(animate);
+            animationId = requestAnimationFrame(animate);
         });
     }
 }
@@ -1175,6 +1244,13 @@ class WhitepaperMenu {
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.whitepaper-container');
     if (container) {
-        new WhitepaperMenu(container);
+        const menu = new WhitepaperMenu(container);
+        
+        // Listener para garantir visibilidade quando a página volta ao foco
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                menu.ensureVisibility();
+            }
+        });
     }
 });

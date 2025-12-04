@@ -358,19 +358,19 @@ class EcosystemGraph {
                             <p>In our Ecosystem, we will have <strong>ERC-721 NFTs</strong> (ASCENDERS, LANDS, and PETS) and <strong>ERC-1155 NFTs</strong> (RESOURCES).</p>
                             <p>The WEB 3 systems will be added with the arrival of <strong>Ascendria – Champions of Ascendria</strong>. However, this does not mean you won't be monetizing your earnings from the start, because everything you create during the <strong>"Toward Ascendria" Event</strong> can be transformed into sellable NFTs with the arrival of Ascendria.</p>
 
-                            <h3>⛏️ MINER TO ASCENDER CONVERSION</h3>
-                            <p>The Miners can only be acquired during the "Toward Ascendria" event, and all their progress will be utilized. Depending on your Miner's evolution, you can receive an Ascender NFT of up to <strong>LEGENDARY</strong> level:</p>
+                            <h3>⛏️CONVERSION FROM MINER TO SWORN ASCENDER</h3>
+                            <p>The Miners can only be acquired during the "Toward Ascendria" event, and all their progress will be utilized. Depending on the evolution of your pickaxe, you can receive a Sworn Ascender NFT of up to <strong>EPIC</strong> level:</p>
                             <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
-                                <tr style="background: rgba(0,0,0,0.1);"><th style="padding: 0.5rem; text-align: center; width: 50%;">Miner Rarity</th><th style="padding: 0.5rem; text-align: center; width: 50%;">Ascender Rarity</th></tr>
-                                <tr><td style="padding: 0.5rem; text-align: center;">Mythic Miner</td><td style="padding: 0.5rem; text-align: center;"><strong>Legendary Genesis Ascender</strong></td></tr>
-                                <tr><td style="padding: 0.5rem; text-align: center;">Legendary Miner</td><td style="padding: 0.5rem; text-align: center;"><strong>Epic Genesis Ascender</strong></td></tr>
-                                <tr><td style="padding: 0.5rem; text-align: center;">Epic Miner</td><td style="padding: 0.5rem; text-align: center;"><strong>Rare Genesis Ascender</strong></td></tr>
-                                <tr><td style="padding: 0.5rem; text-align: center;">Rare Miner</td><td style="padding: 0.5rem; text-align: center;"><strong>Common Genesis Ascender</strong></td></tr>
-                                <tr><td style="padding: 0.5rem; text-align: center;">Common Miner</td><td style="padding: 0.5rem; text-align: center;"><strong>Common Genesis Ascender</strong></td></tr>
+                                <tr style="background: rgba(0,0,0,0.1);"><th style="padding: 0.5rem; text-align: center; width: 50%;">Miner Rarity</th><th style="padding: 0.5rem; text-align: center; width: 50%;">Sworn Ascender Rarity</th></tr>
+                                <tr><td style="padding: 0.5rem; text-align: center;">Mythic Pickaxe</td><td style="padding: 0.5rem; text-align: center;"><strong>Epic Oath Stone</strong></td></tr>
+                                <tr><td style="padding: 0.5rem; text-align: center;">Legendary Pickaxe</td><td style="padding: 0.5rem; text-align: center;"><strong>Epic Oath Stone</strong></td></tr>
+                                <tr><td style="padding: 0.5rem; text-align: center;">Epic Pickaxe</td><td style="padding: 0.5rem; text-align: center;"><strong>Rare Oath Stone</strong></td></tr>
+                                <tr><td style="padding: 0.5rem; text-align: center;">Rare Pickaxe</td><td style="padding: 0.5rem; text-align: center;"><strong>Common Oath Stone</strong></td></tr>
+                                <tr><td style="padding: 0.5rem; text-align: center;">Common Pickaxe</td><td style="padding: 0.5rem; text-align: center;"><strong>Common Oath Stone</strong></td></tr>
                             </table>
 
                             <h3>👑 GENESIS ASCENDERS</h3>
-                            <p>The Genesis Ascenders can only be acquired by obtaining the miner during the "Toward Ascendria" event. When Champions of Ascendria arrives, the <strong>OATH function</strong> will be released at the King Aethernus NPC, and your off-chain asset will be transformed into a <strong>Genesis Ascender Crystal {rarity}</strong>.</p>
+                            <p>The Sworn Ascenders can only be acquired by obtaining the miner during the "Toward Ascendria" event. When Champions of Ascendria arrives, the <strong>OATH function</strong> will be released at the King Aethernus NPC, and your off-chain asset will be transformed into a <strong>Genesis Ascender Crystal {rarity}</strong>.</p>
                             <p>Your Sworn Ascender NFT will have a passive buff called <strong>"Witness of the Fall"</strong>. Since your character is theoretically a member of the city of Aurelia that was destroyed by Nihil, you observed the dragon in action and know some of its weak points, guaranteeing you <strong>5% more damage to Nihil</strong>.</p>
 
                             <h3>🔷 ERC-1155 NFTs (Resources)</h3>

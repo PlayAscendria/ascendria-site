@@ -118,6 +118,9 @@ main {
   height: 100%;
   opacity: 1;
   transition: opacity 0.5s ease;
+  /* Garantir que a máscara não bloqueie permanentemente */
+  mask-image: none;
+  -webkit-mask-image: none;
 }
 
 .whitepaper-menu.hidden {
@@ -172,6 +175,9 @@ main {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  /* Garantir que a máscara não bloqueie permanentemente */
+  mask-image: none;
+  -webkit-mask-image: none;
 }
 
 .whitepaper-detail.active {
