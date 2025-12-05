@@ -570,6 +570,17 @@ class financialmodelTimeline {
                 <li><strong style="color: #5c3d1e;">New Raffle:</strong> Based on Staking Power (Level x Rarity). Requires <strong style="color: #166534;">7 days</strong> of uninterrupted staking.</li>
             </ul>
         </div>
+
+        <h4 style="color: #d97706; margin-bottom: 10px; font-size: 1.15em;">7. The Battle Pass (Competitive Edge)</h4>
+        <div style="background: rgba(255, 251, 235, 0.7); border-left: 4px solid #d97706; padding: 15px; border-radius: 6px; backdrop-filter: blur(4px);">
+            <p style="color: #6b4423; font-size: 1em; margin: 0 0 10px 0; line-height: 1.7;">
+                For warriors seeking maximum efficiency, the Battle Pass provides essential operational bonuses:
+            </p>
+            <ul style="margin: 0; padding-left: 20px; color: #6b4423; font-size: 1em; line-height: 1.8;">
+                <li style="margin-bottom: 5px;">⚡ <strong style="color: #5c3d1e;">+15% Energy Regeneration:</strong> Allows for more battles and resource gathering per day.</li>
+                <li>📈 <strong style="color: #5c3d1e;">+15% Experience Gain:</strong> Accelerates level progression for Guild Wars readiness.</li>
+            </ul>
+        </div>
     </div>
       `,
       

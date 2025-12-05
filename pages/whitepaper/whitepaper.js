@@ -882,7 +882,7 @@ class WhitepaperMenu {
                     <p><strong>Cardinals Row</strong> is the competitive TCG (Trading Card Game) of the Ascendria ecosystem. A strategic card game where players build decks and compete in tactical battles using cards representing heroes, spells, and artifacts from the Ascendria universe.</p>
                     
                     <h3>Our Commitment to Creative Freedom and Development</h3>
-                    <p>The Ascendria team has always reserved the right to creative freedom, which is why we are achieving objectives and improvements we hadn't initially considered.</p>
+                    <p>The Mana Work team has always reserved the right to creative freedom, which is why we are achieving objectives and improvements we hadn't initially considered.</p>
                     <p>At this moment, we have a complete overview of what we want the ecosystem to be, but we do not wish to be rigidly bound by early documentation. Restricting ourselves now would prevent us from exercising free creativity and implementing better mechanics in the future Ascendria modules.</p>
                     <p>Therefore, the detailed Whitepaper for <strong>Cardinals Row</strong> will be updated when we are dedicating ourselves solely and exclusively to its development.</p>
                     <p>Rest assured, nothing will deviate from the general context already established in the <strong>ASCENDRIA ECOSYSTEM WHITEPAPER</strong>. However, the specific methods by which items are acquired and the core mechanics within this module may evolve and vary as development progresses.</p>
@@ -910,7 +910,7 @@ class WhitepaperMenu {
                     <p><strong>Champions of Ascendria</strong> is the competitive PvP arena where players battle for glory, rewards, and legendary status using their customized champions.</p>
                     
                     <h3>Our Commitment to Creative Freedom and Development</h3>
-                    <p>The Ascendria team has always reserved the right to creative freedom, which is why we are achieving objectives and improvements we hadn't initially considered.</p>
+                    <p>The Mana Work team has always reserved the right to creative freedom, which is why we are achieving objectives and improvements we hadn't initially considered.</p>
                     <p>At this moment, we have a complete overview of what we want the ecosystem to be, but we do not wish to be rigidly bound by early documentation. Restricting ourselves now would prevent us from exercising free creativity and implementing better mechanics in the future Ascendria modules.</p>
                     <p>Therefore, the detailed Whitepaper for <strong>Champions of Ascendria</strong> will be updated when we are dedicating ourselves solely and exclusively to its development.</p>
                     <p>Rest assured, nothing will deviate from the general context already established in the <strong>ASCENDRIA ECOSYSTEM WHITEPAPER</strong>. However, the specific methods by which items are acquired and the core mechanics within this module may evolve and vary as development progresses.</p>
@@ -938,7 +938,7 @@ class WhitepaperMenu {
                     <p><strong>Forges of Ascendria</strong> is the crafting and marketplace hub where players create, enhance, and trade valuable items across the ecosystem.</p>
                     
                     <h3>Our Commitment to Creative Freedom and Development</h3>
-                    <p>The Ascendria team has always reserved the right to creative freedom, which is why we are achieving objectives and improvements we hadn't initially considered.</p>
+                    <p>The Mana Work team has always reserved the right to creative freedom, which is why we are achieving objectives and improvements we hadn't initially considered.</p>
                     <p>At this moment, we have a complete overview of what we want the ecosystem to be, but we do not wish to be rigidly bound by early documentation. Restricting ourselves now would prevent us from exercising free creativity and implementing better mechanics in the future Ascendria modules.</p>
                     <p>Therefore, the detailed Whitepaper for <strong>Forges of Ascendria</strong> will be updated when we are dedicating ourselves solely and exclusively to its development.</p>
                     <p>Rest assured, nothing will deviate from the general context already established in the <strong>ASCENDRIA ECOSYSTEM WHITEPAPER</strong>. However, the specific methods by which items are acquired and the core mechanics within this module may evolve and vary as development progresses.</p>
@@ -966,7 +966,7 @@ class WhitepaperMenu {
                     <p><strong>Depths of Ascendria</strong> is the PvE exploration-focused experience where players venture into mysterious dungeons to discover rare treasures and ancient secrets.</p>
                     
                     <h3>Our Commitment to Creative Freedom and Development</h3>
-                    <p>The Ascendria team has always reserved the right to creative freedom, which is why we are achieving objectives and improvements we hadn't initially considered.</p>
+                    <p>The Mana Work team has always reserved the right to creative freedom, which is why we are achieving objectives and improvements we hadn't initially considered.</p>
                     <p>At this moment, we have a complete overview of what we want the ecosystem to be, but we do not wish to be rigidly bound by early documentation. Restricting ourselves now would prevent us from exercising free creativity and implementing better mechanics in the future Ascendria modules.</p>
                     <p>Therefore, the detailed Whitepaper for <strong>Depths of Ascendria</strong> will be updated when we are dedicating ourselves solely and exclusively to its development.</p>
                     <p>Rest assured, nothing will deviate from the general context already established in the <strong>ASCENDRIA ECOSYSTEM WHITEPAPER</strong>. However, the specific methods by which items are acquired and the core mechanics within this module may evolve and vary as development progresses.</p>
