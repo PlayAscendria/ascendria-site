@@ -829,17 +829,28 @@ class EcosystemTitleReveal {
         // Usar o #content-area como scroll container (ou window se não existir)
         const scrollContainer = this.contentArea || window;
         
+        // Flag para requestAnimationFrame
+        this.ticking = false;
+        
         // Checar posição inicial
         this.checkScroll();
         
-        // Listener de scroll
-        scrollContainer.addEventListener('scroll', () => this.checkScroll(), { passive: true });
+        // Listener de scroll com requestAnimationFrame para evitar forced reflow
+        scrollContainer.addEventListener('scroll', () => this.requestCheck(), { passive: true });
         
         // Também checar no resize
-        window.addEventListener('resize', () => this.checkScroll(), { passive: true });
+        window.addEventListener('resize', () => this.requestCheck(), { passive: true });
+    }
+    
+    requestCheck() {
+        if (!this.ticking) {
+            this.ticking = true;
+            requestAnimationFrame(() => this.checkScroll());
+        }
     }
     
     checkScroll() {
+        this.ticking = false;
         const scrollContainer = this.contentArea || document.documentElement;
         const scrollTop = this.contentArea ? this.contentArea.scrollTop : window.scrollY;
         

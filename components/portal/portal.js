@@ -277,7 +277,24 @@ class MagicPortal {
   }
 }
 
-// Inicialização - aguarda componentes carregarem
+// Carrega Three.js dinamicamente
+let threeLoadPromise = null;
+function loadThreeJS() {
+  if (typeof THREE !== 'undefined') return Promise.resolve();
+  if (threeLoadPromise) return threeLoadPromise;
+  
+  threeLoadPromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+  
+  return threeLoadPromise;
+}
+
+// Inicialização - usa IntersectionObserver para carregar Three.js apenas quando necessário
 function initPortal() {
   const portalContainer = document.getElementById('magic-portal');
   
@@ -289,18 +306,29 @@ function initPortal() {
   
   // Verifica se já foi inicializado
   if (portalContainer.dataset.portalInit) return;
-  portalContainer.dataset.portalInit = 'true';
   
-  // Carregar Three.js dinamicamente se não estiver disponível
-  if (typeof THREE === 'undefined') {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';
-    script.onload = () => {
-      new MagicPortal(portalContainer);
-    };
-    document.head.appendChild(script);
+  // Usar IntersectionObserver para carregar Three.js só quando portal estiver próximo
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        observer.disconnect();
+        portalContainer.dataset.portalInit = 'true';
+        
+        loadThreeJS().then(() => {
+          new MagicPortal(portalContainer);
+        }).catch(err => {
+          console.warn('Portal: Three.js failed to load', err);
+        });
+      }
+    }, { rootMargin: '200px' }); // Carrega 200px antes de ficar visível
+    
+    observer.observe(portalContainer);
   } else {
-    new MagicPortal(portalContainer);
+    // Fallback para navegadores sem IntersectionObserver
+    portalContainer.dataset.portalInit = 'true';
+    loadThreeJS().then(() => {
+      new MagicPortal(portalContainer);
+    });
   }
 }
 
