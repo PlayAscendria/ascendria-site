@@ -34,7 +34,7 @@ ascendria-site/
 ├── js/                     # Global scripts
 └── pages/                  # Sub-pages
     ├── lore/
-    ├── tokenomics/
+    ├── financialmodel/
     └── whitepaper/
 ```
 

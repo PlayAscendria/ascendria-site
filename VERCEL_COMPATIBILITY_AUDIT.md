@@ -29,7 +29,7 @@
 
 **Arquivos afetados:**
 - `pages/whitepaper/style.css`
-- `pages/tokenomics/style.css`
+- `pages/financialmodel/style.css`
 - `pages/lore/style.css`
 
 **Código problemático:**
@@ -101,7 +101,7 @@ const htmlFileNames = {
 
 **Problema:** Os 3 arquivos de páginas internas usam `@import`:
 - `pages/whitepaper/style.css` - 3 imports
-- `pages/tokenomics/style.css` - 3 imports  
+- `pages/financialmodel/style.css` - 3 imports  
 - `pages/lore/style.css` - 3 imports
 
 **Por que causa FOUC:**
@@ -247,7 +247,7 @@ package-lock.json
 
 | # | Causa | Impacto | Prioridade |
 |---|-------|---------|------------|
-| 1 | `@import` com paths relativos nas páginas internas | FOUC nas páginas whitepaper/tokenomics/lore | 🔴 CRÍTICO |
+| 1 | `@import` com paths relativos nas páginas internas | FOUC nas páginas whitepaper/financialmodel/lore | 🔴 CRÍTICO |
 | 2 | Timing de revelação do body antes dos componentes | FOUC na página principal | 🔴 CRÍTICO |
 | 3 | CSS esconde conteúdo mas JS assíncrono controla | Race condition | 🟠 ALTO |
 | 4 | Paths inconsistentes (mistura relativo/absoluto) | Potencial quebra | 🟡 MÉDIO |
@@ -258,7 +258,7 @@ package-lock.json
 
 ### CORREÇÃO 1: Eliminar @import das páginas internas
 
-**Arquivos:** `pages/whitepaper/index.html`, `pages/tokenomics/index.html`, `pages/lore/index.html`
+**Arquivos:** `pages/whitepaper/index.html`, `pages/financialmodel/index.html`, `pages/lore/index.html`
 
 **Adicionar no `<head>` de cada página:**
 ```html

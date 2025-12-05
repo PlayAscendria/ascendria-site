@@ -2,7 +2,7 @@
  * ASCENDRIA - SPA Router v5
  * 
  * Funcionalidades:
- * 1. SPA entre páginas de documentos (Lore, Whitepaper, Tokenomics)
+ * 1. SPA entre páginas de documentos (Lore, Whitepaper, financialmodel)
  *    - BackgroundLive permanece ativo e contínuo
  * 2. Transição suave da Home/About para páginas de documentos
  *    - Fade overlay elegante
@@ -38,7 +38,7 @@
     const normalized = normalizePath(path);
     return normalized.startsWith('/pages/lore') ||
            normalized.startsWith('/pages/whitepaper') ||
-           normalized.startsWith('/pages/tokenomics');
+           normalized.startsWith('/pages/financialmodel');
   }
 
   /**
@@ -361,13 +361,13 @@
       existingScripts.forEach(s => s.remove());
       
       // Resetar flag de inicialização do container correspondente
-      if (src.includes('tokenomics')) {
-        const container = document.querySelector('.tokenomics-container');
+      if (src.includes('financialmodel')) {
+        const container = document.querySelector('.financialmodel-container');
         if (container) {
           container.dataset.initialized = 'false';
           container.innerHTML = '';
         }
-        window._tokenomicsRetries = 0;
+        window._financialmodelRetries = 0;
       }
       if (src.includes('whitepaper')) {
         const container = document.querySelector('.whitepaper-container');

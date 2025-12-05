@@ -1,5 +1,5 @@
 /* 
- * Tokenomics Page Styles
+ * financialmodel Page Styles
  * Linha do tempo horizontal com nodes interativos
  */
 
@@ -92,8 +92,8 @@ main {
   pointer-events: none;
 }
 
-/* ========== TOKENOMICS CONTAINER ========== */
-.tokenomics-container {
+/* ========== FINANCIAL MODEL CONTAINER ========== */
+.financialmodel-container {
   position: absolute;
   z-index: 5;
   top: 52%;
@@ -111,7 +111,7 @@ main {
 }
 
 /* ========== TIMELINE VIEW ========== */
-.tokenomics-timeline {
+.financialmodel-timeline {
   position: relative;
   width: 100%;
   height: 100%;
@@ -122,7 +122,7 @@ main {
   -webkit-mask-image: none;
 }
 
-.tokenomics-timeline.hidden {
+.financialmodel-timeline.hidden {
   opacity: 0;
   pointer-events: none;
 }
@@ -317,7 +317,7 @@ main {
 }
 
 /* ========== DETAIL VIEW ========== */
-.tokenomics-detail {
+.financialmodel-detail {
   position: absolute;
   top: 0;
   left: 0;
@@ -334,13 +334,13 @@ main {
   -webkit-mask-image: none;
 }
 
-.tokenomics-detail.active {
+.financialmodel-detail.active {
   opacity: 1;
   pointer-events: auto;
 }
 
 /* ========== BOTÃO HOME ========== */
-.tokenomics-detail .detail-home {
+.financialmodel-detail .detail-home {
   position: absolute;
   top: 5%;
   right: 2%;
@@ -354,39 +354,39 @@ main {
   padding: 0;
 }
 
-.tokenomics-detail.active .detail-home {
+.financialmodel-detail.active .detail-home {
   pointer-events: auto;
 }
 
-.tokenomics-detail .detail-home img {
+.financialmodel-detail .detail-home img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-.tokenomics-detail .detail-home:hover {
+.financialmodel-detail .detail-home:hover {
   transform: scale(1.15);
 }
 
 /* ========== HEADER DO DETALHE ========== */
-.tokenomics-detail .detail-header {
+.financialmodel-detail .detail-header {
   padding: 1rem 1.5rem 0.5rem 1.5rem;
   text-align: center;
   border-bottom: 2px solid rgba(44, 24, 16, 0.2);
 }
 
-.tokenomics-detail .detail-icon {
+.financialmodel-detail .detail-icon {
   width: clamp(50px, 8vw, 100px);
   height: auto;
   object-fit: contain;
 }
 
-.tokenomics-detail .detail-title {
+.financialmodel-detail .detail-title {
   display: none;
 }
 
 /* ========== CONTEÚDO DO DETALHE ========== */
-.tokenomics-detail .detail-content {
+.financialmodel-detail .detail-content {
   flex: 1;
   padding: 0.5rem 3rem 6rem 3rem;
   overflow-y: auto;
@@ -399,48 +399,48 @@ main {
   scrollbar-color: rgba(139, 90, 43, 0.6) transparent;
 }
 
-.tokenomics-detail .detail-content::-webkit-scrollbar {
+.financialmodel-detail .detail-content::-webkit-scrollbar {
   width: 8px;
 }
 
-.tokenomics-detail .detail-content::-webkit-scrollbar-track {
+.financialmodel-detail .detail-content::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.tokenomics-detail .detail-content::-webkit-scrollbar-thumb {
+.financialmodel-detail .detail-content::-webkit-scrollbar-thumb {
   background-color: rgba(139, 90, 43, 0.6);
   border-radius: 4px;
 }
 
-.tokenomics-detail .detail-content p {
+.financialmodel-detail .detail-content p {
   line-height: 1.8;
   margin-bottom: 1rem;
   font-size: 1rem;
   color: #2c1810;
 }
 
-.tokenomics-detail .detail-content h3 {
+.financialmodel-detail .detail-content h3 {
   color: #1a0f08;
   margin: 1.5rem 0 0.8rem 0;
   font-size: 1.2rem;
   font-weight: bold;
 }
 
-.tokenomics-detail .detail-content h4 {
+.financialmodel-detail .detail-content h4 {
   color: #2c1810;
   margin: 1rem 0 0.5rem 0;
   font-size: 1rem;
   font-weight: bold;
 }
 
-.tokenomics-detail .detail-content ul {
+.financialmodel-detail .detail-content ul {
   padding-left: 0;
   margin-bottom: 1rem;
   list-style-position: inside;
   text-align: center;
 }
 
-.tokenomics-detail .detail-content li {
+.financialmodel-detail .detail-content li {
   line-height: 1.7;
   margin-bottom: 0.4rem;
   font-size: 0.95rem;
@@ -448,7 +448,7 @@ main {
   text-align: center;
 }
 
-.tokenomics-detail .detail-content ol {
+.financialmodel-detail .detail-content ol {
   padding-left: 0;
   margin-bottom: 1rem;
   list-style-position: inside;
@@ -456,7 +456,7 @@ main {
 }
 
 /* ========== TABELAS ========== */
-.tokenomics-detail .detail-content table {
+.financialmodel-detail .detail-content table {
   width: 100%;
   max-width: 90%;
   margin: 1.5rem auto;
@@ -468,11 +468,11 @@ main {
   border: 2px solid rgba(139, 90, 43, 0.4);
 }
 
-.tokenomics-detail .detail-content table thead {
+.financialmodel-detail .detail-content table thead {
   background: linear-gradient(180deg, #8B5A2B 0%, #6B4423 100%);
 }
 
-.tokenomics-detail .detail-content table th {
+.financialmodel-detail .detail-content table th {
   padding: 0.8rem 1rem;
   color: #FFF8EB;
   font-weight: bold;
@@ -482,7 +482,7 @@ main {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.tokenomics-detail .detail-content table td {
+.financialmodel-detail .detail-content table td {
   padding: 0.6rem 1rem;
   color: #2c1810;
   font-size: 0.9rem;
@@ -490,16 +490,16 @@ main {
   border-bottom: 1px solid rgba(139, 90, 43, 0.2);
 }
 
-.tokenomics-detail .detail-content table tbody tr:nth-child(even) {
+.financialmodel-detail .detail-content table tbody tr:nth-child(even) {
   background: rgba(139, 90, 43, 0.08);
 }
 
-.tokenomics-detail .detail-content table tbody tr:hover {
+.financialmodel-detail .detail-content table tbody tr:hover {
   background: rgba(139, 90, 43, 0.15);
 }
 
 /* ========== LINKS CLICÁVEIS ========== */
-.tokenomics-detail .detail-content a {
+.financialmodel-detail .detail-content a {
   color: #8B4513;
   text-decoration: underline;
   font-weight: 600;
@@ -507,12 +507,12 @@ main {
   cursor: pointer;
 }
 
-.tokenomics-detail .detail-content a:hover {
+.financialmodel-detail .detail-content a:hover {
   color: #5D2E0C;
   text-shadow: 0 0 8px rgba(139, 69, 19, 0.4);
 }
 
-.tokenomics-detail .detail-content a:visited {
+.financialmodel-detail .detail-content a:visited {
   color: #6B3510;
 }
 

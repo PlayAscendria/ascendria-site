@@ -7,7 +7,7 @@
    
    ESTRUTURA:
    - Cada resolução contém seções para: TOPBAR, BACKGROUNDLIVE, ECOSYSTEM, 
-     FOOTER, PORTAL, LOADING, PÁGINAS (lore, tokenomics, whitepaper)
+     FOOTER, PORTAL, LOADING, PÁGINAS (lore, financialmodel, whitepaper)
    
    COMO USAR:
    - 1920x1080 = valores BASE (nos arquivos de componentes)
@@ -119,7 +119,7 @@
     font-size: clamp(2.5rem, 8vw, 4.5rem);
   }
   
-  /* ========== PÁGINAS (lore, tokenomics, whitepaper) ========== */
+  /* ========== PÁGINAS (lore, financialmodel, whitepaper) ========== */
   .doc-container {
     height: 96%;
   }
@@ -154,8 +154,8 @@
     font-size: 0.9rem;
   }
 
-  /* --- TOKENOMICS --- */
-  .tokenomics-container {
+  /* --- FINANCIAL MODEL --- */
+  .financialmodel-container {
     width: 60%;
     height: 58%;
   }
@@ -169,7 +169,7 @@
     width: clamp(55px, 9vw, 100px);
   }
 
-  .tokenomics-detail .detail-content {
+  .financialmodel-detail .detail-content {
     padding: 0.5rem 2rem 5rem 2rem;
     font-size: 0.9rem;
   }
@@ -315,8 +315,8 @@
     font-size: 0.95rem;
   }
 
-  /* --- TOKENOMICS --- */
-  .tokenomics-container {
+  /* --- FINANCIAL MODEL --- */
+  .financialmodel-container {
     width: 62%;
     height: 60%;
   }
@@ -325,7 +325,7 @@
     width: clamp(55px, 9vw, 100px);
   }
 
-  .tokenomics-detail .detail-content {
+  .financialmodel-detail .detail-content {
     padding: 0.5rem 2.5rem 5rem 2.5rem;
     font-size: 0.95rem;
   }
@@ -429,8 +429,8 @@
     padding: 0.5rem 2.5rem 5.5rem 2.5rem;
   }
 
-  /* --- TOKENOMICS --- */
-  .tokenomics-container {
+  /* --- FINANCIAL MODEL --- */
+  .financialmodel-container {
     width: 63%;
     height: 62%;
   }
@@ -439,7 +439,7 @@
     width: clamp(60px, 9vw, 110px);
   }
 
-  .tokenomics-detail .detail-content {
+  .financialmodel-detail .detail-content {
     padding: 0.5rem 2.5rem 5.5rem 2.5rem;
   }
 }
@@ -523,8 +523,8 @@
     padding: 0.5rem 3rem 5.5rem 3rem;
   }
 
-  /* --- TOKENOMICS --- */
-  .tokenomics-container {
+  /* --- FINANCIAL MODEL --- */
+  .financialmodel-container {
     width: 64%;
     height: 63%;
   }
@@ -533,7 +533,7 @@
     width: clamp(65px, 10vw, 120px);
   }
 
-  .tokenomics-detail .detail-content {
+  .financialmodel-detail .detail-content {
     padding: 0.5rem 3rem 5.5rem 3rem;
   }
 }
@@ -617,13 +617,13 @@
     padding: 0.5rem 3rem 6rem 3rem;
   }
 
-  /* --- TOKENOMICS --- */
-  .tokenomics-container {
+  /* --- FINANCIAL MODEL --- */
+  .financialmodel-container {
     width: 65%;
     height: 65%;
   }
 
-  .tokenomics-detail .detail-content {
+  .financialmodel-detail .detail-content {
     padding: 0.5rem 3rem 6rem 3rem;
   }
 }
@@ -746,8 +746,8 @@
     font-size: 1.15rem;
   }
 
-  /* --- TOKENOMICS --- */
-  .tokenomics-container {
+  /* --- FINANCIAL MODEL --- */
+  .financialmodel-container {
     width: 65%;
     height: 65%;
   }
@@ -761,12 +761,12 @@
     width: clamp(90px, 14vw, 170px);
   }
 
-  .tokenomics-detail .detail-content {
+  .financialmodel-detail .detail-content {
     font-size: 1.15rem;
     padding: 0.5rem 3rem 6rem 3rem;
   }
 
-  .tokenomics-detail .detail-content p {
+  .financialmodel-detail .detail-content p {
     font-size: 1.15rem;
   }
 
@@ -902,8 +902,8 @@
     font-size: 1.2rem;
   }
 
-  /* --- TOKENOMICS --- */
-  .tokenomics-container {
+  /* --- FINANCIAL MODEL --- */
+  .financialmodel-container {
     width: 65%;
     height: 65%;
   }
@@ -917,12 +917,12 @@
     width: clamp(95px, 14vw, 180px);
   }
 
-  .tokenomics-detail .detail-content {
+  .financialmodel-detail .detail-content {
     font-size: 1.2rem;
     padding: 0.5rem 3rem 6rem 3rem;
   }
 
-  .tokenomics-detail .detail-content p {
+  .financialmodel-detail .detail-content p {
     font-size: 1.2rem;
   }
 
@@ -1102,8 +1102,8 @@
     padding: 1rem 1.2rem;
   }
 
-  /* --- TOKENOMICS --- */
-  .tokenomics-container {
+  /* --- FINANCIAL MODEL --- */
+  .financialmodel-container {
     width: 65%;
     height: 65%;
   }
@@ -1122,26 +1122,26 @@
     height: 10px;
   }
 
-  .tokenomics-detail .detail-content {
+  .financialmodel-detail .detail-content {
     font-size: 1.4rem;
     padding: 1rem 3.5rem 8rem 3.5rem;
   }
 
-  .tokenomics-detail .detail-content p {
+  .financialmodel-detail .detail-content p {
     font-size: 1.4rem;
     line-height: 2;
   }
 
-  .tokenomics-detail .detail-content h3 {
+  .financialmodel-detail .detail-content h3 {
     font-size: 1.6rem;
   }
 
-  .tokenomics-detail .detail-content h4 {
+  .financialmodel-detail .detail-content h4 {
     font-size: 1.3rem;
   }
 
-  .tokenomics-detail .detail-content table th,
-  .tokenomics-detail .detail-content table td {
+  .financialmodel-detail .detail-content table th,
+  .financialmodel-detail .detail-content table td {
     font-size: 1.2rem;
     padding: 1rem 1.2rem;
   }

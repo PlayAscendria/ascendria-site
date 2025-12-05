@@ -167,7 +167,7 @@
     // Páginas de documentos = modo simple
     if (path.includes('/pages/lore') || 
         path.includes('/pages/whitepaper') || 
-        path.includes('/pages/tokenomics')) {
+        path.includes('/pages/financialmodel')) {
       return 'simple';
     }
     // Home, About, etc = modo full
