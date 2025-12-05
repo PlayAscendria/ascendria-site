@@ -78,15 +78,23 @@
 		
 		<!-- Preload LCP Image - Crítico para performance -->
 		<link rel="preload" as="image" href="/assets/images/background/backgroundpaisagem/5_fundosol_1.webp" fetchpriority="high">
+		<link rel="preload" as="image" href="/assets/images/background/backgroundpaisagem/0_telabranca_0.webp">
 		
-		<!-- CSS - Carregamento bloqueante garante que estilos estejam prontos -->
+		<!-- CSS Crítico - Carregamento bloqueante (apenas loading e base) -->
 		<link rel="stylesheet" href="/pages/loading/loading.css">
 		<link rel="stylesheet" href="/css/style.css">
 		<link rel="stylesheet" href="/components/topbar/topbar.css">
 		<link rel="stylesheet" href="/components/backgroundlive/backgroundlive.css">
-		<link rel="stylesheet" href="/components/portal/portal.css">
-		<link rel="stylesheet" href="/components/ecosystem/ecosystem.css">
-		<link rel="stylesheet" href="/components/footer/footer.css">
+		
+		<!-- CSS Não-Crítico - Carregamento async -->
+		<link rel="preload" href="/components/portal/portal.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<link rel="preload" href="/components/ecosystem/ecosystem.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<link rel="preload" href="/components/footer/footer.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript>
+			<link rel="stylesheet" href="/components/portal/portal.css">
+			<link rel="stylesheet" href="/components/ecosystem/ecosystem.css">
+			<link rel="stylesheet" href="/components/footer/footer.css">
+		</noscript>
 		<!-- Responsive DEVE ser o último para sobrescrever os outros -->
 		<link rel="stylesheet" href="/css/responsive.css">
 		
@@ -162,6 +170,14 @@
 
 		<!-- Content area - contém hero, main e footer -->
 		<div id="content-area">
+			<!-- LCP Image - Carregada imediatamente para melhorar métricas -->
+			<img src="/assets/images/background/backgroundpaisagem/5_fundosol_1.webp" 
+				 alt="" 
+				 fetchpriority="high"
+				 decoding="async"
+				 style="position:absolute;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-1;"
+				 aria-hidden="true">
+			
 			<!-- Hero: primeira imagem de fundo do site -->
 			<div class="hero" role="img" aria-label="Imagem oficial de Ascendria">
 				<div class="hero-inner" aria-hidden="true">
