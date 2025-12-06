@@ -551,7 +551,6 @@ class WhitepaperMenu {
                     </ul>
                     <p>When Ascendria is discovered within the official story: The Miner collection will become the <strong>Genesis collection</strong> of the ecosystem and will receive a unique <strong>"Witness of the Fall"</strong> buff — all attacks against Nihil will be 5% stronger than other users.</p>
                     <p><em>Note: The Return of Nihil is the game's only global event and will be extremely important for progression within the Ascendria universe.</em></p>
-                    <p>Each player who owns a Miner will receive a new ally: a <strong>Humanoid Automaton</strong>, which will take over the role of continuous production.</p>
                     
                     <h4>1.3 Main Goal within Idle Mines</h4>
                     <p>The player's big goal in Idle Mines is: <strong>Maximize their mines, pickaxe, and skill tree until the launch of Ascendria.</strong></p>
