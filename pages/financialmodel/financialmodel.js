@@ -15,14 +15,14 @@ class financialmodelTimeline {
     // As datas determinam quando cada node é "alcançado" pela linha de progresso
     this.nodes = [
       { id: 'genesis', label: 'Genesis', icon: 'ascendria.webp', position: 'center', date: new Date('2025-12-04') }, // Data de lançamento
-      { id: 'custom', label: 'Custom', icon: 'custom.png', position: 'top', date: new Date('2025-12-15') },
+      { id: 'custom', label: 'Custom', icon: 'custom.webp', position: 'top', date: new Date('2025-12-15') },
       { id: 'idle_mines', label: 'Idle Mines', icon: 'idle_mines.webp', position: 'bottom', date: new Date('2025-12-25') },
       { id: 'cardinals_row', label: 'Cardinals Row', icon: 'cardnals_row.webp', position: 'top', date: new Date('2026-01-25') },
-      { id: 'championships', label: 'Championships', icon: 'championships.png', position: 'bottom', date: new Date('2026-02-25') },
+      { id: 'championships', label: 'Championships', icon: 'championships.webp', position: 'bottom', date: new Date('2026-02-25') },
       { id: 'champions', label: 'Champions', icon: 'champions.webp', position: 'top', date: new Date('2026-08-25') },
       { id: 'forges', label: 'Forges', icon: 'forges.webp', position: 'bottom', date: new Date('2027-02-25') },
       { id: 'depths', label: 'Depths', icon: 'depths.webp', position: 'top', date: new Date('2027-08-25') },
-      { id: 'future', label: 'Future', icon: 'future.png', position: 'center', date: new Date('2030-12-25') }
+      { id: 'future', label: 'Future', icon: 'future.webp', position: 'center', date: new Date('2030-12-25') }
     ];
 
     // Conteúdo dos módulos
@@ -1065,3 +1065,4 @@ window.addEventListener('load', () => {
 });
 
 })(); // End IIFE
+

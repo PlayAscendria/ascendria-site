@@ -341,3 +341,4 @@ if (document.readyState === 'loading') {
 
 // Export para uso externo
 window.MagicPortal = MagicPortal;
+

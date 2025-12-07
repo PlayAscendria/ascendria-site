@@ -269,3 +269,4 @@ if (document.readyState === 'loading') {
 } else {
   initializeTopbar();
 }
+

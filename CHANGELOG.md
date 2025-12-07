@@ -1,5 +1,46 @@
 # Changelog - Ascendria Site Performance & Security Optimization
 
+## [2025-12-07] - Code Cleanup & Optimization
+
+### CODE CLEANUP
+
+#### 1. Removed Obsolete HTML Files
+- **Removed**: `components/header.html` - Replaced by `components/topbar/TopBar.html`
+- **Removed**: `components/footer.html` - Empty file, replaced by `components/footer/Footer.html`
+- **Removed**: `pages/loading/index.html` - Standalone page not referenced anywhere
+- **Impact**: Cleaner codebase, reduces confusion
+
+#### 2. Removed Unused JavaScript
+- **Removed**: `pages/loading/loading.js` - Script for unused loading page
+- **Removed**: ~150 lines of dead code in `components/nfts/nfts.js` (zoom feature)
+  - Removed: `openModal()`, `closeModal()`, `handleThumbnailClick()`
+  - Removed: Event listeners for modal functionality
+  - Feature flag `ZOOM_ENABLED = false` made permanent removal
+- **Removed**: 18 lines in `components/ecosystem/ecosystem.js`
+  - Removed: `easeOutInQuad()`, `easeInOutQuad()`, `easeInOutCubic()` - Never called
+- **Impact**: Reduced JavaScript bundle size by ~5KB, improved maintainability
+
+#### 3. Fixed Broken References
+- **File**: `js/asset-preloader.js`
+- **Removed references** to non-existent assets:
+  - `/assets/images/ui/separator.webp`
+  - `/assets/images/ui/left_button.webp`
+  - `/assets/images/ui/right_button.webp`
+- **Impact**: Eliminates 404 errors in console, cleaner preloader
+
+#### 4. Removed Obsolete Images
+- **Removed**: `assets/logo.svg` - Old logo replaced by `logoascendria.webp`
+- **Impact**: Reduced asset size
+
+#### 5. Image Dimension Corrections
+- **File**: `components/nfts/Nfts.html`
+- **Fixed**: Social NFT cards now use correct dimensions `1116x429` (was incorrectly `400x560`)
+- **Fixed**: Miner NFT cards now use correct dimensions `4133x5846` (was incorrectly `400x560`)
+- **Removed**: `aspect-ratio: 5/7` from CSS that was stretching images
+- **Impact**: Images display in correct proportions, no distortion
+
+---
+
 ## [2025-12-07] - Performance, Security & SEO Critical Fixes
 
 ### SECURITY IMPROVEMENTS
@@ -301,3 +342,4 @@ git checkout HEAD~1 -- components/footer/footer.css
 **Generated**: 2025-12-07
 **Author**: Claude AI (Performance Optimization Specialist)
 **Version**: 1.0.0
+

@@ -12,7 +12,7 @@
   display: block;
 
   /* Background image */
-  background-image: url('/assets/images/ui/footer.png');
+  background-image: url('/assets/images/ui/footer.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -127,3 +127,4 @@
 }
 
 /* Responsividade movida para css/responsive.css */
+

@@ -93,3 +93,4 @@ Headers configured in `vercel.json`:
 ## 📄 License
 
 Copyright © 2025 Ascendria Team. All rights reserved.
+

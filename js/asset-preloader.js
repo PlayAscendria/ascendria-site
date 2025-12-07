@@ -86,15 +86,12 @@ class AssetPreloader {
       // UI
       '/assets/images/ui/logoascendria.webp',
       '/assets/images/ui/favicon.webp',
-      '/assets/images/ui/separator.webp',
-      '/assets/images/ui/left_button.webp',
-      '/assets/images/ui/right_button.webp',
-      
+
       // Scripts
       '/components/backgroundlive/backgroundlive.js',
       '/components/topbar/topbar.js',
       '/components/footer/footer.js',
-      
+
       // CSS
       '/css/style.css',
       '/components/topbar/topbar.css',
@@ -479,3 +476,4 @@ async function startAssetPreloader() {
 // Exporta para uso global
 window.AssetPreloader = AssetPreloader;
 window.startAssetPreloader = startAssetPreloader;
+
