@@ -241,12 +241,17 @@
         const arrows = document.querySelectorAll('.selector-arrow');
         const shareBtn = document.getElementById('share-btn');
 
+        console.log('[Ascenders] Share button found:', shareBtn);
+
         arrows.forEach(arrow => {
             arrow.addEventListener('click', handleArrowClick);
         });
 
         if (shareBtn) {
             shareBtn.addEventListener('click', shareComposition);
+            console.log('[Ascenders] Share button event listener attached');
+        } else {
+            console.warn('[Ascenders] Share button NOT found in DOM');
         }
     }
 

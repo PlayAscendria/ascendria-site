@@ -8,7 +8,6 @@
   color: #fff;
   width: 100%;
   min-height: 200px;
-  margin-top: 6rem;
   text-align: center;
   display: block;
 
@@ -81,30 +80,35 @@
 
 /* Social Media Icons */
 .footer-socials {
-  display: flex;
+  display: flex !important;
   gap: clamp(1rem, 3vw, 1.5rem);
   justify-content: center;
   align-items: center;
   margin-top: clamp(0.5rem, 2vw, 1rem);
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .footer-socials a {
-  color: #F1D72C;
-  transition: color 0.2s ease, transform 0.2s ease;
-  display: flex;
+  color: #fff !important;
+  transition: color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   padding: 0.5rem;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .footer-socials a:hover,
 .footer-socials a:focus {
   color: #fff;
+  opacity: 0.8;
   transform: translateY(-2px) scale(1.1);
 }
 
 .footer-socials a:focus-visible {
-  outline: 2px solid #F1D72C;
+  outline: 2px solid #fff;
   outline-offset: 4px;
   border-radius: 4px;
 }
@@ -113,11 +117,13 @@
   width: 24px;
   height: 24px;
   transition: filter 0.2s ease;
+  fill: #fff !important;
+  display: block;
 }
 
 .footer-socials a:hover svg,
 .footer-socials a:focus svg {
-  filter: drop-shadow(0 0 8px rgba(241, 215, 44, 0.5));
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
 }
 
 /* Responsividade movida para css/responsive.css */

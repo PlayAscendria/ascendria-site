@@ -399,6 +399,8 @@
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+    width: 100%;
+    display: block;
 }
 
 .share-button:hover {
@@ -435,7 +437,7 @@
 
 .nfts-cta {
     margin-top: 8rem;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     text-align: center;
 }
 
