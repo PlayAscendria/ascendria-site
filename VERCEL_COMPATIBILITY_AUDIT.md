@@ -356,3 +356,4 @@ setTimeout(() => {
 3. Aplicar CORREÇÃO 3 (timing de revelação)
 4. Deploy e testar
 5. Monitorar Console em produção
+

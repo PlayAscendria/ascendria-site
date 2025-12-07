@@ -6,168 +6,18 @@
 (function() {
     'use strict';
 
-    // Estado do componente
-    let modal = null;
-    let modalImage = null;
-    let currentImageSrc = '';
-    let currentImageAlt = '';
-    // Feature flag para zoom (defina como false para desativar qualquer zoom)
-    const ZOOM_ENABLED = false;
-
     /**
      * Inicializa o componente de NFTs
+     * Nota: Feature de zoom foi removida
      */
     function initNftsGallery() {
-        // Obter referências aos elementos
-        modal = document.getElementById('nft-zoom-modal');
-        modalImage = modal?.querySelector('.nft-zoom-image');
-        const closeButton = modal?.querySelector('.nft-zoom-close');
-        const backdrop = modal?.querySelector('.nft-zoom-backdrop');
-
-        if (!modal || !modalImage) {
-            console.warn('NFT zoom modal not found');
-            // continue; modal absent shouldn't block the gallery rendering.
-        }
-
-        // Adicionar event listeners aos thumbnails (se o zoom estiver habilitado)
-        const thumbnails = document.querySelectorAll('.nft-thumbnail');
-        if (!ZOOM_ENABLED) {
-            // Se o zoom estiver desabilitado, remover atributos de interação e sair
-            thumbnails.forEach(thumbnail => {
-                thumbnail.removeAttribute('tabindex');
-                thumbnail.removeAttribute('role');
-                thumbnail.removeAttribute('aria-label');
-                // Uma classe visual para poder ocultar overlays ou estilos se necessário
-                thumbnail.classList.add('zoom-disabled');
-            });
-            // Garantir que o modal esteja oculto
-            if (modal) {
-                modal.setAttribute('aria-hidden', 'true');
-                modal.style.display = 'none';
-            }
-        } else {
-            thumbnails.forEach(thumbnail => {
-                thumbnail.addEventListener('click', handleThumbnailClick);
-
-                // Tornar acessível via teclado
-                thumbnail.setAttribute('tabindex', '0');
-                thumbnail.setAttribute('role', 'button');
-                thumbnail.setAttribute('aria-label', 'Click to zoom image');
-
-                thumbnail.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        handleThumbnailClick.call(thumbnail);
-                    }
-                });
-            });
-        }
-
-        // Event listeners do modal
-        if (closeButton) {
-            closeButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                closeModal();
-            });
-        }
-
-        if (backdrop) {
-            backdrop.addEventListener('click', closeModal);
-        }
-
-        // Escutar somente se o zoom/modal estiver habilitado e presente
-        if (ZOOM_ENABLED && modal) {
-            // Fechar com ESC
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
-                    closeModal();
-                }
-            });
-
-            // Prevenção de scroll quando modal está aberto
-            document.addEventListener('wheel', (e) => {
-                if (modal.getAttribute('aria-hidden') === 'false') {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-
-            document.addEventListener('touchmove', (e) => {
-                if (modal.getAttribute('aria-hidden') === 'false') {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-        }
-    }
-
-    /**
-     * Manipula clique em thumbnail
-     */
-    function handleThumbnailClick() {
-        const imageSrc = this.dataset.image;
-        const imageAlt = this.querySelector('img')?.alt || 'NFT Image';
-
-        if (!imageSrc) {
-            console.warn('No image source found');
-            return;
-        }
-
-        openModal(imageSrc, imageAlt);
-    }
-
-    /**
-     * Abre o modal com a imagem
-     */
-    function openModal(src, alt) {
-        if (!modal || !modalImage) return;
-
-        currentImageSrc = src;
-        currentImageAlt = alt;
-
-        // Preload da imagem antes de mostrar o modal
-        const img = new Image();
-        img.onload = () => {
-            modalImage.src = src;
-            modalImage.alt = alt;
-            modal.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
-
-            // Focar no botão de fechar para acessibilidade
-            const closeButton = modal.querySelector('.nft-zoom-close');
-            if (closeButton) {
-                setTimeout(() => closeButton.focus(), 100);
-            }
-        };
-        img.onerror = () => {
-            console.error('Failed to load image:', src);
-        };
-        img.src = src;
-    }
-
-    /**
-     * Fecha o modal
-     */
-    function closeModal() {
-        if (!modal) return;
-
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-
-        // Limpar imagem após a animação
-        setTimeout(() => {
-            if (modalImage) {
-                modalImage.src = '';
-                modalImage.alt = '';
-            }
-        }, 300);
-    }
-
-    /**
-     * Cleanup quando o componente é destruído
-     */
-    function cleanup() {
+        // Remover atributos de interação dos thumbnails (zoom desabilitado)
         const thumbnails = document.querySelectorAll('.nft-thumbnail');
         thumbnails.forEach(thumbnail => {
-            thumbnail.removeEventListener('click', handleThumbnailClick);
+            thumbnail.removeAttribute('tabindex');
+            thumbnail.removeAttribute('role');
+            thumbnail.removeAttribute('aria-label');
+            thumbnail.classList.add('zoom-disabled');
         });
     }
 
@@ -178,10 +28,9 @@
         initNftsGallery();
     }
 
-    // Expor cleanup para uso externo se necessário
+    // Expor init para uso externo se necessário
     window.NftsGallery = {
-        init: initNftsGallery,
-        cleanup: cleanup
+        init: initNftsGallery
     };
 })();
 
@@ -334,14 +183,14 @@
 
         // Camadas de renderização (ordem Z-index: Border, Body, Eye, Hair, Nose, Mouth)
         // Construir caminhos de asset (considera casos de nomenclatura específica)
-        const borderFileName = `${rarity}_border.png`;
+        const borderFileName = `${rarity}_border.webp`;
         const borderPath = `${BASE_PATH}/${rarity}/${borderFileName}`;
-        const bodyPath = `${BASE_PATH}/${body}.png`;
-        const eyePath = `${BASE_PATH}/${rarity}/${rarity}_eyes/${eyes}.png`;
+        const bodyPath = `${BASE_PATH}/${body}.webp`;
+        const eyePath = `${BASE_PATH}/${rarity}/${rarity}_eyes/${eyes}.webp`;
         const hairFolder = (rarity === 'mythic') ? 'mithyc_hair' : `${rarity}_hair`;
-        const hairPath = `${BASE_PATH}/${rarity}/${hairFolder}/${hair}.png`;
-        const nosePath = `${BASE_PATH}/nose/${nose}.png`;
-        const mouthPath = `${BASE_PATH}/mouth/${mouth}.png`;
+        const hairPath = `${BASE_PATH}/${rarity}/${hairFolder}/${hair}.webp`;
+        const nosePath = `${BASE_PATH}/nose/${nose}.webp`;
+        const mouthPath = `${BASE_PATH}/mouth/${mouth}.webp`;
 
         let layers = [];
         let firstImg;
@@ -392,7 +241,7 @@
 
         try {
             // Carregar imagem de fundo (com logo, QR code e título já incluídos)
-            const background = await loadImage('/assets/images/nfts/ascender/back_share.png');
+            const background = await loadImage('/assets/images/nfts/ascender/back_share.webp');
             shareCtx.drawImage(background, 0, 0, 1200, 800);
         } catch (err) {
             console.warn('Background não carregado, usando fundo padrão');
@@ -427,7 +276,7 @@
         shareCanvas.toBlob((blob) => {
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
-            link.download = 'my-ascender.png';
+            link.download = 'my-ascender.webp';
             link.href = url;
             link.click();
             URL.revokeObjectURL(url);
@@ -455,3 +304,4 @@
         init: initAscendersComposer
     };
 })();
+

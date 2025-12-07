@@ -781,26 +781,6 @@ class EcosystemGraph {
         });
     }
     
-    // Easing: começa RÁPIDO, desacelera no meio, termina suave
-    easeOutInQuad(t) {
-        if (t < 0.5) {
-            // Primeira metade: easeOut (começa rápido, desacelera)
-            return 2 * t * (2 - 2 * t);
-        } else {
-            // Segunda metade: easeIn (acelera suavemente até o fim)
-            const t2 = t - 0.5;
-            return 0.5 + 2 * t2 * t2;
-        }
-    }
-    
-    easeInOutQuad(t) {
-        return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-    }
-    
-    easeInOutCubic(t) {
-        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    }
-    
     destroy() {
         window.removeEventListener('resize', this.handleResize);
         if (this.container) {
@@ -893,3 +873,4 @@ document.addEventListener('DOMContentLoaded', () => {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = EcosystemGraph;
 }
+

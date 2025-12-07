@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl:*)",
+      "Bash(dir:*)",
+      "Bash(cat:*)",
+      "Bash(identify:*)",
+      "Bash(node -e:*)",
+      "Bash(node convert-to-webp.js)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
+

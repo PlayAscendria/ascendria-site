@@ -31,19 +31,19 @@
 
 | Arquivo | Tamanho | Localização |
 |---------|---------|-------------|
-| `logoascendria.png` | **12.6 MB** | assets/images/ui/ |
-| `0_telabranca_0.png` | **11.2 MB** | assets/images/background/ |
-| `1_grama1_20.png` | **2.1 MB** | assets/images/background/ |
-| `5_fundosol_1.png` | **1.7 MB** | assets/images/background/ |
-| `right_button.png` | **949 KB** | assets/images/ui/ |
-| `left_button.png` | **945 KB** | assets/images/ui/ |
+| `logoascendria.webp` | **12.6 MB** | assets/images/ui/ |
+| `0_telabranca_0.webp` | **11.2 MB** | assets/images/background/ |
+| `1_grama1_20.webp` | **2.1 MB** | assets/images/background/ |
+| `5_fundosol_1.webp` | **1.7 MB** | assets/images/background/ |
+| `right_button.webp` | **949 KB** | assets/images/ui/ |
+| `left_button.webp` | **945 KB** | assets/images/ui/ |
 
 **Impacto:** LCP extremamente alto, consumo de dados móveis exorbitante.
 
 **Solução:**
 ```bash
 # Converter para WebP com compressão
-npx sharp-cli --input assets/images/**/*.png --output assets/images/webp/ --webp --quality 80
+npx sharp-cli --input assets/images/**/*.webp --output assets/images/webp/ --webp --quality 80
 ```
 
 ---
@@ -123,10 +123,10 @@ body.loaded #footer-placeholder {
 **Código Atual (backgroundlive.css):**
 ```css
 .backgroundlive-root .bg-layer.montanha3 { 
-  background-image: url("/assets/images/background/backgroundpaisagem/3_montanha1_18.png"); 
+  background-image: url("/assets/images/background/backgroundpaisagem/3_montanha1_18.webp"); 
 }
 .backgroundlive-root .bg-layer.grama2 { 
-  background-image: url("/assets/images/background/backgroundpaisagem/2_grama2_19.png"); 
+  background-image: url("/assets/images/background/backgroundpaisagem/2_grama2_19.webp"); 
 }
 /* ... mais 11 imagens ... */
 ```
@@ -151,7 +151,7 @@ body.loaded #footer-placeholder {
 
 **Código Atual (TopBar.html):**
 ```html
-<img src="/assets/images/ui/logoascendria.png" alt="Ascendria Logo" class="logo-img">
+<img src="/assets/images/ui/logoascendria.webp" alt="Ascendria Logo" class="logo-img">
 <!-- Falta width e height -->
 ```
 
@@ -528,14 +528,14 @@ if (bg) {
 
 ```javascript
 const imageFiles = [
-  { file: '0_telabranca_0.png', order: 0, zIndex: 0, category: 'base' },     // 11MB
-  { file: '1_grama1_20.png', order: 1, zIndex: 20, category: 'grama' },      // 2.1MB
-  { file: '2_grama2_19.png', order: 2, zIndex: 19, category: 'grama' },      // 1.3MB
-  { file: '3_montanha1_18.png', order: 3, zIndex: 18, category: 'montanha' },
-  { file: '3_montanha2_14.png', order: 3, zIndex: 17, category: 'montanha' },
-  { file: '4_nuvem1_15.png', order: 4, zIndex: 15, category: 'nuvem' },
+  { file: '0_telabranca_0.webp', order: 0, zIndex: 0, category: 'base' },     // 11MB
+  { file: '1_grama1_20.webp', order: 1, zIndex: 20, category: 'grama' },      // 2.1MB
+  { file: '2_grama2_19.webp', order: 2, zIndex: 19, category: 'grama' },      // 1.3MB
+  { file: '3_montanha1_18.webp', order: 3, zIndex: 18, category: 'montanha' },
+  { file: '3_montanha2_14.webp', order: 3, zIndex: 17, category: 'montanha' },
+  { file: '4_nuvem1_15.webp', order: 4, zIndex: 15, category: 'nuvem' },
   // ... mais 7 imagens
-  { file: '5_fundosol_1.png', order: 5, zIndex: 1, category: 'fundo' },      // 1.7MB
+  { file: '5_fundosol_1.webp', order: 5, zIndex: 1, category: 'fundo' },      // 1.7MB
 ];
 ```
 
@@ -592,7 +592,7 @@ setTimeout(function() {
 <meta property="og:url" content="https://ascendria.com/">
 <meta property="og:title" content="Ascendria - Gaming Community & NFT Ecosystem">
 <meta property="og:description" content="Join Ascendria, a thriving gaming community and NFT ecosystem...">
-<meta property="og:image" content="https://ascendria.com/assets/images/ui/logoascendria.png">
+<meta property="og:image" content="https://ascendria.com/assets/images/ui/logoascendria.webp">
 <meta property="og:site_name" content="Ascendria">
 ```
 
@@ -608,7 +608,7 @@ setTimeout(function() {
   "name": "Ascendria",
   "description": "Gaming Community and NFT Ecosystem",
   "url": "https://ascendria.com",
-  "logo": "https://ascendria.com/assets/images/ui/logoascendria.png"
+  "logo": "https://ascendria.com/assets/images/ui/logoascendria.webp"
 }
 </script>
 
@@ -629,7 +629,7 @@ setTimeout(function() {
 #### 5.4 Favicon Presente
 
 ```html
-<link rel="icon" type="image/png" href="/assets/images/ui/favicon.png">
+<link rel="icon" type="image/png" href="/assets/images/ui/favicon.webp">
 ```
 
 ---
@@ -640,7 +640,7 @@ setTimeout(function() {
 
 **Código Ausente:**
 ```html
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.webp">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#0a0e27">
 ```
@@ -752,7 +752,7 @@ setTimeout(function() {
 npm install -g sharp-cli
 
 # Converter com qualidade 80
-sharp -i "assets/images/**/*.png" -o "assets/images/" -f webp -q 80
+sharp -i "assets/images/**/*.webp" -o "assets/images/" -f webp -q 80
 ```
 
 #### Tarefa 2.2: Comprimir Logo
@@ -849,7 +849,7 @@ self.addEventListener('install', (event) => {
     srcset="/assets/images/background/5_fundosol_1.webp" 
     type="image/webp">
   <img 
-    src="/assets/images/background/5_fundosol_1.png" 
+    src="/assets/images/background/5_fundosol_1.webp" 
     alt="Background"
     loading="lazy">
 </picture>
@@ -919,3 +919,4 @@ self.addEventListener('install', (event) => {
 
 **Última atualização:** 30 de novembro de 2025  
 **Próxima revisão:** Após implementação da Fase 1
+
