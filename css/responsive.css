@@ -109,7 +109,16 @@
   .site-footer {
     padding: clamp(1.25rem, 3vw, 2rem) clamp(0.75rem, 2vw, 1.25rem);
   }
-  
+
+  .footer-socials {
+    gap: 0.75rem;
+  }
+
+  .footer-socials svg {
+    width: 20px;
+    height: 20px;
+  }
+
   /* ========== HERO ========== */
   .hero-content {
     max-width: 700px;
@@ -178,9 +187,39 @@
   .loading-info {
     bottom: 50px;
   }
-  
+
   .painting-text {
     font-size: 15px;
+  }
+
+  /* ========== NFTs ========== */
+  .nfts-container {
+    padding: 1.5rem;
+  }
+
+  .nft-category-title {
+    font-size: clamp(1.4rem, 3.5vw, 2rem);
+  }
+
+  .nft-category-description {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  }
+
+  .nft-gallery {
+    gap: 1.5rem;
+  }
+
+  .ascenders-composer {
+    gap: 2rem;
+  }
+
+  #ascender-canvas {
+    height: 70vh;
+  }
+
+  .nfts-join-btn {
+    padding: 0.8rem 1.6rem;
+    font-size: 1rem;
   }
 }
 
@@ -329,6 +368,36 @@
     padding: 0.5rem 2.5rem 5rem 2.5rem;
     font-size: 0.95rem;
   }
+
+  /* ========== NFTs ========== */
+  .nfts-container {
+    padding: 1.75rem;
+  }
+
+  .nft-category-title {
+    font-size: clamp(1.5rem, 3.8vw, 2.2rem);
+  }
+
+  .nft-category-description {
+    font-size: clamp(0.95rem, 1.9vw, 1.15rem);
+  }
+
+  .nft-gallery {
+    gap: 1.75rem;
+  }
+
+  .ascenders-composer {
+    gap: 2.5rem;
+  }
+
+  #ascender-canvas {
+    height: 72vh;
+  }
+
+  .nfts-join-btn {
+    padding: 0.85rem 1.7rem;
+    font-size: 1.05rem;
+  }
 }
 
 
@@ -442,6 +511,36 @@
   .financialmodel-detail .detail-content {
     padding: 0.5rem 2.5rem 5.5rem 2.5rem;
   }
+
+  /* ========== NFTs ========== */
+  .nfts-container {
+    padding: 1.75rem;
+  }
+
+  .nft-category-title {
+    font-size: clamp(1.6rem, 4vw, 2.3rem);
+  }
+
+  .nft-category-description {
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+  }
+
+  .nft-gallery {
+    gap: 1.75rem;
+  }
+
+  .ascenders-composer {
+    gap: 2.5rem;
+  }
+
+  #ascender-canvas {
+    height: 75vh;
+  }
+
+  .nfts-join-btn {
+    padding: 0.9rem 1.8rem;
+    font-size: 1.1rem;
+  }
 }
 
 
@@ -536,6 +635,28 @@
   .financialmodel-detail .detail-content {
     padding: 0.5rem 3rem 5.5rem 3rem;
   }
+
+  /* ========== NFTs ========== */
+  .nft-category-title {
+    font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+  }
+
+  .nft-category-description {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+  }
+
+  .ascenders-composer {
+    gap: 2.75rem;
+  }
+
+  #ascender-canvas {
+    height: 76vh;
+  }
+
+  .nfts-join-btn {
+    padding: 0.9rem 1.8rem;
+    font-size: 1.1rem;
+  }
 }
 
 
@@ -625,6 +746,28 @@
 
   .financialmodel-detail .detail-content {
     padding: 0.5rem 3rem 6rem 3rem;
+  }
+
+  /* ========== NFTs ========== */
+  .nft-category-title {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+  }
+
+  .nft-category-description {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+  }
+
+  .ascenders-composer {
+    gap: 3rem;
+  }
+
+  #ascender-canvas {
+    height: 78vh;
+  }
+
+  .nfts-join-btn {
+    padding: 1rem 2rem;
+    font-size: 1.15rem;
   }
 }
 
@@ -782,6 +925,49 @@
   .footer-nav a {
     font-size: 1rem;
   }
+
+  .footer-socials {
+    gap: 1.25rem;
+  }
+
+  .footer-socials svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* ========== NFTs ========== */
+  .nft-category-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  .nft-category-description {
+    font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+  }
+
+  .nft-gallery {
+    gap: 2.5rem;
+  }
+
+  .ascenders-composer {
+    gap: 3.5rem;
+  }
+
+  #ascender-canvas {
+    height: 80vh;
+  }
+
+  .control-group label {
+    font-size: 1.2rem;
+  }
+
+  .selector-value {
+    font-size: 1.15rem;
+  }
+
+  .nfts-join-btn {
+    padding: 1.1rem 2.2rem;
+    font-size: 1.2rem;
+  }
 }
 
 /* ==================================================================================
@@ -937,6 +1123,53 @@
 
   .footer-nav a {
     font-size: 1rem;
+  }
+
+  .footer-socials {
+    gap: 1.5rem;
+  }
+
+  .footer-socials svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* ========== NFTs ========== */
+  .nft-category-title {
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
+  }
+
+  .nft-category-description {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  }
+
+  .nft-gallery {
+    gap: 2.5rem;
+  }
+
+  .ascenders-composer {
+    gap: 3.5rem;
+  }
+
+  #ascender-canvas {
+    height: 80vh;
+  }
+
+  .control-group label {
+    font-size: 1.25rem;
+  }
+
+  .selector-value {
+    font-size: 1.2rem;
+  }
+
+  .share-button {
+    font-size: 1.2rem;
+  }
+
+  .nfts-join-btn {
+    padding: 1.15rem 2.3rem;
+    font-size: 1.25rem;
   }
 }
 
@@ -1149,26 +1382,86 @@
   /* ========== FOOTER ========== */
   .site-footer {
     padding: 3rem 2rem;
-  }  .footer-copyright {
+  }
+
+  .footer-copyright {
     font-size: 1.2rem;
   }
-  
+
   .footer-nav a {
     font-size: 1.2rem;
   }
-  
+
+  .footer-socials {
+    gap: 1.75rem;
+  }
+
+  .footer-socials svg {
+    width: 28px;
+    height: 28px;
+  }
+
   /* ========== LOADING ========== */
   .painting-text {
     font-size: 20px;
   }
-  
+
   .progress-value {
     font-size: 30px;
   }
-  
+
   .loading-info {
     bottom: 80px;
     max-width: 600px;
+  }
+
+  /* ========== NFTs ========== */
+  .nfts-container {
+    padding: 2.5rem;
+  }
+
+  .nft-category-title {
+    font-size: clamp(3rem, 5vw, 4.5rem);
+  }
+
+  .nft-category-description {
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  }
+
+  .nft-gallery {
+    gap: 3rem;
+  }
+
+  .ascenders-composer {
+    gap: 4rem;
+  }
+
+  #ascender-canvas {
+    height: 80vh;
+  }
+
+  .control-group label {
+    font-size: 1.4rem;
+  }
+
+  .selector-value {
+    font-size: 1.3rem;
+  }
+
+  .selector-arrow {
+    width: 42px;
+    height: 42px;
+    font-size: 1.4rem;
+  }
+
+  .share-button {
+    font-size: 1.3rem;
+    padding: 1.2rem 2.5rem;
+  }
+
+  .nfts-join-btn {
+    padding: 1.2rem 2.4rem;
+    font-size: 1.3rem;
   }
 }
 

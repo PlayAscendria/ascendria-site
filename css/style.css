@@ -38,11 +38,16 @@ html {
 /* Conteúdo principal ESCONDIDO por padrão */
 #content-area,
 #topbar-placeholder,
-#footer-placeholder,
 #backgroundlive-placeholder,
 .topbar {
 	opacity: 0;
 	visibility: hidden;
+}
+
+/* Footer placeholder */
+#footer-placeholder {
+	display: block;
+	width: 100%;
 }
 
 /* Quando body.loaded é adicionado, mostrar TUDO com transição */
@@ -152,8 +157,9 @@ body {
 	padding-top: 8vh;
 	overflow-x: hidden; /* Apenas scroll vertical */
 	overflow-y: auto;
-	flex: 1 1 auto;
+	flex: 1 1 0;
 	max-width: 100vw;
+	min-height: 0;
 }
 
 /* Scroll behavior e customização leve do scrollbar */
@@ -161,17 +167,35 @@ html {
 	scroll-behavior: smooth;
 }
 
-/* WebKit-based browsers */
-body::-webkit-scrollbar { width: 12px; height: 12px; }
-body::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
-body::-webkit-scrollbar-thumb {
-	background: rgba(5, 63, 53, 0.8);
-	border-radius: 999px;
-	border: 3px solid rgba(0,0,0,0.06);
+/* WebKit-based browsers - Scroll amarelo */
+body::-webkit-scrollbar,
+#content-area::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
 }
 
-/* Firefox */
-* { scrollbar-width: thin; scrollbar-color: rgb(3, 32, 30) rgba(255,255,255,0.02); }
+body::-webkit-scrollbar-track,
+#content-area::-webkit-scrollbar-track {
+	background: rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb,
+#content-area::-webkit-scrollbar-thumb {
+	background: #F1D72C;
+	border-radius: 999px;
+	border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+body::-webkit-scrollbar-thumb:hover,
+#content-area::-webkit-scrollbar-thumb:hover {
+	background: #ffd700;
+}
+
+/* Firefox - Scroll amarelo */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: #F1D72C rgba(0, 0, 0, 0.3);
+}
 
 #main {
 	min-height: 20vh;
@@ -584,53 +608,70 @@ body::-webkit-scrollbar-thumb {
 #nfts.landing-section {
 	position: relative;
 	z-index: 5; /* Abaixo do Ecosystem (z-index 20) para ficar por baixo do pergaminho */
-	margin-top: -18vh; /* Sobe para ficar por baixo do pergaminho */
-	padding-top: calc(18vh + clamp(4rem, 10vw, 8rem)); /* Compensa o margin negativo */
+	margin-top: -10vh; /* Sobe para ficar por baixo do pergaminho */
+	padding-top: calc(10vh + clamp(4rem, 10vw, 8rem)); /* Compensa o margin negativo */
 	padding-bottom: clamp(4rem, 10vw, 8rem);
 	padding-left: clamp(1rem, 5vw, 2rem);
 	padding-right: clamp(1rem, 5vw, 2rem);
-	/* Fundo com a imagem telabranca */
+	min-height: 250vh; /* Espaço suficiente para 3 seções de NFTs + Ascenders */
+}
+
+/* Background da seção NFTs como pseudo-elemento para não sobrepor o conteúdo */
+#nfts.landing-section::before {
+	content: '';
+	position: absolute;
+	top: -8vh;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: calc(100% + 8vh);
 	background-image: url('/assets/images/background/backgroundpaisagem/0_telabranca_0.webp');
 	background-size: cover;
-	background-position: center;
+	background-position: center top;
 	background-repeat: no-repeat;
-	height: 100vh; /* Exatamente uma tela */
-	min-height: auto;
-	max-height: 100vh;
+	z-index: -1;
 }
 
 /* Título da seção NFTs - mesmo estilo do Ecosystem */
 .nfts-title {
 	position: absolute;
-	top: 8%; /* Posição logo abaixo do pergaminho */
+	top: 2.5%; /* Posição logo abaixo do pergaminho */
 	left: 50%;
-	transform: translateX(-50%);
-	z-index: 10;
+	transform: translateX(-50%) translateY(30px);
+	z-index: 15;
 	margin: 0;
-	font-size: clamp(2rem, 5vw, 4rem);
+	font-size: clamp(3rem, 8vw, 6rem);
 	color: #2c1810;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-	font-family: inherit;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+	font-family: 'Cinzel Decorative', serif;
 	text-align: center;
 	pointer-events: none;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
-	/* Efeito de revelação - começa invisível */
-	clip-path: inset(0 100% 0 0);
+	width: 100%;
 	opacity: 0;
-	transition: clip-path 1s ease-out 0.3s, opacity 1s ease-out;
+	transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* Quando visível - revela da esquerda para direita */
 .nfts-title.visible {
-	clip-path: inset(0 0% 0 0);
 	opacity: 1;
+	transform: translateX(-50%) translateY(0);
 }
 
 #nfts .section-content {
 	position: relative;
-	z-index: 1;
+	z-index: 10;
 	max-width: 1200px;
 	margin: 0 auto;
+	/* Efeito de fade-in - começa invisível */
+	opacity: 0;
+	transform: translateY(30px);
+	transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Quando visível - fade in suave */
+#nfts .section-content.visible {
+	opacity: 1;
+	transform: translateY(0);
 }
 

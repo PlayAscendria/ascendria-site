@@ -39,8 +39,9 @@ class ComponentLoader {
    */
   static async load(componentName, placeholderId) {
     const placeholder = document.getElementById(placeholderId);
-    
+
     if (!placeholder) {
+      console.warn(`[ComponentLoader] Placeholder não encontrado: ${placeholderId}`);
       return;
     }
 
@@ -50,12 +51,14 @@ class ComponentLoader {
       const htmlFileNames = {
         'topbar': 'TopBar',        // /components/topbar/TopBar.html
         'footer': 'Footer',        // /components/footer/Footer.html
-        'backgroundlive': 'BackgroundLive'  // /components/backgroundlive/BackgroundLive.html
+        'backgroundlive': 'BackgroundLive',  // /components/backgroundlive/BackgroundLive.html
+        'nfts': 'Nfts'            // /components/nfts/Nfts.html
       };
-      
+
       const htmlFileName = htmlFileNames[componentName] || componentName;
       // SEMPRE usar paths absolutos (começando com /)
       const htmlPath = `/components/${componentName}/${htmlFileName}.html`;
+      console.log(`[ComponentLoader] Carregando ${componentName} de ${htmlPath}`);
       const htmlResponse = await this.fetchWithTimeout(htmlPath);
 
       if (!htmlResponse.ok) {
@@ -63,7 +66,9 @@ class ComponentLoader {
       }
 
       const html = await htmlResponse.text();
+      console.log(`[ComponentLoader] ${componentName} HTML carregado:`, html.substring(0, 100));
       placeholder.innerHTML = html;
+      console.log(`[ComponentLoader] ${componentName} injetado no DOM`);
       
       // Carregar CSS se não existir (path absoluto)
       const cssPath = `/components/${componentName}/${componentName}.css`;
@@ -98,6 +103,7 @@ class ComponentLoader {
 
           } catch (err) {
       // Erro silencioso em produção - componente falhou ao carregar
+      console.error(`[ComponentLoader] Erro ao carregar ${componentName}:`, err);
       throw err;
     }
   }

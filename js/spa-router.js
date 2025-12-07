@@ -317,8 +317,8 @@
     // Fade out rápido
     await fadeOutPage();
     
-    // Navega imediatamente
-    window.location.href = url.pathname;
+    // Navega imediatamente (preserve hash so anchors are respected)
+    window.location.href = url.href;
   }
 
   /**

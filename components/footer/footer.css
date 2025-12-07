@@ -3,27 +3,51 @@
   position: relative;
   z-index: var(--z-content, 10);
   clear: both;
-  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 3vw, 1.5rem);
+  padding: clamp(2rem, 5vw, 3rem) clamp(1rem, 3vw, 1.5rem);
   background: #111;
   color: #fff;
   width: 100%;
-  margin-top: auto;
+  min-height: 200px;
+  margin-top: 6rem;
   text-align: center;
+  display: block;
+
+  /* Background image */
+  background-image: url('/assets/images/ui/footer.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Overlay escuro para melhor legibilidade do texto */
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
 }
 
 .footer-container {
+  position: relative;
+  z-index: 2;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: clamp(0.75rem, 2vw, 1.5rem);
+  gap: clamp(1rem, 3vw, 1.5rem);
   align-items: center;
+  justify-content: center;
 }
 
 .footer-copyright {
   margin: 0;
   font-size: clamp(0.85rem, 1.5vw, 0.95rem);
   color: #ccc;
+  text-align: center;
 }
 
 .footer-nav {
@@ -53,6 +77,47 @@
   outline: 2px solid #F1D72C;
   outline-offset: 4px;
   border-radius: 2px;
+}
+
+/* Social Media Icons */
+.footer-socials {
+  display: flex;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  justify-content: center;
+  align-items: center;
+  margin-top: clamp(0.5rem, 2vw, 1rem);
+}
+
+.footer-socials a {
+  color: #F1D72C;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.footer-socials a:hover,
+.footer-socials a:focus {
+  color: #fff;
+  transform: translateY(-2px) scale(1.1);
+}
+
+.footer-socials a:focus-visible {
+  outline: 2px solid #F1D72C;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.footer-socials svg {
+  width: 24px;
+  height: 24px;
+  transition: filter 0.2s ease;
+}
+
+.footer-socials a:hover svg,
+.footer-socials a:focus svg {
+  filter: drop-shadow(0 0 8px rgba(241, 215, 44, 0.5));
 }
 
 /* Responsividade movida para css/responsive.css */
