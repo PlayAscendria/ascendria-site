@@ -1,0 +1,456 @@
+/* ====================================
+   NFTs Section Styles
+   ==================================== */
+
+/* Título já está definido em style.css - não sobrescrever */
+
+/* Container principal */
+.nfts-container {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    padding-top: 3rem; /* Espaço para o título absoluto */
+}
+
+/* Categoria de NFT */
+.nft-category {
+    margin-bottom: 6rem;
+    position: relative;
+    z-index: 10;
+}
+
+.nft-category:last-child {
+    margin-bottom: 4rem;
+}
+
+/* Títulos das categorias */
+.nft-category-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: #2c1810;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transform: translateY(-1vh);
+}
+
+/* Descrição das categorias */
+.nft-category-description {
+    font-family: 'Lora', serif;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: #4a4a4a;
+    text-align: center;
+    line-height: 1.8;
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
+}
+
+/* Galeria de NFTs */
+.nft-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+/* Thumbnail individual */
+.nft-thumbnail {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #fff;
+}
+
+.nft-thumbnail:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+.nft-thumbnail img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+/* Overlay com ícone de zoom */
+.nft-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nft-thumbnail:hover .nft-overlay {
+    opacity: 1;
+}
+
+.zoom-icon {
+    font-size: 48px;
+    color: #fff;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    animation: pulse-zoom 1.5s ease-in-out infinite;
+    display: block;
+}
+
+@keyframes pulse-zoom {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Modal de Zoom */
+.nft-zoom-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.nft-zoom-modal[aria-hidden="false"] {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.nft-zoom-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(4px);
+}
+
+.nft-zoom-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    z-index: 10001;
+    animation: zoomIn 0.3s ease-out;
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.nft-zoom-image {
+    max-width: 100%;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Botão de fechar */
+.nft-zoom-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    padding: 0;
+    font-size: 24px;
+    color: #fff;
+    line-height: 1;
+}
+
+.nft-zoom-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .nft-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .nft-category {
+        margin-bottom: 4rem;
+    }
+
+    .nft-category-description {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .nft-zoom-close {
+        top: -40px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .nft-zoom-close svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nft-gallery {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0.5rem;
+    }
+
+    .nft-category-title {
+        font-size: 1.5rem;
+    }
+
+    .zoom-icon {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+    .nft-thumbnail,
+    .nft-overlay,
+    .nft-zoom-modal,
+    .nft-zoom-close {
+        transition: none;
+    }
+
+    .zoom-icon {
+        animation: none;
+    }
+
+    @keyframes zoomIn {
+        from, to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+}
+
+/* Focus states para acessibilidade */
+.nft-thumbnail:focus-visible {
+    outline: 3px solid #2c1810;
+    outline-offset: 4px;
+}
+
+.nft-zoom-close:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 2px;
+}
+
+/* ====================================
+   Ascenders Composer Section
+   ==================================== */
+
+.ascenders-composer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.composer-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.control-group label {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c1810;
+    margin-bottom: 0.5rem;
+}
+
+.control-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #fff;
+    border: 2px solid #2c1810;
+    border-radius: 8px;
+    padding: 0.75rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.control-selector:hover {
+    border-color: #8b4513;
+    box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.05);
+}
+
+.selector-value {
+    flex: 1;
+    text-align: center;
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #2c1810;
+    user-select: none;
+}
+
+.selector-arrow {
+    background: linear-gradient(135deg, #8b4513 0%, #d2691e 100%);
+    border: none;
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 6px rgba(139, 69, 19, 0.3);
+}
+
+.selector-arrow:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.4);
+}
+
+.selector-arrow:active {
+    transform: scale(0.95);
+}
+
+.selector-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.share-button {
+    margin-top: 1rem;
+    margin-bottom: 6rem; /* espelhando .ascenders-cta margin-bottom */
+    padding: 1rem 2rem;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #8b4513 0%, #d2691e 100%);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+}
+
+.share-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+}
+
+.share-button:active {
+    transform: translateY(0);
+}
+
+.composer-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    min-height: 80vh;
+}
+
+#ascender-canvas {
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    height: 80vh;
+    width: auto;
+}
+
+.ascenders-cta {
+    margin-top: 3rem;
+    margin-bottom: 0rem; /* cria espaçamento extra antes do footer */
+    text-align: center;
+    position: relative; /* permite ajuste visual sem quebrar fluxo */
+    z-index: 20; /* garante que fique por cima de elementos de rodapé se necessário */
+}
+
+.join-discord-btn {
+    margin-top: 4vh;
+    display: inline-block;
+    padding: 1.4rem 4rem; /* maior padding para botão mais proeminente */
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem; /* maior fonte */
+    font-weight: 800;
+    color: #fff;
+    background: linear-gradient(135deg, #5865F2 0%, #7289DA 100%);
+    text-decoration: none;
+    border-radius: 14px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, transform 0.12s;
+    box-shadow: 0 8px 28px rgba(88, 101, 242, 0.45);
+}
+
+.join-discord-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5);
+}
+
+.join-discord-btn:active {
+    transform: translateY(-1px);
+/* Ajustes responsivos para evitar overflow do botão maior */
+@media (max-width: 768px) {
+    .share-button { margin-bottom: 3rem; }
+    .join-discord-btn {
+        padding: 1rem 2rem;
+        font-size: 1.05rem;
+        border-radius: 10px;
+    }
+}
+}
+
+/* Responsivo - Ascenders */
+@media (max-width: 968px) {
+    .ascenders-composer {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .composer-preview {
+        order: -1;
+    }
+}
