@@ -6,10 +6,12 @@
       "Bash(cat:*)",
       "Bash(identify:*)",
       "Bash(node -e:*)",
-      "Bash(node convert-to-webp.js)"
+      "Bash(node convert-to-webp.js)",
+      "Bash(npm audit:*)",
+      "Bash(find:*)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []
   }
 }
-

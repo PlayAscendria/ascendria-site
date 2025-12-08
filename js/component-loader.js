@@ -83,7 +83,29 @@ class ComponentLoader {
         link.id = cssId;
         link.rel = 'stylesheet';
         link.href = cssPath;
+
+        // BUGFIX: Aguardar CSS carregar para evitar FOUC e race conditions
+        // Usa Promise com timeout de seguranca (2.5s) para nao bloquear indefinidamente
+        const cssLoaded = new Promise((resolve) => {
+          link.onload = () => {
+            console.log(`[ComponentLoader] CSS carregado: ${cssPath}`);
+            resolve(true);
+          };
+          link.onerror = () => {
+            console.warn(`[ComponentLoader] Erro ao carregar CSS: ${cssPath}`);
+            resolve(false);
+          };
+          // Timeout de seguranca: se CSS nao carregar em 2.5s, continua mesmo assim
+          setTimeout(() => {
+            console.warn(`[ComponentLoader] Timeout ao aguardar CSS: ${cssPath}`);
+            resolve(false);
+          }, 2500);
+        });
+
         document.head.appendChild(link);
+
+        // Aguardar CSS estar pronto antes de continuar
+        await cssLoaded;
       }
 
       // Carregar JS se existir (path absoluto)
