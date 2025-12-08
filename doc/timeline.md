@@ -614,9 +614,79 @@ Os 3 fallbacks do footer em [js/dom-handlers.js](../js/dom-handlers.js) podem se
 
 ---
 
-**Proxima Fase:** FASE 2.1 - Performance (FCP & LCP)
-**Estimativa:** 6-10 horas
-**Aguardando:** Aprovacao do usuario e testes em staging
+**Proxima Fase:** ~~FASE 2.1 - Performance (FCP & LCP)~~ **CANCELADA - PROBLEMA CRITICO DETECTADO**
+**Estimativa:** ~~6-10 horas~~ **RESTAURACAO EMERGENCIAL NECESSARIA**
+**Aguardando:** ~~Aprovacao do usuario e testes em staging~~ **DECISAO DO USUARIO**
+
+---
+
+### 08/12/2025 - PROBLEMA CRITICO DETECTADO EM DEPLOY
+
+**Responsavel:** Claude (Diagnostico)
+**Branch:** `webp-conversion`
+**Commit Problematico:** `09bdd87`
+**Status:** AGUARDANDO DECISAO DO USUARIO
+
+#### Situacao Reportada pelo Usuario
+
+> "Voce desconfigurou TODO O projeto. As paginas Lore, Whitepaper e financial model estao completamente destruidas, nem a topbar funciona. Na sessao Hero voce removeu o portal. Na sessao Ecossystem voce simplesmente destruiu tudo e na NFTs tambem."
+
+**Impacto:**
+- ❌ Topbar nao funciona
+- ❌ Portal no Hero (backgroundlive) nao aparece
+- ❌ Secao Ecosystem destruida
+- ❌ Secao NFTs nao carrega
+- ❌ Paginas Lore/Whitepaper/Financial Model quebradas
+
+#### Causa Raiz Identificada
+
+**Problema:** Atributo `defer` em dom-handlers.js + ordem de execucao incorreta
+
+**Arquivo:** [index.html](../index.html) linha 294
+```html
+<script src="/js/dom-handlers.js" defer></script>
+```
+
+**Analise Tecnica:**
+1. Scripts com `defer` executam APOS todo o DOM estar carregado
+2. dom-handlers.js depende de `ComponentLoader` (window.ComponentLoader)
+3. Com `defer`, a ordem de execucao fica imprevisivel
+4. ComponentLoader pode nao estar disponivel quando dom-handlers.js executa
+5. Resultado: Componentes (topbar, backgroundlive, nfts, footer) NAO sao inicializados
+
+**Arquivo Criado:**
+- [doc/PLANO_RESTAURACAO_EMERGENCIAL.md](./PLANO_RESTAURACAO_EMERGENCIAL.md) - Plano completo de restauracao
+
+#### Opcoes de Restauracao
+
+**OPCAO A - REVERT COMPLETO** (5-10min | Risco: ZERO)
+- Reverter commit 09bdd87 completamente
+- Restauracao IMEDIATA da funcionalidade
+- Perde TODOS os ganhos da Fase 2.0
+- Codigo dos melhoramentos permanece para tentar depois
+
+**OPCAO B - FIX CIRURGICO** (30-45min | Risco: BAIXO) ✅ **RECOMENDADA**
+- Remover atributo `defer` do dom-handlers.js
+- Ajustar ordem dos scripts
+- Adicionar debug-control.js nas paginas secundarias
+- Mantem TODOS os ganhos da Fase 2.0
+- Testar localmente antes de deploy
+
+**OPCAO C - HIBRIDO** (1-2h | Risco: MEDIO)
+- FASE 1: Revert imediato (restauracao)
+- FASE 2: Reimplementacao corrigida com testes exaustivos
+- Usuario ve site funcionando enquanto corrigimos
+
+#### Licoes Aprendidas
+
+1. **SEMPRE testar localmente ANTES de deploy**
+2. **NUNCA usar `defer` em scripts com dependencias imediatas**
+3. **Validar staging ANTES de considerar completo**
+4. **Checklist de validacao deveria ser OBRIGATORIO**
+
+#### Decisao Pendente
+
+**AGUARDANDO:** Usuario escolher opcao A, B ou C
 
 ---
 
