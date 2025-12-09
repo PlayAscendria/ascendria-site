@@ -8,8 +8,13 @@
  * - Timeout de fetch para evitar travamentos
  */
 class ComponentLoader {
-  // Timeout para fetch (5 segundos)
-  static FETCH_TIMEOUT = 5000;
+  // Timeout para fetch (aumentado para tolerar redes lentas)
+  static FETCH_TIMEOUT = 15000;
+
+  // Sleep util (não-bloqueante)
+  static sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
   
   /**
    * Fetch com timeout para evitar travamentos
@@ -59,7 +64,20 @@ class ComponentLoader {
       // SEMPRE usar paths absolutos (começando com /)
       const htmlPath = `/components/${componentName}/${htmlFileName}.html`;
       console.debug && console.debug(`[ComponentLoader] Carregando ${componentName} de ${htmlPath}`);
-      const htmlResponse = await this.fetchWithTimeout(htmlPath);
+      // Tenta carregar o HTML com 1 retry em caso de timeout/transiente
+      let htmlResponse;
+      try {
+        htmlResponse = await this.fetchWithTimeout(htmlPath);
+      } catch (firstErr) {
+        // Retry simples com pequeno backoff — não bloqueia a thread
+        try {
+          await this.sleep(800);
+          htmlResponse = await this.fetchWithTimeout(htmlPath);
+        } catch (secondErr) {
+          // Repassa o erro original para tratamento acima
+          throw secondErr;
+        }
+      }
 
       if (!htmlResponse.ok) {
         throw new Error(`HTTP ${htmlResponse.status} - Não foi possível carregar ${htmlPath}`);

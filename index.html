@@ -237,13 +237,18 @@
 		<!-- Quick skip for returning users: remove loading-screen early to avoid flicker -->
 		<script>
 		  (function(){
-		    try{
-		      if (sessionStorage.getItem('alreadyLoaded')) {
-		        var ls = document.getElementById('loading-screen');
-		        if (ls && ls.parentNode) ls.parentNode.removeChild(ls);
-		        window.mark && window.mark('preloader-skip');
-		      }
-		    }catch(e){}
+			try{
+				if (sessionStorage.getItem('alreadyLoaded')) {
+					var ls = document.getElementById('loading-screen');
+					if (ls) {
+						// Aplicar fade-out seguro: adiciona classe .completed e remove após 800ms
+						ls.classList.add('completed');
+						ls.style.pointerEvents = 'none';
+						setTimeout(function(){ try{ if (ls.parentNode) ls.parentNode.removeChild(ls); }catch(e){} }, 800);
+					}
+					window.mark && window.mark('preloader-skip');
+				}
+			}catch(e){}
 		  })();
 		</script>
 		<!-- 
