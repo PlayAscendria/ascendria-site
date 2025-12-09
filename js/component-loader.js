@@ -58,7 +58,7 @@ class ComponentLoader {
       const htmlFileName = htmlFileNames[componentName] || componentName;
       // SEMPRE usar paths absolutos (começando com /)
       const htmlPath = `/components/${componentName}/${htmlFileName}.html`;
-      console.log(`[ComponentLoader] Carregando ${componentName} de ${htmlPath}`);
+      console.debug && console.debug(`[ComponentLoader] Carregando ${componentName} de ${htmlPath}`);
       const htmlResponse = await this.fetchWithTimeout(htmlPath);
 
       if (!htmlResponse.ok) {
@@ -66,9 +66,9 @@ class ComponentLoader {
       }
 
       const html = await htmlResponse.text();
-      console.log(`[ComponentLoader] ${componentName} HTML carregado:`, html.substring(0, 100));
+      console.debug && console.debug(`[ComponentLoader] ${componentName} HTML carregado:`);
       placeholder.innerHTML = html;
-      console.log(`[ComponentLoader] ${componentName} injetado no DOM`);
+      console.debug && console.debug(`[ComponentLoader] ${componentName} injetado no DOM`);
       
       // Carregar CSS se não existir (path absoluto)
       const cssPath = `/components/${componentName}/${componentName}.css`;
@@ -84,6 +84,22 @@ class ComponentLoader {
         link.rel = 'stylesheet';
         link.href = cssPath;
         document.head.appendChild(link);
+
+        // Aguarda o carregamento do stylesheet com fallback de timeout
+        // Não bloqueia indefinidamente: resolve após load, error ou 3000ms
+        try {
+          await new Promise((resolve) => {
+            let done = false;
+            const tidy = () => {
+              if (done) return; done = true; resolve();
+            };
+            const t = setTimeout(() => { tidy(); }, 3000);
+            link.onload = () => { clearTimeout(t); tidy(); };
+            link.onerror = () => { clearTimeout(t); tidy(); };
+          });
+        } catch (e) {
+          // Não devemos quebrar a renderização se o CSS falhar
+        }
       }
 
       // Carregar JS se existir (path absoluto)

@@ -104,6 +104,8 @@ class AssetPreloader {
    * Inicia o preloader
    */
   async start() {
+    // Perf mark: preloader start
+    try { window.mark && window.mark('preloader-start'); } catch(e){}
     this.startTime = Date.now();
     
     // Ativa a tela de loading
@@ -425,6 +427,7 @@ class AssetPreloader {
    * Finaliza o preloader
    */
   complete() {
+    try { window.markEnd && window.markEnd('preloader-start'); } catch(e){}
     // Mensagem final
     if (this.narrativeText) {
       this.narrativeText.textContent = '✓ Work Completed!';

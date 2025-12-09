@@ -2,6 +2,35 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<!-- Performance instrumentation (non-invasive) -->
+		<script>
+		  (function(){
+		    try {
+		      window.perfMarks = window.perfMarks || {};
+		      window.mark = function(name){
+		        if (performance && performance.mark) {
+		          try { performance.mark(name + '_start'); } catch(e){}
+		        }
+		        window.perfMarks[name] = window.perfMarks[name] || {};
+		        window.perfMarks[name].start = performance.now();
+		      };
+		      window.markEnd = function(name){
+		        if (performance && performance.mark && performance.measure) {
+		          try { performance.mark(name + '_end'); performance.measure(name, name + '_start', name + '_end'); } catch(e){}
+		        }
+		        window.perfMarks[name] = window.perfMarks[name] || {};
+		        window.perfMarks[name].end = performance.now();
+		      };
+		      window.perfReport = function(){
+		        try {
+		          var entries = performance.getEntriesByType && performance.getEntriesByType('measure') || [];
+		          if (window.DEBUG) console.debug('perf.measures', entries, window.perfMarks);
+		        } catch(e){}
+		      };
+		      window.mark && window.mark('head-parse');
+		    } catch(e){}
+		  })();
+		</script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 		
 		<!-- Primary Meta Tags -->
@@ -205,6 +234,18 @@
 		</script>
 	</head>
 	<body>
+		<!-- Quick skip for returning users: remove loading-screen early to avoid flicker -->
+		<script>
+		  (function(){
+		    try{
+		      if (sessionStorage.getItem('alreadyLoaded')) {
+		        var ls = document.getElementById('loading-screen');
+		        if (ls && ls.parentNode) ls.parentNode.removeChild(ls);
+		        window.mark && window.mark('preloader-skip');
+		      }
+		    }catch(e){}
+		  })();
+		</script>
 		<!-- 
 			SISTEMA DE PRELOADER AAA
 			1. asset-preloader.js: carrega TODOS os assets do site com progresso real
@@ -313,6 +354,7 @@
 			
 			// Carregar componentes
 			async function loadComponents() {
+				window.mark && window.mark('components-start');
 				try {
 					await Promise.all([
 						ComponentLoader.load('topbar', 'topbar-placeholder'),
@@ -320,6 +362,7 @@
 						ComponentLoader.load('nfts', 'nfts-placeholder'),
 						ComponentLoader.load('footer', 'footer-placeholder')
 					]);
+					window.markEnd && window.markEnd('components-start');
 
 					// Debug: verificar se footer foi carregado
 					setTimeout(() => {
