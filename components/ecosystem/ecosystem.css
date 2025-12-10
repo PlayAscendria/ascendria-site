@@ -1,19 +1,19 @@
-/* ========== ECOSYSTEM INTERACTIVE GRAPH ========== */
-/* ESTILOS BASE - OTIMIZADO PARA 1920x1080 */
-/* Ajustes para outras resoluções em css/responsive.css */
 
-/* Container que fica ATRÁS do pergaminho vazado */
+
+
+
+
 .ecosystem-container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* Dimensões otimizadas para 1920x1080 */
+    
     width: 124%;
     height: 68%;
     z-index: 1;
     overflow: hidden;
-    /* Fundo sempre visível durante transições */
+    
     background-image: url('/assets/images/background/fundo2.webp');
     background-size: cover;
     background-position: center;
@@ -21,7 +21,7 @@
     border-radius: 8px;
 }
 
-/* ========== GRAPH VIEW (Visão principal com nós) ========== */
+
 .ecosystem-graph {
     position: relative;
     width: 100%;
@@ -35,14 +35,14 @@
     pointer-events: none;
 }
 
-/* ========== TRIANGLE LAYOUT PARA 3 NÓS ========== */
+
 .eco-nodes-triangle {
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-/* ========== NODES (Módulos do ecossistema) ========== */
+
 .eco-node {
     position: absolute;
     background: none;
@@ -62,20 +62,20 @@
     transform: scale(0.98);
 }
 
-/* Ícone como imagem */
+
 .eco-node-icon {
     width: clamp(120px, 18vw, 220px);
     height: auto;
     object-fit: contain;
 }
 
-/* Label escondida */
+
 .eco-node-label {
     display: none;
 }
 
-/* Posições em triângulo - mais próximos do centro */
-/* Rankings no topo centro */
+
+
 .eco-node[data-node="rankings"] {
     top: 15%;
     left: 50%;
@@ -86,7 +86,7 @@
     transform: translateX(-50%) scale(1.1);
 }
 
-/* Ascendria embaixo esquerda */
+
 .eco-node[data-node="ascendria"] {
     bottom: 22%;
     left: 28%;
@@ -97,7 +97,7 @@
     transform: translateX(-50%) scale(1.1);
 }
 
-/* Community embaixo direita */
+
 .eco-node[data-node="community"] {
     bottom: 22%;
     right: 28%;
@@ -108,7 +108,7 @@
     transform: translateX(50%) scale(1.1);
 }
 
-/* ========== MODULE DETAIL VIEW ========== */
+
 .ecosystem-detail {
     position: absolute;
     top: 0;
@@ -128,17 +128,17 @@
     pointer-events: auto;
 }
 
-/* ========== BOTÕES HOME E BACK ========== */
-/* Posicionamento calculado para alinhar com o pergaminhoback.webp */
-/* O pergaminho tem: width: 120%, height: 100% da seção */
-/* O ecosystem-container tem: width: 124%, height: 68% da seção */
-/* Conversão: vertical = valor * (100/68) ≈ 1.47x | horizontal = valor * (120/124) ≈ 0.97x */
 
-/* Botão Home - volta para os 3 menus principais */
+
+
+
+
+
+
 .detail-home {
     position: absolute;
-    top: 8%;      /* ~7% do pergaminho */
-    right: 2%;   /* ~9% do pergaminho */
+    top: 8%;      
+    right: 2%;   
     width: 3%;
     aspect-ratio: 1;
     background: none;
@@ -149,7 +149,7 @@
     padding: 0;
 }
 
-/* Garantir que botões sejam clicáveis quando detail está ativo */
+
 .ecosystem-detail.active .detail-home {
     pointer-events: auto;
 }
@@ -164,11 +164,11 @@
     transform: scale(1.15);
 }
 
-/* Botão Back - volta para a página anterior */
+
 .detail-back {
     position: absolute;
-    top: 8%;      /* ~7% do pergaminho */
-    left: 2%;    /* ~9% do pergaminho */
+    top: 8%;      
+    left: 2%;    
     width: 3%;
     aspect-ratio: 1;
     background: none;
@@ -177,10 +177,10 @@
     z-index: 200;
     transition: transform 0.3s ease;
     padding: 0;
-    display: none; /* Escondido por padrão, mostrado quando em submenu */
+    display: none; 
 }
 
-/* Garantir que botões sejam clicáveis quando detail está ativo */
+
 .ecosystem-detail.active .detail-back {
     pointer-events: auto;
 }
@@ -199,7 +199,7 @@
     display: block;
 }
 
-/* Header do detalhe */
+
 .detail-header {
     padding: 5rem 1.5rem 1rem 1.5rem;
     text-align: center;
@@ -216,7 +216,7 @@
     display: none;
 }
 
-/* Conteúdo do detalhe */
+
 .detail-content {
     flex: 1;
     padding: 0.5rem 4rem 8rem 4rem;
@@ -225,7 +225,7 @@
     color: #2c1810;
     text-align: center;
     font-size: 1.1rem;
-    /* Estilo do scrollbar */
+    
     scrollbar-width: thin;
     scrollbar-color: rgba(139, 90, 43, 0.6) transparent;
 }
@@ -275,20 +275,20 @@
     font-size: 1.05rem;
 }
 
-/* ========== SUBMENU GRID ========== */
-/* Tamanhos RELATIVOS ao container - escala automaticamente */
+
+
 .submenu-grid {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-evenly; /* Distribui espaço igual entre e ao redor dos itens */
+    justify-content: space-evenly; 
     align-items: flex-start;
     padding: 2% 3%;
     width: 100%;
 }
 
 .submenu-item {
-    flex: 0 0 auto; /* Tamanho automático baseado no conteúdo */
-    width: 12%; /* Largura fixa em porcentagem */
+    flex: 0 0 auto; 
+    width: 12%; 
     cursor: pointer;
     transition: transform 0.3s ease;
     display: flex;
@@ -303,19 +303,20 @@
 }
 
 .submenu-icon {
-    width: 80%; /* Relativo ao item (que é relativo ao container) */
+    width: 80%; 
     height: auto;
     object-fit: contain;
 }
 
 .submenu-label {
-    font-size: 0.8em; /* Relativo ao contexto */
+    font-size: 0.8em; 
     font-weight: 600;
     color: #2c1810;
     text-align: center;
     text-transform: uppercase;
 }
 
-/* Responsividade movida para css/responsive.css */
+
+
 
 

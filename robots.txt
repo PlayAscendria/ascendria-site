@@ -1,14 +1,12 @@
-# Ascendria - Robots.txt
 User-agent: *
 Allow: /
 
-# Disallow admin or system directories (if applicable)
-Disallow: /assets/fonts/
-Disallow: /components/
-
-# Sitemap location
+# Sitemap
 Sitemap: https://playascendria.com/sitemap.xml
 
-# Crawl delay (optional, in seconds)
-Crawl-delay: 1
+# Bloquear arquivos de desenvolvimento
+Disallow: /diagnostic.html
+Disallow: /node_modules/
+Disallow: /build.js
+Disallow: /.git/
 

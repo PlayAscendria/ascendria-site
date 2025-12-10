@@ -1,20 +1,8 @@
-/**
- * ASCENDRIA - Asset Preloader AAA com Pintura Progressiva
- * 
- * Combina o efeito visual de pintura progressiva (fade por camada)
- * com pré-carregamento real de TODOS os assets do site.
- * 
- * Features:
- * - Efeito de pintura progressiva (fade animado por camada)
- * - Barra de progresso real baseada em assets carregados
- * - Pré-carrega imagens, scripts, CSS, fontes
- * - Cache via sessionStorage para visitas subsequentes
- * - Fallback de timeout para evitar travamentos
- */
+
 
 class AssetPreloader {
   constructor(options = {}) {
-    // Elementos da UI existente
+
     this.loadingContainer = document.getElementById('loading-screen');
     this.progressText = document.getElementById('progressValue');
     this.progressFill = document.getElementById('progressFill');
@@ -22,28 +10,28 @@ class AssetPreloader {
     this.canvas = document.getElementById('paintCanvas');
     this.ctx = this.canvas ? this.canvas.getContext('2d', { willReadFrequently: true }) : null;
     
-    // Configurações
+
     this.options = {
       timeout: options.timeout || 15000,
       minDisplayTime: options.minDisplayTime || 2000,
       ...options
     };
     
-    // Estado do preloader
+
     this.assets = [];
     this.loadedCount = 0;
     this.totalAssets = 0;
     this.startTime = 0;
     
-    // Estado da pintura progressiva
+
     this.paintLayers = [];
     this.paintedLayers = [];
     this.currentPaintIndex = 0;
     this.isPainting = false;
     this.paintingComplete = false;
-    this.paintedLayersCount = 0; // Contador de camadas pintadas
+    this.paintedLayersCount = 0; 
     
-    // Mensagens narrativas (sincronizadas com pintura)
+
     this.messages = [
       'Preparing the canvas...',
       'Painting the background...',
@@ -54,7 +42,7 @@ class AssetPreloader {
       'Masterpiece completed!'
     ];
     
-    // Durações de animação por categoria (mantém o original)
+
     this.categoryDuration = {
       'base': 500,
       'fundo': 400,
@@ -63,8 +51,8 @@ class AssetPreloader {
       'grama': 400
     };
     
-    // Camadas do background para pintura (ordem de pintura)
-    // Ordem: tela branca (base) → grama1 → grama2 → montanha1 → montanha2 → nuvens → fundo sol
+
+
     this.backgroundLayers = [
       { url: '/assets/images/background/backgroundpaisagem/0_telabranca_0.webp', order: 0, zIndex: 0, category: 'base' },
       { url: '/assets/images/background/backgroundpaisagem/1_grama1_20.webp', order: 1, zIndex: 20, category: 'grama' },
@@ -81,18 +69,18 @@ class AssetPreloader {
       { url: '/assets/images/background/backgroundpaisagem/5_fundosol_1.webp', order: 6, zIndex: 1, category: 'fundo' },
     ];
     
-    // Assets adicionais para pré-carregar (em paralelo com pintura)
+
     this.additionalAssets = [
-      // UI
+
       '/assets/images/ui/logoascendria.webp',
       '/assets/images/ui/favicon.webp',
 
-      // Scripts
+
       '/components/backgroundlive/backgroundlive.js',
       '/components/topbar/topbar.js',
       '/components/footer/footer.js',
 
-      // CSS
+
       '/css/style.css',
       '/components/topbar/topbar.css',
       '/components/backgroundlive/backgroundlive.css',
@@ -100,43 +88,39 @@ class AssetPreloader {
     ];
   }
   
-  /**
-   * Inicia o preloader
-   */
+  
   async start() {
-    // Perf mark: preloader start
+
     try { window.mark && window.mark('preloader-start'); } catch(e){}
     this.startTime = Date.now();
     
-    // Ativa a tela de loading
+
     if (this.loadingContainer) {
       this.loadingContainer.classList.add('active');
     }
     
-    // Inicializa canvas
+
     this.initCanvas();
     
-    // Conta total de assets
+
     this.totalAssets = this.backgroundLayers.length + this.additionalAssets.length;
     
-    // Carrega PRIMEIRO as imagens do background para pintura
+
     await this.loadPaintingLayers();
     
-    // Inicia pintura E carrega outros assets em paralelo
+
     await Promise.all([
       this.startProgressivePainting(),
       this.loadAdditionalAssets()
     ]);
     
-    // Garante tempo mínimo de exibição
+
     await this.ensureMinDisplayTime();
     
     return Promise.resolve();
   }
   
-  /**
-   * Inicializa o canvas
-   */
+  
   initCanvas() {
     if (!this.canvas || !this.ctx) return;
     
@@ -151,17 +135,15 @@ class AssetPreloader {
     });
   }
   
-  /**
-   * Desenha textura base do canvas (papel/tela de pintura)
-   */
+  
   drawCanvasTexture() {
     if (!this.ctx) return;
     
-    // Fundo bege com textura
+
     this.ctx.fillStyle = '#f5f1e8';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     
-    // Adiciona textura sutil de tela de pintura
+
     const imageData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
     const data = imageData.data;
     
@@ -175,9 +157,7 @@ class AssetPreloader {
     this.ctx.putImageData(imageData, 0, 0);
   }
   
-  /**
-   * Carrega todas as imagens do background para pintura
-   */
+  
   async loadPaintingLayers() {
     const loadPromises = this.backgroundLayers.map((layer, index) => {
       return new Promise((resolve) => {
@@ -199,7 +179,7 @@ class AssetPreloader {
         };
         
         img.onerror = () => {
-          console.error(`✗ Failed: ${layer.url}`);
+
           this.loadedCount++;
           this.updateProgressBar();
           resolve();
@@ -211,13 +191,11 @@ class AssetPreloader {
     
     await Promise.all(loadPromises);
     
-    // Ordena por ordem de pintura
+
     this.paintLayers.sort((a, b) => a.order - b.order);
   }
   
-  /**
-   * Inicia a pintura progressiva (com animação de fade)
-   */
+  
   startProgressivePainting() {
     return new Promise((resolve) => {
       if (this.paintLayers.length === 0) {
@@ -237,10 +215,10 @@ class AssetPreloader {
         
         const layer = this.paintLayers[layerIndex];
         
-        // Atualiza mensagem narrativa
+
         this.updateNarrativeMessage(layerIndex, this.paintLayers.length);
         
-        // Pinta a camada com animação de fade
+
         this.paintLayerWithFade(layer, () => {
           layerIndex++;
           paintNextLayer();
@@ -251,9 +229,7 @@ class AssetPreloader {
     });
   }
   
-  /**
-   * Pinta uma camada com efeito de fade progressivo
-   */
+  
   paintLayerWithFade(layerData, callback) {
     const img = layerData.img;
     const duration = this.categoryDuration[layerData.category] || 500;
@@ -263,22 +239,22 @@ class AssetPreloader {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
       
-      // Redesenha tudo: textura base + camadas pintadas + camada atual
+
       this.drawCanvasTexture();
       
-      // Coleta todas as camadas a desenhar (pintadas + atual)
+
       const allLayers = this.paintLayers.filter(l => l.painted || l === layerData);
       
-      // Ordena por z-index (menor = mais atrás)
+
       allLayers.sort((a, b) => a.zIndex - b.zIndex);
       
-      // Desenha cada camada
+
       allLayers.forEach((layer) => {
         if (layer === layerData) {
-          // Camada atual: com fade progressivo
+
           this.drawImageCover(layer.img, progress);
         } else {
-          // Camadas já pintadas: opacidade total
+
           this.drawImageCover(layer.img, 1);
         }
       });
@@ -289,7 +265,7 @@ class AssetPreloader {
         layerData.painted = true;
         this.paintedLayers.push(layerData);
         this.paintedLayersCount++;
-        this.updateProgressBar(); // Atualiza progresso quando camada é pintada
+        this.updateProgressBar(); 
         callback();
       }
     };
@@ -297,9 +273,7 @@ class AssetPreloader {
     requestAnimationFrame(animate);
   }
   
-  /**
-   * Desenha imagem mantendo aspect ratio (cover)
-   */
+  
   drawImageCover(img, alpha = 1) {
     if (!this.ctx || !img) return;
     
@@ -325,9 +299,7 @@ class AssetPreloader {
     this.ctx.globalAlpha = 1;
   }
   
-  /**
-   * Redesenha todas as camadas já pintadas (para resize)
-   */
+  
   redrawAllPaintedLayers() {
     this.drawCanvasTexture();
     
@@ -338,9 +310,7 @@ class AssetPreloader {
     });
   }
   
-  /**
-   * Carrega assets adicionais em paralelo
-   */
+  
   async loadAdditionalAssets() {
     const promises = this.additionalAssets.map(url => {
       return this.preloadFile(url).finally(() => {
@@ -352,9 +322,7 @@ class AssetPreloader {
     await Promise.all(promises);
   }
   
-  /**
-   * Pré-carrega um arquivo (imagem ou fetch)
-   */
+  
   preloadFile(url) {
     const ext = url.split('.').pop().toLowerCase().split('?')[0];
     
@@ -372,17 +340,14 @@ class AssetPreloader {
       .catch(() => {});
   }
   
-  /**
-   * Atualiza a barra de progresso
-   * Progresso híbrido: 50% para carregamento + 50% para pintura
-   */
+  
   updateProgressBar() {
-    // Progresso de carregamento (0-50%)
+
     const loadPercent = this.totalAssets > 0 
       ? (this.loadedCount / this.totalAssets) * 50 
       : 0;
     
-    // Progresso de pintura (50-100%)
+
     const paintPercent = this.paintLayers.length > 0 
       ? (this.paintedLayersCount / this.paintLayers.length) * 50 
       : 0;
@@ -398,9 +363,7 @@ class AssetPreloader {
     }
   }
   
-  /**
-   * Atualiza mensagem narrativa baseada na camada
-   */
+  
   updateNarrativeMessage(currentIndex, total) {
     if (!this.narrativeText) return;
     
@@ -410,9 +373,7 @@ class AssetPreloader {
     this.narrativeText.textContent = message;
   }
   
-  /**
-   * Garante tempo mínimo de exibição
-   */
+  
   ensureMinDisplayTime() {
     const elapsed = Date.now() - this.startTime;
     const remaining = this.options.minDisplayTime - elapsed;
@@ -423,12 +384,10 @@ class AssetPreloader {
     return Promise.resolve();
   }
   
-  /**
-   * Finaliza o preloader
-   */
+  
   complete() {
     try { window.markEnd && window.markEnd('preloader-start'); } catch(e){}
-    // Mensagem final
+
     if (this.narrativeText) {
       this.narrativeText.textContent = '✓ Work Completed!';
     }
@@ -439,16 +398,16 @@ class AssetPreloader {
       this.progressFill.style.width = '100%';
     }
     
-    // Marca como carregado na sessão
+
     sessionStorage.setItem('alreadyLoaded', '1');
     
-    // Aguarda um momento antes do fade
+
     return new Promise(resolve => {
       setTimeout(() => {
         if (this.loadingContainer) {
           this.loadingContainer.classList.add('completed');
           
-          // Remove do DOM após animação CSS
+
           setTimeout(() => {
             if (this.loadingContainer && this.loadingContainer.parentNode) {
               this.loadingContainer.remove();
@@ -458,14 +417,12 @@ class AssetPreloader {
         } else {
           resolve();
         }
-      }, 800); // Pausa para apreciar a arte completa
+      }, 800); 
     });
   }
 }
 
-/**
- * Função principal para iniciar o preloader
- */
+
 async function startAssetPreloader() {
   const preloader = new AssetPreloader({
     timeout: 15000,
@@ -476,7 +433,7 @@ async function startAssetPreloader() {
   await preloader.complete();
 }
 
-// Exporta para uso global
+
 window.AssetPreloader = AssetPreloader;
 window.startAssetPreloader = startAssetPreloader;
 

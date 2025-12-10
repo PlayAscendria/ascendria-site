@@ -5,10 +5,20 @@
   "private": true,
   "scripts": {
     "start": "npx serve .",
-    "lint": "echo 'No linting configured'"
+    "build": "node build.js",
+    "build:prod": "node build.js",
+    "preview": "npx serve dist",
+    "lint": "eslint . --ext .js --ignore-path .gitignore",
+    "lint:fix": "eslint . --ext .js --fix",
+    "clean": "rm -rf dist",
+    "validate": "npm run lint && npm run build"
   },
   "devDependencies": {
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "eslint": "^8.57.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
 

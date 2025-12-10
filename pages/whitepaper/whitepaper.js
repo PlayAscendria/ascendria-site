@@ -1,7 +1,4 @@
-/**
- * Whitepaper Interactive Menu
- * 6 menus principais com detalhamento de cada módulo
- */
+
 
 (function() {
 'use strict';
@@ -16,7 +13,7 @@ class WhitepaperMenu {
         this._currentAnimationId = null;
         this._safetyTimeout = null;
         
-        // 6 Menus principais do Whitepaper
+
         this.modules = {
             ascendria: {
                 icon: '/assets/images/ecosystem/ascendria.webp',
@@ -311,10 +308,10 @@ class WhitepaperMenu {
                     <h4>4.3 Official Communication Channels</h4>
                     <p>Ascendria's communication is centralized in official channels:</p>
                     <ul>
-                        <li><strong>Discord (Primary Channel):</strong> <a href="https://playascendria.com/discord" target="_blank" rel="noopener">playascendria.com/discord</a></li>
-                        <li><strong>X (Twitter):</strong> <a href="https://x.com/PlayAscendria" target="_blank" rel="noopener">x.com/PlayAscendria</a></li>
-                        <li><strong>YouTube:</strong> <a href="https://youtube.com/@PlayAscendria" target="_blank" rel="noopener">youtube.com/@PlayAscendria</a></li>
-                        <li><strong>TikTok:</strong> <a href="https://tiktok.com/@playascendria" target="_blank" rel="noopener">tiktok.com/@playascendria</a></li>
+                        <li><strong>Discord (Primary Channel):</strong> <a href="https:
+                        <li><strong>X (Twitter):</strong> <a href="https:
+                        <li><strong>YouTube:</strong> <a href="https:
+                        <li><strong>TikTok:</strong> <a href="https:
                     </ul>
                     <p><strong>Discord: The Central Hub</strong> — Official announcements, changelogs, devlogs, structured discussions, support, community decisions, and Bot monitoring all happen here.</p>
                     
@@ -323,7 +320,7 @@ class WhitepaperMenu {
                     <p><strong>Active Communication on Discord:</strong> With two dedicated Community Managers ensuring quick responses, direct support, constant moderation, and continuous engagement.</p>
                     <p><strong>Weekly Videos:</strong> 1 video per week on YouTube and TikTok with weekly bulletins, production advances, ecosystem news, and community highlights.</p>
                     <p><strong>Occasional Live Streams:</strong> Reserved for module launches, major updates, community events, and significant ecosystem changes.</p>
-                    <p><strong>Public Roadmap:</strong> Available at <a href="https://playascendria.com" target="_blank" rel="noopener">playascendria.com</a>, updated as milestones are reached.</p>
+                    <p><strong>Public Roadmap:</strong> Available at <a href="https:
                     
                     <h4>4.5 Community Participation in Decisions</h4>
                     <p>The community is an essential part of Ascendria's construction, influencing the ecosystem's direction through feedback, active participation, and voting.</p>
@@ -507,15 +504,15 @@ class WhitepaperMenu {
                     <p>Ascendria keeps all its official channels duly verified and centralized to ensure secure, transparent, and direct communication with the community, investors, and partners.</p>
                     
                     <h4>9.1 Official Website</h4>
-                    <p><strong>Website:</strong> <a href="https://playascendria.com" target="_blank" rel="noopener">playascendria.com</a></p>
+                    <p><strong>Website:</strong> <a href="https:
                     <p>This is the main destination for Dashboard Access, Public Roadmap, Lore Portal, and Institutional information.</p>
                     
                     <h4>9.2 Community and Communication</h4>
                     <ul>
-                        <li><strong>Discord (Primary Channel):</strong> <a href="https://playascendria.com/discord" target="_blank" rel="noopener">playascendria.com/discord</a> — Official announcements, Changelogs, Devlogs, Support, Bot integration, Voting, Social events</li>
-                        <li><strong>X (Twitter):</strong> <a href="https://x.com/PlayAscendria" target="_blank" rel="noopener">x.com/PlayAscendria</a> — Quick announcements, News, Official posts, Community polls</li>
-                        <li><strong>YouTube:</strong> <a href="https://youtube.com/@PlayAscendria" target="_blank" rel="noopener">youtube.com/@PlayAscendria</a> — Weekly videos, Production updates, Informative content, Event coverage</li>
-                        <li><strong>TikTok:</strong> <a href="https://tiktok.com/@playascendria" target="_blank" rel="noopener">tiktok.com/@playascendria</a> — Short dynamic content, Community highlights</li>
+                        <li><strong>Discord (Primary Channel):</strong> <a href="https:
+                        <li><strong>X (Twitter):</strong> <a href="https:
+                        <li><strong>YouTube:</strong> <a href="https:
+                        <li><strong>TikTok:</strong> <a href="https:
                     </ul>
                     
                     <h4>9.3 Support and Contact with the Team</h4>
@@ -993,7 +990,7 @@ class WhitepaperMenu {
         this.createStructure();
         this.bindEvents();
         
-        // Verificação de segurança - garantir que menu está visível
+
         this.ensureVisibility();
     }
     
@@ -1014,15 +1011,15 @@ class WhitepaperMenu {
     }
     
     createStructure() {
-        // Menu View com os 6 módulos
+
         this.menuView = document.createElement('div');
         this.menuView.className = 'whitepaper-menu';
         
-        // Grid de menus
+
         const menuGrid = document.createElement('div');
         menuGrid.className = 'whitepaper-grid';
         
-        // Criar os 6 nós de menu
+
         Object.keys(this.modules).forEach(key => {
             const module = this.modules[key];
             const node = document.createElement('div');
@@ -1036,7 +1033,7 @@ class WhitepaperMenu {
         
         this.menuView.appendChild(menuGrid);
         
-        // Detail View
+
         this.detailView = document.createElement('div');
         this.detailView.className = 'whitepaper-detail';
         this.detailView.innerHTML = `
@@ -1047,7 +1044,7 @@ class WhitepaperMenu {
             <div class="detail-content"></div>
         `;
         
-        // Criar botão Home (volta para os 6 menus principais)
+
         this.homeButton = document.createElement('button');
         this.homeButton.className = 'detail-home';
         this.homeButton.setAttribute('aria-label', 'Voltar ao menu');
@@ -1055,13 +1052,13 @@ class WhitepaperMenu {
         this.homeButton.innerHTML = `<img src="/assets/images/ecosystem/home.webp" alt="Home" />`;
         this.detailView.insertBefore(this.homeButton, this.detailView.firstChild);
         
-        // Adicionar ao container
+
         this.container.appendChild(this.menuView);
         this.container.appendChild(this.detailView);
     }
     
     bindEvents() {
-        // Clique nos itens do menu
+
         this.container.querySelectorAll('.whitepaper-item').forEach(item => {
             item.addEventListener('click', (e) => {
                 const moduleKey = item.dataset.module;
@@ -1071,7 +1068,7 @@ class WhitepaperMenu {
             });
         });
         
-        // Botão Home - volta para os 6 menus principais
+
         if (this.homeButton) {
             this.homeButton.onclick = (e) => {
                 e.preventDefault();
@@ -1082,7 +1079,7 @@ class WhitepaperMenu {
     }
     
     async openModule(moduleKey) {
-        // Cancelar qualquer animação em andamento
+
         this.cancelCurrentAnimation();
         
         this.isAnimating = true;
@@ -1091,7 +1088,7 @@ class WhitepaperMenu {
         
         const module = this.modules[moduleKey];
         
-        // Preencher conteúdo do detalhe ANTES da animação
+
         const detailIcon = this.detailView.querySelector('.detail-icon');
         detailIcon.src = module.icon;
         detailIcon.alt = module.label;
@@ -1099,13 +1096,13 @@ class WhitepaperMenu {
         this.detailView.querySelector('.detail-content').innerHTML = module.content;
         
         try {
-            // Animação: apaga menuView e revela detailView
+
             await this.transitionAnimation(this.menuView, this.detailView, () => {
                 this.menuView.classList.add('hidden');
                 this.detailView.classList.add('active');
             });
         } catch (e) {
-            // Em caso de erro, garantir estados corretos
+
             this.menuView.classList.add('hidden');
             this.detailView.classList.add('active');
             this.clearMasks();
@@ -1116,20 +1113,20 @@ class WhitepaperMenu {
     }
     
     async closeModule() {
-        // Cancelar qualquer animação em andamento
+
         this.cancelCurrentAnimation();
         
         this.isAnimating = true;
         this._animationStart = Date.now();
         
         try {
-            // Animação: apaga detailView e revela menuView
+
             await this.transitionAnimation(this.detailView, this.menuView, () => {
                 this.detailView.classList.remove('active');
                 this.menuView.classList.remove('hidden');
             });
         } catch (e) {
-            // Em caso de erro, garantir estados corretos
+
             this.detailView.classList.remove('active');
             this.menuView.classList.remove('hidden');
             this.clearMasks();
@@ -1141,7 +1138,7 @@ class WhitepaperMenu {
     }
     
     cancelCurrentAnimation() {
-        // Cancelar animação em andamento
+
         if (this._currentAnimationId) {
             cancelAnimationFrame(this._currentAnimationId);
             this._currentAnimationId = null;
@@ -1150,13 +1147,13 @@ class WhitepaperMenu {
             clearTimeout(this._safetyTimeout);
             this._safetyTimeout = null;
         }
-        // Limpar máscaras imediatamente
+
         this.clearMasks();
         this.isAnimating = false;
     }
     
     clearMasks() {
-        // Limpar máscaras de ambos os elementos
+
         if (this.menuView) {
             this.menuView.style.maskImage = '';
             this.menuView.style.webkitMaskImage = '';
@@ -1169,7 +1166,7 @@ class WhitepaperMenu {
     
     async transitionAnimation(fromElement, toElement, onMiddle) {
         return new Promise((resolve) => {
-            const duration = 1400; // ms
+            const duration = 1400; 
             const startTime = performance.now();
             
             const isSameElement = fromElement === toElement;
@@ -1181,17 +1178,17 @@ class WhitepaperMenu {
             
             let middleCalled = false;
             
-            // Timeout de segurança - se a animação travar, limpar tudo
+
             this._safetyTimeout = setTimeout(() => {
                 if (this._currentAnimationId) {
                     cancelAnimationFrame(this._currentAnimationId);
                     this._currentAnimationId = null;
                 }
-                // Garantir que onMiddle foi chamado
+
                 if (!middleCalled && onMiddle) {
                     onMiddle();
                 }
-                // Limpar máscaras
+
                 if (fromElement) {
                     fromElement.style.maskImage = '';
                     fromElement.style.webkitMaskImage = '';
@@ -1201,7 +1198,7 @@ class WhitepaperMenu {
                     toElement.style.webkitMaskImage = '';
                 }
                 resolve();
-            }, duration + 500); // 500ms de margem de segurança
+            }, duration + 500); 
             
             const animate = (currentTime) => {
                 const elapsed = currentTime - startTime;
@@ -1247,13 +1244,13 @@ class WhitepaperMenu {
                 if (progress < 1) {
                     this._currentAnimationId = requestAnimationFrame(animate);
                 } else {
-                    // Limpar timeout de segurança
+
                     if (this._safetyTimeout) {
                         clearTimeout(this._safetyTimeout);
                         this._safetyTimeout = null;
                     }
                     this._currentAnimationId = null;
-                    // Limpar máscaras
+
                     if (fromElement) {
                         fromElement.style.maskImage = '';
                         fromElement.style.webkitMaskImage = '';
@@ -1271,22 +1268,22 @@ class WhitepaperMenu {
     }
 }
 
-// Inicializar quando o DOM estiver pronto
+
 function initWhitepaper() {
     const container = document.querySelector('.whitepaper-container');
     if (!container) {
-        // Se o container não existir ainda, tentar novamente em 100ms
+
         setTimeout(initWhitepaper, 100);
         return;
     }
     
-    // Verificar se já foi inicializado
+
     if (container.dataset.initialized === 'true') return;
     container.dataset.initialized = 'true';
     
     const menu = new WhitepaperMenu(container);
     
-    // Listener para garantir visibilidade quando a página volta ao foco
+
     document.addEventListener('visibilitychange', () => {
         if (!document.hidden) {
             menu.ensureVisibility();
@@ -1294,13 +1291,13 @@ function initWhitepaper() {
     });
 }
 
-// Tentar inicializar imediatamente se DOM já estiver pronto
+
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initWhitepaper);
 } else {
-    // DOM já está pronto
+
     initWhitepaper();
 }
 
-})(); // End IIFE
+})(); 
 

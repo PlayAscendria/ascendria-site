@@ -1,44 +1,51 @@
-/* Portal Magico - Estilos */
-/* Portal DENTRO da div .carruagem, posicionado relativo à imagem da carruagem */
 
-/* ============ BASE ============ */
+
+
+
 .backgroundlive-root .bg-layer.carruagem #magic-portal {
   position: absolute;
   display: block;
-  /* Posição relativa à carruagem (ajustar conforme posição do espelho) */
+  
   top: 24%;
   left: 55%;
   width: 20%;
   height: 35%;
+  min-width: 100px;
+  min-height: 150px;
   z-index: 1;
   pointer-events: auto;
   cursor: pointer;
   text-decoration: none;
   border-radius: 45% / 50%;
-  overflow: hidden;
+  overflow: visible;
 }
 
-/* O canvas Three.js - preenche o container do portal */
+
 .backgroundlive-root .bg-layer.carruagem #magic-portal canvas {
-  display: block;
+  display: block !important;
   width: 100% !important;
   height: 100% !important;
   pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
-/* Efeito hover */
+
 .backgroundlive-root .bg-layer.carruagem #magic-portal:hover {
   filter: brightness(1.3);
 }
 
-/* Texto removido - portal sem texto */
+
 .backgroundlive-root .bg-layer.carruagem #magic-portal::after {
   display: none;
 }
 
-/* Esconder portal no modo simple */
+
 .backgroundlive-root[data-mode="simple"] .bg-layer.carruagem #magic-portal {
   display: none !important;
 }
 
-/* Responsividade movida para css/responsive.css */
+
+

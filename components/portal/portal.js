@@ -1,3 +1,6 @@
+(function() {
+'use strict';
+
 /**
  * Portal Mágico - Efeito Three.js
  * Cria um efeito de vórtice/portal mágico interativo
@@ -285,7 +288,7 @@ function loadThreeJS() {
   
   threeLoadPromise = new Promise((resolve, reject) => {
     const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';
+    script.src = 'https://unpkg.com/three@0.159.0/build/three.min.js';
     script.onload = resolve;
     script.onerror = reject;
     document.head.appendChild(script);
@@ -341,4 +344,6 @@ if (document.readyState === 'loading') {
 
 // Export para uso externo
 window.MagicPortal = MagicPortal;
+
+})();
 

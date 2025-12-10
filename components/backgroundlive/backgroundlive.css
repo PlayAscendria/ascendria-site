@@ -1,29 +1,13 @@
-/* BackgroundLive component styles */
 
-/* ========== CONFIGURAÇÃO DE NUVENS ==========
-   EDITE AQUI O MOVIMENTO DE CADA NUVEM:
-   
-   Para cada nuvem você pode configurar:
-   - animation-duration: tempo total do loop em segundos (ex: 180s)
-   - animation-direction: normal ou reverse
-   
-   NUVENS CONFIGURÁVEIS:
-   - nuvem1: movimento esquerda (cloud-loop-left)
-   - nuvem2: movimento direita (cloud-loop-right)
-   - nuvem3: movimento esquerda (cloud-loop-left)
-   - nuvem4: movimento direita (cloud-loop-right)
-   - nuvem5: movimento esquerda (cloud-loop-left)
-   - nuvem6: movimento direita (cloud-loop-right)
-   - nuvem7: movimento esquerda (cloud-loop-left)
-   
-   ============================================ */
 
-/* ========== ESTILOS BASE - OTIMIZADO PARA 1920x1080 ========== */
+
+
+
 
 .backgroundlive-root { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 5; }
 .backgroundlive-root .bg-parallax { position: absolute; inset: 0; }
 
-/* Camada genérica - base para todas as layers */
+
 .backgroundlive-root .bg-layer {
   position: absolute;
   left: 50%;
@@ -37,7 +21,7 @@
   background-size: 100% auto;
 }
 
-/* Nuvens precisam de contain para não distorcer */
+
 .backgroundlive-root .bg-layer.nuvem1,
 .backgroundlive-root .bg-layer.nuvem2,
 .backgroundlive-root .bg-layer.nuvem3,
@@ -48,13 +32,13 @@
   background-size: contain;
 }
 
-/* Camadas de paisagem */
+
 .backgroundlive-root .bg-layer.montanha3 { z-index: 18; background-image: url("/assets/images/background/backgroundpaisagem/3_montanha1_18.webp"); }
 .backgroundlive-root .bg-layer.grama2 { z-index: 19; background-image: url("/assets/images/background/backgroundpaisagem/2_grama2_19.webp"); }
 .backgroundlive-root .bg-layer.grama1 { z-index: 21; background-image: url("/assets/images/background/backgroundpaisagem/1_grama1_20.webp"); }
 .backgroundlive-root .bg-layer.montanha2 { z-index: 17; background-image: url("/assets/images/background/backgroundpaisagem/3_montanha2_14.webp"); }
 
-/* Nuvens */
+
 .backgroundlive-root .bg-layer.nuvem1 { z-index: 15; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem1_15.webp"); }
 .backgroundlive-root .bg-layer.nuvem2 { z-index: 14; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem2_15.webp"); }
 .backgroundlive-root .bg-layer.nuvem3 { z-index: 13; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem3_15.webp"); }
@@ -63,12 +47,12 @@
 .backgroundlive-root .bg-layer.nuvem6 { z-index: 10; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem6_15.webp"); }
 .backgroundlive-root .bg-layer.nuvem7 { z-index: 9; background-image: url("/assets/images/background/backgroundpaisagem/nuvens/4_nuvem7_15.webp"); }
 
-/* Fundo-sol - Camada de fundo principal (céu + horizonte) */
+
 .backgroundlive-root .bg-layer.fundo-sol {
   position: absolute;
   left: 0;
   top: 0;
-  transform: none; /* Remove o translate herdado do .bg-layer */
+  transform: none; 
   width: 100%;
   height: 100%;
   background-image: url("/assets/images/background/backgroundpaisagem/5_fundosol_1.webp");
@@ -78,7 +62,7 @@
   z-index: 1;
 }
 
-/* Sol - Posição e tamanho para 1080p */
+
 .backgroundlive-root .bg-layer.sun { 
   z-index: 2; 
   background-position: 30% 20%; 
@@ -97,7 +81,7 @@
 
 .backgroundlive-root .bg-layer.sun::before { display: none; }
 
-/* Sun rays container - Tamanho para 1080p */
+
 .backgroundlive-root .sun-rays {
   position: absolute;
   left: 52%;
@@ -110,7 +94,7 @@
   animation: sun-rotate 120s linear infinite;
 }
 
-/* Breathing glow - Tamanho para 1080p */
+
 .backgroundlive-root .breathing-glow {
   position: absolute;
   left: 52%;
@@ -133,7 +117,7 @@
   animation: breathing-light 6s ease-in-out infinite;
 }
 
-/* bloom / soft glow */
+
 .backgroundlive-root .bg-layer.sun::after {
   width: 260px;
   height: 260px;
@@ -143,9 +127,9 @@
   opacity: 0.95;
 }
 
-/* ============ PERSONAGENS BASE ============ */
 
-/* Carruagem */
+
+
 .backgroundlive-root .bg-layer.carruagem { 
   z-index: 22;
   position: absolute;
@@ -165,7 +149,7 @@
   display: block;
 }
 
-/* Jano */
+
 .backgroundlive-root .bg-layer.jano { 
   z-index: 21;
   position: absolute;
@@ -186,7 +170,7 @@
   display: block;
 }
 
-/* Orion */
+
 .backgroundlive-root .bg-layer.orion { 
   z-index: 20;
   position: absolute;
@@ -207,7 +191,7 @@
   display: block;
 }
 
-/* Trio */
+
 .backgroundlive-root .bg-layer.trio { 
   z-index: 21;
   position: absolute;
@@ -228,12 +212,12 @@
   display: block;
 }
 
-/* Esconder personagens no modo simple */
+
 .backgroundlive-root[data-mode="simple"] .bg-layer[data-mode-full] {
   display: none !important;
 }
 
-/* Sun ray elements */
+
 .backgroundlive-root .sun-ray {
   position: absolute;
   left: 40%;
@@ -256,7 +240,7 @@
   animation: triangle-pulse var(--ray-duration, 3s) ease-in-out var(--ray-delay, 0s) infinite alternate;
 }
 
-/* ========== KEYFRAMES ========== */
+
 
 @keyframes breathing-light {
   0%, 100% { opacity: 1; filter: blur(40px) brightness(1.0); }
@@ -274,7 +258,7 @@
   100% { transform: translate(-50%,-50%) scaleY(1.0); opacity: 0.75; }
 }
 
-/* ========== ANIMAÇÕES DAS NUVENS ========== */
+
 
 @keyframes nuvem1-animation {
   0% { transform: translate(-50%, -50%) scale(0.1); left: 37%; top: 38%; opacity: 1; }
@@ -392,7 +376,7 @@
   100% { transform: translate(-50%, -50%) scale(0.4); left: 100%; top: 20%; opacity: 1; }
 }
 
-/* Aplicar animações às nuvens */
+
 .backgroundlive-root .bg-layer.nuvem1 { animation: nuvem1-animation 70s linear infinite; will-change: transform; }
 .backgroundlive-root .bg-layer.nuvem2 { animation: nuvem2-animation 140s linear infinite; will-change: transform; }
 .backgroundlive-root .bg-layer.nuvem3 { animation: nuvem3-animation 80s linear infinite; will-change: transform; }
@@ -401,5 +385,6 @@
 .backgroundlive-root .bg-layer.nuvem6 { animation: nuvem6-animation 120s linear infinite; will-change: transform; }
 .backgroundlive-root .bg-layer.nuvem7 { animation: nuvem7-animation 180s linear infinite; will-change: transform; }
 
-/* Responsividade movida para css/responsive.css */
+
+
 

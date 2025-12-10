@@ -1,7 +1,4 @@
-/**
- * financialmodel Interactive Timeline
- * Sistema de linha do tempo horizontal com nodes clicáveis e progresso baseado em data
- */
+
 
 (function() {
 'use strict';
@@ -11,10 +8,10 @@ class financialmodelTimeline {
     this.container = document.querySelector('.financialmodel-container');
     if (!this.container) return;
 
-    // Definição dos nodes da linha do tempo com datas
-    // As datas determinam quando cada node é "alcançado" pela linha de progresso
+
+
     this.nodes = [
-      { id: 'genesis', label: 'Genesis', icon: 'ascendria.webp', position: 'center', date: new Date('2025-12-04') }, // Data de lançamento
+      { id: 'genesis', label: 'Genesis', icon: 'ascendria.webp', position: 'center', date: new Date('2025-12-04') }, 
       { id: 'custom', label: 'Custom', icon: 'custom.webp', position: 'top', date: new Date('2025-12-15') },
       { id: 'idle_mines', label: 'Idle Mines', icon: 'idle_mines.webp', position: 'bottom', date: new Date('2025-12-25') },
       { id: 'cardinals_row', label: 'Cardinals Row', icon: 'cardnals_row.webp', position: 'top', date: new Date('2026-01-25') },
@@ -25,7 +22,7 @@ class financialmodelTimeline {
       { id: 'future', label: 'Future', icon: 'future.webp', position: 'center', date: new Date('2030-12-25') }
     ];
 
-    // Conteúdo dos módulos
+
     this.modules = {
       genesis: `
     <div class="roadmap-modal-content">
@@ -748,7 +745,7 @@ class financialmodelTimeline {
     };
 
     this.currentView = 'timeline';
-    this.wasDragging = false; // Inicializa antes de qualquer evento
+    this.wasDragging = false; 
     this.init();
   }
 
@@ -758,7 +755,7 @@ class financialmodelTimeline {
     this.bindEvents();
     this.updateProgress();
     
-    // Verificação de segurança - garantir que timeline está visível
+
     this.ensureVisibility();
   }
   
@@ -777,49 +774,43 @@ class financialmodelTimeline {
     }
   }
 
-  /**
-   * Calcula a porcentagem de progresso baseada na data atual
-   */
+  
   calculateProgress() {
     const today = new Date();
-    const startDate = this.nodes[0].date; // Genesis
-    const endDate = this.nodes[this.nodes.length - 1].date; // Future
+    const startDate = this.nodes[0].date; 
+    const endDate = this.nodes[this.nodes.length - 1].date; 
     
-    // Se ainda não começou
+
     if (today < startDate) return 0;
     
-    // Se já passou do fim
+
     if (today >= endDate) return 100;
     
-    // Calcula progresso proporcional
+
     const totalTime = endDate.getTime() - startDate.getTime();
     const elapsedTime = today.getTime() - startDate.getTime();
     
     return (elapsedTime / totalTime) * 100;
   }
 
-  /**
-   * Determina quais nodes já foram alcançados
-   */
+  
   getReachedNodes() {
     const today = new Date();
     return this.nodes.filter(node => today >= node.date).map(node => node.id);
   }
 
-  /**
-   * Atualiza a linha de progresso e estado dos nodes
-   */
+  
   updateProgress() {
     const progressPercent = this.calculateProgress();
     const reachedNodes = this.getReachedNodes();
     
-    // Atualiza a barra de progresso
+
     const progressBar = this.container.querySelector('.timeline-progress');
     if (progressBar) {
       progressBar.style.width = `${progressPercent}%`;
     }
     
-    // Atualiza o estado visual dos nodes
+
     this.container.querySelectorAll('.timeline-node').forEach(nodeEl => {
       const nodeId = nodeEl.dataset.module;
       if (reachedNodes.includes(nodeId)) {
@@ -871,7 +862,7 @@ class financialmodelTimeline {
   }
 
   bindEvents() {
-    // Node clicks - usando mousedown/mouseup para controlar melhor
+
     this.container.querySelectorAll('.timeline-node').forEach(node => {
       let nodeStartX = 0;
       let nodeStartY = 0;
@@ -885,7 +876,7 @@ class financialmodelTimeline {
         const deltaX = Math.abs(e.clientX - nodeStartX);
         const deltaY = Math.abs(e.clientY - nodeStartY);
         
-        // Só abre se não moveu mais que 5px (foi um clique, não um drag)
+
         if (deltaX < 5 && deltaY < 5) {
           const moduleId = node.dataset.module;
           this.showDetail(moduleId);
@@ -893,7 +884,7 @@ class financialmodelTimeline {
       });
     });
 
-    // Home button
+
     const homeBtn = this.container.querySelector('.detail-home');
     if (homeBtn) {
       homeBtn.addEventListener('click', () => {
@@ -901,13 +892,11 @@ class financialmodelTimeline {
       });
     }
 
-    // Drag to scroll
+
     this.initDragScroll();
   }
 
-  /**
-   * Inicializa o sistema de arrastar para scrollar
-   */
+  
   initDragScroll() {
     const wrapper = this.container.querySelector('.timeline-wrapper');
     if (!wrapper) return;
@@ -917,7 +906,7 @@ class financialmodelTimeline {
     let scrollLeft = 0;
 
     wrapper.addEventListener('mousedown', (e) => {
-      // Ignora se o clique foi em um node (deixa o node processar)
+
       if (e.target.closest('.timeline-node')) {
         return;
       }
@@ -943,11 +932,11 @@ class financialmodelTimeline {
       e.preventDefault();
       
       const x = e.pageX - wrapper.offsetLeft;
-      const walk = (x - startX) * 2; // Multiplicador de velocidade
+      const walk = (x - startX) * 2; 
       wrapper.scrollLeft = scrollLeft - walk;
     });
 
-    // Touch support para mobile
+
     let touchStartX = 0;
     let touchScrollLeft = 0;
 
@@ -976,13 +965,13 @@ class financialmodelTimeline {
     const detailTitle = detail.querySelector('.detail-title');
     const detailContent = detail.querySelector('.detail-content');
 
-    // Update detail content
+
     detailIcon.src = `/assets/images/ecosystem/${node.icon}`;
     detailIcon.alt = node.label;
     detailTitle.textContent = node.label;
     detailContent.innerHTML = this.modules[moduleId];
 
-    // Animate transition - garantir que os estados estejam corretos
+
     timeline.classList.add('hidden');
     
     setTimeout(() => {
@@ -1008,55 +997,55 @@ class financialmodelTimeline {
   }
 }
 
-// Initialize when DOM is ready
+
 function initfinancialmodel() {
   try {
     const container = document.querySelector('.financialmodel-container');
     if (!container) {
-      console.warn('financialmodel: container not found, retrying...');
-      // Limite de tentativas para evitar loop infinito
+
+
       if (!window._financialmodelRetries) window._financialmodelRetries = 0;
       window._financialmodelRetries++;
-      if (window._financialmodelRetries < 50) { // Máximo 5 segundos
+      if (window._financialmodelRetries < 50) { 
         setTimeout(initfinancialmodel, 100);
       }
       return;
     }
     
-    // Verificar se já foi inicializado
+
     if (container.dataset.initialized === 'true') return;
     container.dataset.initialized = 'true';
     
-    console.log('financialmodel: initializing...');
+
     const timeline = new financialmodelTimeline();
     
     if (!timeline.container) {
-      console.error('financialmodel: failed to initialize timeline');
+
       return;
     }
     
-    console.log('financialmodel: initialized successfully');
+
     
-    // Listener para garantir visibilidade quando a página volta ao foco
+
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) {
         timeline.ensureVisibility();
       }
     });
   } catch (error) {
-    console.error('financialmodel: initialization error', error);
+
   }
 }
 
-// Tentar inicializar imediatamente se DOM já estiver pronto
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initfinancialmodel);
 } else {
-  // DOM já está pronto
+
   initfinancialmodel();
 }
 
-// Fallback: tentar novamente após window.onload
+
 window.addEventListener('load', () => {
   const container = document.querySelector('.financialmodel-container');
   if (container && container.dataset.initialized !== 'true') {
@@ -1064,5 +1053,5 @@ window.addEventListener('load', () => {
   }
 });
 
-})(); // End IIFE
+})(); 
 

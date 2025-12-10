@@ -1,17 +1,11 @@
-/**
- * NFTs Gallery Component with Zoom Functionality
- * Handles image gallery interactions and modal zoom
- */
+
 
 (function() {
     'use strict';
 
-    /**
-     * Inicializa o componente de NFTs
-     * Nota: Feature de zoom foi removida
-     */
+    
     function initNftsGallery() {
-        // Remover atributos de interação dos thumbnails (zoom desabilitado)
+
         const thumbnails = document.querySelectorAll('.nft-thumbnail');
         thumbnails.forEach(thumbnail => {
             thumbnail.removeAttribute('tabindex');
@@ -21,29 +15,26 @@
         });
     }
 
-    // Inicializar quando o DOM estiver pronto
+
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initNftsGallery);
     } else {
         initNftsGallery();
     }
 
-    // Expor init para uso externo se necessário
+
     window.NftsGallery = {
         init: initNftsGallery
     };
 })();
 
-/**
- * Ascenders NFT Composer
- * Interactive NFT composition with layering system
- */
+
 (function() {
     'use strict';
 
     const BASE_PATH = '/assets/images/nfts/ascender';
 
-    // Configuração de assets disponíveis por raridade
+
     const ASSETS_CONFIG = {
         common: { hair: 15, eyes: 12 },
         rare: { hair: 15, eyes: 12 },
@@ -62,8 +53,8 @@
 
     let canvas, ctx;
     let currentComposition = {
-        rarity: RARITIES.indexOf('mythic') || 0, // default to mythic if available
-        body: 0, // naked_base index
+        rarity: RARITIES.indexOf('mythic') || 0, 
+        body: 0, 
         hair: 3,
         eyes: 3,
         nose: 2,
@@ -78,9 +69,9 @@
 
         ctx = canvas.getContext('2d');
 
-        // Renderizar composição padrão para obter tamanho da imagem
+
         renderComposition().then(() => {
-            // Após primeira renderização, anexar event listeners
+
             attachEventListeners();
             updateAllDisplays();
         });
@@ -90,7 +81,7 @@
         const arrows = document.querySelectorAll('.selector-arrow');
         const shareBtn = document.getElementById('share-btn');
 
-        console.log('[Ascenders] Share button found:', shareBtn);
+
 
         arrows.forEach(arrow => {
             arrow.addEventListener('click', handleArrowClick);
@@ -98,9 +89,9 @@
 
         if (shareBtn) {
             shareBtn.addEventListener('click', shareComposition);
-            console.log('[Ascenders] Share button event listener attached');
+
         } else {
-            console.warn('[Ascenders] Share button NOT found in DOM');
+
         }
     }
 
@@ -112,7 +103,7 @@
         let max = 1;
         let currentValue = currentComposition[control];
 
-        // Determinar máximo baseado no controle
+
         switch(control) {
             case 'rarity':
                 max = RARITIES.length;
@@ -134,21 +125,21 @@
                 break;
         }
 
-        // Atualizar valor com wrap-around
+
         let newValue = currentValue + direction;
         if (control === 'rarity' || control === 'body') {
-            // Index-based (0-based)
+
             if (newValue < 0) newValue = max - 1;
             if (newValue >= max) newValue = 0;
         } else {
-            // Number-based (1-based)
+
             if (newValue < 1) newValue = max;
             if (newValue > max) newValue = 1;
         }
 
         currentComposition[control] = newValue;
 
-        // Se mudou rarity, resetar hair e eyes
+
         if (control === 'rarity') {
             currentComposition.hair = 1;
             currentComposition.eyes = 1;
@@ -181,8 +172,8 @@
         const nose = currentComposition.nose;
         const mouth = currentComposition.mouth;
 
-        // Camadas de renderização (ordem Z-index: Border, Body, Eye, Hair, Nose, Mouth)
-        // Construir caminhos de asset (considera casos de nomenclatura específica)
+
+
         const borderFileName = `${rarity}_border.webp`;
         const borderPath = `${BASE_PATH}/${rarity}/${borderFileName}`;
         const bodyPath = `${BASE_PATH}/${body}.webp`;
@@ -194,75 +185,139 @@
 
         let layers = [];
         let firstImg;
+
         try {
-            // tenta carregar o border (se falhar, usamos o body como base)
+
             firstImg = await loadImage(borderPath);
             layers = [borderPath, bodyPath, eyePath, hairPath, nosePath, mouthPath];
         } catch (err) {
-            console.warn(`Failed to load border: ${borderPath}, falling back to body.`, err);
+
             try {
                 firstImg = await loadImage(bodyPath);
             } catch (err2) {
-                console.warn(`Failed to load body image: ${bodyPath}`, err2);
-                // Se tudo falhar, abortamos
-                return;
+
+
+                const candidates = [eyePath, hairPath, nosePath, mouthPath];
+                for (let i = 0; i < candidates.length; i++) {
+                    try {
+                        firstImg = await loadImage(candidates[i]);
+                        layers = [candidates[i]];
+
+                        break;
+                    } catch (err3) {
+
+                    }
+                }
+                if (!firstImg) {
+
+
+                    return;
+                }
             }
-            layers = [bodyPath, eyePath, hairPath, nosePath, mouthPath];
-        }
-        if (!canvasSize) {
-            canvasSize = { width: firstImg.width, height: firstImg.height };
-            canvas.width = canvasSize.width;
-            canvas.height = canvasSize.height;
+            if (!layers.length) layers = [bodyPath, eyePath, hairPath, nosePath, mouthPath];
         }
 
-        // Limpar canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const rect = canvas.getBoundingClientRect();
+        const parentRect = canvas.parentElement ? canvas.parentElement.getBoundingClientRect() : rect;
+        const dpr = window.devicePixelRatio || 1;
 
-        // Desenhar primeira camada
-        ctx.drawImage(firstImg, 0, 0);
 
-        // Carregar e desenhar camadas restantes
+        let maxWidth = (rect.width && rect.width > 0) ? rect.width : firstImg.width;
+        let maxHeight = (rect.height && rect.height > 0) ? rect.height : firstImg.height;
+        maxWidth = Math.min(maxWidth, parentRect.width || maxWidth);
+        maxHeight = Math.min(maxHeight, parentRect.height || maxHeight);
+
+
+        const imgAspect = firstImg.width / firstImg.height;
+        let cssWidth = firstImg.width;
+        let cssHeight = firstImg.height;
+
+        if (cssWidth > maxWidth) {
+            cssWidth = maxWidth;
+            cssHeight = Math.round(cssWidth / imgAspect);
+        }
+        if (cssHeight > maxHeight) {
+            cssHeight = maxHeight;
+            cssWidth = Math.round(cssHeight * imgAspect);
+        }
+
+
+        cssWidth = Math.max(50, cssWidth);
+        cssHeight = Math.max(50, cssHeight);
+
+
+        canvas.width = Math.round(cssWidth * dpr);
+        canvas.height = Math.round(cssHeight * dpr);
+        canvas.style.width = cssWidth + 'px';
+        canvas.style.height = cssHeight + 'px';
+
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+
+        ctx.clearRect(0, 0, cssWidth, cssHeight);
+
+
+        ctx.drawImage(firstImg, 0, 0, cssWidth, cssHeight);
+
+
         for (let i = 1; i < layers.length; i++) {
             try {
                 const img = await loadImage(layers[i]);
-                ctx.drawImage(img, 0, 0);
+                ctx.drawImage(img, 0, 0, cssWidth, cssHeight);
             } catch (err) {
-                console.warn(`Failed to load layer: ${layers[i]}`, err);
+
             }
+        }
+
+
+        try {
+            const rect = canvas.getBoundingClientRect();
+
+
+            try {
+                const data = canvas.toDataURL('image/webp');
+
+            } catch (err) {
+
+            }
+
+        } catch (err) {
+
         }
     }
 
     async function shareComposition() {
-        // Criar canvas para compartilhamento
+
         const shareCanvas = document.createElement('canvas');
         shareCanvas.width = 1200;
         shareCanvas.height = 800;
         const shareCtx = shareCanvas.getContext('2d');
 
         try {
-            // Carregar imagem de fundo (com logo, QR code e título já incluídos)
+
             const background = await loadImage('/assets/images/nfts/ascender/back_share.webp');
             shareCtx.drawImage(background, 0, 0, 1200, 800);
         } catch (err) {
-            console.warn('Background não carregado, usando fundo padrão');
+
             shareCtx.fillStyle = '#f5f1e8';
             shareCtx.fillRect(0, 0, shareCanvas.width, shareCanvas.height);
         }
 
-        // Composição do usuário - centralizada verticalmente com altura máxima de 610px
+
         const maxHeight = 610;
         const compositionX = 100;
-        const availableVerticalSpace = 800; // Altura total do canvas
+        const availableVerticalSpace = 800; 
 
-        // Calcular dimensões mantendo aspect ratio
+
         const aspectRatio = canvas.width / canvas.height;
         let drawWidth, drawHeight;
 
-        // Limitar pela altura máxima
+
         drawHeight = maxHeight;
         drawWidth = maxHeight * aspectRatio;
 
-        // Centralizar verticalmente
+
         const compositionY = (availableVerticalSpace - drawHeight) / 2;
 
         shareCtx.drawImage(canvas,
@@ -272,7 +327,7 @@
             drawHeight
         );
 
-        // Converter para imagem e fazer download
+
         shareCanvas.toBlob((blob) => {
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
@@ -284,16 +339,67 @@
     }
 
     function loadImage(src) {
+
+
+
+
         return new Promise((resolve, reject) => {
-            const img = new Image();
-            img.crossOrigin = 'anonymous';
-            img.onload = () => resolve(img);
-            img.onerror = () => reject(new Error(`Failed to load: ${src}`));
-            img.src = src;
+            const candidates = [src];
+            if (src.endsWith('.webp')) {
+                candidates.push(src.replace(/\.webp$/, '.png'));
+            }
+
+            let tried = 0;
+
+            const tryCandidate = (candidate, useCrossOrigin) => {
+                const img = new Image();
+                if (useCrossOrigin) img.crossOrigin = 'anonymous';
+                img.onload = () => {
+
+                    resolve(img);
+                };
+                img.onerror = (e) => {
+
+                    proceed();
+                };
+                img.src = candidate;
+            };
+
+            const proceed = () => {
+                if (tried === 0) {
+
+                    tried = 1;
+                    tryCandidate(candidates[0], false);
+                    return;
+                }
+
+
+                const nextIndex = Math.min(1, candidates.length - 1);
+                if (nextIndex >= 0 && candidates[nextIndex] !== undefined && candidates[nextIndex] !== candidates[0]) {
+
+                    tried = 2;
+                    tryCandidate(candidates[nextIndex], true);
+                    return;
+                }
+
+                if (tried === 2) {
+                    tried = 3;
+                    const next = candidates.length > 1 ? candidates[1] : null;
+                    if (next) {
+                        tryCandidate(next, false);
+                        return;
+                    }
+                }
+
+                reject(new Error(`Failed to load: ${src}`));
+            };
+
+
+            tryCandidate(candidates[0], true);
         });
     }
 
-    // Inicializar quando o DOM estiver pronto
+
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initAscendersComposer);
     } else {

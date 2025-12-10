@@ -1,4 +1,4 @@
-/* Footer Component */
+
 .site-footer {
   position: relative;
   z-index: var(--z-content, 10);
@@ -11,14 +11,14 @@
   text-align: center;
   display: block;
 
-  /* Background image */
+  
   background-image: url('/assets/images/ui/footer.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* Overlay escuro para melhor legibilidade do texto */
+
 .site-footer::before {
   content: '';
   position: absolute;
@@ -78,7 +78,7 @@
   border-radius: 2px;
 }
 
-/* Social Media Icons */
+
 .footer-socials {
   display: flex !important;
   gap: clamp(1rem, 3vw, 1.5rem);
@@ -126,5 +126,6 @@
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
 }
 
-/* Responsividade movida para css/responsive.css */
+
+
 

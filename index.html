@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<!-- Performance instrumentation (non-invasive) -->
+		
 		<script>
 		  (function(){
 		    try {
@@ -24,7 +24,10 @@
 		      window.perfReport = function(){
 		        try {
 		          var entries = performance.getEntriesByType && performance.getEntriesByType('measure') || [];
-		          if (window.DEBUG) console.debug('perf.measures', entries, window.perfMarks);
+		          // Performance reporting apenas em modo debug
+		          if (window.DEBUG && window.location.hostname === 'localhost') {
+		            console.debug('perf.measures', entries, window.perfMarks);
+		          }
 		        } catch(e){}
 		      };
 		      window.mark && window.mark('head-parse');
@@ -33,7 +36,7 @@
 		</script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 		
-		<!-- Primary Meta Tags -->
+		
 		<title>Ascendria - Gaming Community & NFT Ecosystem | Play, Collect, Earn</title>
 		<meta name="title" content="Ascendria - Gaming Community & NFT Ecosystem">
 		<meta name="description" content="Join Ascendria, a thriving gaming community and NFT ecosystem. Explore unique digital assets, play immersive games, and be part of a revolutionary Web3 gaming experience.">
@@ -43,7 +46,7 @@
 		<meta name="language" content="English">
 		<link rel="canonical" href="https://playascendria.com/">
 		
-		<!-- Open Graph / Facebook -->
+		
 		<meta property="og:type" content="website">
 		<meta property="og:url" content="https://playascendria.com/">
 		<meta property="og:title" content="Ascendria - Gaming Community & NFT Ecosystem">
@@ -51,7 +54,7 @@
 		<meta property="og:image" content="https://playascendria.com/assets/images/ui/logoascendria.webp">
 		<meta property="og:site_name" content="Ascendria">
 		
-		<!-- Twitter -->
+		
 		<meta property="twitter:card" content="summary_large_image">
 		<meta property="twitter:url" content="https://playascendria.com/">
 		<meta property="twitter:site" content="@PlayAscendria">
@@ -60,17 +63,12 @@
 		<meta property="twitter:description" content="Join Ascendria, a thriving gaming community and NFT ecosystem. Explore unique digital assets, play immersive games, and be part of a revolutionary Web3 gaming experience.">
 		<meta property="twitter:image" content="https://playascendria.com/assets/images/ui/logoascendria.webp">
 		
-		<!-- Favicon -->
+		
 		<link rel="icon" type="image/webp" href="/assets/images/ui/favicon.webp">
 		<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/ui/favicon.webp">
 		<meta name="theme-color" content="#0a0e27">
 		
-		<!-- 
-			ANTI-FOUC Strategy:
-			1. Body starts with opacity:0 via inline style
-			2. CSS files load (render-blocking by default)
-			3. After all CSS loaded, JS at end of body shows content
-		-->
+		
 		<style>
 			/* Fallback background enquanto carrega */
 			html, body {
@@ -110,35 +108,35 @@
 			}
 		</style>
 		
-		<!-- Preconnect para recursos externos -->
+		
 		<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 		<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 		
-		<!-- Preload LCP Image - Crítico para performance -->
+		
 		<link rel="preload" as="image" href="/assets/images/background/backgroundpaisagem/5_fundosol_1.webp" fetchpriority="high">
 		<link rel="preload" as="image" href="/assets/images/background/backgroundpaisagem/0_telabranca_0.webp">
 		
-		<!-- CSS Crítico - Carregamento bloqueante (apenas loading e base) -->
+		
 		<link rel="stylesheet" href="/pages/loading/loading.css">
 		<link rel="stylesheet" href="/css/style.css">
 		<link rel="stylesheet" href="/components/topbar/topbar.css">
 		<link rel="stylesheet" href="/components/backgroundlive/backgroundlive.css">
 		
-		<!-- CSS Não-Crítico - Carregamento async -->
+		
 		<link rel="preload" href="/components/portal/portal.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 		<link rel="preload" href="/components/ecosystem/ecosystem.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 		<link rel="preload" href="/components/nfts/nfts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-		<!-- Footer CSS carregado de forma bloqueante para garantir -->
+		
 		<link rel="stylesheet" href="/components/footer/footer.css">
 		<noscript>
 			<link rel="stylesheet" href="/components/portal/portal.css">
 			<link rel="stylesheet" href="/components/ecosystem/ecosystem.css">
 			<link rel="stylesheet" href="/components/nfts/nfts.css">
 		</noscript>
-		<!-- Responsive DEVE ser o último para sobrescrever os outros -->
+		
 		<link rel="stylesheet" href="/css/responsive.css">
 		
-		<!-- Structured Data (JSON-LD) -->
+		
 		<script type="application/ld+json">
 		{
 			"@context": "https://schema.org",
@@ -234,7 +232,7 @@
 		</script>
 	</head>
 	<body>
-		<!-- Quick skip for returning users: remove loading-screen early to avoid flicker -->
+		
 		<script>
 		  (function(){
 			try{
@@ -251,22 +249,17 @@
 			}catch(e){}
 		  })();
 		</script>
-		<!-- 
-			SISTEMA DE PRELOADER AAA
-			1. asset-preloader.js: carrega TODOS os assets do site com progresso real
-			2. loading-home.js: gerencia exibição e integração com sessionStorage
-			O loading começa INVISÍVEL (CSS), JS controla quando mostrar
-		-->
 		
-		<!-- Asset Preloader - DEVE carregar PRIMEIRO -->
+		
+		
 		<script src="/js/asset-preloader.js"></script>
-		<!-- Loading Manager - usa o preloader acima -->
+		
 		<script src="/pages/loading/loading-home.js"></script>
 
-		<!-- Skip Navigation for Accessibility -->
+		
 		<a href="#main" class="skip-to-main">Skip to main content</a>
 
-		<!-- Loading screen (appears on first visit only) -->
+		
 		<div id="loading-screen" class="loading-container">
 			<canvas id="paintCanvas"></canvas>
 			<div class="loading-info">
@@ -278,12 +271,12 @@
 			</div>
 		</div>
 
-		<!-- Topbar component will be injected here -->
+		
 		<div id="topbar-placeholder" data-component="topbar"></div>
 
-		<!-- Content area - contém hero, main e footer -->
+		
 		<div id="content-area">
-			<!-- LCP Image - Carregada imediatamente para melhorar métricas -->
+			
 			<img src="/assets/images/background/backgroundpaisagem/5_fundosol_1.webp" 
 				 alt="" 
 				 fetchpriority="high"
@@ -291,60 +284,61 @@
 				 style="position:absolute;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-1;"
 				 aria-hidden="true">
 			
-			<!-- Hero: primeira imagem de fundo do site -->
+			
 			<div id="hero" class="hero" role="img" aria-label="Imagem oficial de Ascendria">
 				<div class="hero-inner" aria-hidden="true">
-					<!-- Background live component placeholder -->
+					
 					<div id="backgroundlive-placeholder"></div>
 				</div>
 			</div>
 
-			<!-- Conteúdo principal -->
+			
 			<main id="main" role="main">
 
-				<!-- Ecosystem Section (Pergaminho) - logo após a Hero -->
+				
 				<section id="ecosystem" class="landing-section">
-					<!-- Título no banner superior do pergaminho -->
+					
 					<h1 class="ecosystem-title">Ecosystem</h1>
 					
 					<div class="section-content">
-						<!-- Container limitador que fica ATRÁS do pergaminho vazado -->
+						
 						<div class="ecosystem-container">
-							<!-- Conteúdo será injetado via JavaScript -->
+							
 						</div>
 					</div>
 				</section>
 
-				<!-- NFTs Section - após o pergaminho -->
+				
 				<section id="nfts" class="landing-section">
-					<!-- Título com efeito de revelação -->
+					
 					<h1 class="nfts-title">NFTs</h1>
 
 					<div class="section-content">
-						<!-- NFTs Component placeholder -->
+						
 						<div id="nfts-placeholder"></div>
 					</div>
 				</section>
 			</main>
 
-			<!-- FOOTER FORA DO MAIN - ESSENCIAL PARA VISIBILIDADE -->
-			<!-- Footer Section separada para garantir posicionamento correto -->
+			
+			
 			<footer id="footer-section" class="footer-section">
 				<div id="footer-placeholder" data-component="footer"></div>
 			</footer>
 		</div>
 
-		<!-- Component Loader -->
+		
 		<script src="/js/component-loader.js"></script>
-		<!-- SPA Router -->
+		
 		<script src="/js/spa-router.js"></script>
 
-		<!-- Initialize Components with Robust Loading System -->
+		
 		<script>
 		(function() {
 			// ANTI-FOUC: Timeout de fallback para garantir que a página seja exibida
 			const FALLBACK_TIMEOUT = 3000;
 			let loaded = false;
+			const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
 			
 			function showPage() {
 				if (loaded) return;
@@ -368,32 +362,11 @@
 						ComponentLoader.load('footer', 'footer-placeholder')
 					]);
 					window.markEnd && window.markEnd('components-start');
-
-					// Debug: verificar se footer foi carregado
-					setTimeout(() => {
-						const footerPlaceholder = document.getElementById('footer-placeholder');
-						const footer = document.querySelector('.site-footer');
-						console.log('[DEBUG FOOTER] Placeholder:', footerPlaceholder);
-						console.log('[DEBUG FOOTER] Element:', footer);
-						if (footer) {
-							console.log('[DEBUG FOOTER] Display:', window.getComputedStyle(footer).display);
-							console.log('[DEBUG FOOTER] Visibility:', window.getComputedStyle(footer).visibility);
-							console.log('[DEBUG FOOTER] Height:', footer.offsetHeight);
-							console.log('[DEBUG FOOTER] Position:', footer.getBoundingClientRect());
-							
-							// Garantir que o footer seja visível
-							footer.style.display = 'block';
-							footer.style.visibility = 'visible';
-							footer.style.opacity = '1';
-						} else {
-							console.warn('[DEBUG FOOTER] Footer não encontrado, tentando fallback...');
-							// Fallback: injetar footer manualmente
-							injectFooterFallback();
-						}
-					}, 1500);
 				} catch (err) {
-					// Erro silencioso
-					console.error('[ERROR] Erro ao carregar componentes:', err);
+					// Erro silencioso em produção
+					if (!isProduction) {
+						console.error('[ERROR] Erro ao carregar componentes:', err);
+					}
 					// Tentar fallback para footer
 					injectFooterFallback();
 				} finally {
@@ -424,7 +397,9 @@
 				const footerPlaceholder = document.getElementById('footer-placeholder');
 				if (!footerPlaceholder || footerPlaceholder.querySelector('.site-footer')) return;
 				
-				console.log('[FALLBACK] Injecting footer manually...');
+				if (!isProduction) {
+					console.log('[FALLBACK] Injecting footer manually...');
+				}
 				footerPlaceholder.innerHTML = `
 					<footer class="site-footer" role="contentinfo">
 						<div class="footer-container">
@@ -466,22 +441,44 @@
 		})();
 		</script>
 
-		<!-- Vercel Speed Insights -->
-		<script type="module">
+		<!-- <script type="module">
 			import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@1/dist/index.mjs';
 			injectSpeedInsights();
+		</script> -->
+		
+		<!-- Service Worker Registration -->
+		<script>
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', () => {
+				// Desabilitar Service Worker temporariamente em desenvolvimento para evitar erros
+				const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+				if (!isDev) {
+					navigator.serviceWorker.register('/sw.js')
+						.then((registration) => {
+							// Service Worker registrado com sucesso
+						})
+						.catch((error) => {
+							// Falha silenciosa - não afeta funcionalidade
+						});
+				}
+			});
+		}
 		</script>
 		
-		<!-- Portal Mágico - Three.js carregado dinamicamente quando visível -->
-		<script src="/components/portal/portal.js" defer></script>
+		
+		<script src="/components/portal/portal.js?v=4" defer></script>
+		
+		<!-- Preload Three.js para o portal -->
+		<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+		<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
-		<!-- Ecosystem Interactive Graph -->
+		
 		<script src="/components/ecosystem/ecosystem.js" defer></script>
 
-		<!-- NFTs Gallery with Zoom -->
+		
 		<script src="/components/nfts/nfts.js" defer></script>
 
-		<!-- NFTs Section Reveal - Conteúdo e Título -->
+		
 		<script>
 		document.addEventListener('DOMContentLoaded', () => {
 			const nftsContent = document.querySelector('#nfts .section-content');
@@ -529,7 +526,7 @@
 		});
 		</script>
 		
-		<!-- Fallback final para garantir footer visível -->
+		
 		<script>
 		// Fallback final: se após 5 segundos o footer não estiver visível, garantir visibilidade
 		setTimeout(() => {
@@ -547,3 +544,4 @@
 		</script>
 	</body>
 </html>
+

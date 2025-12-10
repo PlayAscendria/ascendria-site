@@ -1,6 +1,6 @@
-/* About Page Styles */
 
-/* Layout principal */
+
+
 body {
   margin: 0;
   padding: 0;
@@ -8,19 +8,19 @@ body {
   min-height: 100vh;
 }
 
-/* Área principal da página */
+
 .about-page {
-  padding-top: 8vh; /* Compensa topbar fixa */
+  padding-top: 8vh; 
   min-height: calc(100vh - 8vh);
 }
 
-/* Swiper container */
+
 .aboutSwiper {
   width: 100%;
   height: calc(100vh - 8vh);
 }
 
-/* Slides com background image */
+
 .swiper-slide {
   background-size: cover;
   background-position: center;
@@ -31,7 +31,7 @@ body {
   position: relative;
 }
 
-/* Overlay escuro para melhorar legibilidade do texto */
+
 .swiper-slide::before {
   content: "";
   position: absolute;
@@ -44,7 +44,7 @@ body {
   z-index: 1;
 }
 
-/* Conteúdo dos slides - RESPONSIVO */
+
 .slide-content {
   position: relative;
   z-index: 2;
@@ -73,7 +73,7 @@ body {
   margin: 0 auto;
 }
 
-/* Botões de navegação do Swiper */
+
 .swiper-button-next,
 .swiper-button-prev {
   color: #F1D72C;
@@ -95,7 +95,7 @@ body {
   background: rgba(241, 215, 44, 0.2);
 }
 
-/* Paginação */
+
 .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
@@ -107,4 +107,5 @@ body {
   background: #F1D72C;
   opacity: 1;
 }
+
 

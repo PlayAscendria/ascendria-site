@@ -1,4 +1,4 @@
-/* Z-Index System */
+
 :root {
   --z-base: 1;
   --z-background: 5;
@@ -13,20 +13,20 @@
   --z-loading: 500;
 }
 
-/* Topbar / Header: moved from global css/style.css into component */
+
 .topbar {
   height: clamp(60px, 8vh, 80px);
-  position: fixed; /* fixa no topo para permanecer visível durante a rolagem */
+  position: fixed; 
   top: 0;
   left: 0;
   right: 0;
   z-index: var(--z-topbar);
-  background: rgba(3, 49, 49, 0.15); /* mais translúcida */
+  background: rgba(3, 49, 49, 0.15); 
   display: flex;
   align-items: center;
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  pointer-events: auto; /* garante que cliques funcionem */
+  pointer-events: auto; 
 }
 
 .topbar .topbar-inner {
@@ -53,7 +53,7 @@
 }
 
 .logo-img {
-  height: 96%; /* 96% da altura da topbar */
+  height: 96%; 
   width: auto;
   display: block;
   object-fit: contain;
@@ -127,7 +127,7 @@
 .join-btn:hover, .join-btn:focus { filter: brightness(0.95); transform: translateY(-1px); }
 .join-btn:active { transform: translateY(0); }
 
-/* Hamburger Menu (Mobile) */
+
 .hamburger {
   display: none;
   background: none;
@@ -150,15 +150,15 @@
   transition: all 0.3s ease;
 }
 
-/* Mobile Navigation */
+
 .mobile-nav {
   display: none;
   position: fixed;
   top: clamp(60px, 8vh, 80px);
   left: 0;
   right: 0;
-  background: rgba(3, 49, 49, 0.15); /* mesma transparência da topbar */
-  -webkit-backdrop-filter: blur(8px); /* mesmo blur da topbar */
+  background: rgba(3, 49, 49, 0.15); 
+  -webkit-backdrop-filter: blur(8px); 
   backdrop-filter: blur(8px);
   max-height: calc(100vh - clamp(60px, 8vh, 80px));
   overflow-y: auto;
@@ -207,7 +207,7 @@
   color: #F1D72C;
 }
 
-/* Mobile Dropdown Toggles */
+
 .mobile-dropdown-toggle {
   display: block;
   width: 100%;
@@ -276,7 +276,7 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.12);
 }
 
-/* Hamburger animation when active */
+
 .hamburger.active .hamburger-line:nth-child(1) {
   transform: rotate(45deg) translate(0.5rem, 0.7rem);
 }
@@ -290,6 +290,7 @@
   transform: rotate(-45deg) translate(0.5rem, -0.7rem);
 }
 
-/* Responsividade movida para css/responsive.css */
+
+
 
 

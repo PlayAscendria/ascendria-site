@@ -1,7 +1,4 @@
-/**
- * Ecosystem Interactive Graph
- * 3 menus principais com submenus
- */
+
 
 class EcosystemGraph {
     constructor(container) {
@@ -11,7 +8,7 @@ class EcosystemGraph {
         this.currentModule = null;
         this.isAnimating = false;
         
-        // 3 Menus principais
+
         this.modules = {
             rankings: {
                 icon: '/assets/images/ecosystem/rankings.webp',
@@ -448,15 +445,15 @@ class EcosystemGraph {
     }
     
     createStructure() {
-        // Graph View com os nós principais
+
         this.graphView = document.createElement('div');
         this.graphView.className = 'ecosystem-graph';
         
-        // Container para os 3 nós principais (triângulo)
+
         const nodesContainer = document.createElement('div');
         nodesContainer.className = 'eco-nodes-triangle';
         
-        // Container para as setas
+
         const arrowsContainer = document.createElement('div');
         arrowsContainer.className = 'eco-arrows';
         arrowsContainer.innerHTML = `
@@ -476,7 +473,7 @@ class EcosystemGraph {
         `;
         nodesContainer.appendChild(arrowsContainer);
         
-        // Criar apenas os 3 nós principais
+
         Object.keys(this.modules).forEach(key => {
             const module = this.modules[key];
             const node = document.createElement('div');
@@ -490,7 +487,7 @@ class EcosystemGraph {
         
         this.graphView.appendChild(nodesContainer);
         
-        // Detail View
+
         this.detailView = document.createElement('div');
         this.detailView.className = 'ecosystem-detail';
         this.detailView.innerHTML = `
@@ -501,7 +498,7 @@ class EcosystemGraph {
             <div class="detail-content"></div>
         `;
         
-        // Criar botão Home (volta para os 3 menus principais)
+
         this.homeButton = document.createElement('button');
         this.homeButton.className = 'detail-home';
         this.homeButton.setAttribute('aria-label', 'Início');
@@ -509,7 +506,7 @@ class EcosystemGraph {
         this.homeButton.innerHTML = `<img src="/assets/images/ecosystem/home.webp" alt="Home" />`;
         this.detailView.insertBefore(this.homeButton, this.detailView.firstChild);
         
-        // Criar botão Back (volta para página anterior)
+
         this.backButton = document.createElement('button');
         this.backButton.className = 'detail-back';
         this.backButton.setAttribute('aria-label', 'Voltar');
@@ -517,13 +514,13 @@ class EcosystemGraph {
         this.backButton.innerHTML = `<img src="/assets/images/ecosystem/back.webp" alt="Voltar" />`;
         this.detailView.insertBefore(this.backButton, this.detailView.firstChild);
         
-        // Adicionar ao container
+
         this.container.appendChild(this.graphView);
         this.container.appendChild(this.detailView);
     }
     
     bindEvents() {
-        // Clique nos nós
+
         this.container.querySelectorAll('.eco-node').forEach(node => {
             node.addEventListener('click', (e) => {
                 const nodeKey = node.dataset.node;
@@ -533,7 +530,7 @@ class EcosystemGraph {
             });
         });
         
-        // Botão Home - volta para os 3 menus principais
+
         if (this.homeButton) {
             this.homeButton.onclick = (e) => {
                 e.preventDefault();
@@ -542,7 +539,7 @@ class EcosystemGraph {
             };
         }
         
-        // Botão Back - volta para a página anterior (submenu -> menu principal)
+
         if (this.backButton) {
             this.backButton.onclick = (e) => {
                 e.preventDefault();
@@ -553,7 +550,7 @@ class EcosystemGraph {
             };
         }
         
-        // Recalcular linhas no resize
+
         window.addEventListener('resize', () => {
             clearTimeout(this.resizeTimeout);
             this.resizeTimeout = setTimeout(() => {}, 200);
@@ -567,16 +564,16 @@ class EcosystemGraph {
         
         const module = this.modules[moduleKey];
         
-        // Esconder botão back no menu principal
+
         this.backButton.classList.remove('visible');
         
-        // Preencher conteúdo do detalhe ANTES da animação
+
         const detailIcon = this.detailView.querySelector('.detail-icon');
         detailIcon.src = module.icon;
         detailIcon.alt = module.label;
         this.detailView.querySelector('.detail-title').textContent = module.title;
         
-        // Se tem submenu, mostrar submenu. Senão, mostrar conteúdo
+
         if (module.hasSubmenu && module.submenu) {
             this.detailView.querySelector('.detail-content').innerHTML = this.createSubmenuHTML(module.submenu);
             this.bindSubmenuEvents();
@@ -584,9 +581,9 @@ class EcosystemGraph {
             this.detailView.querySelector('.detail-content').innerHTML = module.content;
         }
         
-        // Animação única: apaga graphView e revela detailView simultaneamente
+
         await this.transitionAnimation(this.graphView, this.detailView, () => {
-            // No meio da animação, trocar as classes
+
             this.graphView.classList.add('hidden');
             this.detailView.classList.add('active');
         });
@@ -620,7 +617,7 @@ class EcosystemGraph {
         if (this.isAnimating) return;
         this.isAnimating = true;
         
-        // Encontrar o item no submenu
+
         let foundItem = null;
         Object.keys(this.modules).forEach(key => {
             const module = this.modules[key];
@@ -631,7 +628,7 @@ class EcosystemGraph {
         });
         
         if (foundItem) {
-            // Criar elemento temporário com novo conteúdo
+
             const tempContent = document.createElement('div');
             tempContent.className = 'detail-content-inner';
             tempContent.innerHTML = `
@@ -640,9 +637,9 @@ class EcosystemGraph {
                 <div class="detail-content">${foundItem.content}</div>
             `;
             
-            // Animação única no mesmo elemento (troca conteúdo no meio)
+
             await this.transitionAnimation(this.detailView, this.detailView, () => {
-                // No meio da animação, trocar o conteúdo e mostrar back
+
                 this.backButton.classList.add('visible');
                 const detailIcon = this.detailView.querySelector('.detail-icon');
                 detailIcon.src = foundItem.icon;
@@ -661,9 +658,9 @@ class EcosystemGraph {
         
         const module = this.modules[this.currentModule];
         
-        // Animação única no mesmo elemento (troca conteúdo no meio)
+
         await this.transitionAnimation(this.detailView, this.detailView, () => {
-            // No meio da animação, trocar o conteúdo e esconder back
+
             this.backButton.classList.remove('visible');
             const detailIcon = this.detailView.querySelector('.detail-icon');
             detailIcon.src = module.icon;
@@ -680,12 +677,12 @@ class EcosystemGraph {
         if (this.isAnimating) return;
         this.isAnimating = true;
         
-        // Esconder botão back
+
         this.backButton.classList.remove('visible');
         
-        // Animação única: apaga detailView e revela graphView simultaneamente
+
         await this.transitionAnimation(this.detailView, this.graphView, () => {
-            // No meio da animação, trocar as classes
+
             this.detailView.classList.remove('active');
             this.graphView.classList.remove('hidden');
         });
@@ -696,13 +693,13 @@ class EcosystemGraph {
     
     async transitionAnimation(fromElement, toElement, onMiddle) {
         return new Promise((resolve) => {
-            const duration = 1400; // ms - suave mas responsivo
+            const duration = 1400; 
             const startTime = performance.now();
             
-            // Verificar se é o mesmo elemento (transição interna)
+
             const isSameElement = fromElement === toElement;
             
-            // Preparar o elemento de destino (invisível no início) - só se for diferente
+
             if (toElement && !isSameElement) {
                 toElement.style.maskImage = 'linear-gradient(135deg, transparent 0%, transparent 100%)';
                 toElement.style.webkitMaskImage = 'linear-gradient(135deg, transparent 0%, transparent 100%)';
@@ -714,47 +711,47 @@ class EcosystemGraph {
                 const elapsed = currentTime - startTime;
                 let progress = Math.min(elapsed / duration, 1);
                 
-                // Movimento linear - velocidade constante
-                // (sem easing, progress já é linear)
+
+
                 
-                // A "onda" vai de 0 a 200% (para cobrir toda a diagonal)
+
                 const wavePos = progress * 200;
                 
                 if (isSameElement) {
-                    // Transição no mesmo elemento: onda passa, troca conteúdo, onda volta revelando
+
                     if (wavePos < 100) {
-                        // Primeira metade: onda apaga (de cima-esquerda para baixo-direita)
+
                         const erasePos = wavePos;
                         fromElement.style.maskImage = `linear-gradient(135deg, transparent 0%, transparent ${erasePos - 10}%, rgba(0,0,0,1) ${erasePos}%, rgba(0,0,0,1) 100%)`;
                         fromElement.style.webkitMaskImage = `linear-gradient(135deg, transparent 0%, transparent ${erasePos - 10}%, rgba(0,0,0,1) ${erasePos}%, rgba(0,0,0,1) 100%)`;
                     } else {
-                        // Trocar conteúdo quando a onda chegar no meio
+
                         if (!middleCalled && onMiddle) {
                             middleCalled = true;
                             onMiddle();
                         }
-                        // Segunda metade: onda revela (conteúdo novo aparece de cima-esquerda para baixo-direita)
+
                         const revealPos = wavePos - 100;
                         fromElement.style.maskImage = `linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${revealPos - 10}%, transparent ${revealPos}%, transparent 100%)`;
                         fromElement.style.webkitMaskImage = `linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${revealPos - 10}%, transparent ${revealPos}%, transparent 100%)`;
                     }
                 } else {
-                    // Transição entre elementos diferentes
-                    // O elemento antigo vai desaparecendo conforme a onda passa
+
+
                     if (fromElement) {
                         const erasePos = Math.min(wavePos, 150);
                         fromElement.style.maskImage = `linear-gradient(135deg, transparent 0%, transparent ${erasePos - 20}%, rgba(0,0,0,1) ${erasePos}%, rgba(0,0,0,1) 100%)`;
                         fromElement.style.webkitMaskImage = `linear-gradient(135deg, transparent 0%, transparent ${erasePos - 20}%, rgba(0,0,0,1) ${erasePos}%, rgba(0,0,0,1) 100%)`;
                     }
                     
-                    // O elemento novo vai aparecendo logo atrás da onda (com pequeno delay)
+
                     if (toElement) {
-                        const revealPos = Math.max(0, wavePos - 50); // Começa um pouco depois
+                        const revealPos = Math.max(0, wavePos - 50); 
                         toElement.style.maskImage = `linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${revealPos - 20}%, transparent ${revealPos}%, transparent 100%)`;
                         toElement.style.webkitMaskImage = `linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${revealPos - 20}%, transparent ${revealPos}%, transparent 100%)`;
                     }
                     
-                    // Executar callback no meio da animação (para trocar classes)
+
                     if (!middleCalled && progress >= 0.3 && onMiddle) {
                         middleCalled = true;
                         onMiddle();
@@ -764,7 +761,7 @@ class EcosystemGraph {
                 if (progress < 1) {
                     requestAnimationFrame(animate);
                 } else {
-                    // Limpar máscaras no final
+
                     if (fromElement) {
                         fromElement.style.maskImage = '';
                         fromElement.style.webkitMaskImage = '';
@@ -789,10 +786,7 @@ class EcosystemGraph {
     }
 }
 
-/**
- * Ecosystem Title Scroll Reveal
- * Revela o título "Ecosystem" conforme o usuário rola a página
- */
+
 class EcosystemTitleReveal {
     constructor() {
         this.title = document.querySelector('.ecosystem-title');
@@ -806,19 +800,19 @@ class EcosystemTitleReveal {
     }
     
     init() {
-        // Usar o #content-area como scroll container (ou window se não existir)
+
         const scrollContainer = this.contentArea || window;
         
-        // Flag para requestAnimationFrame
+
         this.ticking = false;
         
-        // Checar posição inicial
+
         this.checkScroll();
         
-        // Listener de scroll com requestAnimationFrame para evitar forced reflow
+
         scrollContainer.addEventListener('scroll', () => this.requestCheck(), { passive: true });
         
-        // Também checar no resize
+
         window.addEventListener('resize', () => this.requestCheck(), { passive: true });
     }
     
@@ -834,22 +828,22 @@ class EcosystemTitleReveal {
         const scrollContainer = this.contentArea || document.documentElement;
         const scrollTop = this.contentArea ? this.contentArea.scrollTop : window.scrollY;
         
-        // Pegar a posição da seção ecosystem
+
         const sectionRect = this.ecosystemSection.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
         
-        // Calcular quanto da seção está visível
-        // O título aparece quando o topo da seção entra na viewport
-        const triggerPoint = viewportHeight * 0.7; // Quando 30% da seção está visível
+
+
+        const triggerPoint = viewportHeight * 0.7; 
         
         if (sectionRect.top < triggerPoint) {
-            // Revelar o título
+
             if (!this.hasRevealed) {
                 this.title.classList.add('visible');
                 this.hasRevealed = true;
             }
         } else {
-            // Esconder novamente se voltar ao topo
+
             if (this.hasRevealed) {
                 this.title.classList.remove('visible');
                 this.hasRevealed = false;
@@ -858,18 +852,18 @@ class EcosystemTitleReveal {
     }
 }
 
-// Inicialização automática quando o DOM estiver pronto
+
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.ecosystem-container');
     if (container) {
         window.ecosystemGraph = new EcosystemGraph(container);
     }
     
-    // Inicializar revelação do título
+
     window.ecosystemTitleReveal = new EcosystemTitleReveal();
 });
 
-// Export para uso como módulo
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = EcosystemGraph;
 }

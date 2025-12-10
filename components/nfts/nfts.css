@@ -1,20 +1,18 @@
-/* ====================================
-   NFTs Section Styles
-   ==================================== */
 
-/* Título já está definido em style.css - não sobrescrever */
 
-/* Container principal */
+
+
+
 .nfts-container {
     position: relative;
     z-index: 10;
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
-    padding-top: 3rem; /* Espaço para o título absoluto */
+    padding-top: 3rem; 
 }
 
-/* Categoria de NFT */
+
 .nft-category {
     margin-bottom: 6rem;
     position: relative;
@@ -25,7 +23,7 @@
     margin-bottom: 4rem;
 }
 
-/* Títulos das categorias */
+
 .nft-category-title {
     font-family: 'Cinzel', serif;
     font-size: clamp(1.8rem, 4vw, 2.5rem);
@@ -36,7 +34,7 @@
     letter-spacing: 0.05em;
 }
 
-/* Descrição das categorias */
+
 .nft-category-description {
     font-family: 'Lora', serif;
     font-size: clamp(1rem, 2vw, 1.2rem);
@@ -48,7 +46,7 @@
     padding: 0 1rem;
 }
 
-/* Galeria de NFTs */
+
 .nft-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -56,19 +54,19 @@
     padding: 1rem;
 }
 
-/* Thumbnail individual */
+
 .nft-thumbnail {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    cursor: default; /* no zoom */
+    cursor: default; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     transition: box-shadow 220ms cubic-bezier(.2,.8,.2,1);
     background: #fff;
 }
 
 .nft-thumbnail:hover {
-    transform: translateY(-6px); /* no scale */
+    transform: translateY(-6px); 
     box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
 }
 
@@ -80,28 +78,28 @@
     transform-origin: center center;
 }
 
-/* Overlay com ícone de zoom */
-/* Overlay com ícone de zoom */
+
+
 .nft-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.0); /* hidden overlay */
+    background: rgba(0, 0, 0, 0.0); 
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transition: opacity 220ms cubic-bezier(.2,.8,.2,1);
     pointer-events: none;
-    display: none; /* hide overlay entirely */
+    display: none; 
 }
 
 .nft-thumbnail:hover .nft-overlay {
-    opacity: 0; /* never show */
+    opacity: 0; 
     display: none;
 }
 
 .zoom-icon {
-    display: none; /* hide zoom icon */
+    display: none; 
 }
 
 @keyframes pulse-zoom {
@@ -113,7 +111,7 @@
     }
 }
 
-/* Modal de Zoom (fade e scale suaves) */
+
 .nft-zoom-modal {
     position: fixed;
     top: 0;
@@ -128,7 +126,7 @@
     transition: opacity 240ms cubic-bezier(.2,.8,.2,1), visibility 240ms;
 }
 
-/* Segurança: forçar modal sempre oculto (sem possibilidade de exibir) */
+
 .nft-zoom-modal {
     display: none !important;
 }
@@ -221,7 +219,7 @@
 
 
 
-/* Responsivo */
+
 @media (max-width: 768px) {
     .nft-gallery {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -266,7 +264,7 @@
     }
 }
 
-/* Acessibilidade */
+
 @media (prefers-reduced-motion: reduce) {
     .nft-thumbnail,
     .nft-overlay,
@@ -287,7 +285,7 @@
     }
 }
 
-/* Focus states para acessibilidade */
+
 .nft-thumbnail:focus-visible {
     outline: 3px solid #2c1810;
     outline-offset: 4px;
@@ -298,9 +296,7 @@
     outline-offset: 2px;
 }
 
-/* ====================================
-   Ascenders Composer Section
-   ==================================== */
+
 
 .ascenders-composer {
     display: grid;
@@ -431,9 +427,7 @@
     width: auto;
 }
 
-/* ====================================
-   NFTs Section CTA
-   ==================================== */
+
 
 .nfts-cta {
     margin-top: 8rem;
@@ -467,7 +461,7 @@
     transform: translateY(0);
 }
 
-/* Responsivo - Ascenders */
+
 @media (max-width: 968px) {
     .ascenders-composer {
         grid-template-columns: 1fr;
@@ -483,4 +477,5 @@
         font-size: 1rem;
     }
 }
+
 
