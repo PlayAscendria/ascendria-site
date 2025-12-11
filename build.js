@@ -53,6 +53,32 @@ function minifyJS(content) {
     // Manter estrutura original - não minificar mais
     return content;
   }
+  // NÃO minificar ecosystem.js que contém template literals grandes com HTML e emojis
+  if (content.includes('EcosystemGraph') && content.includes('RANKING SYSTEM')) {
+    // IMPORTANTE: Não fazer nenhuma modificação que possa corromper emojis ou caracteres especiais
+    // Apenas remover comentários, mas NÃO remover console.logs que podem ter objetos complexos
+    // Usar encoding UTF-8 explícito para preservar emojis
+    content = content.replace(/\/\/.*$/gm, '');
+    content = content.replace(/\/\*[\s\S]*?\*\//g, '');
+    // NÃO remover console.logs - podem ter objetos complexos que causam problemas na remoção
+    // Remover apenas linhas vazias múltiplas, mas manter quebras de linha em template literals
+    content = content.replace(/\n\s*\n\s*\n+/g, '\n\n');
+    // NÃO fazer replace de espaços ou caracteres - preservar tudo como está
+    return content;
+  }
+  
+  // NÃO minificar nfts.js que contém muitos template literals e caminhos de arquivos
+  if (content.includes('ascender-canvas') && (content.includes('BASE_PATH') || content.includes('SKINS_BASE_PATH') || content.includes('detectAvailableSkins'))) {
+    // IMPORTANTE: Não minificar template literals que contêm caminhos de arquivos
+    // Apenas remover comentários, mas manter estrutura COMPLETA incluindo template literals
+    content = content.replace(/\/\/.*$/gm, '');
+    content = content.replace(/\/\*[\s\S]*?\*\//g, '');
+    // NÃO remover console.logs - podem ter objetos complexos e múltiplos argumentos que causam problemas na remoção
+    // Remover apenas linhas vazias múltiplas, mas manter quebras de linha e espaços em template literals
+    content = content.replace(/\n\s*\n\s*\n+/g, '\n\n');
+    // NÃO fazer replace de espaços ou caracteres - preservar tudo como está para não corromper template literals
+    return content;
+  }
   
   // Remover comentários de linha e bloco
   content = content.replace(/\/\/.*$/gm, '');
@@ -119,13 +145,15 @@ function processJSFiles() {
   console.log(`📦 Processando ${jsFiles.length} arquivos JS...`);
   
   jsFiles.forEach(file => {
-    const content = fs.readFileSync(file, 'utf8');
+    // Ler com encoding UTF-8 explícito para preservar emojis e caracteres especiais
+    const content = fs.readFileSync(file, { encoding: 'utf8' });
     const minified = minifyJS(content);
     const relPath = path.relative(SRC_DIR, file);
     const destPath = path.join(BUILD_DIR, relPath);
     
     ensureDir(path.dirname(destPath));
-    fs.writeFileSync(destPath, minified, 'utf8');
+    // Escrever com encoding UTF-8 explícito e flag para preservar BOM se necessário
+    fs.writeFileSync(destPath, minified, { encoding: 'utf8' });
   });
 }
 

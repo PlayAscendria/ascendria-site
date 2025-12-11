@@ -5,13 +5,61 @@
 
     
     function initNftsGallery() {
+        // Create zoom modal if it doesn't exist
+        let modal = document.getElementById('nft-zoom-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'nft-zoom-modal';
+            modal.className = 'nft-zoom-modal';
+            modal.setAttribute('aria-hidden', 'true');
+            modal.innerHTML = `
+                <div class="nft-zoom-backdrop"></div>
+                <div class="nft-zoom-content">
+                    <img class="nft-zoom-image" src="" alt="Zoomed NFT" />
+                </div>
+                <button class="nft-zoom-close" aria-label="Close zoom" type="button">×</button>
+            `;
+            document.body.appendChild(modal);
+        }
 
         const thumbnails = document.querySelectorAll('.nft-thumbnail');
+        const zoomImage = modal.querySelector('.nft-zoom-image');
+        const closeBtn = modal.querySelector('.nft-zoom-close');
+        const backdrop = modal.querySelector('.nft-zoom-backdrop');
+
+        // Open modal on thumbnail click
         thumbnails.forEach(thumbnail => {
-            thumbnail.removeAttribute('tabindex');
-            thumbnail.removeAttribute('role');
-            thumbnail.removeAttribute('aria-label');
-            thumbnail.classList.add('zoom-disabled');
+            const img = thumbnail.querySelector('img');
+            if (img) {
+                thumbnail.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    zoomImage.src = img.src;
+                    zoomImage.alt = img.alt || 'Zoomed NFT';
+                    modal.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden'; // Prevent background scroll
+                });
+            }
+        });
+
+        // Close modal functions
+        function closeModal() {
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = ''; // Restore scroll
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeModal);
+        }
+
+        if (backdrop) {
+            backdrop.addEventListener('click', closeModal);
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
+                closeModal();
+            }
         });
     }
 
@@ -49,12 +97,13 @@
     };
 
     const RARITIES = ['common', 'rare', 'epic', 'legendary', 'mythic'];
-    const BODIES = ['naked_base'];
+    let SKINS = []; // Will be populated dynamically
+    const SKINS_BASE_PATH = `${BASE_PATH}/skins`;
 
     let canvas, ctx;
     let currentComposition = {
         rarity: RARITIES.indexOf('mythic') || 0, 
-        body: 0, 
+        skin: 0, // 0 = none (no custom skin), 1+ = custom skin index
         hair: 3,
         eyes: 3,
         nose: 2,
@@ -63,18 +112,101 @@
 
     let canvasSize = null;
 
-    function initAscendersComposer() {
+    // Function to detect available skin files
+    // Only checks known skins from the list - no random guessing
+    async function detectAvailableSkins() {
+        const detectedSkins = [];
+        
+        // Known skins list - add new skin names here as you add them to the folder
+        // IMPORTANT: Update this list whenever you add new skins to the skins folder
+        const knownSkins = ['ronin'];
+        
+        // Verify each known skin exists
+        for (const skinName of knownSkins) {
+            try {
+                const skinPath = `${SKINS_BASE_PATH}/${skinName}.png`;
+                const response = await fetch(skinPath, { method: 'HEAD' });
+                if (response.ok) {
+                    detectedSkins.push(skinName);
+                } else {
+                    console.warn(`[Ascenders] Skin "${skinName}" not found at ${skinPath}`);
+                }
+            } catch (err) {
+                // Skin doesn't exist, skip it silently
+                console.warn(`[Ascenders] Could not verify skin "${skinName}":`, err.message);
+            }
+        }
+        
+        // Sort alphabetically for consistent ordering
+        detectedSkins.sort();
+        
+        console.log(`[Ascenders] Successfully detected ${detectedSkins.length} skin(s):`, detectedSkins);
+        
+        return detectedSkins;
+    }
+
+    async function initAscendersComposer() {
+        // Prevenir múltiplas inicializações
+        if (window.__ascendersComposerInitialized) {
+            return;
+        }
+        
+        // Aguardar o canvas estar disponível (pode ser carregado dinamicamente)
         canvas = document.getElementById('ascender-canvas');
-        if (!canvas) return;
+        
+        if (!canvas) {
+            console.warn('[Ascenders] Canvas não encontrado, tentando novamente...');
+            return;
+        }
 
+        window.__ascendersComposerInitialized = true;
+        
         ctx = canvas.getContext('2d');
+        
+        if (!ctx) {
+            console.error('[Ascenders] Não foi possível obter o contexto 2D do canvas');
+            window.__ascendersComposerInitialized = false;
+            return;
+        }
 
+        console.log('[Ascenders] Inicializando compositor...');
 
-        renderComposition().then(() => {
+        // Detect available skins dynamically
+        try {
+            SKINS = await detectAvailableSkins();
+            console.log('[Ascenders] Skins detectadas:', SKINS.length, SKINS);
+        } catch (err) {
+            console.error('[Ascenders] Erro ao detectar skins:', err);
+            SKINS = [];
+        }
 
+        try {
+            await renderComposition();
             attachEventListeners();
             updateAllDisplays();
-        });
+            console.log('[Ascenders] Compositor inicializado com sucesso');
+        } catch (err) {
+            console.error('[Ascenders] Erro ao renderizar composição:', err);
+            window.__ascendersComposerInitialized = false;
+        }
+        
+        // Re-render on window resize so canvas follows container size
+        if (typeof window !== 'undefined') {
+            const debounced = debounce(() => {
+                renderComposition().catch(err => {
+                    console.error('[Ascenders] Erro ao re-renderizar:', err);
+                });
+            }, 120);
+            window.addEventListener('resize', debounced);
+        }
+    }
+
+    function debounce(fn, wait) {
+        let t = null;
+        return function(...args) {
+            if (t) clearTimeout(t);
+            t = setTimeout(() => fn.apply(this, args), wait);
+        };
     }
 
     function attachEventListeners() {
@@ -108,8 +240,9 @@
             case 'rarity':
                 max = RARITIES.length;
                 break;
-            case 'body':
-                max = BODIES.length;
+            case 'skin':
+                // 0 = none, 1+ = skin index (so max is SKINS.length, allowing 0 to SKINS.length)
+                max = SKINS.length;
                 break;
             case 'hair':
                 max = ASSETS_CONFIG[RARITIES[currentComposition.rarity]].hair;
@@ -127,10 +260,15 @@
 
 
         let newValue = currentValue + direction;
-        if (control === 'rarity' || control === 'body') {
-
+        if (control === 'rarity') {
+            // Circular navigation for rarity
             if (newValue < 0) newValue = max - 1;
             if (newValue >= max) newValue = 0;
+        } else if (control === 'skin') {
+            // Circular navigation for skin (0 = none, 1+ = skin index)
+            // Valid range: 0 (none) to max (last skin index)
+            if (newValue < 0) newValue = max; // Wrap to last skin
+            if (newValue > max) newValue = 0; // Wrap to none
         } else {
 
             if (newValue < 1) newValue = max;
@@ -151,7 +289,19 @@
 
     function updateAllDisplays() {
         document.getElementById('rarity-value').textContent = capitalize(RARITIES[currentComposition.rarity]);
-        document.getElementById('body-value').textContent = BODIES[currentComposition.body] === 'naked_base' ? 'Naked Base' : 'Dress Base';
+        
+        // Update skin display
+        const skinValue = document.getElementById('skin-value');
+        if (skinValue) {
+            if (currentComposition.skin === 0) {
+                skinValue.textContent = 'None';
+            } else {
+                const skinIndex = currentComposition.skin - 1;
+                const skinName = SKINS[skinIndex] || 'Unknown';
+                skinValue.textContent = capitalize(skinName);
+            }
+        }
+        
         document.getElementById('hair-value').textContent = `Hair ${currentComposition.hair}`;
         document.getElementById('eyes-value').textContent = `Eyes ${currentComposition.eyes}`;
         document.getElementById('nose-value').textContent = `Nose ${currentComposition.nose}`;
@@ -166,17 +316,22 @@
         if (!ctx) return;
 
         const rarity = RARITIES[currentComposition.rarity];
-        const body = BODIES[currentComposition.body];
+        const skinIndex = currentComposition.skin;
         const hair = currentComposition.hair;
         const eyes = currentComposition.eyes;
         const nose = currentComposition.nose;
         const mouth = currentComposition.mouth;
 
-
+        // Naked base is always the base body
+        const bodyPath = `${BASE_PATH}/naked_base.webp`;
+        
+        // Custom skin (if selected)
+        const skinPath = (skinIndex > 0 && SKINS[skinIndex - 1]) 
+            ? `${SKINS_BASE_PATH}/${SKINS[skinIndex - 1]}.png` 
+            : null;
 
         const borderFileName = `${rarity}_border.webp`;
         const borderPath = `${BASE_PATH}/${rarity}/${borderFileName}`;
-        const bodyPath = `${BASE_PATH}/${body}.webp`;
         const eyePath = `${BASE_PATH}/${rarity}/${rarity}_eyes/${eyes}.webp`;
         const hairFolder = (rarity === 'mythic') ? 'mithyc_hair' : `${rarity}_hair`;
         const hairPath = `${BASE_PATH}/${rarity}/${hairFolder}/${hair}.webp`;
@@ -187,61 +342,96 @@
         let firstImg;
 
         try {
-
             firstImg = await loadImage(borderPath);
-            layers = [borderPath, bodyPath, eyePath, hairPath, nosePath, mouthPath];
+            // Build layers: border, body (naked_base), eyes, hair (if no custom skin), nose, mouth, skin (if custom)
+            layers = [borderPath, bodyPath, eyePath, nosePath, mouthPath];
+            
+            // Only add hair if no custom skin (custom skin may have headwear)
+            if (!skinPath) {
+                layers.splice(3, 0, hairPath); // Insert hair after eyes
+            }
+            
+            // Add custom skin last (highest z-index)
+            if (skinPath) {
+                layers.push(skinPath);
+            }
         } catch (err) {
+            console.warn('[Ascenders] Erro ao carregar border, tentando alternativas:', err.message);
 
             try {
                 firstImg = await loadImage(bodyPath);
             } catch (err2) {
-
-
-                const candidates = [eyePath, hairPath, nosePath, mouthPath];
+                const candidates = [eyePath, nosePath, mouthPath];
+                if (!skinPath && hairPath) candidates.push(hairPath);
+                if (skinPath) candidates.push(skinPath);
+                
                 for (let i = 0; i < candidates.length; i++) {
                     try {
                         firstImg = await loadImage(candidates[i]);
                         layers = [candidates[i]];
-
                         break;
                     } catch (err3) {
-
+                        // Continue trying
+                        console.warn(`[Ascenders] Falha ao carregar ${candidates[i]}:`, err3.message);
                     }
                 }
                 if (!firstImg) {
-
-
+                    console.error('[Ascenders] Não foi possível carregar nenhuma imagem base. Verifique os caminhos dos arquivos.');
                     return;
                 }
             }
-            if (!layers.length) layers = [bodyPath, eyePath, hairPath, nosePath, mouthPath];
+            if (!layers.length) {
+                layers = [bodyPath, eyePath, nosePath, mouthPath];
+                if (!skinPath && hairPath) {
+                    layers.splice(2, 0, hairPath);
+                }
+                if (skinPath) {
+                    layers.push(skinPath);
+                }
+            }
         }
 
-        const rect = canvas.getBoundingClientRect();
-        const parentRect = canvas.parentElement ? canvas.parentElement.getBoundingClientRect() : rect;
         const dpr = window.devicePixelRatio || 1;
+        
+        // Get the parent container (composer-preview) dimensions
+        const parentContainer = canvas.parentElement;
+        const parentRect = parentContainer ? parentContainer.getBoundingClientRect() : null;
+        
+        // Calculate available space (subtract padding from parent)
+        let availableWidth = firstImg.width;
+        let availableHeight = firstImg.height;
+        
+        if (parentRect && parentContainer) {
+            const parentStyle = getComputedStyle(parentContainer);
+            const paddingTop = parseFloat(parentStyle.paddingTop) || 0;
+            const paddingBottom = parseFloat(parentStyle.paddingBottom) || 0;
+            const paddingLeft = parseFloat(parentStyle.paddingLeft) || 0;
+            const paddingRight = parseFloat(parentStyle.paddingRight) || 0;
+            
+            availableWidth = parentRect.width - paddingLeft - paddingRight;
+            availableHeight = parentRect.height - paddingTop - paddingBottom;
+        }
 
+        // Use available space as maximum dimensions
+        let maxWidth = availableWidth > 0 ? availableWidth : firstImg.width;
+        let maxHeight = availableHeight > 0 ? availableHeight : firstImg.height;
 
-        let maxWidth = (rect.width && rect.width > 0) ? rect.width : firstImg.width;
-        let maxHeight = (rect.height && rect.height > 0) ? rect.height : firstImg.height;
-        maxWidth = Math.min(maxWidth, parentRect.width || maxWidth);
-        maxHeight = Math.min(maxHeight, parentRect.height || maxHeight);
-
-
+        // Calculate canvas size maintaining aspect ratio
         const imgAspect = firstImg.width / firstImg.height;
-        let cssWidth = firstImg.width;
-        let cssHeight = firstImg.height;
+        let cssWidth, cssHeight;
 
-        if (cssWidth > maxWidth) {
+        // Fit to available space while maintaining aspect ratio
+        if (maxWidth / maxHeight > imgAspect) {
+            // Container is wider than image aspect - fit to height
+            cssHeight = maxHeight;
+            cssWidth = Math.round(cssHeight * imgAspect);
+        } else {
+            // Container is taller than image aspect - fit to width
             cssWidth = maxWidth;
             cssHeight = Math.round(cssWidth / imgAspect);
         }
-        if (cssHeight > maxHeight) {
-            cssHeight = maxHeight;
-            cssWidth = Math.round(cssHeight * imgAspect);
-        }
 
-
+        // Ensure minimum size
         cssWidth = Math.max(50, cssWidth);
         cssHeight = Math.max(50, cssHeight);
 
@@ -400,10 +590,54 @@
     }
 
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initAscendersComposer);
-    } else {
-        initAscendersComposer();
+    // Aguardar DOM e também verificar se o componente foi carregado dinamicamente
+    let initAttempts = 0;
+    const MAX_INIT_ATTEMPTS = 50; // Tentar por até 5 segundos (50 * 100ms)
+    
+    function tryInitWithRetry() {
+        const canvas = document.getElementById('ascender-canvas');
+        if (canvas) {
+            // Canvas encontrado, inicializar
+            initAscendersComposer();
+        } else {
+            // Canvas ainda não encontrado, tentar novamente
+            initAttempts++;
+            if (initAttempts < MAX_INIT_ATTEMPTS) {
+                setTimeout(tryInitWithRetry, 100);
+            } else {
+                console.warn('[Ascenders] Canvas não encontrado após múltiplas tentativas');
+            }
+        }
+    }
+    
+    function startInit() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(tryInitWithRetry, 100);
+            });
+        } else {
+            // DOM já carregado, começar a tentar
+            setTimeout(tryInitWithRetry, 100);
+        }
+    }
+
+    startInit();
+
+    // Usar MutationObserver para detectar quando o canvas é adicionado ao DOM
+    if (typeof MutationObserver !== 'undefined') {
+        const observer = new MutationObserver((mutations) => {
+            const canvas = document.getElementById('ascender-canvas');
+            if (canvas && !window.__ascendersInitialized) {
+                window.__ascendersInitialized = true;
+                observer.disconnect();
+                setTimeout(initAscendersComposer, 50);
+            }
+        });
+        
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
     }
 
     window.AscendersComposer = {

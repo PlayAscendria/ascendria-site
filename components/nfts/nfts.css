@@ -55,7 +55,7 @@
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    cursor: default; 
+    cursor: pointer; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     transition: box-shadow 220ms cubic-bezier(.2,.8,.2,1);
     background: #fff;
@@ -120,11 +120,7 @@
     visibility: hidden;
     pointer-events: none;
     transition: opacity 240ms cubic-bezier(.2,.8,.2,1), visibility 240ms;
-}
-
-
-.nft-zoom-modal {
-    display: none !important;
+    display: block; /* Ensure modal container is always in DOM */
 }
 
 .nft-zoom-modal[aria-hidden="false"] {
@@ -308,7 +304,7 @@
     gap: 1.5rem;
     max-width: 380px;
     width: 100%;
-    align-self: start; /* controls determine natural row height */
+    align-self: stretch; /* stretch to match preview height */
 }
 
 .control-group {
@@ -425,10 +421,12 @@
     display: block;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    max-height: 100%; /* respect parent column height */
+    /* Canvas size will be set by JavaScript based on container */
     max-width: 100%;
+    max-height: 100%;
     width: auto;
     height: auto;
+    object-fit: contain;
 }
 
 

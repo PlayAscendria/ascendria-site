@@ -47,9 +47,7 @@ main {
 
 .doc-container {
   position: relative;
-  
   height: 98%;
-  
   width: auto;
   aspect-ratio: 1169 / 758; 
   max-width: 95vw;
@@ -96,12 +94,11 @@ main {
 .doc-content {
   position: absolute;
   z-index: 5; 
-  
   top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60%;
-  height: 46%;
+  width: 65%;
+  height: 65%;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 2rem 2rem 10rem 2rem; 

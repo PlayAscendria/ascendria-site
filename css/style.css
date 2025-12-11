@@ -10,15 +10,6 @@ html {
 	overflow-x: hidden; 
 }
 
-/* Global box-sizing and layout variables */
-:root {
-    --nft-padding: 2vh;
-}
-
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
 body {
 	background: #0a0e27;
 	margin: 0;
@@ -517,10 +508,6 @@ body::-webkit-scrollbar-thumb:hover,
 	transform: translateY(-2px);
 	box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
 }
-
-
-
-
 
 #ecosystem.landing-section {
 	position: relative;

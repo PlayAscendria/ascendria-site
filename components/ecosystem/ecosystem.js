@@ -7,6 +7,7 @@ class EcosystemGraph {
         this.detailView = null;
         this.currentModule = null;
         this.isAnimating = false;
+        this.ecosystemSection = document.querySelector('#ecosystem');
         
 
         this.modules = {
@@ -504,7 +505,6 @@ class EcosystemGraph {
         this.homeButton.setAttribute('aria-label', 'Início');
         this.homeButton.setAttribute('type', 'button');
         this.homeButton.innerHTML = `<img src="/assets/images/ecosystem/home.webp" alt="Home" />`;
-        this.detailView.insertBefore(this.homeButton, this.detailView.firstChild);
         
 
         this.backButton = document.createElement('button');
@@ -512,11 +512,19 @@ class EcosystemGraph {
         this.backButton.setAttribute('aria-label', 'Voltar');
         this.backButton.setAttribute('type', 'button');
         this.backButton.innerHTML = `<img src="/assets/images/ecosystem/back.webp" alt="Voltar" />`;
-        this.detailView.insertBefore(this.backButton, this.detailView.firstChild);
         
 
         this.container.appendChild(this.graphView);
         this.container.appendChild(this.detailView);
+        // Coloca os botões dentro da caixa de detalhe para garantir posicionamento relativo ao conteúdo
+        this.detailView.insertBefore(this.homeButton, this.detailView.firstChild);
+        this.detailView.insertBefore(this.backButton, this.detailView.firstChild);
+
+        console.log('[ECO] detail buttons appended inside detailView', {
+            hasDetailView: !!this.detailView,
+            homeInDom: document.body.contains(this.homeButton),
+            backInDom: document.body.contains(this.backButton)
+        });
     }
     
     bindEvents() {
@@ -586,6 +594,13 @@ class EcosystemGraph {
 
             this.graphView.classList.add('hidden');
             this.detailView.classList.add('active');
+            if (this.ecosystemSection) {
+                this.ecosystemSection.classList.add('detail-active');
+            }
+            // ensure buttons become visible even if class selectors fail
+            this.homeButton.style.opacity = '1';
+            this.homeButton.style.pointerEvents = 'auto';
+            this.backButton.style.pointerEvents = 'auto';
         });
         
         this.isAnimating = false;
@@ -685,6 +700,12 @@ class EcosystemGraph {
 
             this.detailView.classList.remove('active');
             this.graphView.classList.remove('hidden');
+            if (this.ecosystemSection) {
+                this.ecosystemSection.classList.remove('detail-active');
+            }
+            this.homeButton.style.opacity = '0';
+            this.homeButton.style.pointerEvents = 'none';
+            this.backButton.style.pointerEvents = 'none';
         });
         
         this.currentModule = null;

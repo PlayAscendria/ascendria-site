@@ -385,7 +385,7 @@ main {
 
 .financialmodel-detail .detail-content {
   flex: 1;
-  padding: 0.5rem 3rem 6rem 3rem;
+  padding: 0.5rem 3rem 8vh 3rem;
   overflow-y: auto;
   overscroll-behavior: contain;
   color: #2c1810;

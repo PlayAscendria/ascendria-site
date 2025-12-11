@@ -123,7 +123,7 @@
   }
 
   .detail-content {
-    padding: 0.5rem 2.5rem 6rem 2.5rem;
+    padding: 0.5rem 2.5rem 8vh 2.5rem;
     font-size: 0.95rem;
   }
 
@@ -194,8 +194,8 @@
   }
 
   .doc-content {
-    width: 58%;
-    height: 44%;
+    width: 63%;
+    height: 63%;
     padding: 1.5rem 1.5rem 8rem 1.5rem;
   }
 
@@ -213,7 +213,7 @@
   }
 
   .whitepaper-detail .detail-content {
-    padding: 0.5rem 2rem 5rem 2rem;
+    padding: 0.5rem 2rem 12vh 2rem;
     font-size: 0.9rem;
   }
 
@@ -232,7 +232,7 @@
   }
 
   .financialmodel-detail .detail-content {
-    padding: 0.5rem 2rem 5rem 2rem;
+    padding: 0.5rem 2rem 12vh 2rem;
     font-size: 0.9rem;
   }
 }
@@ -388,8 +388,8 @@
   }
 
   .doc-content {
-    width: 58%;
-    height: 44%;
+    width: 63%;
+    height: 63%;
     padding: 1.5rem 1.5rem 8rem 1.5rem;
   }
 
@@ -407,7 +407,7 @@
   }
 
   .whitepaper-detail .detail-content {
-    padding: 0.5rem 2rem 5rem 2rem;
+    padding: 0.5rem 2rem 12vh 2rem;
     font-size: 0.9rem;
   }
 
@@ -426,7 +426,7 @@
   }
 
   .financialmodel-detail .detail-content {
-    padding: 0.5rem 2rem 5rem 2rem;
+    padding: 0.5rem 2rem 12vh 2rem;
     font-size: 0.9rem;
   }
 
@@ -572,7 +572,7 @@
   }
 
   .detail-content {
-    padding: 0.5rem 2rem 4rem 2rem;
+    padding: 0.5rem 2rem 12vh 2rem;
     font-size: 0.9rem;
   }
 
@@ -616,8 +616,8 @@
   }
 
   .doc-content {
-    width: 59%;
-    height: 45%;
+    width: 64%;
+    height: 64%;
   }
 
   .whitepaper-container {
@@ -630,7 +630,7 @@
   }
 
   .whitepaper-detail .detail-content {
-    padding: 0.5rem 2.5rem 5rem 2.5rem;
+    padding: 0.5rem 2.5rem 8vh 2.5rem;
     font-size: 0.95rem;
   }
 
@@ -644,7 +644,7 @@
   }
 
   .financialmodel-detail .detail-content {
-    padding: 0.5rem 2.5rem 5rem 2.5rem;
+    padding: 0.5rem 2.5rem 8vh 2.5rem;
     font-size: 0.95rem;
   }
 }
@@ -780,8 +780,8 @@
   }
 
   .doc-content {
-    width: 59%;
-    height: 45%;
+    width: 64%;
+    height: 64%;
   }
 
   .whitepaper-container {
@@ -794,7 +794,7 @@
   }
 
   .whitepaper-detail .detail-content {
-    padding: 0.5rem 2.5rem 5.5rem 2.5rem;
+    padding: 0.5rem 2.5rem 8vh 2.5rem;
   }
 
   .financialmodel-container {
@@ -807,7 +807,7 @@
   }
 
   .financialmodel-detail .detail-content {
-    padding: 0.5rem 2.5rem 5.5rem 2.5rem;
+    padding: 0.5rem 2.5rem 8vh 2.5rem;
   }
 }
 
@@ -922,8 +922,8 @@
   }
 
   .doc-content {
-    width: 60%;
-    height: 46%;
+    width: 65%;
+    height: 65%;
   }
 
   .whitepaper-container {
@@ -932,7 +932,7 @@
   }
 
   .whitepaper-detail .detail-content {
-    padding: 0.5rem 3rem 5.5rem 3rem;
+    padding: 0.5rem 3rem 8vh 3rem;
   }
 
   .financialmodel-container {
@@ -945,7 +945,7 @@
   }
 
   .financialmodel-detail .detail-content {
-    padding: 0.5rem 3rem 5.5rem 3rem;
+    padding: 0.5rem 3rem 8vh 3rem;
   }
 }
 
@@ -1060,8 +1060,8 @@
   }
 
   .doc-content {
-    width: 60%;
-    height: 46%;
+    width: 65%;
+    height: 65%;
   }
 
   .whitepaper-container {
@@ -1070,7 +1070,7 @@
   }
 
   .whitepaper-detail .detail-content {
-    padding: 0.5rem 3rem 6rem 3rem;
+    padding: 0.5rem 3rem 8vh 3rem;
   }
 
   .financialmodel-container {
@@ -1079,7 +1079,7 @@
   }
 
   .financialmodel-detail .detail-content {
-    padding: 0.5rem 3rem 6rem 3rem;
+    padding: 0.5rem 3rem 8vh 3rem;
   }
 }
 
@@ -1241,8 +1241,8 @@
   .composer-controls {
     max-width: 420px;
     width: 100%;
-    /* let controls define the height of the row */
-    align-self: start;
+    /* stretch to match preview height */
+    align-self: stretch;
   }
 
   .composer-preview {
@@ -1260,10 +1260,10 @@
     display: block;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    max-height: 100%; /* respect the column height */
+    height: 100%; /* fill preview container height */
     max-width: 100%;
-    height: auto;
     width: auto;
+    object-fit: contain;
   }
 
   /* Lore/Whitepaper/FinancialModel */
@@ -1290,7 +1290,7 @@
 
   .whitepaper-detail .detail-content {
     font-size: 1.15rem;
-    padding: 0.5rem 3rem 6rem 3rem;
+    padding: 0.5rem 3rem 8vh 3rem;
   }
 
   .whitepaper-detail .detail-content p {
@@ -1313,7 +1313,7 @@
 
   .financialmodel-detail .detail-content {
     font-size: 1.15rem;
-    padding: 0.5rem 3rem 6rem 3rem;
+    padding: 0.5rem 3rem 8vh 3rem;
   }
 
   .financialmodel-detail .detail-content p {
@@ -1406,25 +1406,25 @@
   .backgroundlive-root .bg-layer.carruagem { 
     height: 100%; 
     left: 80%; 
-    top: 70%; 
+    top: 50%; 
   }
 
   .backgroundlive-root .bg-layer.jano { 
     height: 20%; 
     left: 45%; 
-    top: 80%; 
+    top: 75%; 
   }
 
   .backgroundlive-root .bg-layer.orion { 
     height: 15%; 
-    left: 54%; 
-    top: 76%; 
+    left: 51%; 
+    top: 70%; 
   }
 
   .backgroundlive-root .bg-layer.trio { 
     height: 70%; 
     left: 14%; 
-    top: 70%; 
+    top: 73%; 
   }
 
   .backgroundlive-root .bg-layer.carruagem #magic-portal {
@@ -1522,7 +1522,7 @@
 .composer-controls {
   max-width: 420px;
   width: 100%;
-  align-self: start;
+  align-self: stretch;
 }
 
 .composer-preview {
@@ -1560,13 +1560,23 @@
 }
 
   /* Lore/Whitepaper/FinancialModel */
+  
   .doc-title {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin-top: 2vh;
   }
 
   .doc-content {
-    font-size: 1.2rem;
-  }
+    position: absolute;
+    z-index: 5; 
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 65%;
+    height: 51%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 2rem 2rem 12rem 2rem; 
 
   .doc-content p {
     font-size: 1.2rem;
@@ -1583,7 +1593,7 @@
 
   .whitepaper-detail .detail-content {
     font-size: 1.2rem;
-    padding: 0.5rem 3rem 6rem 3rem;
+    padding: 0.5rem 3rem 8vh 3rem;
   }
 
   .whitepaper-detail .detail-content p {
@@ -1606,7 +1616,7 @@
 
   .financialmodel-detail .detail-content {
     font-size: 1.2rem;
-    padding: 0.5rem 3rem 6rem 3rem;
+    padding: 0.5rem 3rem 8vh 3rem;
   }
 
   .financialmodel-detail .detail-content p {
@@ -1843,7 +1853,7 @@
 
   .whitepaper-detail .detail-content {
     font-size: 1.4rem;
-    padding: 1rem 3.5rem 8rem 3.5rem;
+    padding: 1rem 3.5rem 8vh 3.5rem;
   }
 
   .whitepaper-detail .detail-content p {
@@ -1886,7 +1896,7 @@
 
   .financialmodel-detail .detail-content {
     font-size: 1.4rem;
-    padding: 1rem 3.5rem 8rem 3.5rem;
+    padding: 1rem 3.5rem 8vh 3.5rem;
   }
 
   .financialmodel-detail .detail-content p {
@@ -2039,7 +2049,7 @@
   }
 
   .detail-content {
-    padding: 0.5rem 1.5rem 5rem 1.5rem;
+    padding: 0.5rem 1.5rem 8vh 1.5rem;
     font-size: 0.9rem;
   }
 
@@ -2142,8 +2152,8 @@
   }
 
   .doc-content {
-    width: 55%;
-    height: 42%;
+    width: 60%;
+    height: 60%;
     padding: 1rem 1rem 6rem 1rem;
     font-size: 0.85rem;
   }
@@ -2158,7 +2168,7 @@
   }
 
   .whitepaper-detail .detail-content {
-    padding: 0.5rem 1.5rem 4rem 1.5rem;
+    padding: 0.5rem 1.5rem 8vh 1.5rem;
     font-size: 0.85rem;
   }
 
@@ -2172,7 +2182,7 @@
   }
 
   .financialmodel-detail .detail-content {
-    padding: 0.5rem 1.5rem 4rem 1.5rem;
+    padding: 0.5rem 1.5rem 8vh 1.5rem;
     font-size: 0.85rem;
   }
 
@@ -2332,8 +2342,8 @@
 
   /* Lore/Whitepaper/FinancialModel */
   .doc-content {
-    width: 52%;
-    height: 40%;
+    width: 58%;
+    height: 58%;
     padding: 0.75rem 0.75rem 5rem 0.75rem;
     font-size: 0.8rem;
   }
@@ -2498,8 +2508,8 @@
 
   /* Lore/Whitepaper/FinancialModel */
   .doc-content {
-    width: 50%;
-    height: 38%;
+    width: 55%;
+    height: 55%;
     padding: 0.5rem 0.5rem 4rem 0.5rem;
     font-size: 0.75rem;
   }

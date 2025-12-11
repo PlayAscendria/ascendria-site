@@ -74,3 +74,4 @@
 
 **Nota**: Este changelog documenta as melhorias feitas para preparar o site para produção seguindo as melhores práticas de desenvolvimento web.
 
+
