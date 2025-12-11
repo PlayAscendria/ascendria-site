@@ -195,6 +195,6 @@ Este é um projeto privado. Para sugestões ou problemas, entre em contato atrav
 
 ---
 
-Desenvolvido com ❤️ pela equipe Ascendria
+Desenvolvido com ❤️ pela equipe Mana Works
 
 
