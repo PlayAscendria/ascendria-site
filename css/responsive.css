@@ -1,171 +1,160 @@
 
 
+/* ============================================
+   RESPONSIVE.CSS - CONTROLE CENTRAL DE RESPONSIVIDADE
+   Organizado por: HeroSection → EcosystemSection → NFTsSection → Lore/Whitepaper/FinancialModel
+   ============================================ */
 
-
-@media (min-width: 1024px) and (max-width: 1279px) {
+/* ============================================
+   TABLET: 769px - 1023px
+   ============================================ */
+@media (min-width: 769px) and (max-width: 1023px) {
   
-  
-  .topbar {
-    height: clamp(55px, 7vh, 70px);
-  }
-  
-  .main-nav > ul {
-    gap: 0.5rem;
-  }
-  
-  .main-nav li.has-dropdown > a {
-    font-size: 0.9rem;
-  }
-  
-  .join-btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
-  }
-  
-  
-  
+  /* HeroSection */
   .backgroundlive-root .bg-layer {
     width: 100%;
     height: 100%;
     background-size: cover;
   }
-  
+
   .backgroundlive-root .bg-layer.fundo-sol {
     background-size: cover;
     background-position: center 30%;
   }
-  
-  
+
   .backgroundlive-root .bg-layer.sun {
     background-size: cover;
     background-position: center 30%;
   }
-  .backgroundlive-root .sun-rays { width: 45vh; height: 45vh; }
-  .backgroundlive-root .breathing-glow { width: 45vh; height: 45vh; }
-  
-  
-  .backgroundlive-root .bg-layer.carruagem { height: 75%; left: 82%; top: 72%; }
-  .backgroundlive-root .bg-layer.jano { height: 17%; left: 46%; top: 82%; }
-  .backgroundlive-root .bg-layer.orion { height: 13%; left: 55%; top: 78%; }
-  .backgroundlive-root .bg-layer.trio { height: 60%; left: 16%; top: 72%; }
-  
-  
+
+  .backgroundlive-root .sun-rays { 
+    width: 45vh; 
+    height: 45vh; 
+  }
+
+  .backgroundlive-root .breathing-glow { 
+    width: 45vh; 
+    height: 45vh; 
+  }
+
+  .backgroundlive-root .bg-layer.carruagem { 
+    height: 75%; 
+    left: 82%; 
+    top: 72%; 
+  }
+
+  .backgroundlive-root .bg-layer.jano { 
+    height: 17%; 
+    left: 46%; 
+    top: 82%; 
+  }
+
+  .backgroundlive-root .bg-layer.orion { 
+    height: 13%; 
+    left: 55%; 
+    top: 78%; 
+  }
+
+  .backgroundlive-root .bg-layer.trio { 
+    height: 60%; 
+    left: 16%; 
+    top: 72%; 
+  }
+
   .backgroundlive-root .bg-layer.carruagem #magic-portal {
     top: 24%;
     left: 55%;
     width: 20%;
     height: 35%;
   }
-  
-  
-  .ecosystem-container {
-    width: 124%;
-    height: 65%;
-  }
-  
-  .eco-node {
-    width: clamp(60px, 9vw, 100px);
-    height: clamp(60px, 9vw, 100px);
-  }
-  
-  .eco-node[data-node="ascendria"] {
-    width: clamp(80px, 11vw, 130px);
-    height: clamp(80px, 11vw, 130px);
-  }
-  
-  .ecosystem-title {
-    top: 11%;
-    font-size: clamp(1.4rem, 3.5vw, 2.5rem);
-  }
-  
-  
-  .site-footer {
-    padding: clamp(1.25rem, 3vw, 2rem) clamp(0.75rem, 2vw, 1.25rem);
-  }
 
-  .footer-socials {
-    gap: 0.75rem;
-  }
-
-  .footer-socials svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  
   .hero-content {
     max-width: 700px;
   }
-  
+
   .hero-title {
     font-size: clamp(2.5rem, 8vw, 4.5rem);
   }
-  
-  
-  .doc-container {
-    height: 96%;
+
+  /* EcosystemSection */
+  #ecosystem.landing-section {
+    aspect-ratio: 16 / 11;
+    margin-top: -15vh;
   }
 
-  .doc-title {
-    font-size: clamp(1.6rem, 4vw, 2.8rem);
+  #ecosystem.landing-section::after {
+    width: 110%;
   }
 
-  
-  .doc-content {
-    width: 58%;
-    height: 44%;
-    padding: 1.5rem 1.5rem 8rem 1.5rem;
+  .ecosystem-container {
+    width: 95%;
+    height: 70%;
   }
 
-  
-  .whitepaper-container {
-    width: 60%;
-    height: 58%;
+  .ecosystem-title {
+    top: 10%;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
   }
 
-  .whitepaper-item {
-    width: 12%;
+  .eco-node-icon {
+    width: clamp(80px, 12vw, 140px);
   }
 
-  .whitepaper-icon {
-    width: 90%;
+  .eco-node[data-node="rankings"] {
+    top: 12%;
   }
 
-  .whitepaper-detail .detail-content {
-    padding: 0.5rem 2rem 5rem 2rem;
-    font-size: 0.9rem;
+  .eco-node[data-node="ascendria"] {
+    bottom: 20%;
+    left: 30%;
   }
 
-  
-  .financialmodel-container {
-    width: 60%;
-    height: 58%;
+  .eco-node[data-node="community"] {
+    bottom: 20%;
+    right: 30%;
   }
 
-  .node-icon {
-    width: clamp(50px, 8vw, 90px);
+  .detail-header {
+    padding: 4rem 1rem 0.5rem 1rem;
   }
 
-  .timeline-node[data-module="genesis"] .node-icon,
-  .timeline-node[data-module="future"] .node-icon {
-    width: clamp(55px, 9vw, 100px);
+  .detail-icon {
+    width: clamp(70px, 10vw, 120px);
   }
 
-  .financialmodel-detail .detail-content {
-    padding: 0.5rem 2rem 5rem 2rem;
-    font-size: 0.9rem;
+  .detail-content {
+    padding: 0.5rem 2.5rem 6rem 2.5rem;
+    font-size: 0.95rem;
   }
 
-  
-  .loading-info {
-    bottom: 50px;
+  .ecosystem-detail .detail-home {
+    right: 6%;
+    left: auto;
+    top: 6%;
+    width: 2vh;
+    transform: none;
   }
 
-  .painting-text {
-    font-size: 15px;
+  .ecosystem-detail .detail-back {
+    left: 6%;
+    top: 6%;
+    width: 2vh;
+    transform: none;
   }
 
-  
+  .submenu-grid {
+    padding: 2% 2%;
+  }
+
+  .submenu-item {
+    width: 14%;
+  }
+
+  .submenu-icon {
+    width: 75%;
+  }
+
+  /* NFTsSection */
   .nfts-container {
     padding: 1.5rem;
   }
@@ -194,153 +183,400 @@
     padding: 0.8rem 1.6rem;
     font-size: 1rem;
   }
+
+  /* Lore/Whitepaper/FinancialModel */
+  .doc-container {
+    height: 96%;
+  }
+
+  .doc-title {
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+  }
+
+  .doc-content {
+    width: 58%;
+    height: 44%;
+    padding: 1.5rem 1.5rem 8rem 1.5rem;
+  }
+
+  .whitepaper-container {
+    width: 60%;
+    height: 58%;
+  }
+
+  .whitepaper-item {
+    width: 12%;
+  }
+
+  .whitepaper-icon {
+    width: 90%;
+  }
+
+  .whitepaper-detail .detail-content {
+    padding: 0.5rem 2rem 5rem 2rem;
+    font-size: 0.9rem;
+  }
+
+  .financialmodel-container {
+    width: 60%;
+    height: 58%;
+  }
+
+  .node-icon {
+    width: clamp(50px, 8vw, 90px);
+  }
+
+  .timeline-node[data-module="genesis"] .node-icon,
+  .timeline-node[data-module="future"] .node-icon {
+    width: clamp(55px, 9vw, 100px);
+  }
+
+  .financialmodel-detail .detail-content {
+    padding: 0.5rem 2rem 5rem 2rem;
+    font-size: 0.9rem;
+  }
 }
 
 
-
-@media (min-width: 1280px) and (max-width: 1365px) {
+/* ============================================
+   PC: 1024px - 1279px
+   ============================================ */
+@media (min-width: 1024px) and (max-width: 1279px) {
   
-  
+  /* Topbar */
   .topbar {
-    height: clamp(58px, 7.5vh, 72px);
+    height: clamp(55px, 7vh, 70px);
   }
-  
+
   .main-nav > ul {
-    gap: 0.6rem;
+    gap: 0.5rem;
   }
-  
-  .main-nav a {
-    font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+
+  .main-nav li.has-dropdown > a {
+    font-size: 0.9rem;
   }
-  
-  
-  
+
+  .join-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  /* HeroSection */
   .backgroundlive-root .bg-layer {
-    width: 115%;
-    height: 115%;
-    background-size: contain;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
   }
-  
+
   .backgroundlive-root .bg-layer.fundo-sol {
-    background-size: 100% auto;
-    background-position: center top;
+    background-size: cover;
+    background-position: center 30%;
   }
-  
-  
-  .backgroundlive-root .bg-layer.sun { background-size: 22% auto; }
-  .backgroundlive-root .sun-rays { width: 50vh; height: 50vh; }
-  .backgroundlive-root .breathing-glow { width: 50vh; height: 50vh; }
-  
-  
-  .backgroundlive-root .bg-layer.carruagem { height: 80%; left: 75%; top: 71%; }
-  .backgroundlive-root .bg-layer.jano { height: 18%; left: 45%; top: 78%; }
-  .backgroundlive-root .bg-layer.orion { height: 14%; left: 52%; top: 75%; }
-  .backgroundlive-root .bg-layer.trio { height: 80%; left: 17%; top: 75%; }
-  
-  
+
+  .backgroundlive-root .bg-layer.sun {
+    background-size: cover;
+    background-position: center 30%;
+  }
+
+  .backgroundlive-root .sun-rays { 
+    width: 45vh; 
+    height: 45vh; 
+  }
+
+  .backgroundlive-root .breathing-glow { 
+    width: 45vh; 
+    height: 45vh; 
+  }
+
+  .backgroundlive-root .bg-layer.carruagem { 
+    height: 75%; 
+    left: 82%; 
+    top: 72%; 
+  }
+
+  .backgroundlive-root .bg-layer.jano { 
+    height: 17%; 
+    left: 46%; 
+    top: 82%; 
+  }
+
+  .backgroundlive-root .bg-layer.orion { 
+    height: 13%; 
+    left: 55%; 
+    top: 78%; 
+  }
+
+  .backgroundlive-root .bg-layer.trio { 
+    height: 60%; 
+    left: 16%; 
+    top: 72%; 
+  }
+
   .backgroundlive-root .bg-layer.carruagem #magic-portal {
     top: 24%;
     left: 55%;
     width: 20%;
     height: 35%;
   }
-  
-  
+
+  .hero-content {
+    max-width: 700px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+  }
+
+  /* EcosystemSection */
   .ecosystem-container {
-    width: 88%;
+    width: 124%;
     height: 65%;
   }
-  
-  .ecosystem-title {
-    top: 11.5%;
-    font-size: clamp(1.5rem, 3.8vw, 2.8rem);
+
+  .eco-node {
+    width: clamp(60px, 9vw, 100px);
+    height: clamp(60px, 9vw, 100px);
   }
-  
-  
-  .eco-node-icon {
-    width: clamp(80px, 12vw, 140px);
-  }
-  
-  
-  .eco-node[data-node="rankings"] {
-    top: 12%;
-  }
-  
+
   .eco-node[data-node="ascendria"] {
-    bottom: 22%;
-    left: 37%;
+    width: clamp(80px, 11vw, 130px);
+    height: clamp(80px, 11vw, 130px);
   }
-  
-  .eco-node[data-node="community"] {
-    bottom: 22%;
-    right: 37%;
+
+  .ecosystem-title {
+    top: 11%;
+    font-size: clamp(1.4rem, 3.5vw, 2.5rem);
   }
-  
-  
-  .detail-icon {
-    width: clamp(60px, 10vw, 100px);
+
+  /* NFTsSection */
+  .nfts-container {
+    padding: 1.5rem;
   }
-  
-  .detail-header {
-    padding: 3.5rem 1rem 0.5rem 1rem;
+
+  .nft-category-title {
+    font-size: clamp(1.4rem, 3.5vw, 2rem);
   }
-  
-  .detail-content {
-    padding: 0.5rem 2rem 4rem 2rem;
-    font-size: 0.9rem;
+
+  .nft-category-description {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
   }
-  
-  
-  .hero-title {
-    font-size: clamp(2.8rem, 9vw, 5rem);
+
+  .nft-gallery {
+    gap: 1.5rem;
   }
-  
-  
+
+  .ascenders-composer {
+    gap: 2rem;
+  }
+
+  #ascender-canvas {
+    height: 70vh;
+  }
+
+  .nfts-join-btn {
+    padding: 0.8rem 1.6rem;
+    font-size: 1rem;
+  }
+
+  /* Lore/Whitepaper/FinancialModel */
   .doc-container {
-    height: 97%;
+    height: 96%;
   }
 
   .doc-title {
-    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
   }
 
-  
   .doc-content {
-    width: 59%;
-    height: 45%;
+    width: 58%;
+    height: 44%;
+    padding: 1.5rem 1.5rem 8rem 1.5rem;
   }
 
-  
   .whitepaper-container {
-    width: 62%;
-    height: 60%;
+    width: 60%;
+    height: 58%;
   }
 
   .whitepaper-item {
-    width: 13%;
+    width: 12%;
+  }
+
+  .whitepaper-icon {
+    width: 90%;
   }
 
   .whitepaper-detail .detail-content {
-    padding: 0.5rem 2.5rem 5rem 2.5rem;
-    font-size: 0.95rem;
+    padding: 0.5rem 2rem 5rem 2rem;
+    font-size: 0.9rem;
   }
 
-  
   .financialmodel-container {
-    width: 62%;
-    height: 60%;
+    width: 60%;
+    height: 58%;
   }
 
   .node-icon {
+    width: clamp(50px, 8vw, 90px);
+  }
+
+  .timeline-node[data-module="genesis"] .node-icon,
+  .timeline-node[data-module="future"] .node-icon {
     width: clamp(55px, 9vw, 100px);
   }
 
   .financialmodel-detail .detail-content {
-    padding: 0.5rem 2.5rem 5rem 2.5rem;
-    font-size: 0.95rem;
+    padding: 0.5rem 2rem 5rem 2rem;
+    font-size: 0.9rem;
   }
 
+  /* Footer */
+  .site-footer {
+    padding: clamp(1.25rem, 3vw, 2rem) clamp(0.75rem, 2vw, 1.25rem);
+  }
+
+  .footer-socials {
+    gap: 0.75rem;
+  }
+
+  .footer-socials svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Loading/Painting */
+  .loading-info {
+    bottom: 50px;
+  }
+
+  .painting-text {
+    font-size: 15px;
+  }
+}
+
+
+/* ============================================
+   PC: 1280px - 1365px
+   ============================================ */
+@media (min-width: 1280px) and (max-width: 1365px) {
   
+  /* Topbar */
+  .topbar {
+    height: clamp(58px, 7.5vh, 72px);
+  }
+
+  .main-nav > ul {
+    gap: 0.6rem;
+  }
+
+  .main-nav a {
+    font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+  }
+
+  /* HeroSection */
+  .backgroundlive-root .bg-layer {
+    width: 115%;
+    height: 115%;
+    background-size: contain;
+  }
+
+  .backgroundlive-root .bg-layer.fundo-sol {
+    background-size: 100% auto;
+    background-position: center top;
+  }
+
+  .backgroundlive-root .bg-layer.sun { 
+    background-size: 22% auto; 
+  }
+
+  .backgroundlive-root .sun-rays { 
+    width: 50vh; 
+    height: 50vh; 
+  }
+
+  .backgroundlive-root .breathing-glow { 
+    width: 50vh; 
+    height: 50vh; 
+  }
+
+  .backgroundlive-root .bg-layer.carruagem { 
+    height: 80%; 
+    left: 75%; 
+    top: 71%; 
+  }
+
+  .backgroundlive-root .bg-layer.jano { 
+    height: 18%; 
+    left: 45%; 
+    top: 78%; 
+  }
+
+  .backgroundlive-root .bg-layer.orion { 
+    height: 14%; 
+    left: 52%; 
+    top: 75%; 
+  }
+
+  .backgroundlive-root .bg-layer.trio { 
+    height: 80%; 
+    left: 17%; 
+    top: 75%; 
+  }
+
+  .backgroundlive-root .bg-layer.carruagem #magic-portal {
+    top: 24%;
+    left: 55%;
+    width: 20%;
+    height: 35%;
+  }
+
+  .hero-title {
+    font-size: clamp(2.8rem, 9vw, 5rem);
+  }
+
+  /* EcosystemSection */
+  .ecosystem-container {
+    width: 88%;
+    height: 65%;
+  }
+
+  .ecosystem-title {
+    top: 11.5%;
+    font-size: clamp(1.5rem, 3.8vw, 2.8rem);
+  }
+
+  .eco-node-icon {
+    width: clamp(80px, 12vw, 140px);
+  }
+
+  .eco-node[data-node="rankings"] {
+    top: 12%;
+  }
+
+  .eco-node[data-node="ascendria"] {
+    bottom: 22%;
+    left: 37%;
+  }
+
+  .eco-node[data-node="community"] {
+    bottom: 22%;
+    right: 37%;
+  }
+
+  .detail-icon {
+    width: clamp(60px, 10vw, 100px);
+  }
+
+  .detail-header {
+    padding: 3.5rem 1rem 0.5rem 1rem;
+  }
+
+  .detail-content {
+    padding: 0.5rem 2rem 4rem 2rem;
+    font-size: 0.9rem;
+  }
+
+  /* NFTsSection */
   .nfts-container {
     padding: 1.75rem;
   }
@@ -369,94 +605,24 @@
     padding: 0.85rem 1.7rem;
     font-size: 1.05rem;
   }
-}
 
-
-
-
-
-@media (min-width: 1366px) and (max-width: 1439px) {
-  
-  
-  .topbar {
-    height: clamp(58px, 7.5vh, 75px);
-  }
-  
-  .main-nav > ul {
-    gap: 0.7rem;
-  }
-  
-  .main-nav a {
-    font-size: clamp(0.88rem, 1.4vw, 0.98rem);
-  }
-  
-  
-  
-  .backgroundlive-root .bg-layer {
-    width: 118%;
-    height: 118%;
-    background-size: contain;
-  }
-  
-  .backgroundlive-root .bg-layer.fundo-sol {
-    background-size: 100% auto;
-    background-position: center top;
-  }
-  
-  
-  .backgroundlive-root .bg-layer.sun { background-size: 21% auto; }
-  .backgroundlive-root .sun-rays { width: 55vh; height: 55vh; }
-  .backgroundlive-root .breathing-glow { width: 55vh; height: 55vh; }
-  
-  
-  .backgroundlive-root .bg-layer.carruagem { height: 95%; left: 80%; top: 70%; }
-  .backgroundlive-root .bg-layer.jano { height: 19%; left: 45%; top: 80%; }
-  .backgroundlive-root .bg-layer.orion { height: 14%; left: 54%; top: 76%; }
-  .backgroundlive-root .bg-layer.trio { height: 68%; left: 18%; top: 70%; }
-  
-  
-  .backgroundlive-root .bg-layer.carruagem #magic-portal {
-    top: 24%;
-    left: 55%;
-    width: 20%;
-    height: 35%;
-  }
-  
-  
-  .ecosystem-container {
-    width: 124%;
-    height: 65%;
-  }
-  
-  .ecosystem-title {
-    top: 11.5%;
-    font-size: clamp(1.6rem, 4vw, 3rem);
-  }
-  
-  
-  .hero-title {
-    font-size: clamp(2.8rem, 9vw, 5rem);
-  }
-  
-  
+  /* Lore/Whitepaper/FinancialModel */
   .doc-container {
     height: 97%;
   }
 
   .doc-title {
-    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
   }
 
-  
   .doc-content {
     width: 59%;
     height: 45%;
   }
 
-  
   .whitepaper-container {
-    width: 63%;
-    height: 62%;
+    width: 62%;
+    height: 60%;
   }
 
   .whitepaper-item {
@@ -464,24 +630,117 @@
   }
 
   .whitepaper-detail .detail-content {
-    padding: 0.5rem 2.5rem 5.5rem 2.5rem;
+    padding: 0.5rem 2.5rem 5rem 2.5rem;
+    font-size: 0.95rem;
   }
 
-  
   .financialmodel-container {
-    width: 63%;
-    height: 62%;
+    width: 62%;
+    height: 60%;
   }
 
   .node-icon {
-    width: clamp(60px, 9vw, 110px);
+    width: clamp(55px, 9vw, 100px);
   }
 
   .financialmodel-detail .detail-content {
-    padding: 0.5rem 2.5rem 5.5rem 2.5rem;
+    padding: 0.5rem 2.5rem 5rem 2.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+
+/* ============================================
+   PC: 1366px - 1439px
+   ============================================ */
+@media (min-width: 1366px) and (max-width: 1439px) {
+  
+  /* Topbar */
+  .topbar {
+    height: clamp(58px, 7.5vh, 75px);
   }
 
-  
+  .main-nav > ul {
+    gap: 0.7rem;
+  }
+
+  .main-nav a {
+    font-size: clamp(0.88rem, 1.4vw, 0.98rem);
+  }
+
+  /* HeroSection */
+  .backgroundlive-root .bg-layer {
+    width: 118%;
+    height: 118%;
+    background-size: contain;
+  }
+
+  .backgroundlive-root .bg-layer.fundo-sol {
+    background-size: 100% auto;
+    background-position: center top;
+  }
+
+  .backgroundlive-root .bg-layer.sun { 
+    background-size: 21% auto; 
+  }
+
+  .backgroundlive-root .sun-rays { 
+    width: 55vh; 
+    height: 55vh; 
+  }
+
+  .backgroundlive-root .breathing-glow { 
+    width: 55vh; 
+    height: 55vh; 
+  }
+
+  .backgroundlive-root .bg-layer.carruagem { 
+    height: 95%; 
+    left: 80%; 
+    top: 70%; 
+  }
+
+  .backgroundlive-root .bg-layer.jano { 
+    height: 19%; 
+    left: 45%; 
+    top: 80%; 
+  }
+
+  .backgroundlive-root .bg-layer.orion { 
+    height: 14%; 
+    left: 54%; 
+    top: 76%; 
+  }
+
+  .backgroundlive-root .bg-layer.trio { 
+    height: 68%; 
+    left: 18%; 
+    top: 70%; 
+  }
+
+  .backgroundlive-root .bg-layer.carruagem #magic-portal {
+    top: 24%;
+    left: 55%;
+    width: 20%;
+    height: 35%;
+  }
+
+  .hero-title {
+    font-size: clamp(2.8rem, 9vw, 5rem);
+  }
+
+  /* EcosystemSection */
+  .ecosystem-container {
+    width: 124%;
+    height: 65%;
+  }
+
+  .ecosystem-title {
+    top: 11.5%;
+    font-size: clamp(1.6rem, 4vw, 3rem);
+  }
+
+  /* NFTsSection */
   .nfts-container {
     padding: 1.75rem;
   }
@@ -510,100 +769,132 @@
     padding: 0.9rem 1.8rem;
     font-size: 1.1rem;
   }
+
+  /* Lore/Whitepaper/FinancialModel */
+  .doc-container {
+    height: 97%;
+  }
+
+  .doc-title {
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  }
+
+  .doc-content {
+    width: 59%;
+    height: 45%;
+  }
+
+  .whitepaper-container {
+    width: 63%;
+    height: 62%;
+  }
+
+  .whitepaper-item {
+    width: 13%;
+  }
+
+  .whitepaper-detail .detail-content {
+    padding: 0.5rem 2.5rem 5.5rem 2.5rem;
+  }
+
+  .financialmodel-container {
+    width: 63%;
+    height: 62%;
+  }
+
+  .node-icon {
+    width: clamp(60px, 9vw, 110px);
+  }
+
+  .financialmodel-detail .detail-content {
+    padding: 0.5rem 2.5rem 5.5rem 2.5rem;
+  }
 }
 
 
-
+/* ============================================
+   PC: 1440px - 1599px
+   ============================================ */
 @media (min-width: 1440px) and (max-width: 1599px) {
   
-  
+  /* Topbar */
   .topbar {
     height: clamp(60px, 8vh, 78px);
   }
-  
+
   .main-nav > ul {
     gap: 0.8rem;
   }
-  
-  
-  
+
+  /* HeroSection */
   .backgroundlive-root .bg-layer {
     width: 120%;
     height: 120%;
     background-size: contain;
   }
-  
+
   .backgroundlive-root .bg-layer.fundo-sol {
     background-size: 100% auto;
     background-position: center top;
   }
-  
-  
-  .backgroundlive-root .bg-layer.sun { background-size: 20% auto; }
-  .backgroundlive-root .sun-rays { width: 60vh; height: 60vh; }
-  .backgroundlive-root .breathing-glow { width: 60vh; height: 60vh; }
-  
-  
-  .backgroundlive-root .bg-layer.carruagem { height: 98%; left: 80%; top: 70%; }
-  .backgroundlive-root .bg-layer.jano { height: 19%; left: 45%; top: 80%; }
-  .backgroundlive-root .bg-layer.orion { height: 15%; left: 54%; top: 76%; }
-  .backgroundlive-root .bg-layer.trio { height: 69%; left: 18%; top: 70%; }
-  
-  
+
+  .backgroundlive-root .bg-layer.sun { 
+    background-size: 20% auto; 
+  }
+
+  .backgroundlive-root .sun-rays { 
+    width: 60vh; 
+    height: 60vh; 
+  }
+
+  .backgroundlive-root .breathing-glow { 
+    width: 60vh; 
+    height: 60vh; 
+  }
+
+  .backgroundlive-root .bg-layer.carruagem { 
+    height: 98%; 
+    left: 80%; 
+    top: 70%; 
+  }
+
+  .backgroundlive-root .bg-layer.jano { 
+    height: 19%; 
+    left: 45%; 
+    top: 80%; 
+  }
+
+  .backgroundlive-root .bg-layer.orion { 
+    height: 15%; 
+    left: 54%; 
+    top: 76%; 
+  }
+
+  .backgroundlive-root .bg-layer.trio { 
+    height: 69%; 
+    left: 18%; 
+    top: 70%; 
+  }
+
   .backgroundlive-root .bg-layer.carruagem #magic-portal {
     top: 24%;
     left: 55%;
     width: 20%;
     height: 35%;
   }
-  
-  
+
+  /* EcosystemSection */
   .ecosystem-container {
     width: 124%;
     height: 65%;
   }
-  
+
   .ecosystem-title {
     top: 11%;
     font-size: clamp(1.8rem, 4.5vw, 3.5rem);
   }
-  
-  
-  .doc-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-  }
 
-  
-  .doc-content {
-    width: 60%;
-    height: 46%;
-  }
-
-  
-  .whitepaper-container {
-    width: 64%;
-    height: 65%;
-  }
-
-  .whitepaper-detail .detail-content {
-    padding: 0.5rem 3rem 5.5rem 3rem;
-  }
-
-  
-  .financialmodel-container {
-    width: 64%;
-    height: 63%;
-  }
-
-  .node-icon {
-    width: clamp(65px, 10vw, 120px);
-  }
-
-  .financialmodel-detail .detail-content {
-    padding: 0.5rem 3rem 5.5rem 3rem;
-  }
-
-  
+  /* NFTsSection */
   .nft-category-title {
     font-size: clamp(1.8rem, 4.5vw, 2.5rem);
   }
@@ -624,96 +915,124 @@
     padding: 0.9rem 1.8rem;
     font-size: 1.1rem;
   }
+
+  /* Lore/Whitepaper/FinancialModel */
+  .doc-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .doc-content {
+    width: 60%;
+    height: 46%;
+  }
+
+  .whitepaper-container {
+    width: 64%;
+    height: 65%;
+  }
+
+  .whitepaper-detail .detail-content {
+    padding: 0.5rem 3rem 5.5rem 3rem;
+  }
+
+  .financialmodel-container {
+    width: 64%;
+    height: 63%;
+  }
+
+  .node-icon {
+    width: clamp(65px, 10vw, 120px);
+  }
+
+  .financialmodel-detail .detail-content {
+    padding: 0.5rem 3rem 5.5rem 3rem;
+  }
 }
 
 
-
+/* ============================================
+   PC: 1600px - 1920px
+   ============================================ */
 @media (min-width: 1600px) and (max-width: 1920px) {
   
-  
+  /* Topbar */
   .topbar {
     height: clamp(60px, 8vh, 80px);
   }
-  
+
   .main-nav > ul {
     gap: 0.9rem;
   }
-  
-  
-  
+
+  /* HeroSection */
   .backgroundlive-root .bg-layer {
     width: 120%;
     height: 120%;
     background-size: contain;
   }
-  
+
   .backgroundlive-root .bg-layer.fundo-sol {
     background-size: 100% auto;
     background-position: center top;
   }
-  
-  
-  .backgroundlive-root .bg-layer.sun { background-size: 20% auto; }
-  .backgroundlive-root .sun-rays { width: 65vh; height: 65vh; }
-  .backgroundlive-root .breathing-glow { width: 65vh; height: 65vh; }
-  
-  
-  .backgroundlive-root .bg-layer.carruagem { height: 100%; left: 80%; top: 55%; }
-  .backgroundlive-root .bg-layer.jano { height: 20%; left: 45%; top: 80%; }
-  .backgroundlive-root .bg-layer.orion { height: 15%; left: 52%; top: 76%; }
-  .backgroundlive-root .bg-layer.trio { height: 70%; left: 15%; top: 75%; }
-  
-  
+
+  .backgroundlive-root .bg-layer.sun { 
+    background-size: 20% auto; 
+  }
+
+  .backgroundlive-root .sun-rays { 
+    width: 65vh; 
+    height: 65vh; 
+  }
+
+  .backgroundlive-root .breathing-glow { 
+    width: 65vh; 
+    height: 65vh; 
+  }
+
+  .backgroundlive-root .bg-layer.carruagem { 
+    height: 100%; 
+    left: 80%; 
+    top: 55%; 
+  }
+
+  .backgroundlive-root .bg-layer.jano { 
+    height: 20%; 
+    left: 45%; 
+    top: 80%; 
+  }
+
+  .backgroundlive-root .bg-layer.orion { 
+    height: 15%; 
+    left: 52%; 
+    top: 76%; 
+  }
+
+  .backgroundlive-root .bg-layer.trio { 
+    height: 70%; 
+    left: 15%; 
+    top: 75%; 
+  }
+
   .backgroundlive-root .bg-layer.carruagem #magic-portal {
     top: 35%;
     left: 55%;
     width: 20%;
     height: 30%;
   }
-   
-  
+
+  /* EcosystemSection */
   .ecosystem-container {
     width: 124%;
     height: 65%;
   }
-  
+
   .ecosystem-title {
     top: 11.5%;
     font-size: clamp(1.8rem, 4.5vw, 3.5rem);
   }
-  
-  
-  .doc-title {
-    font-size: clamp(2rem, 5vw, 3.8rem);
-  }
 
-  
-  .doc-content {
-    width: 60%;
-    height: 46%;
-  }
-
-  
-  .whitepaper-container {
-    width: 65%;
-    height: 65%;
-  }
-
-  .whitepaper-detail .detail-content {
-    padding: 0.5rem 3rem 6rem 3rem;
-  }
-
-  
-  .financialmodel-container {
-    width: 65%;
-    height: 65%;
-  }
-
-  .financialmodel-detail .detail-content {
-    padding: 0.5rem 3rem 6rem 3rem;
-  }
-
-  
+  /* NFTsSection */
   .nft-category-title {
     font-size: clamp(2rem, 5vw, 2.8rem);
   }
@@ -734,37 +1053,67 @@
     padding: 1rem 2rem;
     font-size: 1.15rem;
   }
+
+  /* Lore/Whitepaper/FinancialModel */
+  .doc-title {
+    font-size: clamp(2rem, 5vw, 3.8rem);
+  }
+
+  .doc-content {
+    width: 60%;
+    height: 46%;
+  }
+
+  .whitepaper-container {
+    width: 65%;
+    height: 65%;
+  }
+
+  .whitepaper-detail .detail-content {
+    padding: 0.5rem 3rem 6rem 3rem;
+  }
+
+  .financialmodel-container {
+    width: 65%;
+    height: 65%;
+  }
+
+  .financialmodel-detail .detail-content {
+    padding: 0.5rem 3rem 6rem 3rem;
+  }
 }
 
 
-@media (min-width: 1921px) and (max-width: 2560px) {
+/* ============================================
+   PC: 1921px - 2559px
+   ============================================ */
+@media (min-width: 1921px) and (max-width: 2559px) {
   
-  
+  /* Topbar */
   .topbar {
     height: clamp(70px, 8vh, 90px);
   }
-  
+
   .main-nav > ul {
     gap: 1.2rem;
   }
-  
+
   .main-nav a {
     font-size: 1.1rem;
   }
-  
+
   .join-btn {
     padding: 0.5rem 1rem;
     font-size: 1.05rem;
   }
-  
-  
-  
+
+  /* HeroSection */
   .backgroundlive-root .bg-layer {
     width: 100%;
     height: 100%;
     background-size: 100% auto;
   }
-  
+
   .backgroundlive-root .bg-layer.nuvem1,
   .backgroundlive-root .bg-layer.nuvem2,
   .backgroundlive-root .bg-layer.nuvem3,
@@ -774,131 +1123,77 @@
   .backgroundlive-root .bg-layer.nuvem7 {
     background-size: contain;
   }
-  
+
   .backgroundlive-root .bg-layer.fundo-sol {
     background-size: 100% auto;
     background-position: center top;
   }
-  
-  
-  .backgroundlive-root .bg-layer.sun { background-size: 16% auto; }
-  .backgroundlive-root .sun-rays { width: 85vh; height: 85vh; }
-  .backgroundlive-root .breathing-glow { width: 85vh; height: 85vh; }
-  
-  
-  .backgroundlive-root .bg-layer.carruagem { height: 100%; left: 80%; top: 70%; }
-  .backgroundlive-root .bg-layer.jano { height: 20%; left: 45%; top: 80%; }
-  .backgroundlive-root .bg-layer.orion { height: 15%; left: 54%; top: 76%; }
-  .backgroundlive-root .bg-layer.trio { height: 70%; left: 14%; top: 70%; }
-  
-  
+
+  .backgroundlive-root .bg-layer.sun { 
+    background-size: 16% auto; 
+  }
+
+  .backgroundlive-root .sun-rays { 
+    width: 85vh; 
+    height: 85vh; 
+  }
+
+  .backgroundlive-root .breathing-glow { 
+    width: 85vh; 
+    height: 85vh; 
+  }
+
+  .backgroundlive-root .bg-layer.carruagem { 
+    height: 100%; 
+    left: 80%; 
+    top: 70%; 
+  }
+
+  .backgroundlive-root .bg-layer.jano { 
+    height: 20%; 
+    left: 45%; 
+    top: 80%; 
+  }
+
+  .backgroundlive-root .bg-layer.orion { 
+    height: 15%; 
+    left: 54%; 
+    top: 76%; 
+  }
+
+  .backgroundlive-root .bg-layer.trio { 
+    height: 70%; 
+    left: 14%; 
+    top: 70%; 
+  }
+
   .backgroundlive-root .bg-layer.carruagem #magic-portal {
     top: 24%;
     left: 55%;
     width: 20%;
     height: 35%;
   }
-  
-  
+
+  .hero-title {
+    font-size: clamp(4rem, 10vw, 7rem);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+  }
+
+  /* EcosystemSection */
   .ecosystem-container {
     width: 168%;
     height: 65%;
   }
-  
+
   .ecosystem-title {
     top: 11%;
     font-size: clamp(2.5rem, 5vw, 4.5rem);
   }
-  
-  
-  .hero-title {
-    font-size: clamp(4rem, 10vw, 7rem);
-  }
-  
-  .hero-subtitle {
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-  }
-  
-  
-  .doc-title {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-  }
 
-  
-  .doc-content {
-    font-size: 1.2rem;
-  }
-
-  .doc-content p {
-    font-size: 1.2rem;
-  }
-
-  
-  .whitepaper-container {
-    width: 65%;
-    height: 65%;
-  }
-
-  .whitepaper-icon {
-    width: 100%;
-  }
-
-  .whitepaper-detail .detail-content {
-    font-size: 1.15rem;
-    padding: 0.5rem 3rem 6rem 3rem;
-  }
-
-  .whitepaper-detail .detail-content p {
-    font-size: 1.15rem;
-  }
-
-  
-  .financialmodel-container {
-    width: 65%;
-    height: 65%;
-  }
-
-  .node-icon {
-    width: clamp(80px, 12vw, 150px);
-  }
-
-  .timeline-node[data-module="genesis"] .node-icon,
-  .timeline-node[data-module="future"] .node-icon {
-    width: clamp(90px, 14vw, 170px);
-  }
-
-  .financialmodel-detail .detail-content {
-    font-size: 1.15rem;
-    padding: 0.5rem 3rem 6rem 3rem;
-  }
-
-  .financialmodel-detail .detail-content p {
-    font-size: 1.15rem;
-  }
-
-  
-  .site-footer {
-    padding: 2.5rem 1.5rem;
-  }
-
-  .footer-copyright {
-    font-size: 1rem;
-  }
-
-  .footer-nav a {
-    font-size: 1rem;
-  }
-
-  .footer-socials {
-    gap: 1.25rem;
-  }
-
-  .footer-socials svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  
+  /* NFTsSection */
   .nft-category-title {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
   }
@@ -931,37 +1226,154 @@
     padding: 1.1rem 2.2rem;
     font-size: 1.2rem;
   }
+
+  /* Composer layout: make preview match controls height
+     - Grid items stretch to same row height so preview always equals selectors
+     - Remove forced min-heights so controls determine the row height
+     - Constrain canvas to the column using max-width/max-height (percentage of column)
+  */
+  .ascenders-composer {
+    grid-template-columns: 420px minmax(600px, 1fr);
+    align-items: stretch; /* important: stretch both columns to same height */
+    gap: 3.5rem;
+  }
+
+  .composer-controls {
+    max-width: 420px;
+    width: 100%;
+    /* let controls define the height of the row */
+    align-self: start;
+  }
+
+  .composer-preview {
+    padding: 2rem;
+    /* do NOT force a viewport-based min-height here; allow it to stretch to controls */
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    align-self: stretch; /* fill the grid row height set by the controls */
+  }
+
+  #ascender-canvas {
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-height: 100%; /* respect the column height */
+    max-width: 100%;
+    height: auto;
+    width: auto;
+  }
+
+  /* Lore/Whitepaper/FinancialModel */
+  .doc-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .doc-content {
+    font-size: 1.2rem;
+  }
+
+  .doc-content p {
+    font-size: 1.2rem;
+  }
+
+  .whitepaper-container {
+    width: 65%;
+    height: 65%;
+  }
+
+  .whitepaper-icon {
+    width: 100%;
+  }
+
+  .whitepaper-detail .detail-content {
+    font-size: 1.15rem;
+    padding: 0.5rem 3rem 6rem 3rem;
+  }
+
+  .whitepaper-detail .detail-content p {
+    font-size: 1.15rem;
+  }
+
+  .financialmodel-container {
+    width: 65%;
+    height: 65%;
+  }
+
+  .node-icon {
+    width: clamp(80px, 12vw, 150px);
+  }
+
+  .timeline-node[data-module="genesis"] .node-icon,
+  .timeline-node[data-module="future"] .node-icon {
+    width: clamp(90px, 14vw, 170px);
+  }
+
+  .financialmodel-detail .detail-content {
+    font-size: 1.15rem;
+    padding: 0.5rem 3rem 6rem 3rem;
+  }
+
+  .financialmodel-detail .detail-content p {
+    font-size: 1.15rem;
+  }
+
+  /* Footer */
+  .site-footer {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .footer-copyright {
+    font-size: 1rem;
+  }
+
+  .footer-nav a {
+    font-size: 1rem;
+  }
+
+  .footer-socials {
+    gap: 1.25rem;
+  }
+
+  .footer-socials svg {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 
+/* ============================================
+   PC: 2560px - 3839px
+   ============================================ */
 @media (min-width: 2560px) and (max-width: 3839px) {
   
-  
+  /* Topbar */
   .topbar {
     height: clamp(70px, 8vh, 90px);
   }
-  
+
   .main-nav > ul {
     gap: 1.2rem;
   }
-  
+
   .main-nav a {
     font-size: 1.1rem;
   }
-  
+
   .join-btn {
     padding: 0.5rem 1rem;
     font-size: 1.05rem;
   }
-  
-  
-  
+
+  /* HeroSection */
   .backgroundlive-root .bg-layer {
     width: 100%;
     height: 100%;
     background-size: 100% auto;
   }
-  
+
   .backgroundlive-root .bg-layer.nuvem1,
   .backgroundlive-root .bg-layer.nuvem2,
   .backgroundlive-root .bg-layer.nuvem3,
@@ -971,57 +1383,187 @@
   .backgroundlive-root .bg-layer.nuvem7 {
     background-size: contain;
   }
-  
+
   .backgroundlive-root .bg-layer.fundo-sol {
     background-size: 100% auto;
     background-position: center top;
   }
-  
-  
-  .backgroundlive-root .bg-layer.sun { background-size: 16% auto; }
-  .backgroundlive-root .sun-rays { width: 85vh; height: 85vh; }
-  .backgroundlive-root .breathing-glow { width: 85vh; height: 85vh; }
-  
-  
-  .backgroundlive-root .bg-layer.carruagem { height: 100%; left: 80%; top: 70%; }
-  .backgroundlive-root .bg-layer.jano { height: 20%; left: 45%; top: 80%; }
-  .backgroundlive-root .bg-layer.orion { height: 15%; left: 54%; top: 76%; }
-  .backgroundlive-root .bg-layer.trio { height: 70%; left: 14%; top: 70%; }
-  
-  
+
+  .backgroundlive-root .bg-layer.sun { 
+    background-size: 16% auto; 
+  }
+
+  .backgroundlive-root .sun-rays { 
+    width: 85vh; 
+    height: 85vh; 
+  }
+
+  .backgroundlive-root .breathing-glow { 
+    width: 85vh; 
+    height: 85vh; 
+  }
+
+  .backgroundlive-root .bg-layer.carruagem { 
+    height: 100%; 
+    left: 80%; 
+    top: 70%; 
+  }
+
+  .backgroundlive-root .bg-layer.jano { 
+    height: 20%; 
+    left: 45%; 
+    top: 80%; 
+  }
+
+  .backgroundlive-root .bg-layer.orion { 
+    height: 15%; 
+    left: 54%; 
+    top: 76%; 
+  }
+
+  .backgroundlive-root .bg-layer.trio { 
+    height: 70%; 
+    left: 14%; 
+    top: 70%; 
+  }
+
   .backgroundlive-root .bg-layer.carruagem #magic-portal {
-    top: 24%;
+    top: 35%;
     left: 55%;
     width: 20%;
-    height: 35%;
+    height: 30%;
   }
-  
-  
+
+  .hero-title {
+    font-size: clamp(4rem, 10vw, 7rem);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+  }
+
+  /* EcosystemSection */
   .ecosystem-container {
-    width: 124%;
+    width: 170%;
     height: 65%;
   }
-  
+
   .ecosystem-title {
     top: 11%;
     font-size: clamp(2.5rem, 5vw, 4.5rem);
   }
-  
-  
-  .hero-title {
-    font-size: clamp(4rem, 10vw, 7rem);
+
+  /* NFTsSection */
+  .nft-category-title {
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
   }
-  
-  .hero-subtitle {
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
+
+  .nft-category-description {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
   }
-  
-  
+
+  .nft-gallery {
+    gap: 2.5rem;
+  }
+
+  .ascenders-composer {
+    gap: 3.5rem;
+  }
+
+  #ascender-canvas {
+    height: 50vh;
+  }
+
+  .control-group label {
+    font-size: 1.25rem;
+  }
+
+  .selector-value {
+    font-size: 1.2rem;
+  }
+
+  .share-button {
+    font-size: 1.2rem;
+  }
+
+  .nfts-join-btn {
+    padding: 1.15rem 2.3rem;
+    font-size: 1.25rem;
+  }
+
+  .composer-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    min-height: 50vh;
+}
+
+#ascender-canvas {
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-height: 80vh;
+  max-width: 100%;
+  height: auto;
+  width: auto;
+}
+
+/* For very large screens: set fixed controls width and allow preview to flex */
+.ascenders-composer {
+  grid-template-columns: 420px minmax(700px, 1fr);
+  align-items: stretch;
+  gap: 3.5rem;
+}
+
+.composer-controls {
+  max-width: 420px;
+  width: 100%;
+  align-self: start;
+}
+
+.composer-preview {
+  min-height: 0;
+  overflow: hidden;
+  align-self: stretch;
+}
+
+#nfts.landing-section {
+	position: relative;
+	z-index: 5; 
+	margin-top: -15vh; 
+	padding-top: calc(15vh + clamp(4rem, 15vw, 8rem)); 
+	padding-bottom: clamp(4rem, 15vw, 8rem);
+	padding-left: clamp(1rem, 5vw, 2rem);
+	padding-right: clamp(1rem, 5vw, 2rem);
+	height: calc(84% + 8vh);
+	overflow: hidden;
+}
+
+
+#nfts.landing-section::before {
+	content: '';
+	position: absolute;
+	top: -15vh;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: calc(100% + 15vh);
+	background-image: url('/assets/images/background/backgroundpaisagem/0_telabranca_0.webp');
+	background-size: cover;
+	background-position: center top;
+	background-repeat: no-repeat;
+	z-index: -1;
+}
+
+  /* Lore/Whitepaper/FinancialModel */
   .doc-title {
     font-size: clamp(2.5rem, 5vw, 4.5rem);
   }
 
-  
   .doc-content {
     font-size: 1.2rem;
   }
@@ -1030,7 +1572,6 @@
     font-size: 1.2rem;
   }
 
-  
   .whitepaper-container {
     width: 65%;
     height: 65%;
@@ -1049,7 +1590,6 @@
     font-size: 1.2rem;
   }
 
-  
   .financialmodel-container {
     width: 65%;
     height: 65%;
@@ -1073,7 +1613,7 @@
     font-size: 1.2rem;
   }
 
-  
+  /* Footer */
   .site-footer {
     padding: 2.5rem 1.5rem;
   }
@@ -1094,80 +1634,43 @@
     width: 26px;
     height: 26px;
   }
-
-  
-  .nft-category-title {
-    font-size: clamp(2.5rem, 5vw, 3.8rem);
-  }
-
-  .nft-category-description {
-    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-  }
-
-  .nft-gallery {
-    gap: 2.5rem;
-  }
-
-  .ascenders-composer {
-    gap: 3.5rem;
-  }
-
-  #ascender-canvas {
-    height: 80vh;
-  }
-
-  .control-group label {
-    font-size: 1.25rem;
-  }
-
-  .selector-value {
-    font-size: 1.2rem;
-  }
-
-  .share-button {
-    font-size: 1.2rem;
-  }
-
-  .nfts-join-btn {
-    padding: 1.15rem 2.3rem;
-    font-size: 1.25rem;
-  }
 }
 
 
-
+/* ============================================
+   PC: 3840px+
+   ============================================ */
 @media (min-width: 3840px) {
   
-  
+  /* Topbar */
   .topbar {
     height: clamp(80px, 8vh, 100px);
   }
-  
+
   .main-nav > ul {
     gap: 1.5rem;
   }
-  
+
   .main-nav a {
     font-size: 1.3rem;
   }
-  
+
   .join-btn {
     padding: 0.6rem 1.2rem;
     font-size: 1.2rem;
   }
-  
+
   .logo-img {
     height: 98%;
   }
-  
-  
-  
+
+  /* HeroSection */
   .backgroundlive-root .bg-layer {
     width: 100%;
     height: 100%;
     background-size: 100% auto;
   }
-  
+
   .backgroundlive-root .bg-layer.nuvem1,
   .backgroundlive-root .bg-layer.nuvem2,
   .backgroundlive-root .bg-layer.nuvem3,
@@ -1177,208 +1680,90 @@
   .backgroundlive-root .bg-layer.nuvem7 {
     background-size: contain;
   }
-  
+
   .backgroundlive-root .bg-layer.fundo-sol {
     background-size: 100% auto;
     background-position: center top;
   }
-  
-  
-  .backgroundlive-root .bg-layer.sun { background-size: 14% auto; }
-  .backgroundlive-root .sun-rays { width: 100vh; height: 100vh; }
-  .backgroundlive-root .breathing-glow { width: 100vh; height: 100vh; }
-  
-  
-  .backgroundlive-root .bg-layer.carruagem { height: 100%; left: 80%; top: 70%; }
-  .backgroundlive-root .bg-layer.jano { height: 20%; left: 45%; top: 80%; }
-  .backgroundlive-root .bg-layer.orion { height: 15%; left: 54%; top: 76%; }
-  .backgroundlive-root .bg-layer.trio { height: 70%; left: 10%; top: 70%; }
-  
-  
+
+  .backgroundlive-root .bg-layer.sun { 
+    background-size: 14% auto; 
+  }
+
+  .backgroundlive-root .sun-rays { 
+    width: 100vh; 
+    height: 100vh; 
+  }
+
+  .backgroundlive-root .breathing-glow { 
+    width: 100vh; 
+    height: 100vh; 
+  }
+
+  .backgroundlive-root .bg-layer.carruagem { 
+    height: 100%; 
+    left: 80%; 
+    top: 70%; 
+  }
+
+  .backgroundlive-root .bg-layer.jano { 
+    height: 20%; 
+    left: 45%; 
+    top: 80%; 
+  }
+
+  .backgroundlive-root .bg-layer.orion { 
+    height: 15%; 
+    left: 54%; 
+    top: 76%; 
+  }
+
+  .backgroundlive-root .bg-layer.trio { 
+    height: 70%; 
+    left: 10%; 
+    top: 70%; 
+  }
+
   .backgroundlive-root .bg-layer.carruagem #magic-portal {
     top: 24%;
     left: 55%;
     width: 20%;
     height: 35%;
   }
-  
-  
-  .ecosystem-container {
-    width: 115%;
-    height: 65%;
-  }
-  
-  .ecosystem-title {
-    top: 11%;
-    font-size: clamp(3rem, 5vw, 5rem);
-  }
-  
-  .eco-node-icon {
-    width: clamp(180px, 20vw, 300px);
-  }
-  
-  
+
   .hero-title {
     font-size: clamp(5rem, 10vw, 8rem);
   }
-  
+
   .hero-subtitle {
     font-size: clamp(1.5rem, 3vw, 2.2rem);
   }
-  
+
   .hero-description {
     font-size: clamp(1.2rem, 2vw, 1.6rem);
   }
-  
+
   .cta-primary {
     padding: 1.5rem 3.5rem;
     font-size: 1.4rem;
   }
-  
-  
-  .doc-title {
+
+  /* EcosystemSection */
+  .ecosystem-container {
+    width: 115%;
+    height: 65%;
+  }
+
+  .ecosystem-title {
+    top: 11%;
     font-size: clamp(3rem, 5vw, 5rem);
   }
 
-  
-  .doc-content {
-    font-size: 1.4rem;
-    padding: 2.5rem 2.5rem 12rem 2.5rem;
+  .eco-node-icon {
+    width: clamp(180px, 20vw, 300px);
   }
 
-  .doc-content p {
-    font-size: 1.4rem;
-    line-height: 2;
-  }
-
-  .doc-content h2,
-  .doc-content h3 {
-    font-size: 1.8rem;
-  }
-
-  
-  .whitepaper-container {
-    width: 65%;
-    height: 65%;
-  }
-
-  .whitepaper-item {
-    width: 14%;
-  }
-
-  .whitepaper-icon {
-    width: 100%;
-  }
-
-  .whitepaper-detail .detail-content {
-    font-size: 1.4rem;
-    padding: 1rem 3.5rem 8rem 3.5rem;
-  }
-
-  .whitepaper-detail .detail-content p {
-    font-size: 1.4rem;
-    line-height: 2;
-  }
-
-  .whitepaper-detail .detail-content h3 {
-    font-size: 1.6rem;
-  }
-
-  .whitepaper-detail .detail-content h4 {
-    font-size: 1.3rem;
-  }
-
-  .whitepaper-detail .detail-content table th,
-  .whitepaper-detail .detail-content table td {
-    font-size: 1.2rem;
-    padding: 1rem 1.2rem;
-  }
-
-  
-  .financialmodel-container {
-    width: 65%;
-    height: 65%;
-  }
-
-  .node-icon {
-    width: clamp(100px, 14vw, 200px);
-  }
-
-  .timeline-node[data-module="genesis"] .node-icon,
-  .timeline-node[data-module="future"] .node-icon {
-    width: clamp(110px, 16vw, 220px);
-  }
-
-  .timeline-line,
-  .timeline-progress {
-    height: 10px;
-  }
-
-  .financialmodel-detail .detail-content {
-    font-size: 1.4rem;
-    padding: 1rem 3.5rem 8rem 3.5rem;
-  }
-
-  .financialmodel-detail .detail-content p {
-    font-size: 1.4rem;
-    line-height: 2;
-  }
-
-  .financialmodel-detail .detail-content h3 {
-    font-size: 1.6rem;
-  }
-
-  .financialmodel-detail .detail-content h4 {
-    font-size: 1.3rem;
-  }
-
-  .financialmodel-detail .detail-content table th,
-  .financialmodel-detail .detail-content table td {
-    font-size: 1.2rem;
-    padding: 1rem 1.2rem;
-  }
-
-  
-  .site-footer {
-    padding: 3rem 2rem;
-  }
-
-  .footer-copyright {
-    font-size: 1.2rem;
-  }
-
-  .footer-nav a {
-    font-size: 1.2rem;
-  }
-
-  .footer-socials {
-    gap: 1.75rem;
-  }
-
-  .footer-socials svg {
-    width: 28px;
-    height: 28px;
-  }
-
-  
-  .painting-text {
-    font-size: 20px;
-  }
-
-  .progress-value {
-    font-size: 30px;
-  }
-
-  .loading-info {
-    bottom: 80px;
-    max-width: 600px;
-  }
-
-  
-  .nfts-container {
-    padding: 2.5rem;
-  }
-
+  /* NFTsSection */
   .nft-category-title {
     font-size: clamp(3rem, 5vw, 4.5rem);
   }
@@ -1422,40 +1807,376 @@
     padding: 1.2rem 2.4rem;
     font-size: 1.3rem;
   }
+
+  /* Lore/Whitepaper/FinancialModel */
+  .doc-title {
+    font-size: clamp(3rem, 5vw, 5rem);
+  }
+
+  .doc-content {
+    font-size: 1.4rem;
+    padding: 2.5rem 2.5rem 12rem 2.5rem;
+  }
+
+  .doc-content p {
+    font-size: 1.4rem;
+    line-height: 2;
+  }
+
+  .doc-content h2,
+  .doc-content h3 {
+    font-size: 1.8rem;
+  }
+
+  .whitepaper-container {
+    width: 65%;
+    height: 65%;
+  }
+
+  .whitepaper-item {
+    width: 14%;
+  }
+
+  .whitepaper-icon {
+    width: 100%;
+  }
+
+  .whitepaper-detail .detail-content {
+    font-size: 1.4rem;
+    padding: 1rem 3.5rem 8rem 3.5rem;
+  }
+
+  .whitepaper-detail .detail-content p {
+    font-size: 1.4rem;
+    line-height: 2;
+  }
+
+  .whitepaper-detail .detail-content h3 {
+    font-size: 1.6rem;
+  }
+
+  .whitepaper-detail .detail-content h4 {
+    font-size: 1.3rem;
+  }
+
+  .whitepaper-detail .detail-content table th,
+  .whitepaper-detail .detail-content table td {
+    font-size: 1.2rem;
+    padding: 1rem 1.2rem;
+  }
+
+  .financialmodel-container {
+    width: 65%;
+    height: 65%;
+  }
+
+  .node-icon {
+    width: clamp(100px, 14vw, 200px);
+  }
+
+  .timeline-node[data-module="genesis"] .node-icon,
+  .timeline-node[data-module="future"] .node-icon {
+    width: clamp(110px, 16vw, 220px);
+  }
+
+  .timeline-line,
+  .timeline-progress {
+    height: 10px;
+  }
+
+  .financialmodel-detail .detail-content {
+    font-size: 1.4rem;
+    padding: 1rem 3.5rem 8rem 3.5rem;
+  }
+
+  .financialmodel-detail .detail-content p {
+    font-size: 1.4rem;
+    line-height: 2;
+  }
+
+  .financialmodel-detail .detail-content h3 {
+    font-size: 1.6rem;
+  }
+
+  .financialmodel-detail .detail-content h4 {
+    font-size: 1.3rem;
+  }
+
+  .financialmodel-detail .detail-content table th,
+  .financialmodel-detail .detail-content table td {
+    font-size: 1.2rem;
+    padding: 1rem 1.2rem;
+  }
+
+  /* Footer */
+  .site-footer {
+    padding: 3rem 2rem;
+  }
+
+  .footer-copyright {
+    font-size: 1.2rem;
+  }
+
+  .footer-nav a {
+    font-size: 1.2rem;
+  }
+
+  .footer-socials {
+    gap: 1.75rem;
+  }
+
+  .footer-socials svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Loading/Painting */
+  .painting-text {
+    font-size: 20px;
+  }
+
+  .progress-value {
+    font-size: 30px;
+  }
+
+  .loading-info {
+    bottom: 80px;
+    max-width: 600px;
+  }
 }
 
 
-
-@media (prefers-reduced-motion: reduce) {
-  .backgroundlive-root .sun-rays { animation: none !important; }
-  .backgroundlive-root .sun-ray { animation: none !important; }
-  .backgroundlive-root .bg-layer.sun::before { animation: none; }
-  .backgroundlive-root .breathing-glow { animation: none !important; }
-  
-  .backgroundlive-root .bg-layer.nuvem1,
-  .backgroundlive-root .bg-layer.nuvem2,
-  .backgroundlive-root .bg-layer.nuvem3,
-  .backgroundlive-root .bg-layer.nuvem4,
-  .backgroundlive-root .bg-layer.nuvem5,
-  .backgroundlive-root .bg-layer.nuvem6,
-  .backgroundlive-root .bg-layer.nuvem7 {
-    animation: none !important;
-  }
-  
-  .scroll-indicator {
-    animation: none !important;
-  }
-  
-  .cta-primary::before {
-    display: none;
-  }
-}
-
-
-
+/* ============================================
+   CELULAR: max-width 768px
+   ============================================ */
 @media (max-width: 768px) {
   
-  
+  /* HeroSection */
+  .backgroundlive-root .bg-layer {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+  }
+
+  /* EcosystemSection */
+  #ecosystem.landing-section {
+    aspect-ratio: 4 / 5;
+    margin-top: -10vh;
+    min-height: 80vh;
+  }
+
+  #ecosystem.landing-section::after {
+    width: 100%;
+    background-size: cover;
+  }
+
+  .ecosystem-container {
+    width: 90%;
+    height: 75%;
+    max-width: 100%;
+  }
+
+  .ecosystem-title {
+    top: 8%;
+    font-size: clamp(1.2rem, 6vw, 2rem);
+    letter-spacing: 0.05em;
+  }
+
+  .eco-node-icon {
+    width: clamp(60px, 15vw, 100px);
+  }
+
+  .eco-node[data-node="rankings"] {
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .eco-node[data-node="rankings"]:active {
+    transform: translateX(-50%) scale(0.95);
+  }
+
+  .eco-node[data-node="ascendria"] {
+    bottom: 18%;
+    left: 25%;
+    transform: translateX(-50%);
+  }
+
+  .eco-node[data-node="ascendria"]:active {
+    transform: translateX(-50%) scale(0.95);
+  }
+
+  .eco-node[data-node="community"] {
+    bottom: 18%;
+    right: 25%;
+    transform: translateX(50%);
+  }
+
+  .eco-node[data-node="community"]:active {
+    transform: translateX(50%) scale(0.95);
+  }
+
+  @media (hover: hover) {
+    .eco-node[data-node="rankings"]:hover {
+      transform: translateX(-50%) scale(1.05);
+    }
+
+    .eco-node[data-node="ascendria"]:hover {
+      transform: translateX(-50%) scale(1.05);
+    }
+
+    .eco-node[data-node="community"]:hover {
+      transform: translateX(50%) scale(1.05);
+    }
+  }
+
+  .detail-header {
+    padding: 3.5rem 0.75rem 0.5rem 0.75rem;
+  }
+
+  .detail-icon {
+    width: clamp(60px, 12vw, 100px);
+  }
+
+  .detail-content {
+    padding: 0.5rem 1.5rem 5rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .detail-content::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .detail-content h3 {
+    font-size: 1.2rem;
+    margin: 1.5rem 0 0.75rem 0;
+  }
+
+  .detail-content h4 {
+    font-size: 1.05rem;
+    margin: 1.25rem 0 0.5rem 0;
+  }
+
+  .detail-content p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .detail-content li {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .ecosystem-detail .detail-home {
+    right: 6%;
+    left: auto;
+    top: 6%;
+    width: 2vh;
+    transform: none;
+  }
+
+  .ecosystem-detail .detail-back {
+    left: 6%;
+    top: 6%;
+    width: 2vh;
+    transform: none;
+  }
+
+  .submenu-grid {
+    padding: 2% 1%;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .submenu-item {
+    width: 18%;
+    min-width: 60px;
+  }
+
+  .submenu-icon {
+    width: 70%;
+  }
+
+  .submenu-label {
+    font-size: 0.7em;
+  }
+
+  /* NFTsSection */
+  .nfts-container {
+    padding: 1.5rem;
+  }
+
+  .nft-category-title {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+  }
+
+  .nft-category-description {
+    font-size: clamp(0.85rem, 2vw, 1rem);
+  }
+
+  .nft-gallery {
+    gap: 1rem;
+  }
+
+  .ascenders-composer {
+    gap: 1.5rem;
+  }
+
+  #ascender-canvas {
+    height: 60vh;
+  }
+
+  .nfts-join-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  /* Lore/Whitepaper/FinancialModel */
+  .doc-container {
+    height: 95%;
+  }
+
+  .doc-title {
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+  }
+
+  .doc-content {
+    width: 55%;
+    height: 42%;
+    padding: 1rem 1rem 6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .whitepaper-container {
+    width: 55%;
+    height: 55%;
+  }
+
+  .whitepaper-item {
+    width: 10%;
+  }
+
+  .whitepaper-detail .detail-content {
+    padding: 0.5rem 1.5rem 4rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .financialmodel-container {
+    width: 55%;
+    height: 55%;
+  }
+
+  .node-icon {
+    width: clamp(40px, 7vw, 70px);
+  }
+
+  .financialmodel-detail .detail-content {
+    padding: 0.5rem 1.5rem 4rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  /* About Page */
   .about-page {
     padding-top: 60px; 
   }
@@ -1477,10 +2198,157 @@
 }
 
 
-
+/* ============================================
+   CELULAR: max-width 600px
+   ============================================ */
 @media (max-width: 600px) {
   
-  
+  /* EcosystemSection */
+  #ecosystem.landing-section {
+    aspect-ratio: 3 / 4;
+    margin-top: -8vh;
+    min-height: 75vh;
+  }
+
+  .ecosystem-container {
+    width: 95%;
+    height: 80%;
+  }
+
+  .ecosystem-title {
+    top: 6%;
+    font-size: clamp(1rem, 7vw, 1.8rem);
+  }
+
+  .eco-node-icon {
+    width: clamp(50px, 18vw, 90px);
+  }
+
+  .eco-node[data-node="rankings"] {
+    top: 8%;
+  }
+
+  .eco-node[data-node="ascendria"] {
+    bottom: 15%;
+    left: 22%;
+  }
+
+  .eco-node[data-node="community"] {
+    bottom: 15%;
+    right: 22%;
+  }
+
+  .detail-header {
+    padding: 3rem 0.5rem 0.5rem 0.5rem;
+  }
+
+  .detail-icon {
+    width: clamp(50px, 15vw, 90px);
+  }
+
+  .detail-content {
+    padding: 0.5rem 1rem 4rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .detail-content::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .detail-content h3 {
+    font-size: 1.1rem;
+    margin: 1.25rem 0 0.5rem 0;
+  }
+
+  .detail-content h4 {
+    font-size: 1rem;
+    margin: 1rem 0 0.5rem 0;
+  }
+
+  .detail-content p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 0.9rem;
+  }
+
+  .detail-content li {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .ecosystem-detail .detail-home {
+    right: 6%;
+    left: auto;
+    top: 6%;
+    width: 2vh;
+    transform: none;
+  }
+
+  .ecosystem-detail .detail-back {
+    left: 6%;
+    top: 6%;
+    width: 2vh;
+    transform: none;
+  }
+
+  .submenu-grid {
+    padding: 1.5% 0.5%;
+    gap: 0.75rem;
+  }
+
+  .submenu-item {
+    width: 20%;
+    min-width: 55px;
+  }
+
+  .submenu-icon {
+    width: 65%;
+  }
+
+  .submenu-label {
+    font-size: 0.65em;
+  }
+
+  /* NFTsSection */
+  .nfts-container {
+    padding: 1rem;
+  }
+
+  .nft-category-title {
+    font-size: clamp(1rem, 4.5vw, 1.5rem);
+  }
+
+  .nft-category-description {
+    font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+  }
+
+  .nft-gallery {
+    gap: 0.75rem;
+  }
+
+  #ascender-canvas {
+    height: 55vh;
+  }
+
+  /* Lore/Whitepaper/FinancialModel */
+  .doc-content {
+    width: 52%;
+    height: 40%;
+    padding: 0.75rem 0.75rem 5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .whitepaper-container {
+    width: 52%;
+    height: 52%;
+  }
+
+  .financialmodel-container {
+    width: 52%;
+    height: 52%;
+  }
+
+  /* Play Page */
   body.play-page {
     padding: 1rem;
   }
@@ -1489,12 +2357,10 @@
     padding: 2rem 1.5rem;
   }
 
-  
   .slide-content {
     padding: 1.5rem 1rem;
   }
 
-  
   .aboutSwiper .swiper-button-next,
   .aboutSwiper .swiper-button-prev {
     display: none;
@@ -1502,10 +2368,215 @@
 }
 
 
+/* ============================================
+   CELULAR: max-width 480px
+   ============================================ */
+@media (max-width: 480px) {
+  
+  /* EcosystemSection */
+  #ecosystem.landing-section {
+    aspect-ratio: 2 / 3;
+    margin-top: -5vh;
+    min-height: 70vh;
+  }
 
+  .ecosystem-container {
+    width: 98%;
+    height: 85%;
+  }
+
+  .ecosystem-title {
+    top: 5%;
+    font-size: clamp(0.9rem, 8vw, 1.5rem);
+  }
+
+  .eco-node-icon {
+    width: clamp(45px, 20vw, 80px);
+  }
+
+  .eco-node[data-node="rankings"] {
+    top: 6%;
+  }
+
+  .eco-node[data-node="ascendria"] {
+    bottom: 12%;
+    left: 20%;
+  }
+
+  .eco-node[data-node="community"] {
+    bottom: 12%;
+    right: 20%;
+  }
+
+  .detail-header {
+    padding: 2.5rem 0.5rem 0.5rem 0.5rem;
+  }
+
+  .detail-icon {
+    width: clamp(45px, 18vw, 80px);
+  }
+
+  .detail-content {
+    padding: 0.5rem 0.75rem 3.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .detail-content::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .detail-content h3 {
+    font-size: 1rem;
+    margin: 1rem 0 0.5rem 0;
+  }
+
+  .detail-content h4 {
+    font-size: 0.95rem;
+    margin: 0.9rem 0 0.4rem 0;
+  }
+
+  .detail-content p {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+  }
+
+  .detail-content li {
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .ecosystem-detail .detail-home {
+    right: 6%;
+    left: auto;
+    top: 4%;
+    width: 2vh;
+    transform: none;
+  }
+
+  .ecosystem-detail .detail-back {
+    left: 6%;
+    top: 4%;
+    width: 2vh;
+    transform: none;
+  }
+
+  .submenu-grid {
+    padding: 1% 0.25%;
+    gap: 0.5rem;
+  }
+
+  .submenu-item {
+    width: 22%;
+    min-width: 50px;
+  }
+
+  .submenu-icon {
+    width: 60%;
+  }
+
+  .submenu-label {
+    font-size: 0.6em;
+  }
+
+  /* NFTsSection */
+  .nfts-container {
+    padding: 0.75rem;
+  }
+
+  .nft-category-title {
+    font-size: clamp(0.9rem, 4vw, 1.3rem);
+  }
+
+  .nft-category-description {
+    font-size: clamp(0.75rem, 1.6vw, 0.85rem);
+  }
+
+  #ascender-canvas {
+    height: 50vh;
+  }
+
+  /* Lore/Whitepaper/FinancialModel */
+  .doc-content {
+    width: 50%;
+    height: 38%;
+    padding: 0.5rem 0.5rem 4rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .whitepaper-container {
+    width: 50%;
+    height: 50%;
+  }
+
+  .financialmodel-container {
+    width: 50%;
+    height: 50%;
+  }
+}
+
+
+/* ============================================
+   CELULAR LANDSCAPE: max-width 768px landscape
+   ============================================ */
 @media (max-width: 768px) and (orientation: landscape) {
   
-  
+  /* EcosystemSection */
+  #ecosystem.landing-section {
+    aspect-ratio: 16 / 9;
+    margin-top: -8vh;
+    min-height: 60vh;
+  }
+
+  .ecosystem-container {
+    width: 85%;
+    height: 70%;
+  }
+
+  .ecosystem-title {
+    top: 5%;
+    font-size: clamp(1rem, 5vw, 1.8rem);
+  }
+
+  .eco-node-icon {
+    width: clamp(55px, 12vw, 95px);
+  }
+
+  .eco-node[data-node="rankings"] {
+    top: 8%;
+  }
+
+  .eco-node[data-node="ascendria"] {
+    bottom: 15%;
+    left: 28%;
+  }
+
+  .eco-node[data-node="community"] {
+    bottom: 15%;
+    right: 28%;
+  }
+
+  .detail-content {
+    padding: 0.5rem 1.25rem 4rem 1.25rem;
+    font-size: 0.85rem;
+  }
+
+  .ecosystem-detail .detail-home {
+    right: 6%;
+    left: auto;
+    top: 4%;
+    width: 2vh;
+    transform: none;
+  }
+
+  .ecosystem-detail .detail-back {
+    left: 6%;
+    top: 4%;
+    width: 2vh;
+    transform: none;
+  }
+
+  /* Play Page */
   body.play-page {
     padding: 1rem;
   }
@@ -1532,7 +2603,7 @@
     gap: 0.75rem;
   }
 
-  
+  /* About Page */
   .about-page {
     padding-top: 60px;
   }
@@ -1553,3 +2624,77 @@
 }
 
 
+/* ============================================
+   REGRAS GLOBAIS - Ecosystem Buttons
+   ============================================ */
+.ecosystem-detail .detail-home {
+  left: auto;
+  right: 3%;
+  top: 8%;
+  width: 4vh;
+  transform: none;
+}
+
+.ecosystem-detail .detail-home:hover {
+  transform: scale(1.12);
+}
+
+.ecosystem-detail .detail-home:active {
+  transform: scale(0.95);
+}
+
+.ecosystem-detail .detail-back {
+  right: auto;
+  left: 3%;
+  top: 8%;
+  width: 4vh;
+  transform: none;
+}
+
+.ecosystem-detail .detail-back:hover {
+  transform: scale(1.12);
+}
+
+.ecosystem-detail .detail-back:active {
+  transform: scale(0.95);
+}
+
+
+/* ============================================
+   PREFERS REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .backgroundlive-root .sun-rays { 
+    animation: none !important; 
+  }
+
+  .backgroundlive-root .sun-ray { 
+    animation: none !important; 
+  }
+
+  .backgroundlive-root .bg-layer.sun::before { 
+    animation: none; 
+  }
+
+  .backgroundlive-root .breathing-glow { 
+    animation: none !important; 
+  }
+  
+  .backgroundlive-root .bg-layer.nuvem1,
+  .backgroundlive-root .bg-layer.nuvem2,
+  .backgroundlive-root .bg-layer.nuvem3,
+  .backgroundlive-root .bg-layer.nuvem4,
+  .backgroundlive-root .bg-layer.nuvem5,
+  .backgroundlive-root .bg-layer.nuvem6,
+  .backgroundlive-root .bg-layer.nuvem7 {
+    animation: none !important;
+  }
+  
+  .scroll-indicator {
+    animation: none !important;
+  }
+  
+  .cta-primary::before {
+    display: none;
+  }
+}
