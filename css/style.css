@@ -10,6 +10,15 @@ html {
 	overflow-x: hidden; 
 }
 
+/* Global box-sizing and layout variables */
+:root {
+    --nft-padding: 2vh;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
 	background: #0a0e27;
 	margin: 0;
@@ -589,9 +598,6 @@ body::-webkit-scrollbar-thumb:hover,
 }
 
 
-
-
-
 #nfts.landing-section {
 	position: relative;
 	z-index: 5; 
@@ -600,7 +606,8 @@ body::-webkit-scrollbar-thumb:hover,
 	padding-bottom: clamp(4rem, 10vw, 8rem);
 	padding-left: clamp(1rem, 5vw, 2rem);
 	padding-right: clamp(1rem, 5vw, 2rem);
-	min-height: 250vh; 
+	height: calc(84% + 8vh);
+	overflow: hidden;
 }
 
 
@@ -622,7 +629,7 @@ body::-webkit-scrollbar-thumb:hover,
 
 .nfts-title {
 	position: absolute;
-	top: 2.5%; 
+	top: 5%; 
 	left: 50%;
 	transform: translateX(-50%) translateY(30px);
 	z-index: 15;
