@@ -248,11 +248,46 @@ function build() {
   }
   ensureDir(BUILD_DIR);
   
+  // Gerar bundle do portal com esbuild (inclui Three.js)
+  try {
+    const esbuild = require('esbuild');
+    const entry = path.join(SRC_DIR, 'components', 'portal', 'portal-entry.js');
+    const outDir = path.join(BUILD_DIR, 'assets', 'libs');
+    ensureDir(outDir);
+    esbuild.buildSync({
+      entryPoints: [entry],
+      bundle: true,
+      minify: true,
+      sourcemap: true,
+      outfile: path.join(outDir, 'portal.bundle.js'),
+      platform: 'browser',
+      target: ['es2017']
+    });
+    console.log('📦 Portal bundle gerado em', path.join(outDir, 'portal.bundle.js'));
+  } catch (e) {
+    console.warn('⚠️ Falha ao gerar portal bundle com esbuild:', e && e.message || e);
+  }
+  
   // Processar arquivos
   processJSFiles();
   processCSSFiles();
   processHTMLFiles();
   copyAssets();
+  // Copiar bibliotecas de terceiros (vendor) para assets/libs
+  try {
+    const vendorSrc = path.join(SRC_DIR, 'node_modules', 'three', 'build', 'three.min.js');
+    const vendorDestDir = path.join(BUILD_DIR, 'assets', 'libs');
+    const vendorDest = path.join(vendorDestDir, 'three.min.js');
+    if (fs.existsSync(vendorSrc)) {
+      ensureDir(vendorDestDir);
+      fs.copyFileSync(vendorSrc, vendorDest);
+      console.log('📦 Copiado three.min.js para', vendorDest);
+    } else {
+      console.log('⚠️ three.min.js não encontrado em node_modules — pulei cópia do vendor.');
+    }
+  } catch (e) {
+    console.warn('Erro copiando vendor libs:', e && e.message || e);
+  }
   
   // Copiar package.json e outros arquivos necessários
   ['package.json', 'vercel.json', 'sitemap.xml'].forEach(file => {

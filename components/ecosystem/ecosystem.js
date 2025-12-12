@@ -519,12 +519,6 @@ class EcosystemGraph {
         // Coloca os botões dentro da caixa de detalhe para garantir posicionamento relativo ao conteúdo
         this.detailView.insertBefore(this.homeButton, this.detailView.firstChild);
         this.detailView.insertBefore(this.backButton, this.detailView.firstChild);
-
-        console.log('[ECO] detail buttons appended inside detailView', {
-            hasDetailView: !!this.detailView,
-            homeInDom: document.body.contains(this.homeButton),
-            backInDom: document.body.contains(this.backButton)
-        });
     }
     
     bindEvents() {

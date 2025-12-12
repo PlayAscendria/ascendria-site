@@ -22,6 +22,7 @@ const PRECACHE_ASSETS = [
   '/components/backgroundlive/backgroundlive.js',
   '/assets/images/ui/favicon.webp',
   '/assets/images/ui/logoascendria.webp'
+  ,'/offline.html'
 ];
 
 // Instalação
@@ -154,7 +155,8 @@ self.addEventListener('fetch', (event) => {
         });
       })
       .catch(() => {
-        return new Response('Offline', { status: 503 });
+        // Attempt to return a cached offline page when available
+        return caches.match('/offline.html');
       })
   );
 });

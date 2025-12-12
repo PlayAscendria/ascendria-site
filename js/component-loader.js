@@ -71,6 +71,11 @@ class ComponentLoader {
       const html = await htmlResponse.text();
 
       placeholder.innerHTML = html;
+      
+      // Dispara evento quando componente é carregado
+      document.dispatchEvent(new CustomEvent('componentLoaded', {
+        detail: { component: componentName, placeholderId: placeholderId }
+      }));
 
       
 

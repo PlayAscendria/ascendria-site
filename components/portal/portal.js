@@ -285,65 +285,185 @@ let threeLoadPromise = null;
 function loadThreeJS() {
   if (typeof THREE !== 'undefined') return Promise.resolve();
   if (threeLoadPromise) return threeLoadPromise;
-  
+  const sources = [
+    // Priorizar cópia auto-hospedada (produção segura)
+    '/js/libs/three.min.js',
+    // jsDelivr com versão sem 'r' - geralmente disponível
+    'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js',
+    // tentar cdnjs (antiga referência)
+    'https://cdnjs.cloudflare.com/ajax/libs/three.js/r159/three.min.js'
+  ];
+
   threeLoadPromise = new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.src = 'https://unpkg.com/three@0.159.0/build/three.min.js';
-    script.onload = resolve;
-    script.onerror = reject;
-    document.head.appendChild(script);
+    let idx = 0;
+
+    function tryNext() {
+      if (typeof THREE !== 'undefined') return resolve();
+      if (idx >= sources.length) return reject(new Error('All Three.js sources failed'));
+      const src = sources[idx++];
+      const script = document.createElement('script');
+      script.src = src;
+      script.async = true;
+      script.onload = () => {
+        // short delay to ensure global is available
+        setTimeout(() => {
+          if (typeof THREE !== 'undefined') return resolve();
+          // if not defined, try next
+          tryNext();
+        }, 10);
+      };
+      script.onerror = () => {
+        // tentar próximo
+        tryNext();
+      };
+      document.head.appendChild(script);
+    }
+
+    tryNext();
   });
-  
+
   return threeLoadPromise;
 }
 
-// Inicialização - usa IntersectionObserver para carregar Three.js apenas quando necessário
+// Inicialização - detecta quando o elemento magic-portal está disponível
+let portalInitObserver = null;
+let portalCheckInterval = null;
+let portalInitialized = false;
+
 function initPortal() {
+  // Se já foi inicializado, não tenta novamente
+  if (portalInitialized) return true;
+  
   const portalContainer = document.getElementById('magic-portal');
   
   if (!portalContainer) {
-    // Tenta novamente em 500ms se o container não existir ainda
-    setTimeout(initPortal, 500);
-    return;
+    return false;
+  }
+  
+  // Limpa observers e intervalos
+  if (portalInitObserver) {
+    portalInitObserver.disconnect();
+    portalInitObserver = null;
+  }
+  if (portalCheckInterval) {
+    clearInterval(portalCheckInterval);
+    portalCheckInterval = null;
   }
   
   // Verifica se já foi inicializado
-  if (portalContainer.dataset.portalInit) return;
-  
-  // Usar IntersectionObserver para carregar Three.js só quando portal estiver próximo
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        observer.disconnect();
-        portalContainer.dataset.portalInit = 'true';
-        
-        loadThreeJS().then(() => {
-          new MagicPortal(portalContainer);
-        }).catch(err => {
-          console.warn('Portal: Three.js failed to load', err);
-        });
-      }
-    }, { rootMargin: '200px' }); // Carrega 200px antes de ficar visível
-    
-    observer.observe(portalContainer);
-  } else {
-    // Fallback para navegadores sem IntersectionObserver
-    portalContainer.dataset.portalInit = 'true';
-    loadThreeJS().then(() => {
-      new MagicPortal(portalContainer);
-    });
+  if (portalContainer.dataset.portalInit) {
+    portalInitialized = true;
+    return true;
   }
+  
+  // Verifica se o elemento tem tamanho válido
+  if (portalContainer.offsetWidth === 0 && portalContainer.offsetHeight === 0) {
+    // Espera um pouco mais para o elemento ter tamanho
+    setTimeout(() => initPortal(), 200);
+    return false;
+  }
+  
+  // Marca como inicializado
+  portalContainer.dataset.portalInit = 'true';
+  portalInitialized = true;
+  
+  // Carrega Three.js e inicializa o portal
+  loadThreeJS().then(() => {
+    try {
+      new MagicPortal(portalContainer);
+    } catch (err) {
+      console.warn('Portal: Erro ao criar MagicPortal', err);
+      portalInitialized = false;
+      portalContainer.dataset.portalInit = '';
+    }
+  }).catch(err => {
+    console.warn('Portal: Three.js failed to load', err);
+    portalInitialized = false;
+    portalContainer.dataset.portalInit = '';
+  });
+  
+  return true;
 }
 
-// Tenta inicializar quando DOM estiver pronto
+// Estratégia múltipla para detectar quando o elemento está disponível
+function setupPortalDetection() {
+  // Estratégia 1: Verifica imediatamente
+  if (initPortal()) return;
+  
+  // Estratégia 2: MutationObserver focando no placeholder específico
+  const backgroundlivePlaceholder = document.getElementById('backgroundlive-placeholder');
+  if (backgroundlivePlaceholder) {
+    portalInitObserver = new MutationObserver(() => {
+      if (initPortal()) {
+        portalInitObserver.disconnect();
+        portalInitObserver = null;
+      }
+    });
+    
+    portalInitObserver.observe(backgroundlivePlaceholder, {
+      childList: true,
+      subtree: true
+    });
+  }
+  
+  // Estratégia 3: MutationObserver no body (fallback)
+  const bodyObserver = new MutationObserver(() => {
+    if (initPortal()) {
+      bodyObserver.disconnect();
+    }
+  });
+  
+  bodyObserver.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+  
+  // Estratégia 4: Polling periódico como último recurso
+  let attempts = 0;
+  portalCheckInterval = setInterval(() => {
+    attempts++;
+    if (initPortal() || attempts >= 50) { // 50 tentativas = ~5 segundos
+      clearInterval(portalCheckInterval);
+      portalCheckInterval = null;
+    }
+  }, 100);
+  
+  // Estratégia 5: Timeout final de segurança
+  setTimeout(() => {
+    if (portalInitObserver) {
+      portalInitObserver.disconnect();
+      portalInitObserver = null;
+    }
+    if (portalCheckInterval) {
+      clearInterval(portalCheckInterval);
+      portalCheckInterval = null;
+    }
+    // Última tentativa
+    initPortal();
+  }, 5000);
+}
+
+// Escuta evento quando componente é carregado (se disponível)
+document.addEventListener('componentLoaded', (e) => {
+  if (e.detail && e.detail.component === 'backgroundlive') {
+    setTimeout(() => {
+      initPortal();
+    }, 200);
+  }
+});
+
+// Inicializa quando o DOM estiver pronto
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => setTimeout(initPortal, 100));
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(setupPortalDetection, 100);
+  });
 } else {
-  setTimeout(initPortal, 100);
+  setTimeout(setupPortalDetection, 100);
 }
 
 // Export para uso externo
 window.MagicPortal = MagicPortal;
+window.initPortal = initPortal;
 
 })();
 

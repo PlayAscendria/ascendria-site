@@ -14,11 +14,12 @@
     "validate": "npm run lint && npm run build"
   },
   "devDependencies": {
-    "sharp": "^0.34.5",
-    "eslint": "^8.57.0"
+    "esbuild": "^0.27.1",
+    "three": "^0.160.0",
+    "eslint": "^8.57.0",
+    "sharp": "^0.34.5"
   },
   "engines": {
     "node": ">=14.0.0"
   }
 }
-

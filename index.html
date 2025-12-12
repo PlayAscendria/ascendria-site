@@ -362,6 +362,9 @@
 						ComponentLoader.load('footer', 'footer-placeholder')
 					]);
 					window.markEnd && window.markEnd('components-start');
+					
+					// Portal será inicializado automaticamente pelo portal.js
+					// quando o elemento #magic-portal for inserido pelo BackgroundLive
 				} catch (err) {
 					// Erro silencioso em produção
 					if (!isProduction) {
@@ -466,11 +469,9 @@
 		</script>
 		
 		
-		<script src="/components/portal/portal.js?v=4" defer></script>
-		
-		<!-- Preload Three.js para o portal -->
-		<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-		<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+		<!-- Portal bundle (self-hosted) -->
+		<script src="/assets/libs/portal.bundle.js" defer></script>
+
 
 		
 		<script src="/components/ecosystem/ecosystem.js" defer></script>
