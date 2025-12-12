@@ -93,21 +93,8 @@ class ComponentLoader {
         link.href = cssPath;
         document.head.appendChild(link);
 
-
-
-        try {
-          await new Promise((resolve) => {
-            let done = false;
-            const tidy = () => {
-              if (done) return; done = true; resolve();
-            };
-            const t = setTimeout(() => { tidy(); }, 3000);
-            link.onload = () => { clearTimeout(t); tidy(); };
-            link.onerror = () => { clearTimeout(t); tidy(); };
-          });
-        } catch (e) {
-
-        }
+        // Nota: não bloquear o carregamento do JS aguardando o CSS.
+        // O CSS pode carregar em segundo plano; não é necessário aguardar onload.
       }
 
 

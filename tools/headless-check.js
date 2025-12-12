@@ -19,6 +19,12 @@ const puppeteer = require('puppeteer');
     logs.push({type:'requestfailed',text});
     console.log('REQUEST_FAILED: ' + text);
   });
+  page.on('request', req => {
+    console.log('REQUEST_START:', req.method(), req.resourceType(), req.url());
+  });
+  page.on('requestfinished', req => {
+    console.log('REQUEST_FINISHED:', req.method(), req.resourceType(), req.url());
+  });
   page.on('response', async res => {
     try{
       const u = res.url();
@@ -33,7 +39,8 @@ const puppeteer = require('puppeteer');
   try{
     await page.goto(url, {waitUntil: 'networkidle2', timeout: 15000});
     console.log('PAGE_LOADED');
-    await page.waitForTimeout(5000);
+    // `page.waitForTimeout` may not be available in older Puppeteer versions; use a fallback
+    await new Promise(res => setTimeout(res, 5000));
     await page.screenshot({path:'./tools/headless-screenshot.png',fullPage:false}).catch(()=>{});
     console.log('DONE');
   }catch(e){
