@@ -5,14 +5,31 @@
 
     
     function initNftsGallery() {
+        // Use event delegation so dynamically-added thumbnails work
+        if (!window.__nftGalleryClickHandler) {
+            window.__nftGalleryClickHandler = function (e) {
+                const thumb = e.target.closest && e.target.closest('.nft-thumbnail');
+                if (!thumb) return;
 
-        const thumbnails = document.querySelectorAll('.nft-thumbnail');
-        thumbnails.forEach(thumbnail => {
-            thumbnail.removeAttribute('tabindex');
-            thumbnail.removeAttribute('role');
-            thumbnail.removeAttribute('aria-label');
-            thumbnail.classList.add('zoom-disabled');
-        });
+                // Normalize accessibility attributes for the clicked thumbnail
+                try {
+                    thumb.removeAttribute('tabindex');
+                    thumb.removeAttribute('role');
+                    thumb.removeAttribute('aria-label');
+                } catch (err) {
+                    // ignore
+                }
+
+                // Dispatch a custom event so other modules (zoom, lightbox) can react
+                try {
+                    const ev = new CustomEvent('nft:clicked', { detail: { thumbnail: thumb }, bubbles: true });
+                    thumb.dispatchEvent(ev);
+                } catch (err) {
+                    // ignore
+                }
+            };
+            document.body.addEventListener('click', window.__nftGalleryClickHandler);
+        }
     }
 
 
@@ -35,7 +52,7 @@
     const BASE_PATH = '/assets/images/nfts/ascender';
 
     // Simplified skin detection for production: synchronous, single known skin
-    function detectAvailableSkins() {
+    async function detectAvailableSkins() {
         return ['ronin'];
     }
 

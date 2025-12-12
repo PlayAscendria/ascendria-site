@@ -285,41 +285,53 @@ let threeLoadPromise = null;
 function loadThreeJS() {
   if (typeof THREE !== 'undefined') return Promise.resolve();
   if (threeLoadPromise) return threeLoadPromise;
-  const sources = [
-    // Priorizar cópia auto-hospedada (produção segura)
-    '/js/libs/three.min.js',
-    // jsDelivr com versão sem 'r' - geralmente disponível
-    'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js',
-    // tentar cdnjs (antiga referência)
-    'https://cdnjs.cloudflare.com/ajax/libs/three.js/r159/three.min.js'
-  ];
 
   threeLoadPromise = new Promise((resolve, reject) => {
-    let idx = 0;
+    // Try local copy first
+    const localSrc = '/js/libs/three.min.js';
+    const fallbackSrc = 'https://unpkg.com/three@0.159.0/build/three.min.js';
 
-    function tryNext() {
-      if (typeof THREE !== 'undefined') return resolve();
-      if (idx >= sources.length) return reject(new Error('All Three.js sources failed'));
-      const src = sources[idx++];
-      const script = document.createElement('script');
-      script.src = src;
-      script.async = true;
-      script.onload = () => {
-        // short delay to ensure global is available
-        setTimeout(() => {
-          if (typeof THREE !== 'undefined') return resolve();
-          // if not defined, try next
-          tryNext();
-        }, 10);
-      };
-      script.onerror = () => {
-        // tentar próximo
-        tryNext();
-      };
-      document.head.appendChild(script);
+    function loadScript(src, onLoad, onError) {
+      const s = document.createElement('script');
+      s.src = src;
+      s.async = true;
+      s.onload = onLoad;
+      s.onerror = onError;
+      document.head.appendChild(s);
     }
 
-    tryNext();
+    // small helper to verify global availability
+    function checkReady() {
+      if (typeof THREE !== 'undefined') return true;
+      return false;
+    }
+
+    // Attempt to load local first
+    loadScript(localSrc, () => {
+      // give a tick for global to be set
+      setTimeout(() => {
+        if (checkReady()) return resolve();
+        // if local script didn't expose THREE, try fallback
+        loadScript(fallbackSrc, () => {
+          setTimeout(() => {
+            if (checkReady()) return resolve();
+            reject(new Error('Three.js loaded but global THREE not found'));
+          }, 10);
+        }, () => {
+          reject(new Error('Failed to load fallback Three.js from CDN'));
+        });
+      }, 10);
+    }, () => {
+      // local failed — try fallback CDN
+      loadScript(fallbackSrc, () => {
+        setTimeout(() => {
+          if (checkReady()) return resolve();
+          reject(new Error('Three.js loaded from CDN but global THREE not found'));
+        }, 10);
+      }, () => {
+        reject(new Error('Failed to load Three.js from both local and CDN'));
+      });
+    });
   });
 
   return threeLoadPromise;
