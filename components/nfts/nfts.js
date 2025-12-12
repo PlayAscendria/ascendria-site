@@ -27,8 +27,88 @@
                 } catch (err) {
                     // ignore
                 }
+
+                // Open built-in zoom modal for thumbnail images (fallback when no other handler exists)
+                try {
+                    const img = thumb.querySelector && thumb.querySelector('img');
+                    if (img && img.src) {
+                        openNftModal(img.src, img.alt || 'NFT');
+                    }
+                } catch (err) {
+                    // ignore
+                }
             };
             document.body.addEventListener('click', window.__nftGalleryClickHandler);
+        }
+    }
+
+    // --- Modal helper (simple, resilient) ---------------------------------
+    function createNftModal() {
+        if (window.__nftModalCreated) return;
+        window.__nftModalCreated = true;
+
+        const backdrop = document.createElement('div');
+        backdrop.className = 'nft-zoom-backdrop';
+        backdrop.setAttribute('role', 'dialog');
+        backdrop.setAttribute('aria-modal', 'true');
+        backdrop.style.display = 'none';
+        backdrop.tabIndex = -1;
+
+        const imgWrap = document.createElement('div');
+        imgWrap.className = 'nft-zoom-inner';
+
+        const img = document.createElement('img');
+        img.className = 'nft-zoom-image';
+        img.alt = '';
+
+        const close = document.createElement('button');
+        close.className = 'nft-zoom-close';
+        close.innerText = '✕';
+        close.setAttribute('aria-label', 'Close');
+
+        imgWrap.appendChild(close);
+        imgWrap.appendChild(img);
+        backdrop.appendChild(imgWrap);
+        document.body.appendChild(backdrop);
+
+        backdrop.addEventListener('click', (ev) => {
+            if (ev.target === backdrop || ev.target === close) closeNftModal();
+        });
+
+        document.addEventListener('keydown', (ev) => {
+            if (ev.key === 'Escape') closeNftModal();
+        });
+
+        // expose elements
+        window.__nftModalElements = { backdrop, img, close };
+    }
+
+    function openNftModal(src, alt) {
+        try {
+            createNftModal();
+            const { backdrop, img } = window.__nftModalElements || {};
+            if (!backdrop || !img) return;
+            img.src = src;
+            img.alt = alt || '';
+            backdrop.style.display = 'flex';
+            // prevent background scroll
+            try { document.body.style.overflow = 'hidden'; } catch (e) {}
+            // focus for accessibility
+            backdrop.focus && backdrop.focus();
+        } catch (e) {
+            // ignore
+        }
+    }
+
+    function closeNftModal() {
+        try {
+            const el = window.__nftModalElements;
+            if (!el) return;
+            el.backdrop.style.display = 'none';
+            el.img.src = '';
+            try { document.body.style.overflow = ''; } catch (e) {}
+        } catch (e) {
+            // ignore
         }
     }
 
