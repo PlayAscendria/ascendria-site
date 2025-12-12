@@ -288,6 +288,25 @@ function build() {
   } catch (e) {
     console.warn('Erro copiando vendor libs:', e && e.message || e);
   }
+
+  // Garantir que o build também expõe uma cópia de three.min.js em /js/libs
+  try {
+    console.log('🔧 Corrigindo libs do Three.js...');
+    const targetDir = path.join(__dirname, 'dist', 'js', 'libs');
+    if (!fs.existsSync(targetDir)) {
+      fs.mkdirSync(targetDir, { recursive: true });
+    }
+    const sourcePath = path.join(__dirname, 'dist', 'assets', 'libs', 'three.min.js');
+    const destPath = path.join(targetDir, 'three.min.js');
+    if (fs.existsSync(sourcePath)) {
+      fs.copyFileSync(sourcePath, destPath);
+      console.log('✅ Three.js copiado com sucesso para', destPath);
+    } else {
+      console.error('❌ ERRO: Arquivo Three.js original não encontrado em:', sourcePath);
+    }
+  } catch (err) {
+    console.error('❌ Falha ao copiar Three.js:', err);
+  }
   
   // Copiar package.json e outros arquivos necessários
   ['package.json', 'vercel.json', 'sitemap.xml'].forEach(file => {
